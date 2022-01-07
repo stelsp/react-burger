@@ -10,35 +10,55 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 
 export default function AppHeader() {
-  const textDecorationNone = {
-    textDecoration: "none",
-  };
-
   return (
     <div className={AppHeaderStyle.flex}>
-      <a
-        href="#"
-        className="text text_type_main-default text_color_inactive"
-        style={textDecorationNone}
-      >
-        <BurgerIcon type="primary" /> Конструктор
-      </a>
-      <a
-        href="#"
-        className="text text_type_main-default text_color_inactive"
-        style={textDecorationNone}
-      >
-        <ListIcon type="primary" /> Лента заказов
-      </a>
-      <Logo></Logo>
+      <div className={AppHeaderStyle.flex}>
+        <div
+          className="mr-2 mt-4 mb-4 p-5"
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <BurgerIcon type="primary" />
+          <p className="text text_type_main-default text_color_primary ml-2">
+            Конструктор
+          </p>
+        </div>
 
-      <a
-        href="#"
-        className="text text_type_main-default text_color_inactive"
-        style={textDecorationNone}
+        <div
+          className="mt-4 mb-4 p-5"
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <ListIcon type="secondary" />
+          <p className="text text_type_main-default text_color_inactive ml-2">
+            Лента заказов
+          </p>
+        </div>
+      </div>
+
+      <div className={AppHeaderStyle.logo}>
+        <Logo />
+      </div>
+
+      <div
+        className="mt-4 mb-4 p-5"
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
       >
-        <ProfileIcon type="primary" /> Личный кабинет
-      </a>
+        <ProfileIcon type="secondary" />
+        <p className="text text_type_main-default text_color_inactive ml-2">
+          Личный кабинет
+        </p>
+      </div>
     </div>
   );
 }
