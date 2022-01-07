@@ -11,3 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+@import url("./fonts/fonts.css");
+@import url("../node_modules/@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css");
+@import url("../node_modules/@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css");

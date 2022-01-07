@@ -8,18 +8,15 @@ import { Counter } from "@ya.praktikum/react-developer-burger-ui-components/dist
 import { EmailInput } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/email-input";
 import { PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/password-input";
 
-import "../../../node_modules/@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css";
-import "../../../node_modules/@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
-
 import AppHeader from "../AppHeader/AppHeader";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngridients";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 
-import AppStyle from "./App.module.css";
+import styles from "./App.module.css";
 
 export default function App() {
   return (
-    <div className={AppStyle.App}>
+    <div className={styles.App}>
       <AppHeader />
       <BurgerIngredients />
       <BurgerConstructor />

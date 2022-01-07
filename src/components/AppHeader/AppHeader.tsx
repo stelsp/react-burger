@@ -1,5 +1,3 @@
-import "../../../node_modules/@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css";
-import "../../../node_modules/@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 import styles from "./AppHeader.module.css";
 
 import { Logo } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/logo";
