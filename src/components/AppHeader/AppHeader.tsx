@@ -14,7 +14,7 @@ export default function AppHeader() {
     <div className={AppHeaderStyle.flex}>
       <div className={AppHeaderStyle.flex}>
         <div
-          className="mr-2 mt-4 mb-4 p-5"
+          className="mr-2 mt-4 mb-4 pt-5 pr-5 pb-5"
           style={{
             display: "flex",
             justifyContent: "space-between",
@@ -28,7 +28,7 @@ export default function AppHeader() {
         </div>
 
         <div
-          className="mt-4 mb-4 p-5"
+          className="mt-4 mb-4 pt-5 pr-5 pb-5"
           style={{
             display: "flex",
             justifyContent: "space-between",
@@ -47,7 +47,7 @@ export default function AppHeader() {
       </div>
 
       <div
-        className="mt-4 mb-4 p-5"
+        className="mt-4 mb-4 pt-5 pl-5 pb-5"
         style={{
           display: "flex",
           justifyContent: "space-between",
