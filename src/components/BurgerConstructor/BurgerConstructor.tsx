@@ -2,7 +2,6 @@ import style from "./BurgerConstructor.module.css";
 
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/button";
-import { Counter } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter";
 
 import {
   DragIcon,
