@@ -12,7 +12,9 @@ export default function BurgerIngredients() {
 
   return (
     <div className={" " + styles.BurgerIngredients}>
-      <h2 className={titleStyle + "mb-5"}>Соберите бургер</h2>
+      <h2 className={"text text_type_main-large text_color_primary mt-10 mb-5"}>
+        Соберите бургер
+      </h2>
 
       <div style={{ display: "flex" }}>
         <Tab value="one" active={current === "one"} onClick={setCurrent}>
