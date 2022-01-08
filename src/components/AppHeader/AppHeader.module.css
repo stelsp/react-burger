@@ -9,6 +9,11 @@
   margin-left: auto;
 }
 
-.text {
+.link {
+  composes: flex;
   text-decoration: none;
+}
+
+.link:hover {
+  color: var(--text-primary-color);
 }

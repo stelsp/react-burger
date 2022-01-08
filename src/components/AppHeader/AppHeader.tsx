@@ -1,3 +1,5 @@
+import React from "react";
+
 import styles from "./AppHeader.module.css";
 
 import { Logo } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/logo";
@@ -8,27 +10,25 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 
 export default function AppHeader() {
+  const linkStyle =
+    "text text_type_main-default text_color_inactive mt-4 mb-4 pt-5 pb-5 ";
+
   return (
     <div className={styles.flex}>
       <div className={styles.flex}>
         <MenuItem
-          style={"mt-4 mr-2 mb-4 pt-5 pr-5 pb-5 " + styles.flex}
-          icon={<BurgerIcon type="primary" />}
-          link={"#"}
-          textStyle={
-            "text text_type_main-default text_color_primary ml-2 " + styles.text
-          }
+          linkStyle={"pr-5 mr-2 " + linkStyle + styles.link}
+          textStyle={"ml-2"}
+          icon={<BurgerIcon type="secondary" />}
+          href={"#"}
           text={"Конструктор"}
         />
 
         <MenuItem
-          style={"mt-4 mb-4 pt-5 pr-5 pb-5 " + styles.flex}
+          linkStyle={"pr-5 pl-5 " + linkStyle + styles.link}
+          textStyle={"ml-2"}
           icon={<ListIcon type="secondary" />}
-          link={"#"}
-          textStyle={
-            "text text_type_main-default text_color_inactive ml-2 " +
-            styles.text
-          }
+          href={"#"}
           text={"Лента заказов"}
         />
       </div>
@@ -38,12 +38,10 @@ export default function AppHeader() {
       </div>
 
       <MenuItem
-        style={"mt-4 mb-4 pt-5 pb-5 pl-5 " + styles.flex}
+        linkStyle={"pl-5 " + linkStyle + styles.link}
+        textStyle={"ml-2"}
         icon={<ProfileIcon type="secondary" />}
-        link={"#"}
-        textStyle={
-          "text text_type_main-default text_color_inactive ml-2 " + styles.text
-        }
+        href={"#"}
         text={"Личный кабинет"}
       />
     </div>
@@ -52,11 +50,9 @@ export default function AppHeader() {
 
 function MenuItem(props: any) {
   return (
-    <div className={props.style}>
+    <a href={props.href} className={props.linkStyle}>
       {props.icon}
-      <a href={props.link} className={props.textStyle}>
-        {props.text}
-      </a>
-    </div>
+      <span className={props.textStyle}>{props.text}</span>
+    </a>
   );
 }
