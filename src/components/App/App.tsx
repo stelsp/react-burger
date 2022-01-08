@@ -1,8 +1,6 @@
 import React from "react";
 
-import { Button } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/button";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/input";
-import { Counter } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter";
 import { EmailInput } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/email-input";
 import { PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/password-input";
 
