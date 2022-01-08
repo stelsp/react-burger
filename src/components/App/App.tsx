@@ -1,8 +1,6 @@
 import React from "react";
 
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/button";
-import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element";
-import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/input";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter";
 import { EmailInput } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/email-input";
@@ -18,8 +16,10 @@ export default function App() {
   return (
     <div className={styles.App}>
       <AppHeader />
-      <BurgerIngredients />
-      <BurgerConstructor />
+      <main className={styles.main}>
+        <BurgerIngredients />
+        <BurgerConstructor />
+      </main>
     </div>
   );
 }

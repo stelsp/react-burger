@@ -1,0 +1,26 @@
+.BurgerConstructor {
+  width: 600px;
+}
+
+.list {
+}
+
+.ingredients {
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkout {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.test {
+  width: 36px;
+}
