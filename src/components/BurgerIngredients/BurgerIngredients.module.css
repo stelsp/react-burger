@@ -2,6 +2,30 @@
   width: 600px;
 }
 
-.title {
-  display: block;
+.card {
+  position: relative;
+  width: 272px;
+}
+
+.price {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img {
+}
+
+.priceCount {
+}
+
+.cardTitle {
+  text-align: center;
+}
+
+.cardList {
+  display: flex;
+  justify-content: flex-start;
+
+  flex-wrap: wrap;
 }
