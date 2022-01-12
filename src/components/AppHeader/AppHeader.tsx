@@ -1,6 +1,7 @@
 import React from "react";
-
 import styles from "./AppHeader.module.css";
+
+import MenuItem from "./MenuItem";
 
 import { Logo } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/logo";
 import {
@@ -45,14 +46,5 @@ export default function AppHeader() {
         text={"Личный кабинет"}
       />
     </div>
-  );
-}
-
-function MenuItem(props: any) {
-  return (
-    <a href={props.href} className={props.linkStyle}>
-      {props.icon}
-      <span className={props.textStyle}>{props.text}</span>
-    </a>
   );
 }
