@@ -7,49 +7,49 @@ import {
   DragIcon,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-export default function BurgerConstructor() {
-  const element = [
-    {
-      type: undefined,
-      isLocked: undefined,
-      handleClose: undefined,
-      text: "Краторная булка N-200i",
-      thumbnail: require("@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png"),
-      price: 20,
-    },
-    {
-      type: undefined,
-      isLocked: undefined,
-      handleClose: undefined,
-      text: "Краторная булка N-200i",
-      thumbnail: require("@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png"),
-      price: 20,
-    },
-    {
-      type: undefined,
-      isLocked: undefined,
-      handleClose: undefined,
-      text: "Краторная булка N-200i",
-      thumbnail: require("@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png"),
-      price: 20,
-    },
-    {
-      type: undefined,
-      isLocked: undefined,
-      handleClose: undefined,
-      text: "Краторная булка N-200i",
-      thumbnail: require("@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png"),
-      price: 20,
-    },
-    {
-      type: undefined,
-      isLocked: undefined,
-      handleClose: undefined,
-      text: "Краторная булка N-200i",
-      thumbnail: require("@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png"),
-      price: 20,
-    },
-  ];
+export default function BurgerConstructor({ data }: any) {
+  // const element = [
+  //   {
+  //     type: undefined,
+  //     isLocked: undefined,
+  //     handleClose: undefined,
+  //     text: "Краторная булка N-200i",
+  //     thumbnail: require("@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png"),
+  //     price: 20,
+  //   },
+  //   {
+  //     type: undefined,
+  //     isLocked: undefined,
+  //     handleClose: undefined,
+  //     text: "Краторная булка N-200i",
+  //     thumbnail: require("@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png"),
+  //     price: 20,
+  //   },
+  //   {
+  //     type: undefined,
+  //     isLocked: undefined,
+  //     handleClose: undefined,
+  //     text: "Краторная булка N-200i",
+  //     thumbnail: require("@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png"),
+  //     price: 20,
+  //   },
+  //   {
+  //     type: undefined,
+  //     isLocked: undefined,
+  //     handleClose: undefined,
+  //     text: "Краторная булка N-200i",
+  //     thumbnail: require("@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png"),
+  //     price: 20,
+  //   },
+  //   {
+  //     type: undefined,
+  //     isLocked: undefined,
+  //     handleClose: undefined,
+  //     text: "Краторная булка N-200i",
+  //     thumbnail: require("@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png"),
+  //     price: 20,
+  //   },
+  // ];
   return (
     <div className={" " + style.BurgerConstructor}>
       <div className={"mt-25 mb-10 " + style.list}>
@@ -63,15 +63,15 @@ export default function BurgerConstructor() {
           />
         </div>
         <ul className={"text " + style.ingredients}>
-          {element.map((el) => {
+          {data.map((el: any) => {
             return (
               <li className={"mb-4 ml-4 mr-1 " + style.item}>
                 <DragIcon type="primary" />
                 <ConstructorElement
                   type={el.type}
                   handleClose={el.handleClose}
-                  text={el.text}
-                  thumbnail={el.thumbnail}
+                  text={el.name}
+                  thumbnail={el.image}
                   price={el.price}
                 />
               </li>
