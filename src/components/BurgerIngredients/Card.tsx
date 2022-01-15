@@ -4,8 +4,8 @@ import styles from "./BurgerIngredients.module.css";
 
 export default function Card() {
   return (
-    <div className={"mr-4 ml-4 " + styles.card}>
-      <Counter count={1} size={"small"} />
+    <div className={"mt-6 mb-10 ml-4 " + styles.card}>
+      <Counter count={1} size={"default"} />
       <img
         src={require("@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png")}
         alt="#"
@@ -13,7 +13,7 @@ export default function Card() {
       />
       <p
         className={
-          "text text_type_digits-default text_color_primary mt-1 mb-1 " +
+          "text text_type_digits-default text_color_primary mt-1 mb-2 " +
           styles.price
         }
       >

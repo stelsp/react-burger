@@ -7,6 +7,20 @@
 
 .ingredients {
   list-style: none;
+  overflow-y: scroll;
+  max-height: 500px;
+}
+
+.ingredients::-webkit-scrollbar {
+  width: 12px;
+}
+.ingredients::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+.ingredients::-webkit-scrollbar-thumb {
+  background: #8585ad;
+  border: 3px solid #2f2f37;
+  border-radius: 6px;
 }
 
 .item {

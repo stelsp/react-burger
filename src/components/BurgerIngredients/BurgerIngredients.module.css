@@ -5,6 +5,7 @@
 .card {
   position: relative;
   width: 272px;
+  margin-right: auto;
 }
 
 .price {
@@ -28,4 +29,22 @@
   justify-content: flex-start;
 
   flex-wrap: wrap;
+}
+
+.ingredientsList {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 664px;
+}
+
+.ingredientsList::-webkit-scrollbar {
+  width: 12px;
+}
+.ingredientsList::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+.ingredientsList::-webkit-scrollbar-thumb {
+  background: #8585ad;
+  border: 3px solid #2f2f37;
+  border-radius: 6px;
 }

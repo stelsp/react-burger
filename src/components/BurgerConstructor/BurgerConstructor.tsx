@@ -65,7 +65,7 @@ export default function BurgerConstructor() {
         <ul className={"text " + style.ingredients}>
           {element.map((el) => {
             return (
-              <li className={"mb-4 ml-4 mr-4 " + style.item}>
+              <li className={"mb-4 ml-4 mr-1 " + style.item}>
                 <DragIcon type="primary" />
                 <ConstructorElement
                   type={el.type}

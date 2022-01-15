@@ -12,7 +12,7 @@ import {
 
 export default function AppHeader() {
   const linkStyle =
-    "text text_type_main-default text_color_inactive mt-4 mb-4 pt-5 pb-5 ";
+    "text text_type_main-default text_color_inactive mt-4 mb-4 pt-4 pb-4 ";
 
   return (
     <div className={styles.flex}>
