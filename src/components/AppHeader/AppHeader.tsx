@@ -15,36 +15,38 @@ export default function AppHeader() {
     "text text_type_main-default text_color_inactive mt-4 mb-4 pt-4 pb-4 ";
 
   return (
-    <div className={styles.flex}>
+    <header className={styles.header}>
       <div className={styles.flex}>
-        <MenuItem
-          linkStyle={"pr-5 mr-2 " + linkStyle + styles.link}
-          textStyle={"ml-2"}
-          icon={<BurgerIcon type="secondary" />}
-          href={"#"}
-          text={"Конструктор"}
-        />
+        <div className={styles.flex}>
+          <MenuItem
+            linkStyle={"pr-5 mr-2 " + linkStyle + styles.link}
+            textStyle={"ml-2"}
+            icon={<BurgerIcon type="secondary" />}
+            href={"#"}
+            text={"Конструктор"}
+          />
+
+          <MenuItem
+            linkStyle={"pr-5 pl-5 " + linkStyle + styles.link}
+            textStyle={"ml-2"}
+            icon={<ListIcon type="secondary" />}
+            href={"#"}
+            text={"Лента заказов"}
+          />
+        </div>
+
+        <div className={styles.logo}>
+          <Logo />
+        </div>
 
         <MenuItem
-          linkStyle={"pr-5 pl-5 " + linkStyle + styles.link}
+          linkStyle={"pl-5 " + linkStyle + styles.link}
           textStyle={"ml-2"}
-          icon={<ListIcon type="secondary" />}
+          icon={<ProfileIcon type="secondary" />}
           href={"#"}
-          text={"Лента заказов"}
+          text={"Личный кабинет"}
         />
       </div>
-
-      <div className={styles.logo}>
-        <Logo />
-      </div>
-
-      <MenuItem
-        linkStyle={"pl-5 " + linkStyle + styles.link}
-        textStyle={"ml-2"}
-        icon={<ProfileIcon type="secondary" />}
-        href={"#"}
-        text={"Личный кабинет"}
-      />
-    </div>
+    </header>
   );
 }
