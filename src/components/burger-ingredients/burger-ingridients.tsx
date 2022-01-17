@@ -27,7 +27,7 @@ export default function BurgerIngredients({ data }: any) {
           Начинки
         </Tab>
       </div>
-      <div className={" custom-scroll " + styles.list}>
+      <div className={styles.list + " custom-scroll"}>
         <h3 className={titleStyle}>Булки</h3>
         <ul className={styles.cards}>
           {data.map((el: any) => {
