@@ -1,0 +1,26 @@
+.container {
+  width: 600px;
+}
+
+.list {
+  list-style: none;
+  overflow-y: scroll;
+  max-height: 480px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkout {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon {
+  transform: scale(1.5);
+}

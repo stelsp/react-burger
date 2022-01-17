@@ -1,0 +1,41 @@
+.header {
+  position: relative;
+  background: var(--background);
+}
+
+header:before,
+header:after {
+  content: "";
+  position: absolute;
+  background: var(--background);
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+}
+
+header:before {
+  right: 100%;
+}
+header:after {
+  left: 100%;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  margin-right: 286px;
+  margin-left: auto;
+}
+
+.link {
+  composes: flex;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--text-primary-color);
+}
