@@ -5,7 +5,7 @@ import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
 import Card from "../card/card";
 
-export default function BurgerIngredients() {
+export default function BurgerIngredients({ data }: any) {
   const titleStyle = "text text_type_main-medium text_color_primary ";
 
   const [current, setCurrent] = React.useState("one");
@@ -30,22 +30,27 @@ export default function BurgerIngredients() {
       <div className={styles.list + " custom-scroll"}>
         <h3 className={titleStyle}>Булки</h3>
         <ul className={styles.cards}>
-          <Card />
-          <Card />
+          {data.map((el: any) => {
+            if (el.type === "bun") {
+              return <Card name={el.name} image={el.image} price={el.price} />;
+            }
+          })}
         </ul>
         <h3 className={titleStyle}>Соусы</h3>
         <ul className={styles.cards}>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {data.map((el: any) => {
+            if (el.type === "sauce") {
+              return <Card name={el.name} image={el.image} price={el.price} />;
+            }
+          })}
         </ul>
         <h3 className={titleStyle}>Начинки</h3>
         <ul className={styles.cards}>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {data.map((el: any) => {
+            if (el.type === "main") {
+              return <Card name={el.name} image={el.image} price={el.price} />;
+            }
+          })}
         </ul>
       </div>
     </div>

@@ -12,7 +12,7 @@ export default function App() {
     <div className={styles.app}>
       <AppHeader />
       <main className={styles.main}>
-        <BurgerIngredients />
+        <BurgerIngredients data={data} />
         <BurgerConstructor data={data} />
       </main>
     </div>
