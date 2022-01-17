@@ -8,52 +8,10 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 export default function BurgerConstructor({ data }: any) {
-  // const element = [
-  //   {
-  //     type: undefined,
-  //     isLocked: undefined,
-  //     handleClose: undefined,
-  //     text: "Краторная булка N-200i",
-  //     thumbnail: require("@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png"),
-  //     price: 20,
-  //   },
-  //   {
-  //     type: undefined,
-  //     isLocked: undefined,
-  //     handleClose: undefined,
-  //     text: "Краторная булка N-200i",
-  //     thumbnail: require("@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png"),
-  //     price: 20,
-  //   },
-  //   {
-  //     type: undefined,
-  //     isLocked: undefined,
-  //     handleClose: undefined,
-  //     text: "Краторная булка N-200i",
-  //     thumbnail: require("@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png"),
-  //     price: 20,
-  //   },
-  //   {
-  //     type: undefined,
-  //     isLocked: undefined,
-  //     handleClose: undefined,
-  //     text: "Краторная булка N-200i",
-  //     thumbnail: require("@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png"),
-  //     price: 20,
-  //   },
-  //   {
-  //     type: undefined,
-  //     isLocked: undefined,
-  //     handleClose: undefined,
-  //     text: "Краторная булка N-200i",
-  //     thumbnail: require("@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png"),
-  //     price: 20,
-  //   },
-  // ];
   return (
-    <div className={" " + style.BurgerConstructor}>
-      <div className={"mt-25 mb-10 " + style.list}>
-        <div className={"mb-4 ml-4 mr-4 pl-8 " + style.item}>
+    <div className={style.container}>
+      <div className={"mt-25 mb-10"}>
+        <div className={style.item + " mb-4 ml-4 mr-4 pl-8"}>
           <ConstructorElement
             type={"top"}
             isLocked={true}
@@ -62,10 +20,10 @@ export default function BurgerConstructor({ data }: any) {
             price={20}
           />
         </div>
-        <ul className={"text " + style.ingredients}>
+        <ul className={style.list + " text custom-scroll"}>
           {data.map((el: any) => {
             return (
-              <li className={"mb-4 ml-4 mr-1 " + style.item}>
+              <li className={style.item + " mb-4 ml-4 mr-1"}>
                 <DragIcon type="primary" />
                 <ConstructorElement
                   type={el.type}
@@ -78,7 +36,7 @@ export default function BurgerConstructor({ data }: any) {
             );
           })}
         </ul>
-        <div className={"ml-4 mr-4 pl-8 " + style.item}>
+        <div className={style.item + " ml-4 mr-4 pl-8"}>
           <ConstructorElement
             type={"bottom"}
             isLocked={true}
@@ -88,9 +46,9 @@ export default function BurgerConstructor({ data }: any) {
           />
         </div>
       </div>
-      <div className={" " + style.checkout}>
+      <div className={style.checkout + " mr-4"}>
         <p className="text text_type_digits-medium">610</p>
-        <div className={style.test}>
+        <div className={style.icon + " mr-10"}>
           <CurrencyIcon type="primary" />
         </div>
         <Button size="large">Оформить заказ</Button>

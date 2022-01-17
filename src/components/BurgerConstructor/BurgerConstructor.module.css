@@ -1,26 +1,11 @@
-.BurgerConstructor {
+.container {
   width: 600px;
 }
 
 .list {
-}
-
-.ingredients {
   list-style: none;
   overflow-y: scroll;
-  max-height: 500px;
-}
-
-.ingredients::-webkit-scrollbar {
-  width: 12px;
-}
-.ingredients::-webkit-scrollbar-track {
-  background: #2f2f37;
-}
-.ingredients::-webkit-scrollbar-thumb {
-  background: #8585ad;
-  border: 3px solid #2f2f37;
-  border-radius: 6px;
+  max-height: 480px;
 }
 
 .item {
@@ -33,8 +18,9 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  gap: 10px;
 }
 
-.test {
-  width: 36px;
+.icon {
+  transform: scale(1.5);
 }

@@ -1,10 +1,16 @@
 import React from "react";
 
-export default function MenuItem(props: any) {
+export default function MenuItem({
+  linkStyle,
+  href,
+  icon,
+  textStyle,
+  text,
+}: any) {
   return (
-    <a href={props.href} className={props.linkStyle}>
-      {props.icon}
-      <span className={props.textStyle}>{props.text}</span>
+    <a href={href} className={linkStyle}>
+      {icon}
+      <span className={textStyle}>{text}</span>
     </a>
   );
 }
