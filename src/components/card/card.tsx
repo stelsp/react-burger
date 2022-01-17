@@ -8,7 +8,7 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 
 function Card({ name, image, price }: any) {
   return (
-    <li className={styles.card + " mt-6 mb-10 ml-4"}>
+    <li className={styles.card + " mt-6 mb-6 ml-4"}>
       <Counter count={1} size={"default"} />
       <img src={image} alt={name} className={"mr-4 ml-4"} />
       <p

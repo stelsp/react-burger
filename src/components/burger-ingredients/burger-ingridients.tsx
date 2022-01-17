@@ -44,7 +44,7 @@ function BurgerIngredients({ data }: any) {
             }
           })}
         </ul>
-        <h3 className={titleStyle}>Соусы</h3>
+        <h3 className={titleStyle + " mt-10"}>Соусы</h3>
         <ul className={styles.cards}>
           {data.map((el: any) => {
             if (el.type === "sauce") {
@@ -59,7 +59,7 @@ function BurgerIngredients({ data }: any) {
             }
           })}
         </ul>
-        <h3 className={titleStyle}>Начинки</h3>
+        <h3 className={titleStyle + " mt-10"}>Начинки</h3>
         <ul className={styles.cards}>
           {data.map((el: any) => {
             if (el.type === "main") {

@@ -27,18 +27,18 @@ function BurgerConstructor({ data }: any) {
         </div>
         <ul className={style.list + " text custom-scroll"}>
           {data.map((el: any) => {
-            return (
-              <li className={style.item + " mb-4 ml-4 mr-1"} key={el._id}>
-                <DragIcon type="primary" />
-                <ConstructorElement
-                  type={el.type}
-                  handleClose={el.handleClose}
-                  text={el.name}
-                  thumbnail={el.image}
-                  price={el.price}
-                />
-              </li>
-            );
+            if (el.type !== "bun") {
+              return (
+                <li className={style.item + " mb-4 ml-4 mr-1"} key={el._id}>
+                  <DragIcon type="primary" />
+                  <ConstructorElement
+                    text={el.name}
+                    thumbnail={el.image}
+                    price={el.price}
+                  />
+                </li>
+              );
+            }
           })}
         </ul>
         <div className={style.item + " ml-4 mr-4 pl-8"}>
