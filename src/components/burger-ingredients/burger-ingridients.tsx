@@ -1,9 +1,9 @@
 import React from "react";
 
-import styles from "./BurgerIngredients.module.css";
+import styles from "./burger-ingredients.module.css";
 
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
-import Card from "./Card";
+import Card from "../card/card";
 
 export default function BurgerIngredients() {
   const titleStyle = "text text_type_main-medium text_color_primary ";
@@ -11,7 +11,7 @@ export default function BurgerIngredients() {
   const [current, setCurrent] = React.useState("one");
 
   return (
-    <div className={"mt-10 " + styles.BurgerIngredients}>
+    <div className={styles.container + " mt-10"}>
       <h2 className={"text text_type_main-large text_color_primary "}>
         Соберите бургер
       </h2>
@@ -27,31 +27,26 @@ export default function BurgerIngredients() {
           Начинки
         </Tab>
       </div>
-      <div className={styles.ingredientsList}>
+      <div className={styles.list + " custom-scroll"}>
         <h3 className={titleStyle}>Булки</h3>
-        <div className={styles.cardList}>
+        <ul className={styles.cards}>
           <Card />
           <Card />
-        </div>
-
+        </ul>
         <h3 className={titleStyle}>Соусы</h3>
-        <div className={styles.cardList}>
+        <ul className={styles.cards}>
           <Card />
           <Card />
           <Card />
           <Card />
-          <Card />
-          <Card />
-        </div>
+        </ul>
         <h3 className={titleStyle}>Начинки</h3>
-        <div className={styles.cardList}>
+        <ul className={styles.cards}>
           <Card />
           <Card />
           <Card />
           <Card />
-          <Card />
-          <Card />
-        </div>
+        </ul>
       </div>
     </div>
   );

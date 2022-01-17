@@ -1,19 +1,19 @@
 import React from "react";
 
-import AppHeader from "../AppHeader/AppHeader";
-import BurgerIngredients from "../BurgerIngredients/BurgerIngridients";
-import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
-import test from "../../utils/data";
+import styles from "./app.module.css";
 
-import styles from "./App.module.css";
+import AppHeader from "../app-header/app-header";
+import BurgerIngredients from "../burger-ingredients/burger-ingridients";
+import BurgerConstructor from "../burger-constructor/burger-constructor";
+import data from "../../utils/data";
 
 export default function App() {
   return (
-    <div className={styles.App}>
+    <div className={styles.app}>
       <AppHeader />
       <main className={styles.main}>
         <BurgerIngredients />
-        <BurgerConstructor data={test} />
+        <BurgerConstructor data={data} />
       </main>
     </div>
   );
