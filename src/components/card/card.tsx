@@ -1,11 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import styles from "./card.module.css";
 
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 
-export default function Card({ name, image, price }: any) {
+function Card({ name, image, price }: any) {
   return (
     <li className={styles.card + " mt-6 mb-10 ml-4"}>
       <Counter count={1} size={"default"} />
@@ -29,3 +30,11 @@ export default function Card({ name, image, price }: any) {
     </li>
   );
 }
+
+Card.propTypes = {
+  name: PropTypes.string,
+  image: PropTypes.string,
+  price: PropTypes.number,
+};
+
+export default Card;

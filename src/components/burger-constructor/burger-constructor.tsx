@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import style from "./burger-constructor.module.css";
 
@@ -9,7 +10,9 @@ import {
   DragIcon,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-export default function BurgerConstructor({ data }: any) {
+import { isPlusToken } from "typescript";
+
+function BurgerConstructor({ data }: any) {
   return (
     <div className={style.container}>
       <div className={"mt-25 mb-10"}>
@@ -25,7 +28,7 @@ export default function BurgerConstructor({ data }: any) {
         <ul className={style.list + " text custom-scroll"}>
           {data.map((el: any) => {
             return (
-              <li className={style.item + " mb-4 ml-4 mr-1"}>
+              <li className={style.item + " mb-4 ml-4 mr-1"} key={el._id}>
                 <DragIcon type="primary" />
                 <ConstructorElement
                   type={el.type}
@@ -58,3 +61,9 @@ export default function BurgerConstructor({ data }: any) {
     </div>
   );
 }
+
+BurgerConstructor.propTypes = {
+  data: PropTypes.array,
+};
+
+export default BurgerConstructor;

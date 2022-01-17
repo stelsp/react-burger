@@ -1,11 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import styles from "./burger-ingredients.module.css";
 
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
 import Card from "../card/card";
 
-export default function BurgerIngredients({ data }: any) {
+function BurgerIngredients({ data }: any) {
   const titleStyle = "text text_type_main-medium text_color_primary ";
 
   const [current, setCurrent] = React.useState("one");
@@ -32,7 +33,14 @@ export default function BurgerIngredients({ data }: any) {
         <ul className={styles.cards}>
           {data.map((el: any) => {
             if (el.type === "bun") {
-              return <Card name={el.name} image={el.image} price={el.price} />;
+              return (
+                <Card
+                  name={el.name}
+                  image={el.image}
+                  price={el.price}
+                  key={el._id}
+                />
+              );
             }
           })}
         </ul>
@@ -40,7 +48,14 @@ export default function BurgerIngredients({ data }: any) {
         <ul className={styles.cards}>
           {data.map((el: any) => {
             if (el.type === "sauce") {
-              return <Card name={el.name} image={el.image} price={el.price} />;
+              return (
+                <Card
+                  name={el.name}
+                  image={el.image}
+                  price={el.price}
+                  key={el._id}
+                />
+              );
             }
           })}
         </ul>
@@ -48,7 +63,14 @@ export default function BurgerIngredients({ data }: any) {
         <ul className={styles.cards}>
           {data.map((el: any) => {
             if (el.type === "main") {
-              return <Card name={el.name} image={el.image} price={el.price} />;
+              return (
+                <Card
+                  name={el.name}
+                  image={el.image}
+                  price={el.price}
+                  key={el._id}
+                />
+              );
             }
           })}
         </ul>
@@ -56,3 +78,9 @@ export default function BurgerIngredients({ data }: any) {
     </div>
   );
 }
+
+BurgerIngredients.propTypes = {
+  data: PropTypes.array,
+};
+
+export default BurgerIngredients;
