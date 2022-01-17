@@ -11,11 +11,11 @@ function MenuItem({ linkStyle, href, icon, textStyle, text }: any) {
 }
 
 MenuItem.propTypes = {
-  linkStyle: PropTypes.string,
-  href: PropTypes.string,
-  icon: PropTypes.object,
-  textStyle: string,
-  text: string,
+  linkStyle: PropTypes.string.isRequired,
+  href: PropTypes.string.isRequired,
+  icon: PropTypes.object.isRequired,
+  textStyle: string.isRequired,
+  text: string.isRequired,
 };
 
 export default MenuItem;
