@@ -1,5 +1,7 @@
 import React from "react";
 
-function Modal() {
-  return null;
+export default function Modal({ open, children }: any) {
+  if (!open) return null;
+
+  return <div>{children}</div>;
 }
