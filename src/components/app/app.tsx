@@ -7,6 +7,7 @@ import BurgerIngredients from "../burger-ingredients/burger-ingridients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 
 import Modal from "../modal/modal";
+import OrderDetails from "../order-details/order-details";
 
 let url = "https://norma.nomoreparties.space/api/ingredients";
 
@@ -22,16 +23,21 @@ export default function App() {
       });
   }, []);
 
+  const toggleModal = () => {
+    return setIsOpen((value) => !value);
+  };
+
   return (
     <div className={styles.app}>
       <AppHeader />
       <main className={styles.main}>
         <BurgerIngredients data={data} />
-        <BurgerConstructor data={data} />
+        <BurgerConstructor onOpen={toggleModal} data={data} />
       </main>
 
-      <button onClick={() => setIsOpen((value) => !value)}>open modal</button>
-      <Modal open={isOpen}>Modal</Modal>
+      <Modal open={isOpen} onClose={toggleModal}>
+        <OrderDetails />
+      </Modal>
     </div>
   );
 }

@@ -1,9 +1,9 @@
 .header {
-  position: relative;
+  /* position: relative; */
   background: var(--background);
 }
 
-header:before,
+/* header:before,
 header:after {
   content: "";
   position: absolute;
@@ -18,7 +18,7 @@ header:before {
 }
 header:after {
   left: 100%;
-}
+} */
 
 .flex {
   display: flex;

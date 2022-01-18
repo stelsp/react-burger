@@ -10,9 +10,8 @@ import {
   DragIcon,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-import { isPlusToken } from "typescript";
 
-function BurgerConstructor({ data }: any) {
+function BurgerConstructor({ data, onOpen }: any) {
   return (
     <div className={style.container}>
       <div className={"mt-25 mb-10"}>
@@ -56,7 +55,9 @@ function BurgerConstructor({ data }: any) {
         <div className={style.icon + " mr-10"}>
           <CurrencyIcon type="primary" />
         </div>
-        <Button size="large">Оформить заказ</Button>
+        <Button onClick={onOpen} size="large">
+          Оформить заказ
+        </Button>
       </div>
     </div>
   );
@@ -64,6 +65,7 @@ function BurgerConstructor({ data }: any) {
 
 BurgerConstructor.propTypes = {
   data: PropTypes.array.isRequired,
+  onOpen: PropTypes.func.isRequired,
 };
 
 export default BurgerConstructor;
