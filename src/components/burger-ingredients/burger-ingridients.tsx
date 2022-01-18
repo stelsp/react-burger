@@ -6,7 +6,7 @@ import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
 import Card from "../card/card";
 
-function BurgerIngredients({ data }: any) {
+function BurgerIngredients({ data, onOpen }: any) {
   const titleStyle = "text text_type_main-medium text_color_primary ";
 
   const [current, setCurrent] = React.useState("one");
@@ -39,6 +39,7 @@ function BurgerIngredients({ data }: any) {
                   image={el.image}
                   price={el.price}
                   key={el._id}
+                  onOpen={onOpen}
                 />
               );
             }
@@ -54,6 +55,7 @@ function BurgerIngredients({ data }: any) {
                   image={el.image}
                   price={el.price}
                   key={el._id}
+                  onOpen={onOpen}
                 />
               );
             }
@@ -69,6 +71,7 @@ function BurgerIngredients({ data }: any) {
                   image={el.image}
                   price={el.price}
                   key={el._id}
+                  onOpen={onOpen}
                 />
               );
             }
@@ -81,6 +84,7 @@ function BurgerIngredients({ data }: any) {
 
 BurgerIngredients.propTypes = {
   data: PropTypes.array.isRequired,
+  onOpen: PropTypes.func.isRequired,
 };
 
 export default BurgerIngredients;

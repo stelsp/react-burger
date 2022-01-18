@@ -31,7 +31,7 @@ export default function App() {
     <div className={styles.app}>
       <AppHeader />
       <main className={styles.main}>
-        <BurgerIngredients data={data} />
+        <BurgerIngredients onOpen={toggleModal} data={data} />
         <BurgerConstructor onOpen={toggleModal} data={data} />
       </main>
 
