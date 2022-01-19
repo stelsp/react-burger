@@ -28,10 +28,10 @@ const TEXT_STYLE = "text text_type_main-default text_color_inactive";
 function IngredientsDetails({ data, open, close }: any) {
   return (
     <>
-      {data
-        .filter((el: any) => el._id === "60d3b41abdacab0026a733c6")
-        .map((el: any) => {
-          <Modal open={open} close={close}>
+      <Modal open={open} close={close}>
+        {data
+          .filter((el: any) => el._id === "60d3b41abdacab0026a733c6")
+          .map((el: any) => {
             <div style={CARD_STYLE} className=" pb-15 pr-10 pl-10">
               <h3 className="text text_type_main-large" style={ORDER_STYLE}>
                 Детали ингредиента
@@ -44,9 +44,9 @@ function IngredientsDetails({ data, open, close }: any) {
                 <li className={TEXT_STYLE}>{el.fat}</li>
                 <li className={TEXT_STYLE}>{el.carbohydrates}</li>
               </ul>
-            </div>
-          </Modal>;
-        })}
+            </div>;
+          })}
+      </Modal>
     </>
   );
 }
