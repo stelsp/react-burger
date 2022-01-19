@@ -24,8 +24,9 @@ function BurgerConstructor({ data, open }: any) {
           />
         </div>
         <ul className={style.list + " text custom-scroll"}>
-          {data.map((el: any) => {
-            if (el.type !== "bun") {
+          {data
+            .filter((el: any) => el.type !== "bun")
+            .map((el: any) => {
               return (
                 <li className={style.item + " mb-4 ml-4 mr-1"} key={el._id}>
                   <DragIcon type="primary" />
@@ -36,8 +37,7 @@ function BurgerConstructor({ data, open }: any) {
                   />
                 </li>
               );
-            }
-          })}
+            })}
         </ul>
         <div className={style.item + " ml-4 mr-4 pl-8"}>
           <ConstructorElement

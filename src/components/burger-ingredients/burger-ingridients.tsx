@@ -31,8 +31,9 @@ function BurgerIngredients({ data, open }: any) {
       <div className={styles.list + " custom-scroll"}>
         <h3 className={titleStyle}>Булки</h3>
         <ul className={styles.cards}>
-          {data.map((el: any) => {
-            if (el.type === "bun") {
+          {data
+            .filter((el: any) => el.type === "bun")
+            .map((el: any) => {
               return (
                 <Card
                   name={el.name}
@@ -42,13 +43,13 @@ function BurgerIngredients({ data, open }: any) {
                   open={open}
                 />
               );
-            }
-          })}
+            })}
         </ul>
         <h3 className={titleStyle + " mt-10"}>Соусы</h3>
         <ul className={styles.cards}>
-          {data.map((el: any) => {
-            if (el.type === "sauce") {
+          {data
+            .filter((el: any) => el.type === "sauce")
+            .map((el: any) => {
               return (
                 <Card
                   name={el.name}
@@ -58,13 +59,13 @@ function BurgerIngredients({ data, open }: any) {
                   open={open}
                 />
               );
-            }
-          })}
+            })}
         </ul>
         <h3 className={titleStyle + " mt-10"}>Начинки</h3>
         <ul className={styles.cards}>
-          {data.map((el: any) => {
-            if (el.type === "main") {
+          {data
+            .filter((el: any) => el.type === "main")
+            .map((el: any) => {
               return (
                 <Card
                   name={el.name}
@@ -74,8 +75,7 @@ function BurgerIngredients({ data, open }: any) {
                   open={open}
                 />
               );
-            }
-          })}
+            })}
         </ul>
       </div>
     </div>
