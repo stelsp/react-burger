@@ -39,9 +39,12 @@ export default function App() {
         <BurgerIngredients open={toggleIngredientModal} data={data} />
         <BurgerConstructor open={toggleOrderModal} data={data} />
       </main>
-
       <OrderDetails open={showOrder} close={toggleOrderModal} />
-      <IngredientsDetails open={showIngredient} close={toggleIngredientModal} />
+      <IngredientsDetails
+        open={showIngredient}
+        close={toggleIngredientModal}
+        data={data}
+      />
     </div>
   );
 }

@@ -1,4 +1,6 @@
 import { CSSProperties } from "react";
+import PropTypes from "prop-types";
+
 import Modal from "../modal/modal";
 
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
@@ -22,7 +24,7 @@ const ICON_STYLE: CSSProperties = {
 function OrderDetails({ open, close }: any) {
   return (
     <Modal open={open} close={close}>
-      <div style={CARD_STYLE}>
+      <div style={CARD_STYLE} className=" pt-30 pb-30 pr-25 pl-25">
         <p className="text text_type_digits-large mb-8" style={ORDER_STYLE}>
           034536
         </p>
@@ -40,5 +42,10 @@ function OrderDetails({ open, close }: any) {
     </Modal>
   );
 }
+
+OrderDetails.propTypes = {
+  open: PropTypes.bool.isRequired,
+  close: PropTypes.func.isRequired,
+};
 
 export default OrderDetails;

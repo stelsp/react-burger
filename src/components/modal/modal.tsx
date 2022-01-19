@@ -13,7 +13,7 @@ function Modal({ open, close, children }: any) {
   return ReactDOM.createPortal(
     <div>
       <ModalOverlay close={close} />
-      <div className={styles.modal + " pt-30 pb-30 pr-25 pl-25"}>
+      <div className={styles.modal}>
         <span className={styles.close}>
           <CloseIcon type="primary" onClick={close} />
         </span>
@@ -27,7 +27,7 @@ function Modal({ open, close, children }: any) {
 Modal.propTypes = {
   open: PropTypes.bool.isRequired,
   close: PropTypes.func.isRequired,
-  children: PropTypes.any.isRequired,
+  children: PropTypes.any,
 };
 
 export default Modal;
