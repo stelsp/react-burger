@@ -12,7 +12,7 @@ import {
 
 function BurgerConstructor({ data, open }: any) {
   return (
-    <div className={style.container}>
+    <section className={style.container}>
       <div className={"mt-25 mb-10"}>
         <div className={style.item + " mb-4 ml-4 mr-4 pl-8"}>
           <ConstructorElement
@@ -58,7 +58,7 @@ function BurgerConstructor({ data, open }: any) {
           Оформить заказ
         </Button>
       </div>
-    </div>
+    </section>
   );
 }
 

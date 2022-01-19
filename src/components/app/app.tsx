@@ -27,6 +27,7 @@ export default function App() {
     fetch(url)
       .then((res) => res.json())
       .then((res) => {
+        console.log(res.data);
         setData(res.data);
       });
   }, []);
