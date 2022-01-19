@@ -8,6 +8,10 @@
   border-radius: 40px;
 }
 
+.title {
+  min-width: 580px;
+}
+
 .close {
   position: absolute;
   top: 60px;

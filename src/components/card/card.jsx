@@ -5,7 +5,7 @@ import styles from "./card.module.css";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 
-function Card({ name, image, price, open, id }: any) {
+function Card({ name, image, price, open, id }) {
   return (
     <li className={styles.card + " mt-6 mb-6 ml-4"} onClick={open} id={id}>
       <Counter count={1} size={"default"} />
@@ -34,8 +34,8 @@ Card.propTypes = {
   name: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  open: PropTypes.any.isRequired,
-  id: PropTypes.any.isRequired,
+  open: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default Card;

@@ -5,11 +5,6 @@
   flex-direction: column;
 }
 
-.title {
-  min-width: 580px;
-  margin-top: 51px;
-}
-
 .img {
   display: block;
   min-width: 100%;

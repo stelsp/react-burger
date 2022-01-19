@@ -9,29 +9,37 @@ import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import IngredientsDetails from "../ingredient-details/ingredient-details";
 
-const API_URL = "https://norma.nomoreparties.space/api/ingredients";
+const API_URL = "https://norma.nomoreparties.space/api";
 
 export default function App() {
   const [data, setData] = useState([]);
   const [showOrder, setShowOrder] = useState(false);
-  const [showIngredient, setShowIngredient] = useState(false);
   const [currentIngredient, setCurrentIngredient] = useState("");
 
   const toggleOrderModal = () => {
-    return setShowOrder((value) => !value);
+    setShowOrder((value) => !value);
   };
 
-  const toggleIngredientModal = (e: any) => {
+  const toggleIngredientModal = (e) => {
     setCurrentIngredient(e.currentTarget.id);
-    return setShowIngredient((value) => !value);
+  };
+
+  const checkRes = (res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status + " - " + res.statusText}`);
   };
 
   useEffect(() => {
-    fetch(API_URL)
-      .then((res) => res.json())
+    fetch(`${API_URL}/ingredients`)
+      .then(checkRes)
       .then((res) => {
         console.log(res.data);
         setData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
 
@@ -42,13 +50,20 @@ export default function App() {
         <BurgerIngredients open={toggleIngredientModal} data={data} />
         <BurgerConstructor open={toggleOrderModal} data={data} />
       </main>
-      <Modal open={showOrder} close={toggleOrderModal}>
-        <OrderDetails />
-      </Modal>
 
-      <Modal open={showIngredient} close={toggleIngredientModal}>
-        <IngredientsDetails data={data} currentIngredient={currentIngredient} />
-      </Modal>
+      {showOrder && (
+        <Modal close={toggleOrderModal}>
+          <OrderDetails />
+        </Modal>
+      )}
+      {currentIngredient && (
+        <Modal close={toggleIngredientModal} title={"Детали ингредиента"}>
+          <IngredientsDetails
+            data={data}
+            currentIngredient={currentIngredient}
+          />
+        </Modal>
+      )}
     </>
   );
 }

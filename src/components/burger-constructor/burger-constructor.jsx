@@ -1,17 +1,14 @@
 import PropTypes from "prop-types";
-
 import style from "./burger-constructor.module.css";
-
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/button";
-
 import {
   DragIcon,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 
-function BurgerConstructor({ data, open }: any) {
-  const ingridient: Array<object> = data.filter((el: any) => el.type !== "bun");
+function BurgerConstructor({ data, open }) {
+  const ingredient = data.filter((el) => el.type !== "bun");
 
   return (
     <section className={style.container}>
@@ -26,7 +23,7 @@ function BurgerConstructor({ data, open }: any) {
           />
         </div>
         <ul className={style.list + " text custom-scroll"}>
-          {ingridient.map((el: any) => {
+          {ingredient.map((el) => {
             return (
               <li className={style.item + " mb-4 ml-4 mr-1"} key={el._id}>
                 <DragIcon type="primary" />
@@ -63,7 +60,13 @@ function BurgerConstructor({ data, open }: any) {
 }
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      image: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+    })
+  ).isRequired,
   open: PropTypes.func.isRequired,
 };
 

@@ -2,17 +2,14 @@ import PropTypes from "prop-types";
 
 import styles from "./ingredient-details.module.css";
 
-function IngredientsDetails({ currentIngredient, data }: any) {
-  const ingridient = data.filter((el: any) => el._id === currentIngredient);
+function IngredientsDetails({ currentIngredient, data }) {
+  const ingridient = data.filter((el) => el._id === currentIngredient);
 
   return (
     <>
-      {ingridient.map((el: any) => {
+      {ingridient.map((el) => {
         return (
           <div className={styles.card + " pb-15 pr-10 pl-10"} key={el._id}>
-            <h3 className={styles.title + " text text_type_main-large"}>
-              Детали ингредиента
-            </h3>
             <img
               src={el.image}
               alt={el.name}
@@ -64,12 +61,12 @@ IngredientsDetails.propTypes = {
   currentIngredient: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      image: PropTypes.string,
-      name: PropTypes.string,
-      calories: PropTypes.number,
-      proteins: PropTypes.number,
-      fat: PropTypes.number,
-      carbohydrates: PropTypes.number,
+      image: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      calories: PropTypes.number.isRequired,
+      proteins: PropTypes.number.isRequired,
+      fat: PropTypes.number.isRequired,
+      carbohydrates: PropTypes.number.isRequired,
     })
   ).isRequired,
 };

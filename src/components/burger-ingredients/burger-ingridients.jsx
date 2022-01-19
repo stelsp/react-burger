@@ -1,15 +1,13 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-
 import styles from "./burger-ingredients.module.css";
-
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
 import Card from "../card/card";
 
-function BurgerIngredients({ data, open }: any) {
-  const bun: Array<object> = data.filter((el: any) => el.type === "bun");
-  const sauce: Array<object> = data.filter((el: any) => el.type === "sauce");
-  const main: Array<object> = data.filter((el: any) => el.type === "main");
+function BurgerIngredients({ data, open }) {
+  const bun = data.filter((el) => el.type === "bun");
+  const sauce = data.filter((el) => el.type === "sauce");
+  const main = data.filter((el) => el.type === "main");
 
   const titleStyle = "text text_type_main-medium text_color_primary ";
 
@@ -35,7 +33,7 @@ function BurgerIngredients({ data, open }: any) {
       <div className={styles.list + " custom-scroll"}>
         <h3 className={titleStyle}>Булки</h3>
         <ul className={styles.cards}>
-          {bun.map((el: any) => {
+          {bun.map((el) => {
             return (
               <Card
                 name={el.name}
@@ -50,7 +48,7 @@ function BurgerIngredients({ data, open }: any) {
         </ul>
         <h3 className={titleStyle + " mt-10"}>Соусы</h3>
         <ul className={styles.cards}>
-          {sauce.map((el: any) => {
+          {sauce.map((el) => {
             return (
               <Card
                 name={el.name}
@@ -65,7 +63,7 @@ function BurgerIngredients({ data, open }: any) {
         </ul>
         <h3 className={titleStyle + " mt-10"}>Начинки</h3>
         <ul className={styles.cards}>
-          {main.map((el: any) => {
+          {main.map((el) => {
             return (
               <Card
                 name={el.name}
@@ -84,7 +82,14 @@ function BurgerIngredients({ data, open }: any) {
 }
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      image: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      _id: PropTypes.string.isRequired,
+    })
+  ).isRequired,
   open: PropTypes.func.isRequired,
 };
 

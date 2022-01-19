@@ -1,10 +1,9 @@
 import styles from "./order-details.module.css";
-
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 
 function OrderDetails() {
   return (
-    <div className={styles.card + " pt-30 pb-30 pr-25 pl-25"}>
+    <div className={styles.card + " pt-15 pb-30 pr-25 pl-25"}>
       <h3 className={styles.order + " text text_type_digits-large mb-8"}>
         034536
       </h3>
