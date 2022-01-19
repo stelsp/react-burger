@@ -9,7 +9,7 @@ import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import IngredientsDetails from "../ingredient-details/ingredient-details";
 
-let API_URL = "https://norma.nomoreparties.space/api/ingredients";
+const API_URL = "https://norma.nomoreparties.space/api/ingredients";
 
 export default function App() {
   const [data, setData] = useState([]);
@@ -46,12 +46,9 @@ export default function App() {
         <OrderDetails />
       </Modal>
 
-      <IngredientsDetails
-        open={showIngredient}
-        close={toggleIngredientModal}
-        data={data}
-        currentIngredient={currentIngredient}
-      />
+      <Modal open={showIngredient} close={toggleIngredientModal}>
+        <IngredientsDetails data={data} currentIngredient={currentIngredient} />
+      </Modal>
     </>
   );
 }
