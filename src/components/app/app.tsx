@@ -8,7 +8,7 @@ import BurgerConstructor from "../burger-constructor/burger-constructor";
 import OrderDetails from "../order-details/order-details";
 import IngredientsDetails from "../ingredient-details/ingredient-details";
 
-let url = "https://norma.nomoreparties.space/api/ingredients";
+let API_URL = "https://norma.nomoreparties.space/api/ingredients";
 
 export default function App() {
   const [data, setData] = useState([]);
@@ -26,7 +26,7 @@ export default function App() {
   };
 
   useEffect(() => {
-    fetch(url)
+    fetch(API_URL)
       .then((res) => res.json())
       .then((res) => {
         setData(res.data);
