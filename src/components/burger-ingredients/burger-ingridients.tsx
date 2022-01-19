@@ -7,6 +7,10 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/
 import Card from "../card/card";
 
 function BurgerIngredients({ data, open }: any) {
+  const bun: Array<object> = data.filter((el: any) => el.type === "bun");
+  const sauce: Array<object> = data.filter((el: any) => el.type === "sauce");
+  const main: Array<object> = data.filter((el: any) => el.type === "main");
+
   const titleStyle = "text text_type_main-medium text_color_primary ";
 
   const [current, setCurrent] = useState("one");
@@ -31,54 +35,48 @@ function BurgerIngredients({ data, open }: any) {
       <div className={styles.list + " custom-scroll"}>
         <h3 className={titleStyle}>Булки</h3>
         <ul className={styles.cards}>
-          {data
-            .filter((el: any) => el.type === "bun")
-            .map((el: any) => {
-              return (
-                <Card
-                  name={el.name}
-                  image={el.image}
-                  price={el.price}
-                  key={el._id}
-                  id={el._id}
-                  open={open}
-                />
-              );
-            })}
+          {bun.map((el: any) => {
+            return (
+              <Card
+                name={el.name}
+                image={el.image}
+                price={el.price}
+                key={el._id}
+                id={el._id}
+                open={open}
+              />
+            );
+          })}
         </ul>
         <h3 className={titleStyle + " mt-10"}>Соусы</h3>
         <ul className={styles.cards}>
-          {data
-            .filter((el: any) => el.type === "sauce")
-            .map((el: any) => {
-              return (
-                <Card
-                  name={el.name}
-                  image={el.image}
-                  price={el.price}
-                  key={el._id}
-                  id={el._id}
-                  open={open}
-                />
-              );
-            })}
+          {sauce.map((el: any) => {
+            return (
+              <Card
+                name={el.name}
+                image={el.image}
+                price={el.price}
+                key={el._id}
+                id={el._id}
+                open={open}
+              />
+            );
+          })}
         </ul>
         <h3 className={titleStyle + " mt-10"}>Начинки</h3>
         <ul className={styles.cards}>
-          {data
-            .filter((el: any) => el.type === "main")
-            .map((el: any) => {
-              return (
-                <Card
-                  name={el.name}
-                  image={el.image}
-                  price={el.price}
-                  key={el._id}
-                  id={el._id}
-                  open={open}
-                />
-              );
-            })}
+          {main.map((el: any) => {
+            return (
+              <Card
+                name={el.name}
+                image={el.image}
+                price={el.price}
+                key={el._id}
+                id={el._id}
+                open={open}
+              />
+            );
+          })}
         </ul>
       </div>
     </div>

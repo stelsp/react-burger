@@ -11,6 +11,8 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 
 function BurgerConstructor({ data, open }: any) {
+  const ingridient: Array<object> = data.filter((el: any) => el.type !== "bun");
+
   return (
     <section className={style.container}>
       <div className={"mt-25 mb-10"}>
@@ -24,20 +26,18 @@ function BurgerConstructor({ data, open }: any) {
           />
         </div>
         <ul className={style.list + " text custom-scroll"}>
-          {data
-            .filter((el: any) => el.type !== "bun")
-            .map((el: any) => {
-              return (
-                <li className={style.item + " mb-4 ml-4 mr-1"} key={el._id}>
-                  <DragIcon type="primary" />
-                  <ConstructorElement
-                    text={el.name}
-                    thumbnail={el.image}
-                    price={el.price}
-                  />
-                </li>
-              );
-            })}
+          {ingridient.map((el: any) => {
+            return (
+              <li className={style.item + " mb-4 ml-4 mr-1"} key={el._id}>
+                <DragIcon type="primary" />
+                <ConstructorElement
+                  text={el.name}
+                  thumbnail={el.image}
+                  price={el.price}
+                />
+              </li>
+            );
+          })}
         </ul>
         <div className={style.item + " ml-4 mr-4 pl-8"}>
           <ConstructorElement

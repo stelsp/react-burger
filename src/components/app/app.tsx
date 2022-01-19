@@ -5,6 +5,7 @@ import styles from "./app.module.css";
 import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingridients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
+import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import IngredientsDetails from "../ingredient-details/ingredient-details";
 
@@ -29,6 +30,7 @@ export default function App() {
     fetch(API_URL)
       .then((res) => res.json())
       .then((res) => {
+        console.log(res.data);
         setData(res.data);
       });
   }, []);
@@ -40,7 +42,10 @@ export default function App() {
         <BurgerIngredients open={toggleIngredientModal} data={data} />
         <BurgerConstructor open={toggleOrderModal} data={data} />
       </main>
-      <OrderDetails open={showOrder} close={toggleOrderModal} />
+      <Modal open={showOrder} close={toggleOrderModal}>
+        <OrderDetails />
+      </Modal>
+
       <IngredientsDetails
         open={showIngredient}
         close={toggleIngredientModal}
