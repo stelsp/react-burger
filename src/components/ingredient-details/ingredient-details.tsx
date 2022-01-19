@@ -1,50 +1,63 @@
-import { CSSProperties } from "react";
 import PropTypes from "prop-types";
+
+import styles from "./ingredient-details.module.css";
 
 import Modal from "../modal/modal";
 
-const CARD_STYLE: CSSProperties = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  flexDirection: "column",
-};
-
-const ORDER_STYLE: CSSProperties = {
-  textShadow:
-    "0px 0px 16px rgba(51, 51, 255, 0.25), 0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5)",
-  minWidth: "580px",
-  marginTop: "50px",
-};
-
-const CONTAINER_STYLE: CSSProperties = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-};
-
-const TEXT_STYLE = "text text_type_main-default text_color_inactive";
-
-function IngredientsDetails({ data, open, close }: any) {
+function IngredientsDetails({ currentIngredient, data, open, close }: any) {
   return (
     <>
       <Modal open={open} close={close}>
         {data
-          .filter((el: any) => el._id === "60d3b41abdacab0026a733c6")
+          .filter((el: any) => el._id === currentIngredient)
           .map((el: any) => {
-            <div style={CARD_STYLE} className=" pb-15 pr-10 pl-10">
-              <h3 className="text text_type_main-large" style={ORDER_STYLE}>
-                Детали ингредиента
-              </h3>
-              <img src={el.image} alt={el.name} className="mb-4" />
-              <p className="mb-4">{el.name}</p>
-              <ul style={CONTAINER_STYLE}>
-                <li className={TEXT_STYLE}>{el.calories}</li>
-                <li className={TEXT_STYLE}>{el.proteins}</li>
-                <li className={TEXT_STYLE}>{el.fat}</li>
-                <li className={TEXT_STYLE}>{el.carbohydrates}</li>
-              </ul>
-            </div>;
+            return (
+              <div className={styles.card + " pb-15 pr-10 pl-10"} key={el._id}>
+                <h3 className={styles.title + " text text_type_main-large"}>
+                  Детали ингредиента
+                </h3>
+                <img
+                  src={el.image}
+                  alt={el.name}
+                  className={styles.img + " mb-4"}
+                />
+                <p className="text text_type_main-medium mb-8">{el.name}</p>
+                <ul className={styles.container}>
+                  <li
+                    className={
+                      styles.text +
+                      " text text_type_main-default text_color_inactive"
+                    }
+                  >
+                    Калории,ккал <span>{el.calories}</span>
+                  </li>
+                  <li
+                    className={
+                      styles.text +
+                      " text text_type_main-default text_color_inactive"
+                    }
+                  >
+                    Белки, г <span>{el.proteins}</span>
+                  </li>
+                  <li
+                    className={
+                      styles.text +
+                      " text text_type_main-default text_color_inactive"
+                    }
+                  >
+                    Жиры, г <span>{el.fat}</span>
+                  </li>
+                  <li
+                    className={
+                      styles.text +
+                      " text text_type_main-default text_color_inactive"
+                    }
+                  >
+                    Углеводы, г <span>{el.carbohydrates}</span>
+                  </li>
+                </ul>
+              </div>
+            );
           })}
       </Modal>
     </>
@@ -61,6 +74,7 @@ IngredientsDetails.propTypes = {
   // fat: PropTypes.any,
   // carbohydrates: PropTypes.any,
   data: PropTypes.any,
+  currentIngredient: PropTypes.any,
 };
 
 export default IngredientsDetails;

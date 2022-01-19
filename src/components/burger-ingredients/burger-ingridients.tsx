@@ -40,6 +40,7 @@ function BurgerIngredients({ data, open }: any) {
                   image={el.image}
                   price={el.price}
                   key={el._id}
+                  id={el._id}
                   open={open}
                 />
               );
@@ -56,6 +57,7 @@ function BurgerIngredients({ data, open }: any) {
                   image={el.image}
                   price={el.price}
                   key={el._id}
+                  id={el._id}
                   open={open}
                 />
               );
@@ -72,6 +74,7 @@ function BurgerIngredients({ data, open }: any) {
                   image={el.image}
                   price={el.price}
                   key={el._id}
+                  id={el._id}
                   open={open}
                 />
               );

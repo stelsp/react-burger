@@ -14,12 +14,15 @@ export default function App() {
   const [data, setData] = useState([]);
   const [showOrder, setShowOrder] = useState(false);
   const [showIngredient, setShowIngredient] = useState(false);
+  const [currentIngredient, setCurrentIngredient] = useState("");
 
   const toggleOrderModal = () => {
     return setShowOrder((value) => !value);
   };
 
-  const toggleIngredientModal = () => {
+  const toggleIngredientModal = (e: any) => {
+    setCurrentIngredient(e.currentTarget.id);
+    console.log(currentIngredient);
     return setShowIngredient((value) => !value);
   };
 
@@ -33,7 +36,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className={styles.app}>
+    <>
       <AppHeader />
       <main className={styles.main}>
         <BurgerIngredients open={toggleIngredientModal} data={data} />
@@ -44,7 +47,8 @@ export default function App() {
         open={showIngredient}
         close={toggleIngredientModal}
         data={data}
+        currentIngredient={currentIngredient}
       />
-    </div>
+    </>
   );
 }

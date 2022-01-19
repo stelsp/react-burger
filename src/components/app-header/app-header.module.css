@@ -1,24 +1,13 @@
 .header {
-  /* position: relative; */
   background: var(--background);
+  width: 100%;
+  margin: 0 auto;
 }
 
-/* header:before,
-header:after {
-  content: "";
-  position: absolute;
-  background: var(--background);
-  top: 0;
-  bottom: 0;
-  width: 100vw;
+.wrapper {
+  width: 1240px;
+  margin: 0 auto;
 }
-
-header:before {
-  right: 100%;
-}
-header:after {
-  left: 100%;
-} */
 
 .flex {
   display: flex;

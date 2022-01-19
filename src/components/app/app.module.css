@@ -1,9 +1,6 @@
-.app {
-  width: 1240px;
-  margin: 0 auto;
-}
-
 .main {
+  width: 1250px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
