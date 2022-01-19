@@ -1,4 +1,5 @@
-import React, { CSSProperties } from "react";
+import { CSSProperties } from "react";
+import Modal from "../modal/modal";
 
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 
@@ -18,24 +19,25 @@ const ICON_STYLE: CSSProperties = {
   transform: "scale(3)",
 };
 
-function OrderDetails() {
+function OrderDetails({ open, close }: any) {
   return (
-    <div style={CARD_STYLE}>
-      <p className="text text_type_digits-large mb-8" style={ORDER_STYLE}>
-        034536
-      </p>
-      <p className="text text_type_main-medium mb-15">идентификатор заказа</p>
-
-      <span className="mb-15" style={ICON_STYLE}>
-        <CheckMarkIcon type="primary" />
-      </span>
-      <p className="text text_type_main-default mb-2">
-        Ваш заказ начали готовить
-      </p>
-      <p className="text text_type_main-default text_color_inactive">
-        Дождитесь готовности на орбитальной станции
-      </p>
-    </div>
+    <Modal open={open} close={close}>
+      <div style={CARD_STYLE}>
+        <p className="text text_type_digits-large mb-8" style={ORDER_STYLE}>
+          034536
+        </p>
+        <p className="text text_type_main-medium mb-15">идентификатор заказа</p>
+        <span className="mb-15" style={ICON_STYLE}>
+          <CheckMarkIcon type="primary" />
+        </span>
+        <p className="text text_type_main-default mb-2">
+          Ваш заказ начали готовить
+        </p>
+        <p className="text text_type_main-default text_color_inactive">
+          Дождитесь готовности на орбитальной станции
+        </p>
+      </div>
+    </Modal>
   );
 }
 

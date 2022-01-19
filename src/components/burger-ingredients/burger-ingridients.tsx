@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 
 import styles from "./burger-ingredients.module.css";
@@ -6,10 +6,10 @@ import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
 import Card from "../card/card";
 
-function BurgerIngredients({ data, onOpen }: any) {
+function BurgerIngredients({ data, open }: any) {
   const titleStyle = "text text_type_main-medium text_color_primary ";
 
-  const [current, setCurrent] = React.useState("one");
+  const [current, setCurrent] = useState("one");
 
   return (
     <div className={styles.container + " mt-10"}>
@@ -39,7 +39,7 @@ function BurgerIngredients({ data, onOpen }: any) {
                   image={el.image}
                   price={el.price}
                   key={el._id}
-                  onOpen={onOpen}
+                  open={open}
                 />
               );
             }
@@ -55,7 +55,7 @@ function BurgerIngredients({ data, onOpen }: any) {
                   image={el.image}
                   price={el.price}
                   key={el._id}
-                  onOpen={onOpen}
+                  open={open}
                 />
               );
             }
@@ -71,7 +71,7 @@ function BurgerIngredients({ data, onOpen }: any) {
                   image={el.image}
                   price={el.price}
                   key={el._id}
-                  onOpen={onOpen}
+                  open={open}
                 />
               );
             }
@@ -84,7 +84,7 @@ function BurgerIngredients({ data, onOpen }: any) {
 
 BurgerIngredients.propTypes = {
   data: PropTypes.array.isRequired,
-  onOpen: PropTypes.func.isRequired,
+  open: PropTypes.func.isRequired,
 };
 
 export default BurgerIngredients;

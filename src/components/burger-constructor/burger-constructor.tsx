@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 
 import style from "./burger-constructor.module.css";
@@ -11,7 +10,7 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 
-function BurgerConstructor({ data, onOpen }: any) {
+function BurgerConstructor({ data, open }: any) {
   return (
     <div className={style.container}>
       <div className={"mt-25 mb-10"}>
@@ -55,7 +54,7 @@ function BurgerConstructor({ data, onOpen }: any) {
         <div className={style.icon + " mr-10"}>
           <CurrencyIcon type="primary" />
         </div>
-        <Button onClick={onOpen} size="large">
+        <Button onClick={open} size="large">
           Оформить заказ
         </Button>
       </div>
@@ -65,7 +64,7 @@ function BurgerConstructor({ data, onOpen }: any) {
 
 BurgerConstructor.propTypes = {
   data: PropTypes.array.isRequired,
-  onOpen: PropTypes.func.isRequired,
+  open: PropTypes.func.isRequired,
 };
 
 export default BurgerConstructor;

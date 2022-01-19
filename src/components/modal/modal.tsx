@@ -1,4 +1,3 @@
-import React, { CSSProperties } from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 
@@ -8,15 +7,15 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components/di
 
 import ModalOverlay from "../modal-overlay/modal-overlay";
 
-function Modal({ open, children, onClose }: any) {
+function Modal({ open, close, children }: any) {
   if (!open) return null;
 
   return ReactDOM.createPortal(
     <div>
-      <ModalOverlay onClose={onClose} />
+      <ModalOverlay close={close} />
       <div className={styles.modal + " pt-30 pb-30 pr-25 pl-25"}>
         <span className={styles.close}>
-          <CloseIcon type="primary" onClick={onClose} />
+          <CloseIcon type="primary" onClick={close} />
         </span>
         {children}
       </div>
@@ -27,8 +26,8 @@ function Modal({ open, children, onClose }: any) {
 
 Modal.propTypes = {
   open: PropTypes.bool.isRequired,
+  close: PropTypes.func.isRequired,
   children: PropTypes.any.isRequired,
-  onClose: PropTypes.func.isRequired,
 };
 
 export default Modal;
