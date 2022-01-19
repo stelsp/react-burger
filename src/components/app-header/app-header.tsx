@@ -1,5 +1,3 @@
-import React from "react";
-
 import styles from "./app-header.module.css";
 
 import MenuItem from "../menu-item/menu-item";
