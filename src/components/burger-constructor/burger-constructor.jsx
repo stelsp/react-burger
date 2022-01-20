@@ -1,20 +1,18 @@
-import React from "react";
 import PropTypes from "prop-types";
-
 import style from "./burger-constructor.module.css";
-
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/button";
-
 import {
   DragIcon,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-import { isPlusToken } from "typescript";
+import ingredientPropTypes from "../../constants/ingredient-prop-types";
 
-function BurgerConstructor({ data }: any) {
+function BurgerConstructor({ data, open }) {
+  const ingredient = data.filter((el) => el.type !== "bun");
+
   return (
-    <div className={style.container}>
+    <section className={style.container}>
       <div className={"mt-25 mb-10"}>
         <div className={style.item + " mb-4 ml-4 mr-4 pl-8"}>
           <ConstructorElement
@@ -26,19 +24,17 @@ function BurgerConstructor({ data }: any) {
           />
         </div>
         <ul className={style.list + " text custom-scroll"}>
-          {data.map((el: any) => {
-            if (el.type !== "bun") {
-              return (
-                <li className={style.item + " mb-4 ml-4 mr-1"} key={el._id}>
-                  <DragIcon type="primary" />
-                  <ConstructorElement
-                    text={el.name}
-                    thumbnail={el.image}
-                    price={el.price}
-                  />
-                </li>
-              );
-            }
+          {ingredient.map((el) => {
+            return (
+              <li className={style.item + " mb-4 ml-4 mr-1"} key={el._id}>
+                <DragIcon type="primary" />
+                <ConstructorElement
+                  text={el.name}
+                  thumbnail={el.image}
+                  price={el.price}
+                />
+              </li>
+            );
           })}
         </ul>
         <div className={style.item + " ml-4 mr-4 pl-8"}>
@@ -56,14 +52,17 @@ function BurgerConstructor({ data }: any) {
         <div className={style.icon + " mr-10"}>
           <CurrencyIcon type="primary" />
         </div>
-        <Button size="large">Оформить заказ</Button>
+        <Button onClick={open} size="large">
+          Оформить заказ
+        </Button>
       </div>
-    </div>
+    </section>
   );
 }
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.arrayOf(ingredientPropTypes).isRequired,
+  open: PropTypes.func.isRequired,
 };
 
 export default BurgerConstructor;
