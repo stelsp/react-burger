@@ -1,10 +1,27 @@
+import { useEffect } from "react";
+
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import styles from "./modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import ModalOverlay from "../modal-overlay/modal-overlay";
 
+const MODAL_ROOT = document.getElementById("modal-root");
+
 function Modal({ close, children, title }) {
+  useEffect(() => {
+    function closeOnEsc(e) {
+      if (e.key === "Escape" || e.key === "Esc") {
+        close();
+      }
+    }
+    document.addEventListener("keyup", closeOnEsc);
+
+    return () => {
+      document.removeEventListener("keyup", closeOnEsc);
+    };
+  }, []);
+
   return ReactDOM.createPortal(
     <div>
       <ModalOverlay close={close} />
@@ -22,7 +39,7 @@ function Modal({ close, children, title }) {
         {children}
       </div>
     </div>,
-    document.getElementById("portal")
+    MODAL_ROOT
   );
 }
 

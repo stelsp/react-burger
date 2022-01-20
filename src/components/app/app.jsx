@@ -16,12 +16,18 @@ export default function App() {
   const [showOrder, setShowOrder] = useState(false);
   const [currentIngredient, setCurrentIngredient] = useState("");
 
-  const toggleOrderModal = () => {
-    setShowOrder((value) => !value);
+  const openOrderModal = () => {
+    setShowOrder(true);
+  };
+  const closeOrderModal = () => {
+    setShowOrder(false);
   };
 
-  const toggleIngredientModal = (e) => {
+  const openIngredientModal = (e) => {
     setCurrentIngredient(e.currentTarget.id);
+  };
+  const closeIngredientModal = () => {
+    setCurrentIngredient("");
   };
 
   const checkRes = (res) => {
@@ -47,17 +53,17 @@ export default function App() {
     <>
       <AppHeader />
       <main className={styles.main}>
-        <BurgerIngredients open={toggleIngredientModal} data={data} />
-        <BurgerConstructor open={toggleOrderModal} data={data} />
+        <BurgerIngredients open={openIngredientModal} data={data} />
+        <BurgerConstructor open={openOrderModal} data={data} />
       </main>
 
       {showOrder && (
-        <Modal close={toggleOrderModal}>
+        <Modal close={closeOrderModal}>
           <OrderDetails />
         </Modal>
       )}
       {currentIngredient && (
-        <Modal close={toggleIngredientModal} title={"Детали ингредиента"}>
+        <Modal close={closeIngredientModal} title={"Детали ингредиента"}>
           <IngredientsDetails
             data={data}
             currentIngredient={currentIngredient}

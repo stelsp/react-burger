@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import styles from "./ingredient-details.module.css";
 
 function IngredientsDetails({ currentIngredient, data }) {
-  const ingridient = data.filter((el) => el._id === currentIngredient);
+  const ingredient = data.filter((el) => el._id === currentIngredient);
 
   return (
     <>
-      {ingridient.map((el) => {
+      {ingredient.map((el) => {
         return (
           <div className={styles.card + " pb-15 pr-10 pl-10"} key={el._id}>
             <img
