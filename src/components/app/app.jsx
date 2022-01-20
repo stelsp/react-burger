@@ -41,7 +41,6 @@ export default function App() {
     fetch(`${API_URL}/ingredients`)
       .then(checkRes)
       .then((res) => {
-        console.log(res.data);
         setData(res.data);
       })
       .catch((err) => {
