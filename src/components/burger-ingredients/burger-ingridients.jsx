@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
 import Card from "../card/card";
+import ingredientPropTypes from "../../constants/ingredient-prop-types";
 
 function BurgerIngredients({ data, open }) {
   const bun = data.filter((el) => el.type === "bun");
@@ -82,14 +83,7 @@ function BurgerIngredients({ data, open }) {
 }
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      image: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      _id: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  data: PropTypes.arrayOf(ingredientPropTypes).isRequired,
   open: PropTypes.func.isRequired,
 };
 

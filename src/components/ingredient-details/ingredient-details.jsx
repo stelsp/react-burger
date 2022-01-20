@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-
 import styles from "./ingredient-details.module.css";
+import ingredientPropTypes from "../../constants/ingredient-prop-types";
 
 function IngredientsDetails({ currentIngredient, data }) {
   const ingredient = data.filter((el) => el._id === currentIngredient);
@@ -59,16 +59,7 @@ function IngredientsDetails({ currentIngredient, data }) {
 
 IngredientsDetails.propTypes = {
   currentIngredient: PropTypes.string.isRequired,
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      image: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      calories: PropTypes.number.isRequired,
-      proteins: PropTypes.number.isRequired,
-      fat: PropTypes.number.isRequired,
-      carbohydrates: PropTypes.number.isRequired,
-    })
-  ).isRequired,
+  data: PropTypes.arrayOf(ingredientPropTypes).isRequired,
 };
 
 export default IngredientsDetails;

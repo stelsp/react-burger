@@ -20,7 +20,7 @@ function Modal({ close, children, title }) {
     return () => {
       document.removeEventListener("keyup", closeOnEsc);
     };
-  }, []);
+  }, [close]);
 
   return ReactDOM.createPortal(
     <div>

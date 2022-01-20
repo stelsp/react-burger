@@ -6,6 +6,7 @@ import {
   DragIcon,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
+import ingredientPropTypes from "../../constants/ingredient-prop-types";
 
 function BurgerConstructor({ data, open }) {
   const ingredient = data.filter((el) => el.type !== "bun");
@@ -60,13 +61,7 @@ function BurgerConstructor({ data, open }) {
 }
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      image: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-    })
-  ).isRequired,
+  data: PropTypes.arrayOf(ingredientPropTypes).isRequired,
   open: PropTypes.func.isRequired,
 };
 
