@@ -34,12 +34,15 @@ export default function App() {
     return Promise.reject(`Ошибка: ${res.status + " - " + res.statusText}`);
   };
 
+  const getApi = (api) => {
+    const promise = fetch(`${API_URL}/${api}`);
+    return promise;
+  };
+
   useEffect(() => {
-    fetch(`${API_URL}/ingredients`)
+    getApi("ingredients")
       .then(checkRes)
       .then((res) => {
-        console.log(res.data);
-
         setData(res.data);
       })
       .catch((err) => {
