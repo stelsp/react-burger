@@ -35,13 +35,14 @@ export default function App() {
   };
 
   const getApi = (api) => {
-    const promise = fetch(`${API_URL}/${api}`);
+    const promise = fetch(`${API_URL}/${api}`).then(checkRes);
     return promise;
   };
 
+  const getIngredients = getApi.bind(null, "ingredients");
+
   useEffect(() => {
-    getApi("ingredients")
-      .then(checkRes)
+    getIngredients()
       .then((res) => {
         setData(res.data);
       })
