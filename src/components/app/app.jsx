@@ -1,17 +1,27 @@
 import { useState, useEffect } from "react";
-import styles from "./app.module.css";
-import AppHeader from "../app-header/app-header";
-import BurgerIngredients from "../burger-ingredients/burger-ingridients";
-import BurgerConstructor from "../burger-constructor/burger-constructor";
-import Modal from "../modal/modal";
-import OrderDetails from "../order-details/order-details";
-import IngredientsDetails from "../ingredient-details/ingredient-details";
-import API_URL from "../../constants/api-url";
+import styles from "./App.module.css";
+import AppHeader from "../AppHeader/AppHeader";
+import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
+import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
+import Modal from "../Modal/Modal";
+import OrderDetails from "../OrderDetails/OrderDetails";
+import IngredientsDetails from "../IngredientDetails/IngredientDetails";
+import { getIngredients } from "../../utils/utils";
 
 export default function App() {
   const [data, setData] = useState([]);
   const [showOrder, setShowOrder] = useState(false);
   const [currentIngredient, setCurrentIngredient] = useState("");
+
+  useEffect(() => {
+    getIngredients()
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const openOrderModal = () => {
     setShowOrder(true);
@@ -26,30 +36,6 @@ export default function App() {
   const closeIngredientModal = () => {
     setCurrentIngredient("");
   };
-
-  const checkRes = (res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status + " - " + res.statusText}`);
-  };
-
-  const getApi = (api) => {
-    const promise = fetch(`${API_URL}/${api}`).then(checkRes);
-    return promise;
-  };
-
-  const getIngredients = getApi.bind(null, "ingredients");
-
-  useEffect(() => {
-    getIngredients()
-      .then((res) => {
-        setData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   return (
     <>

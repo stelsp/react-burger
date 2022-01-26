@@ -1,7 +1,5 @@
 import PropTypes from "prop-types";
-
-import styles from "./card.module.css";
-
+import styles from "./Card.module.css";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 

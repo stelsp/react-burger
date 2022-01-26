@@ -1,8 +1,8 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import styles from "./burger-ingredients.module.css";
+import styles from "./BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
-import Card from "../card/card";
+import Card from "../Card/Card";
 import ingredientPropTypes from "../../constants/ingredient-prop-types";
 
 function BurgerIngredients({ data, open }) {

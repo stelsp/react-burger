@@ -2,9 +2,9 @@ import { useEffect } from "react";
 
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import styles from "./modal.module.css";
+import styles from "./Modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-import ModalOverlay from "../modal-overlay/modal-overlay";
+import ModalOverlay from "../ModalOverlay/ModalOverlay";
 
 const MODAL_ROOT = document.getElementById("modal-root");
 
