@@ -5,6 +5,8 @@ import ingredientPropTypes from "../../constants/ingredient-prop-types";
 function IngredientsDetails({ currentIngredient, data }) {
   const ingredient = data.filter((el) => el._id === currentIngredient);
 
+  const TEXT_STYLE = " text text_type_main-default text_color_inactive";
+
   return (
     <>
       {ingredient.map((el) => {
@@ -17,37 +19,17 @@ function IngredientsDetails({ currentIngredient, data }) {
             />
             <p className="text text_type_main-medium mb-8">{el.name}</p>
             <ul className={styles.container}>
-              <li
-                className={
-                  styles.text +
-                  " text text_type_main-default text_color_inactive"
-                }
-              >
-                Калории,ккал <span>{el.calories}</span>
+              <li className={styles.text + TEXT_STYLE}>
+                Калории,ккал<span>{el.calories}</span>
               </li>
-              <li
-                className={
-                  styles.text +
-                  " text text_type_main-default text_color_inactive"
-                }
-              >
-                Белки, г <span>{el.proteins}</span>
+              <li className={styles.text + TEXT_STYLE}>
+                Белки, г<span>{el.proteins}</span>
               </li>
-              <li
-                className={
-                  styles.text +
-                  " text text_type_main-default text_color_inactive"
-                }
-              >
-                Жиры, г <span>{el.fat}</span>
+              <li className={styles.text + TEXT_STYLE}>
+                Жиры, г<span>{el.fat}</span>
               </li>
-              <li
-                className={
-                  styles.text +
-                  " text text_type_main-default text_color_inactive"
-                }
-              >
-                Углеводы, г <span>{el.carbohydrates}</span>
+              <li className={styles.text + TEXT_STYLE}>
+                Углеводы, г<span>{el.carbohydrates}</span>
               </li>
             </ul>
           </div>
