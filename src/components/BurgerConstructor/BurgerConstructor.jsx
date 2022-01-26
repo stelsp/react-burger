@@ -11,6 +11,13 @@ import ingredientPropTypes from "../../constants/ingredient-prop-types";
 function BurgerConstructor({ data, open }) {
   const ingredient = data.filter((el) => el.type !== "bun");
 
+  // сумма стоимости всех ингридиентов (демо, для отображения)
+  let total = 0;
+  data.map((el) => {
+    total += el.price;
+  });
+  //  //  //
+
   return (
     <section className={style.container}>
       <div className={"mt-25 mb-10"}>
@@ -48,7 +55,7 @@ function BurgerConstructor({ data, open }) {
         </div>
       </div>
       <div className={style.checkout + " mr-4"}>
-        <p className="text text_type_digits-medium">610</p>
+        <p className="text text_type_digits-medium">{total}</p>
         <div className={style.icon + " mr-10"}>
           <CurrencyIcon type="primary" />
         </div>
