@@ -7,8 +7,8 @@ const checkRes = (res) => {
   return Promise.reject(`Ошибка: ${res.status + " - " + res.statusText}`);
 };
 
-const getApi = (API_URL, ID) => {
-  const promise = fetch(`${API_URL}/${ID}`).then(checkRes);
+const getApi = (API_URL, KEY) => {
+  const promise = fetch(`${API_URL}/${KEY}`).then(checkRes);
   return promise;
 };
 
