@@ -24,8 +24,7 @@ export default function App() {
   const openOrderModal = () => setShowOrder(!showOrder);
   const closeOrderModal = () => setShowOrder(!showOrder);
 
-  const openIngredientModal = (e: MouseEvent) =>
-    setCurrentIngredient(e.currentTarget.id);
+  const openIngredientModal = (e) => setCurrentIngredient(e.currentTarget.id);
   const closeIngredientModal = () => setCurrentIngredient("");
 
   return (
