@@ -5,7 +5,7 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/
 import Card from "../Card/Card";
 import ingredientPropTypes from "../../constants/ingredient-prop-types";
 
-function BurgerIngredients({ data, open }) {
+function BurgerIngredients({ data, onOpen }) {
   const bun = data.filter((el) => el.type === "bun");
   const sauce = data.filter((el) => el.type === "sauce");
   const main = data.filter((el) => el.type === "main");
@@ -42,7 +42,7 @@ function BurgerIngredients({ data, open }) {
                 price={el.price}
                 key={el._id}
                 id={el._id}
-                open={open}
+                onOpen={onOpen}
               />
             );
           })}
@@ -57,7 +57,7 @@ function BurgerIngredients({ data, open }) {
                 price={el.price}
                 key={el._id}
                 id={el._id}
-                open={open}
+                onOpen={onOpen}
               />
             );
           })}
@@ -72,7 +72,7 @@ function BurgerIngredients({ data, open }) {
                 price={el.price}
                 key={el._id}
                 id={el._id}
-                open={open}
+                onOpen={onOpen}
               />
             );
           })}

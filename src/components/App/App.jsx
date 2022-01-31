@@ -34,17 +34,17 @@ export default function App() {
         <h1>Loading...</h1>
       ) : (
         <main className={styles.main}>
-          <BurgerIngredients open={openIngredientModal} data={data} />
-          <BurgerConstructor open={openOrderModal} data={data} />
+          <BurgerIngredients onOpen={openIngredientModal} data={data} />
+          <BurgerConstructor onOpen={openOrderModal} data={data} />
         </main>
       )}
       {showOrder && (
-        <Modal close={closeOrderModal}>
+        <Modal onClose={closeOrderModal}>
           <OrderDetails />
         </Modal>
       )}
       {currentIngredient && (
-        <Modal close={closeIngredientModal} title={"Детали ингредиента"}>
+        <Modal onClose={closeIngredientModal} title={"Детали ингредиента"}>
           <IngredientsDetails
             data={data}
             currentIngredient={currentIngredient}

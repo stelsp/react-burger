@@ -3,9 +3,9 @@ import styles from "./Card.module.css";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 
-function Card({ name, image, price, open, id }) {
+function Card({ name, image, price, onOpen, id }) {
   return (
-    <li className={styles.card + " mt-6 mb-6 ml-4"} onClick={open} id={id}>
+    <li className={styles.card + " mt-6 mb-6 ml-4"} onClick={onOpen} id={id}>
       <Counter count={1} size={"default"} />
       <img src={image} alt={name} className={"mr-4 ml-4"} />
       <p

@@ -8,7 +8,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import ingredientPropTypes from "../../constants/ingredient-prop-types";
 
-function BurgerConstructor({ data, open }) {
+function BurgerConstructor({ data, onOpen }) {
   const ingredient = data.filter((el) => el.type !== "bun");
 
   // сумма стоимости всех ингридиентов (демо, для отображения)
@@ -59,7 +59,7 @@ function BurgerConstructor({ data, open }) {
         <div className={style.icon + " mr-10"}>
           <CurrencyIcon type="primary" />
         </div>
-        <Button onClick={open} size="large">
+        <Button onClick={onOpen} size="large">
           Оформить заказ
         </Button>
       </div>

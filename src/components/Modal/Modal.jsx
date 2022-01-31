@@ -8,11 +8,11 @@ import ModalOverlay from "../ModalOverlay/ModalOverlay";
 
 const MODAL_ROOT = document.getElementById("modal-root");
 
-function Modal({ close, children, title }) {
+function Modal({ onClose, children, title }) {
   useEffect(() => {
     function closeOnEsc(e) {
       if (e.key === "Escape" || e.key === "Esc") {
-        close();
+        onClose();
       }
     }
     document.addEventListener("keyup", closeOnEsc);
@@ -20,11 +20,11 @@ function Modal({ close, children, title }) {
     return () => {
       document.removeEventListener("keyup", closeOnEsc);
     };
-  }, [close]);
+  }, [onClose]);
 
   return ReactDOM.createPortal(
     <div>
-      <ModalOverlay close={close} />
+      <ModalOverlay onClose={onClose} />
       <div className={styles.modal}>
         <span className={styles.close}>
           <CloseIcon type="primary" onClick={close} />
