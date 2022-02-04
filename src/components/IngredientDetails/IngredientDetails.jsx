@@ -1,8 +1,10 @@
 import PropTypes from "prop-types";
 import styles from "./IngredientDetails.module.css";
 import ingredientPropTypes from "../../constants/ingredient-prop-types";
+import { useData } from "../App/DataContext";
 
-function IngredientsDetails({ currentIngredient, data }) {
+function IngredientsDetails({ currentIngredient }) {
+  const data = useData();
   const ingredient = data.filter((el) => el._id === currentIngredient);
 
   const TEXT_STYLE = " text text_type_main-default text_color_inactive";
@@ -41,7 +43,7 @@ function IngredientsDetails({ currentIngredient, data }) {
 
 IngredientsDetails.propTypes = {
   currentIngredient: PropTypes.string.isRequired,
-  data: PropTypes.arrayOf(ingredientPropTypes).isRequired,
+  // data: PropTypes.arrayOf(ingredientPropTypes).isRequired,
 };
 
 export default IngredientsDetails;

@@ -29,7 +29,7 @@ function Card({ name, image, price, onOpen, id }) {
 }
 
 Card.propTypes = {
-  open: PropTypes.func.isRequired,
+  onOpen: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,

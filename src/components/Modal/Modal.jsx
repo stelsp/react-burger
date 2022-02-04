@@ -44,7 +44,7 @@ function Modal({ onClose, children, title }) {
 }
 
 Modal.propTypes = {
-  close: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
   children: PropTypes.object.isRequired,
   title: PropTypes.string,
 };

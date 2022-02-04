@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import ingredientPropTypes from "../../constants/ingredient-prop-types";
 import style from "./BurgerConstructor.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/button";
@@ -6,9 +7,10 @@ import {
   DragIcon,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-import ingredientPropTypes from "../../constants/ingredient-prop-types";
+import { useData } from "../App/DataContext";
 
-function BurgerConstructor({ data, onOpen }) {
+function BurgerConstructor({ onOpen }) {
+  const data = useData();
   const ingredient = data.filter((el) => el.type !== "bun");
 
   // сумма стоимости всех ингридиентов (демо, для отображения)
@@ -68,8 +70,8 @@ function BurgerConstructor({ data, onOpen }) {
 }
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(ingredientPropTypes).isRequired,
-  open: PropTypes.func.isRequired,
+  // data: PropTypes.arrayOf(ingredientPropTypes).isRequired,
+  onOpen: PropTypes.func.isRequired,
 };
 
 export default BurgerConstructor;

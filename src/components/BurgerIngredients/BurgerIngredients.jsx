@@ -1,11 +1,14 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+import ingredientPropTypes from "../../constants/ingredient-prop-types";
 import styles from "./BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
 import Card from "../Card/Card";
-import ingredientPropTypes from "../../constants/ingredient-prop-types";
+import { useData } from "../App/DataContext";
 
-function BurgerIngredients({ data, onOpen }) {
+function BurgerIngredients({ onOpen }) {
+  const data = useData();
+
   const bun = data.filter((el) => el.type === "bun");
   const sauce = data.filter((el) => el.type === "sauce");
   const main = data.filter((el) => el.type === "main");
@@ -83,8 +86,8 @@ function BurgerIngredients({ data, onOpen }) {
 }
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(ingredientPropTypes).isRequired,
-  open: PropTypes.func.isRequired,
+  // data: PropTypes.arrayOf(ingredientPropTypes).isRequired,
+  onOpen: PropTypes.func.isRequired,
 };
 
 export default BurgerIngredients;
