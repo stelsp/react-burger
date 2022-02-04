@@ -27,7 +27,7 @@ function Modal({ onClose, children, title }) {
       <ModalOverlay onClose={onClose} />
       <div className={styles.modal}>
         <span className={styles.close}>
-          <CloseIcon type="primary" onClick={close} />
+          <CloseIcon type="primary" onClick={onClose} />
         </span>
         <h3
           className={
