@@ -10,6 +10,7 @@
 
 .title {
   min-width: 580px;
+  composes: text text_type_main-large pt-3 mt-10 pr-10 pl-10 from global;
 }
 
 .close {

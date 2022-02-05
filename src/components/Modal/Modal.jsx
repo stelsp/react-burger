@@ -29,13 +29,7 @@ function Modal({ onClose, children, title }) {
         <span className={styles.close}>
           <CloseIcon type="primary" onClick={onClose} />
         </span>
-        <h3
-          className={
-            styles.title + " text text_type_main-large pt-3 mt-10 pr-10 pl-10"
-          }
-        >
-          {title}
-        </h3>
+        <h3 className={styles.title}>{title}</h3>
         {children}
       </div>
     </div>,

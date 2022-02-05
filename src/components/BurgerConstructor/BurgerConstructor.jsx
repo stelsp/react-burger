@@ -32,7 +32,7 @@ function BurgerConstructor({ onOpen }) {
             price={20}
           />
         </div>
-        <ul className={style.list + " text custom-scroll"}>
+        <ul className={style.list}>
           {ingredient.map((el) => {
             return (
               <li className={style.item + " mb-4 ml-4 mr-1"} key={el._id}>
@@ -56,9 +56,9 @@ function BurgerConstructor({ onOpen }) {
           />
         </div>
       </div>
-      <div className={style.checkout + " mr-4"}>
+      <div className={style.checkout}>
         <p className="text text_type_digits-medium">{total}</p>
-        <div className={style.icon + " mr-10"}>
+        <div className={style.icon}>
           <CurrencyIcon type="primary" />
         </div>
         <Button onClick={onOpen} size="large">

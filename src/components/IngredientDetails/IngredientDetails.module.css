@@ -3,14 +3,18 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  composes: pb-15 pr-10 pl-10 from global;
 }
 
 .img {
   display: block;
   min-width: 100%;
   width: 480px;
+  composes: mb-4 from global;
 }
-
+.title {
+  comsposes: text text_type_main-medium mb-8 from global;
+}
 .container {
   display: flex;
   justify-content: space-between;
@@ -26,4 +30,5 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  composes: text text_type_main-default text_color_inactive from global;
 }

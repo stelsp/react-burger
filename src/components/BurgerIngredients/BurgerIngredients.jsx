@@ -8,22 +8,15 @@ import { useData } from "../App/App";
 
 function BurgerIngredients({ onOpen }) {
   const data = useData();
-
   const bun = data.filter((el) => el.type === "bun");
   const sauce = data.filter((el) => el.type === "sauce");
   const main = data.filter((el) => el.type === "main");
-
-  const titleStyle = "text text_type_main-medium text_color_primary ";
-
   const [current, setCurrent] = useState("one");
 
   return (
-    <div className={styles.container + " mt-10"}>
-      <h2 className={"text text_type_main-large text_color_primary "}>
-        Соберите бургер
-      </h2>
-
-      <div className="mt-5 mb-10 " style={{ display: "flex" }}>
+    <div className={styles.container}>
+      <h2 className={styles.title}>Соберите бургер</h2>
+      <div className={styles.tab}>
         <Tab value="one" active={current === "one"} onClick={setCurrent}>
           Булки
         </Tab>
@@ -34,8 +27,8 @@ function BurgerIngredients({ onOpen }) {
           Начинки
         </Tab>
       </div>
-      <div className={styles.list + " custom-scroll"}>
-        <h3 className={titleStyle}>Булки</h3>
+      <div className={styles.list}>
+        <h3 className={styles.cards__title}>Булки</h3>
         <ul className={styles.cards}>
           {bun.map((el) => {
             return (
@@ -50,7 +43,7 @@ function BurgerIngredients({ onOpen }) {
             );
           })}
         </ul>
-        <h3 className={titleStyle + " mt-10"}>Соусы</h3>
+        <h3 className={styles.cards__title + " mt-10"}>Соусы</h3>
         <ul className={styles.cards}>
           {sauce.map((el) => {
             return (
@@ -65,7 +58,7 @@ function BurgerIngredients({ onOpen }) {
             );
           })}
         </ul>
-        <h3 className={titleStyle + " mt-10"}>Начинки</h3>
+        <h3 className={styles.cards__title + " mt-10"}>Начинки</h3>
         <ul className={styles.cards}>
           {main.map((el) => {
             return (

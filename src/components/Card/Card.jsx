@@ -5,25 +5,14 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 
 function Card({ name, image, price, onOpen, id }) {
   return (
-    <li className={styles.card + " mt-6 mb-6 ml-4"} onClick={onOpen} id={id}>
+    <li className={styles.card} onClick={onOpen} id={id}>
       <Counter count={1} size={"default"} />
-      <img src={image} alt={name} className={"mr-4 ml-4"} />
-      <p
-        className={
-          styles.price +
-          " text text_type_digits-default text_color_primary mt-1 mb-2"
-        }
-      >
-        <span className={"pr-2"}>{price}</span>
+      <img src={image} alt={name} className={styles.img} />
+      <p className={styles.price}>
+        <span className={styles.span}>{price}</span>
         <CurrencyIcon type="primary" />
       </p>
-      <h3
-        className={
-          styles.cardTitle + " text text_type_main-default text_color_primary"
-        }
-      >
-        {name}
-      </h3>
+      <h3 className={styles.card__title}>{name}</h3>
     </li>
   );
 }
