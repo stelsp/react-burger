@@ -18,6 +18,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [showOrder, setShowOrder] = useState(false);
   const [currentIngredient, setCurrentIngredient] = useState("");
+  const [newIngredient, setNewIngredient] = useState([]);
 
   useEffect(() => {
     getIngredients()
@@ -29,8 +30,14 @@ export default function App() {
   const openOrderModal = () => setShowOrder(!showOrder);
   const closeOrderModal = () => setShowOrder(!showOrder);
 
-  const openIngredientModal = (e) => setCurrentIngredient(e.currentTarget.id);
+  const openIngredientModal = (e) => {
+    setCurrentIngredient(e.currentTarget.id);
+    setNewIngredient(e.currentTarget.id);
+  };
   const closeIngredientModal = () => setCurrentIngredient("");
+
+  // const addIngredient = (e) => setNewIngredient(e.currentTarget.id);
+  const removeIngredient = () => setNewIngredient("");
 
   return (
     <DataContext.Provider value={data}>
@@ -40,7 +47,11 @@ export default function App() {
       ) : (
         <main className={styles.main}>
           <BurgerIngredients onOpen={openIngredientModal} />
-          <BurgerConstructor onOpen={openOrderModal} />
+          <BurgerConstructor
+            onOpen={openOrderModal}
+            addIngredient={newIngredient}
+            removeIngredient={removeIngredient}
+          />
         </main>
       )}
       {showOrder && (

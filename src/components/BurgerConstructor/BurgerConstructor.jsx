@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import ingredientPropTypes from "../../constants/ingredient-prop-types";
+// import ingredientPropTypes from "../../constants/ingredient-prop-types";
 import style from "./BurgerConstructor.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/button";
@@ -9,9 +9,11 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import { useData } from "../App/App";
 
-function BurgerConstructor({ onOpen }) {
+function BurgerConstructor({ onOpen, addIngredient, removeIngredient }) {
   const data = useData();
-  const ingredient = data.filter((el) => el.type !== "bun");
+  const ingredient = data.filter((el) => el._id === addIngredient);
+  const main = ingredient.filter((el) => el.type !== "bun");
+  const bun = ingredient.filter((el) => el.type === "bun");
 
   // сумма стоимости всех ингридиентов (демо, для отображения)
   let total = 0;
@@ -23,21 +25,26 @@ function BurgerConstructor({ onOpen }) {
   return (
     <section className={style.container}>
       <div className={"mt-25 mb-10"}>
-        <div className={style.item + " mb-4 ml-4 mr-4 pl-8"}>
-          <ConstructorElement
-            type={"top"}
-            isLocked={true}
-            text={"Краторная булка N-200i (верх)"}
-            thumbnail={require("@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png")}
-            price={20}
-          />
-        </div>
+        {bun.map((el) => {
+          return (
+            <div className={style.item + " mb-4 ml-4 mr-4 pl-8"}>
+              <ConstructorElement
+                type={"top"}
+                isLocked={true}
+                text={el.name}
+                thumbnail={el.image}
+                price={el.price}
+              />
+            </div>
+          );
+        })}
         <ul className={style.list}>
-          {ingredient.map((el) => {
+          {main.map((el) => {
             return (
               <li className={style.item + " mb-4 ml-4 mr-1"} key={el._id}>
                 <DragIcon type="primary" />
                 <ConstructorElement
+                  handleClose={removeIngredient}
                   text={el.name}
                   thumbnail={el.image}
                   price={el.price}
@@ -46,15 +53,19 @@ function BurgerConstructor({ onOpen }) {
             );
           })}
         </ul>
-        <div className={style.item + " ml-4 mr-4 pl-8"}>
-          <ConstructorElement
-            type={"bottom"}
-            isLocked={true}
-            text={"Краторная булка N-200i (низ)"}
-            thumbnail={require("@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png")}
-            price={20}
-          />
-        </div>
+        {bun.map((el) => {
+          return (
+            <div className={style.item + " ml-4 mr-4 pl-8"}>
+              <ConstructorElement
+                type={"bottom"}
+                isLocked={true}
+                text={el.name}
+                thumbnail={el.image}
+                price={el.price}
+              />
+            </div>
+          );
+        })}
       </div>
       <div className={style.checkout}>
         <p className="text text_type_digits-medium">{total}</p>
