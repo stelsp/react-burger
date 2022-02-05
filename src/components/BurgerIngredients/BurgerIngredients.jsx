@@ -4,7 +4,7 @@ import ingredientPropTypes from "../../constants/ingredient-prop-types";
 import styles from "./BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
 import Card from "../Card/Card";
-import { useData } from "../App/DataContext";
+import { useData } from "../App/App";
 
 function BurgerIngredients({ onOpen }) {
   const data = useData();

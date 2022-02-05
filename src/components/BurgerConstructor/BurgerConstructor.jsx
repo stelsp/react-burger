@@ -7,7 +7,7 @@ import {
   DragIcon,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-import { useData } from "../App/DataContext";
+import { useData } from "../App/App";
 
 function BurgerConstructor({ onOpen }) {
   const data = useData();
