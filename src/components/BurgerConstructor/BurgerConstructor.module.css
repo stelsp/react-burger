@@ -5,7 +5,7 @@
 .list {
   list-style: none;
   overflow-y: scroll;
-  max-height: 480px;
+  max-height: 464px;
   composes: text custom-scroll from global;
 }
 
