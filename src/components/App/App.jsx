@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import styles from "./App.module.css";
 import AppHeader from "../AppHeader/AppHeader";
@@ -6,8 +7,12 @@ import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import Modal from "../Modal/Modal";
 import OrderDetails from "../OrderDetails/OrderDetails";
 import IngredientsDetails from "../IngredientDetails/IngredientDetails";
-import { getIngredients } from "../../utils/utils";
 import { DataContext } from "./DataContext";
+import {
+  API_URL,
+  URL_KEY_INGREDIENTS,
+  URL_KEY_ORDERS,
+} from "../../constants/api-url";
 
 export function useData() {
   return useContext(DataContext);
@@ -19,15 +24,31 @@ export default function App() {
   const [showOrder, setShowOrder] = useState(false);
   const [currentIngredient, setCurrentIngredient] = useState("");
 
-  const openOrderModal = () => setShowOrder(!showOrder);
+  const [order, setOrder] = useState({});
+  const [loadingOrder, setLoadingOrder] = useState(true);
+  useEffect(() => {
+    axios
+      .post(`${API_URL + URL_KEY_ORDERS}`, { ingredients: sumId })
+      .then((res) => {
+        setOrder(res);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setLoadingOrder(!loadingOrder));
+  }, []);
+
+  const [sumId, setSumId] = useState([]);
+
+  const openOrderModal = () => setOrder(!showOrder);
+
   const closeOrderModal = () => setShowOrder(!showOrder);
 
   const openIngredientModal = (e) => setCurrentIngredient(e.currentTarget.id);
   const closeIngredientModal = () => setCurrentIngredient("");
 
   useEffect(() => {
-    getIngredients()
-      .then(({ data }) => setData(data))
+    axios
+      .get(`${API_URL + URL_KEY_INGREDIENTS}`)
+      .then(({ data }) => setData(data.data))
       .catch((err) => console.log(err))
       .finally(() => setLoading(!loading));
   }, []);

@@ -11,7 +11,7 @@ import { useData } from "../App/App";
 function BurgerConstructor({ onOpen }) {
   const data = useData();
   const main = data.filter((el) => el.type !== "bun");
-  const bun = data.find((el) => el.type == "bun");
+  const bun = data.find((el) => el.type === "bun");
 
   const sum = () => {
     const mainPrice = main
@@ -22,6 +22,7 @@ function BurgerConstructor({ onOpen }) {
     return sum;
   };
   const sumId = [...main.map((el) => el._id), bun._id];
+
   return (
     <section className={style.container}>
       <div className={"mt-25 mb-10"}>
