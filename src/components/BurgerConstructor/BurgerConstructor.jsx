@@ -21,7 +21,6 @@ function BurgerConstructor({ onOpen }) {
     const sum = mainPrice + bunPrice * 2;
     return sum;
   };
-  const sumId = [...main.map((el) => el._id), bun._id];
 
   return (
     <section className={style.container}>

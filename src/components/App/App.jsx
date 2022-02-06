@@ -24,22 +24,19 @@ export default function App() {
   const [showOrder, setShowOrder] = useState(false);
   const [currentIngredient, setCurrentIngredient] = useState("");
 
-  const [order, setOrder] = useState({});
-  const [loadingOrder, setLoadingOrder] = useState(true);
-  useEffect(() => {
-    axios
-      .post(`${API_URL + URL_KEY_ORDERS}`, { ingredients: sumId })
-      .then((res) => {
-        setOrder(res);
-      })
-      .catch((err) => console.log(err))
-      .finally(() => setLoadingOrder(!loadingOrder));
-  }, []);
+  // const [order, setOrder] = useState({});
+  // const [loadingOrder, setLoadingOrder] = useState(true);
+  // useEffect(() => {
+  //   axios
+  //     .post(`${API_URL + URL_KEY_ORDERS}`, { ingredients: sumId })
+  //     .then((res) => {
+  //       setOrder(res);
+  //     })
+  //     .catch((err) => console.log(err))
+  //     .finally(() => setLoadingOrder(!loadingOrder));
+  // }, []);
 
-  const [sumId, setSumId] = useState([]);
-
-  const openOrderModal = () => setOrder(!showOrder);
-
+  const openOrderModal = () => setShowOrder(!showOrder);
   const closeOrderModal = () => setShowOrder(!showOrder);
 
   const openIngredientModal = (e) => setCurrentIngredient(e.currentTarget.id);
@@ -53,6 +50,7 @@ export default function App() {
       .finally(() => setLoading(!loading));
   }, []);
 
+  // const sumId = [...main.map((el) => el._id), bun._id];
   return (
     <DataContext.Provider value={data}>
       <AppHeader />
