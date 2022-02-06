@@ -11,15 +11,17 @@ import { useData } from "../App/App";
 function BurgerConstructor({ onOpen }) {
   const data = useData();
   const main = data.filter((el) => el.type !== "bun");
-  const bun = data.find((el) => el.type === "bun");
+  const bun = data.find((el) => el.type == "bun");
 
-  // сумма стоимости всех ингридиентов (демо, для отображения)
-  let total = 0;
-  data.map((el) => {
-    total += el.price;
-  });
-  //  //  //
-
+  const sum = () => {
+    const mainPrice = main
+      .map((el) => el.price)
+      .reduce((sum, el) => sum + el, 0);
+    const bunPrice = bun.price;
+    const sum = mainPrice + bunPrice * 2;
+    return sum;
+  };
+  const sumId = [...main.map((el) => el._id), bun._id];
   return (
     <section className={style.container}>
       <div className={"mt-25 mb-10"}>
@@ -32,6 +34,7 @@ function BurgerConstructor({ onOpen }) {
             price={bun.price}
           />
         </div>
+
         <ul className={style.list}>
           {main.map((el) => {
             return (
@@ -57,7 +60,7 @@ function BurgerConstructor({ onOpen }) {
         </div>
       </div>
       <div className={style.checkout}>
-        <p className="text text_type_digits-medium">{total}</p>
+        <p className="text text_type_digits-medium">{sum()}</p>
         <div className={style.icon}>
           <CurrencyIcon type="primary" />
         </div>

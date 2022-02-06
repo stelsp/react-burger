@@ -19,18 +19,18 @@ export default function App() {
   const [showOrder, setShowOrder] = useState(false);
   const [currentIngredient, setCurrentIngredient] = useState("");
 
+  const openOrderModal = () => setShowOrder(!showOrder);
+  const closeOrderModal = () => setShowOrder(!showOrder);
+
+  const openIngredientModal = (e) => setCurrentIngredient(e.currentTarget.id);
+  const closeIngredientModal = () => setCurrentIngredient("");
+
   useEffect(() => {
     getIngredients()
       .then(({ data }) => setData(data))
       .catch((err) => console.log(err))
       .finally(() => setLoading(!loading));
   }, []);
-
-  const openOrderModal = () => setShowOrder(!showOrder);
-  const closeOrderModal = () => setShowOrder(!showOrder);
-
-  const openIngredientModal = (e) => setCurrentIngredient(e.currentTarget.id);
-  const closeIngredientModal = () => setCurrentIngredient("");
 
   return (
     <DataContext.Provider value={data}>
