@@ -1,3 +1,5 @@
+import axios from "axios";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import style from "./BurgerConstructor.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element";
@@ -6,21 +8,42 @@ import {
   DragIcon,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
+import { API_URL, URL_KEY_ORDERS } from "../../constants/api-url";
 import { useData } from "../App/App";
 
-function BurgerConstructor({ onOpen }) {
+function BurgerConstructor({ onOpen, handleSetOrder }) {
   const data = useData();
-  const main = data.filter((el) => el.type !== "bun");
-  const bun = data.find((el) => el.type === "bun");
+  const [ingredients] = useState({
+    bun: data.find((el) => el.type === "bun"),
+    main: data.filter((el) => el.type !== "bun").slice(7, 10),
+    sumId: [
+      ...data
+        .filter((el) => el.type !== "bun")
+        .map((el) => el._id)
+        .slice(7, 10),
+      data.find((el) => el.type === "bun")._id,
+    ],
+  });
 
   const sum = () => {
-    const mainPrice = main
+    const mainPrice = ingredients.main
       .map((el) => el.price)
       .reduce((sum, el) => sum + el, 0);
-    const bunPrice = bun.price;
+    const bunPrice = ingredients.bun.price;
     const sum = mainPrice + bunPrice * 2;
     return sum;
   };
+
+  useEffect(() => {
+    axios
+      .post(`${API_URL + URL_KEY_ORDERS}`, {
+        ingredients: ingredients.sumId,
+      })
+      .then((res) => {
+        handleSetOrder(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <section className={style.container}>
@@ -29,14 +52,14 @@ function BurgerConstructor({ onOpen }) {
           <ConstructorElement
             type={"top"}
             isLocked={true}
-            text={bun.name}
-            thumbnail={bun.image}
-            price={bun.price}
+            text={ingredients.bun.name}
+            thumbnail={ingredients.bun.image}
+            price={ingredients.bun.price}
           />
         </div>
 
         <ul className={style.list}>
-          {main.map((el) => {
+          {ingredients.main.map((el) => {
             return (
               <li className={style.item + " mb-4 ml-4 mr-1"} key={el._id}>
                 <DragIcon type="primary" />
@@ -53,9 +76,9 @@ function BurgerConstructor({ onOpen }) {
           <ConstructorElement
             type={"bottom"}
             isLocked={true}
-            text={bun.name}
-            thumbnail={bun.image}
-            price={bun.price}
+            text={ingredients.bun.name}
+            thumbnail={ingredients.bun.image}
+            price={ingredients.bun.price}
           />
         </div>
       </div>

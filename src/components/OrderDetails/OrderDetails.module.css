@@ -14,6 +14,7 @@
 
 .text__identifier {
   composes: text text_type_main-medium mb-15 from global;
+  text-align: center;
 }
 
 .text__start {

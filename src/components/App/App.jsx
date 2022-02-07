@@ -23,21 +23,11 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [showOrder, setShowOrder] = useState(false);
   const [currentIngredient, setCurrentIngredient] = useState("");
-
-  // const [order, setOrder] = useState({});
-  // const [loadingOrder, setLoadingOrder] = useState(true);
-  // useEffect(() => {
-  //   axios
-  //     .post(`${API_URL + URL_KEY_ORDERS}`, { ingredients: sumId })
-  //     .then((res) => {
-  //       setOrder(res);
-  //     })
-  //     .catch((err) => console.log(err))
-  //     .finally(() => setLoadingOrder(!loadingOrder));
-  // }, []);
+  const [order, setOrder] = useState({});
 
   const openOrderModal = () => setShowOrder(!showOrder);
   const closeOrderModal = () => setShowOrder(!showOrder);
+  const handleSetOrder = (res) => setOrder(res);
 
   const openIngredientModal = (e) => setCurrentIngredient(e.currentTarget.id);
   const closeIngredientModal = () => setCurrentIngredient("");
@@ -45,12 +35,13 @@ export default function App() {
   useEffect(() => {
     axios
       .get(`${API_URL + URL_KEY_INGREDIENTS}`)
-      .then(({ data }) => setData(data.data))
+      .then(({ data }) => {
+        setData(data.data);
+      })
       .catch((err) => console.log(err))
       .finally(() => setLoading(!loading));
   }, []);
 
-  // const sumId = [...main.map((el) => el._id), bun._id];
   return (
     <DataContext.Provider value={data}>
       <AppHeader />
@@ -59,12 +50,15 @@ export default function App() {
       ) : (
         <main className={styles.main}>
           <BurgerIngredients onOpen={openIngredientModal} />
-          <BurgerConstructor onOpen={openOrderModal} />
+          <BurgerConstructor
+            onOpen={openOrderModal}
+            handleSetOrder={handleSetOrder}
+          />
         </main>
       )}
       {showOrder && (
         <Modal onClose={closeOrderModal}>
-          <OrderDetails />
+          <OrderDetails order={order} />
         </Modal>
       )}
       {currentIngredient && (

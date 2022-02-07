@@ -1,11 +1,11 @@
 import styles from "./OrderDetails.module.css";
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 
-function OrderDetails() {
+function OrderDetails({ order }) {
   return (
     <div className={styles.card}>
-      <h3 className={styles.order}>034536</h3>
-      <p className={styles.text__identifier}>идентификатор заказа</p>
+      <h3 className={styles.order}>{order.order.number}</h3>
+      <p className={styles.text__identifier}>{order.name}</p>
       <span className={styles.icon}>
         <CheckMarkIcon type="primary" />
       </span>
