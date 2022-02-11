@@ -6,6 +6,7 @@ import {
   ListIcon,
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
+import { APP_HEADER_LINKS } from "../../constants/content";
 
 function AppHeader() {
   return (
@@ -18,7 +19,7 @@ function AppHeader() {
               textStyle={"ml-2"}
               icon={<BurgerIcon type="secondary" />}
               href={"#"}
-              text={"Конструктор"}
+              text={APP_HEADER_LINKS.CONSTRUCTOR}
             />
 
             <MenuItem
@@ -26,7 +27,7 @@ function AppHeader() {
               textStyle={"ml-2"}
               icon={<ListIcon type="secondary" />}
               href={"#"}
-              text={"Лента заказов"}
+              text={APP_HEADER_LINKS.ORDER_FEED}
             />
           </div>
 
@@ -39,7 +40,7 @@ function AppHeader() {
             textStyle={"ml-2"}
             icon={<ProfileIcon type="secondary" />}
             href={"#"}
-            text={"Личный кабинет"}
+            text={APP_HEADER_LINKS.ACCOUNT}
           />
         </nav>
       </div>

@@ -1,4 +1,5 @@
 import style from "./Checkout.module.css";
+import PropTypes from "prop-types";
 import axios from "axios";
 import { useCallback, useState } from "react";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/button";
@@ -52,5 +53,10 @@ function Checkout({ ingredientsIDs, ingredientsPrice }) {
     </>
   );
 }
+
+Checkout.propTypes = {
+  ingredientsIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
+  ingredientsPrice: PropTypes.number.isRequired,
+};
 
 export default Checkout;

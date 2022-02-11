@@ -22,3 +22,11 @@ export const MODAL_TEXT_ORDER = {
 };
 
 export const ORDER_BUTTON_TEXT = "Оформить заказ";
+
+// APP HEADER
+
+export const APP_HEADER_LINKS = {
+  CONSTRUCTOR: "Конструктор",
+  ORDER_FEED: "Лента заказов",
+  ACCOUNT: "Личный кабинет",
+};
