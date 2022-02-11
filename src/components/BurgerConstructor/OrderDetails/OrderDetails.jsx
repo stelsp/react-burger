@@ -1,6 +1,6 @@
 import styles from "./OrderDetails.module.css";
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-import { MODAL_TEXT_ORDER } from "../../../constants/constants";
+import { MODAL_TEXT_ORDER } from "../../../constants/content";
 
 function OrderDetails({ order }) {
   return (

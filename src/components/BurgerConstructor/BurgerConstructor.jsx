@@ -1,29 +1,24 @@
-import { useCallback, useMemo, useState } from "react";
 import style from "./BurgerConstructor.module.css";
+import { useMemo } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element";
-import { Button } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/button";
-import {
-  DragIcon,
-  CurrencyIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-import { useData } from "../App/App";
-import { ORDER_BUTTON_TEXT } from "../../constants/constants";
-import OrderDetails from "./OrderDetails/OrderDetails";
-import Modal from "../Modal/Modal";
-import axios from "axios";
-import { API_URL, URL_KEY_ORDERS } from "../../constants/api-url";
+import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
+import { useData } from "../../services/DataProvider";
+import Checkout from "./Checkout/Checkout";
 
 function BurgerConstructor() {
-  const data = useData();
+  const { data } = useData();
   const bun = data.find((el) => el.type === "bun");
-  const main = data.filter((el) => el.type !== "bun");
-  const ingredientsIDs = [...main.map((el) => el._id), bun._id];
+  const main = data.filter((el) => el.type !== "bun").slice(6, 12);
 
-  const sumPrice = useMemo(() => {
+  const IngredientsIDs = useMemo(() => {
+    return [...main.map((el) => el._id), bun._id];
+  }, [data]);
+
+  const IngredientsPrice = useMemo(() => {
     const mainPrice = main.reduce((sum, el) => sum + el.price, 0);
     const bunPrice = bun.price;
-    const sum = mainPrice + bunPrice * 2;
-    return sum;
+    const price = mainPrice + bunPrice * 2;
+    return price;
   }, [data]);
 
   return (
@@ -63,48 +58,12 @@ function BurgerConstructor() {
           />
         </div>
       </div>
-      <Checkout ingredientsIDs={ingredientsIDs} sumPrice={sumPrice} />
+      <Checkout
+        ingredientsIDs={IngredientsIDs}
+        ingredientsPrice={IngredientsPrice}
+      />
     </section>
   );
 }
 
 export default BurgerConstructor;
-
-function Checkout({ ingredientsIDs, sumPrice }) {
-  const [show, setShow] = useState(false);
-  const [order, setOrder] = useState(false);
-
-  const postIDs = () => {
-    axios
-      .post(`${API_URL + URL_KEY_ORDERS}`, {
-        ingredients: ingredientsIDs,
-      })
-      .then(({ data }) => {
-        setOrder(data);
-        setShow(true);
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const openModal = () => postIDs();
-  const closeModal = () => setShow(false);
-
-  return (
-    <>
-      <div className={style.checkout}>
-        <p className="text text_type_digits-medium">{sumPrice}</p>
-        <div className={style.icon}>
-          <CurrencyIcon type="primary" />
-        </div>
-        <Button onClick={openModal} size="large">
-          {ORDER_BUTTON_TEXT}
-        </Button>
-      </div>
-      {show && (
-        <Modal onClose={closeModal}>
-          <OrderDetails order={order}></OrderDetails>
-        </Modal>
-      )}
-    </>
-  );
-}

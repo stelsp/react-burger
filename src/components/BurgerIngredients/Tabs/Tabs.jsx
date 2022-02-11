@@ -1,7 +1,7 @@
 import styles from "./Tabs.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
 import { useState } from "react";
-import { INGREDIENT_TYPE } from "../../../constants/constants";
+import { INGREDIENT_TYPE } from "../../../constants/content";
 
 function Tabs() {
   const [current, setCurrent] = useState("one");

@@ -5,7 +5,7 @@ import { Counter } from "@ya.praktikum/react-developer-burger-ui-components/dist
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import Modal from "../../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
-import { MODAL_TITLE_INGREDIENT } from "../../../constants/constants";
+import { MODAL_TITLE_INGREDIENT } from "../../../constants/content";
 
 function Ingredient({ el }) {
   const [show, setShow] = useState(false);

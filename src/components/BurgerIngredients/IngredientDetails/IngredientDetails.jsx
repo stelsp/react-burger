@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import styles from "./IngredientDetails.module.css";
-import { INGREDIENT_COMPOUND } from "../../../constants/constants";
+import { INGREDIENT_COMPOUND } from "../../../constants/content";
 
 function IngredientDetails({ el }) {
   return (

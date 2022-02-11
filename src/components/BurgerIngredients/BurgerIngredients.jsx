@@ -1,14 +1,14 @@
 import styles from "./BurgerIngredients.module.css";
-import { useData } from "../App/App";
 import IngredientType from "./IngredientType/IngredientType";
 import Tabs from "./Tabs/Tabs";
+import { useData } from "../../services/DataProvider";
 import {
   INGREDIENT_TYPE,
   BURGER_INGREDIENTS_TITLE,
-} from "../../constants/constants";
+} from "../../constants/content";
 
 function BurgerIngredients() {
-  const data = useData();
+  const { data } = useData();
   const bun = data.filter((el) => el.type === "bun");
   const sauce = data.filter((el) => el.type === "sauce");
   const main = data.filter((el) => el.type === "main");
