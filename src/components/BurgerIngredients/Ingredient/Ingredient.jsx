@@ -5,6 +5,7 @@ import { Counter } from "@ya.praktikum/react-developer-burger-ui-components/dist
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import Modal from "../../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
+import { MODAL_TITLE_INGREDIENT } from "../../../constants/constants";
 
 function Ingredient({ el }) {
   const [show, setShow] = useState(false);
@@ -23,7 +24,7 @@ function Ingredient({ el }) {
         <h3 className={styles.card__title}>{el.name}</h3>
       </div>
       {show && (
-        <Modal onClose={closeModal} title={"Детали ингредиента"}>
+        <Modal onClose={closeModal} title={MODAL_TITLE_INGREDIENT}>
           <IngredientDetails el={el}></IngredientDetails>
         </Modal>
       )}

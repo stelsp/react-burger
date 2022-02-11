@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import styles from "./IngredientDetails.module.css";
+import { INGREDIENT_COMPOUND } from "../../../constants/constants";
 
 function IngredientDetails({ el }) {
   return (
@@ -8,16 +9,20 @@ function IngredientDetails({ el }) {
       <p className={styles.test}>{el.name}</p>
       <ul className={styles.container}>
         <li className={styles.text}>
-          Калории,ккал<span>{el.calories}</span>
+          {INGREDIENT_COMPOUND.CALORIES}
+          <span>{el.calories}</span>
         </li>
         <li className={styles.text}>
-          Белки, г<span>{el.proteins}</span>
+          {INGREDIENT_COMPOUND.PROTEINS}
+          <span>{el.proteins}</span>
         </li>
         <li className={styles.text}>
-          Жиры, г<span>{el.fat}</span>
+          {INGREDIENT_COMPOUND.FAT}
+          <span>{el.fat}</span>
         </li>
         <li className={styles.text}>
-          Углеводы, г<span>{el.carbohydrates}</span>
+          {INGREDIENT_COMPOUND.CARBOHYDRATES}
+          <span>{el.carbohydrates}</span>
         </li>
       </ul>
     </div>
