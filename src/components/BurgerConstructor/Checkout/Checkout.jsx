@@ -23,9 +23,9 @@ function Checkout({ ingredientsIDs, ingredientsPrice }) {
       })
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
-  }, [ingredientsIDs]);
+  }, [order, ingredientsIDs]);
 
-  const closeModal = useCallback(() => setOrder(false), []);
+  const closeModal = useCallback(() => setOrder(false), [order]);
 
   return (
     <>

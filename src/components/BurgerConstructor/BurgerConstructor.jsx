@@ -6,7 +6,7 @@ import { useData } from "../../services/DataProvider";
 import Checkout from "./Checkout/Checkout";
 
 function BurgerConstructor() {
-  const { data } = useData();
+  const data = useData();
   const bun = data.find((el) => el.type === "bun");
   const main = data.filter((el) => el.type !== "bun").slice(6, 12);
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./Ingredient.module.css";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter";
@@ -9,8 +9,8 @@ import { MODAL_TITLE_INGREDIENT } from "../../../constants/content";
 
 function Ingredient({ el }) {
   const [show, setShow] = useState(false);
-  const openModal = () => setShow(true);
-  const closeModal = () => setShow(false);
+  const openModal = useCallback(() => setShow(true), [show]);
+  const closeModal = useCallback(() => setShow(false), [show]);
 
   return (
     <>

@@ -23,12 +23,7 @@ function DataProvider({ children }) {
   }, []);
 
   return (
-    <DataContext.Provider
-      value={{
-        loading: loading,
-        data: data,
-      }}
-    >
+    <DataContext.Provider value={data}>
       {loading ? <h1>Loading...</h1> : <>{children}</>}
     </DataContext.Provider>
   );
