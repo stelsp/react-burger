@@ -1,6 +1,4 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import { useCallback, useMemo, useState } from "react";
 import style from "./BurgerConstructor.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/button";
@@ -8,42 +6,25 @@ import {
   DragIcon,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-import { API_URL, URL_KEY_ORDERS } from "../../constants/api-url";
 import { useData } from "../App/App";
+import { ORDER_BUTTON_TEXT } from "../../constants/constants";
+import OrderDetails from "./OrderDetails/OrderDetails";
+import Modal from "../Modal/Modal";
+import axios from "axios";
+import { API_URL, URL_KEY_ORDERS } from "../../constants/api-url";
 
-function BurgerConstructor({ onOpen, handleSetOrder }) {
+function BurgerConstructor() {
   const data = useData();
-  const [ingredients] = useState({
-    bun: data.find((el) => el.type === "bun"),
-    main: data.filter((el) => el.type !== "bun").slice(7, 10),
-    sumId: [
-      ...data
-        .filter((el) => el.type !== "bun")
-        .map((el) => el._id)
-        .slice(7, 10),
-      data.find((el) => el.type === "bun")._id,
-    ],
-  });
+  const bun = data.find((el) => el.type === "bun");
+  const main = data.filter((el) => el.type !== "bun");
+  const ingredientsIDs = [...main.map((el) => el._id), bun._id];
 
-  const sum = () => {
-    const mainPrice = ingredients.main
-      .map((el) => el.price)
-      .reduce((sum, el) => sum + el, 0);
-    const bunPrice = ingredients.bun.price;
+  const sumPrice = useMemo(() => {
+    const mainPrice = main.reduce((sum, el) => sum + el.price, 0);
+    const bunPrice = bun.price;
     const sum = mainPrice + bunPrice * 2;
     return sum;
-  };
-
-  useEffect(() => {
-    axios
-      .post(`${API_URL + URL_KEY_ORDERS}`, {
-        ingredients: ingredients.sumId,
-      })
-      .then((res) => {
-        handleSetOrder(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  }, [data]);
 
   return (
     <section className={style.container}>
@@ -52,16 +33,16 @@ function BurgerConstructor({ onOpen, handleSetOrder }) {
           <ConstructorElement
             type={"top"}
             isLocked={true}
-            text={ingredients.bun.name}
-            thumbnail={ingredients.bun.image}
-            price={ingredients.bun.price}
+            text={`${bun.name} (верх)`}
+            thumbnail={bun.image}
+            price={bun.price}
           />
         </div>
 
         <ul className={style.list}>
-          {ingredients.main.map((el) => {
+          {main.map((el) => {
             return (
-              <li className={style.item + " mb-4 ml-4 mr-1"} key={el._id}>
+              <li key={el._id} className={style.item + " mb-4 ml-4 mr-1"}>
                 <DragIcon type="primary" />
                 <ConstructorElement
                   text={el.name}
@@ -76,27 +57,54 @@ function BurgerConstructor({ onOpen, handleSetOrder }) {
           <ConstructorElement
             type={"bottom"}
             isLocked={true}
-            text={ingredients.bun.name}
-            thumbnail={ingredients.bun.image}
-            price={ingredients.bun.price}
+            text={`${bun.name} (низ)`}
+            thumbnail={bun.image}
+            price={bun.price}
           />
         </div>
       </div>
-      <div className={style.checkout}>
-        <p className="text text_type_digits-medium">{sum()}</p>
-        <div className={style.icon}>
-          <CurrencyIcon type="primary" />
-        </div>
-        <Button onClick={onOpen} size="large">
-          Оформить заказ
-        </Button>
-      </div>
+      <Checkout ingredientsIDs={ingredientsIDs} sumPrice={sumPrice} />
     </section>
   );
 }
 
-BurgerConstructor.propTypes = {
-  onOpen: PropTypes.func.isRequired,
-};
-
 export default BurgerConstructor;
+
+function Checkout({ ingredientsIDs, sumPrice }) {
+  const [show, setShow] = useState(false);
+  const [order, setOrder] = useState(false);
+
+  const postIDs = () => {
+    axios
+      .post(`${API_URL + URL_KEY_ORDERS}`, {
+        ingredients: ingredientsIDs,
+      })
+      .then(({ data }) => {
+        setOrder(data);
+        setShow(true);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const openModal = () => postIDs();
+  const closeModal = () => setShow(false);
+
+  return (
+    <>
+      <div className={style.checkout}>
+        <p className="text text_type_digits-medium">{sumPrice}</p>
+        <div className={style.icon}>
+          <CurrencyIcon type="primary" />
+        </div>
+        <Button onClick={openModal} size="large">
+          {ORDER_BUTTON_TEXT}
+        </Button>
+      </div>
+      {show && (
+        <Modal onClose={closeModal}>
+          <OrderDetails order={order}></OrderDetails>
+        </Modal>
+      )}
+    </>
+  );
+}

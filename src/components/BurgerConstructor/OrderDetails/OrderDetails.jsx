@@ -1,5 +1,6 @@
 import styles from "./OrderDetails.module.css";
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
+import { MODAL_TEXT_ORDER } from "../../../constants/constants";
 
 function OrderDetails({ order }) {
   return (
@@ -9,10 +10,8 @@ function OrderDetails({ order }) {
       <span className={styles.icon}>
         <CheckMarkIcon type="primary" />
       </span>
-      <p className={styles.text__start}>Ваш заказ начали готовить</p>
-      <p className={styles.text__wait}>
-        Дождитесь готовности на орбитальной станции
-      </p>
+      <p className={styles.text__start}>{MODAL_TEXT_ORDER.START}</p>
+      <p className={styles.text__wait}>{MODAL_TEXT_ORDER.WAIT}</p>
     </div>
   );
 }
