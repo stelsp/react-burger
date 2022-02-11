@@ -1,5 +1,5 @@
 import styles from "./AppHeader.module.css";
-import MenuItem from "../MenuItem/MenuItem";
+import MenuItem from "./MenuItem/MenuItem";
 import { Logo } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/logo";
 import {
   BurgerIcon,

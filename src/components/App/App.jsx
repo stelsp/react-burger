@@ -4,9 +4,8 @@ import styles from "./App.module.css";
 import AppHeader from "../AppHeader/AppHeader";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
-import Modal from "../Modal/Modal";
-import OrderDetails from "../OrderDetails/OrderDetails";
-import IngredientsDetails from "../IngredientDetails/IngredientDetails";
+// import Modal from "../Modal/Modal";
+// import OrderDetails from "../BurgerConstructor/OrderDetails/OrderDetails";
 import { DataContext } from "./DataContext";
 import {
   API_URL,
@@ -22,15 +21,11 @@ export default function App() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showOrder, setShowOrder] = useState(false);
-  const [currentIngredient, setCurrentIngredient] = useState("");
   const [order, setOrder] = useState({});
 
   const openOrderModal = () => setShowOrder(!showOrder);
   const closeOrderModal = () => setShowOrder(!showOrder);
   const handleSetOrder = (res) => setOrder(res);
-
-  const openIngredientModal = (e) => setCurrentIngredient(e.currentTarget.id);
-  const closeIngredientModal = () => setCurrentIngredient("");
 
   useEffect(() => {
     axios
@@ -49,23 +44,18 @@ export default function App() {
         <h1>Loading...</h1>
       ) : (
         <main className={styles.main}>
-          <BurgerIngredients onOpen={openIngredientModal} />
+          <BurgerIngredients />
           <BurgerConstructor
             onOpen={openOrderModal}
             handleSetOrder={handleSetOrder}
           />
         </main>
       )}
-      {showOrder && (
+      {/* {showOrder && (
         <Modal onClose={closeOrderModal}>
           <OrderDetails order={order} />
         </Modal>
-      )}
-      {currentIngredient && (
-        <Modal onClose={closeIngredientModal} title={"Детали ингредиента"}>
-          <IngredientsDetails currentIngredient={currentIngredient} />
-        </Modal>
-      )}
+      )} */}
     </DataContext.Provider>
   );
 }

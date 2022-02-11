@@ -12,8 +12,8 @@
   width: 480px;
   composes: mb-4 from global;
 }
-.title {
-  comsposes: text text_type_main-medium mb-8 from global;
+.test {
+  composes: text text_type_main-default mb-8 from global;
 }
 .container {
   display: flex;

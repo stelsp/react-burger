@@ -1,0 +1,4 @@
+.tab {
+  display: flex;
+  composes: mt-5 from global;
+}
