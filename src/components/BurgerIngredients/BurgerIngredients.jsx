@@ -1,7 +1,8 @@
 import styles from "./BurgerIngredients.module.css";
+import { useMemo } from "react";
+import { useData } from "../../services/DataProvider";
 import IngredientType from "./IngredientType/IngredientType";
 import Tabs from "./Tabs/Tabs";
-import { useData } from "../../services/DataProvider";
 import {
   INGREDIENT_TYPE,
   BURGER_INGREDIENTS_TITLE,
@@ -9,9 +10,18 @@ import {
 
 function BurgerIngredients() {
   const data = useData();
-  const bun = data.filter((el) => el.type === "bun");
-  const sauce = data.filter((el) => el.type === "sauce");
-  const main = data.filter((el) => el.type === "main");
+
+  const bun = useMemo(() => {
+    return data.filter((el) => el.type === "bun");
+  }, [data]);
+
+  const sauce = useMemo(() => {
+    return data.filter((el) => el.type === "sauce");
+  }, [data]);
+
+  const main = useMemo(() => {
+    return data.filter((el) => el.type === "main");
+  }, [data]);
 
   return (
     <div className={styles.container}>

@@ -1,16 +1,16 @@
 import { useCallback, useState } from "react";
-import PropTypes from "prop-types";
 import styles from "./Ingredient.module.css";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import Modal from "../../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { MODAL_TITLE_INGREDIENT } from "../../../constants/content";
+import { ingredientPropTypes } from "../../../constants/ingredient-prop-types";
 
 function Ingredient({ el }) {
   const [show, setShow] = useState(false);
-  const openModal = useCallback(() => setShow(true), [show]);
-  const closeModal = useCallback(() => setShow(false), [show]);
+  const openModal = useCallback(() => setShow(true), []);
+  const closeModal = useCallback(() => setShow(false), []);
 
   return (
     <>
@@ -25,7 +25,7 @@ function Ingredient({ el }) {
       </div>
       {show && (
         <Modal onClose={closeModal} title={MODAL_TITLE_INGREDIENT}>
-          <IngredientDetails el={el}></IngredientDetails>
+          <IngredientDetails el={el} />
         </Modal>
       )}
     </>
@@ -33,7 +33,7 @@ function Ingredient({ el }) {
 }
 
 Ingredient.propTypes = {
-  el: PropTypes.object.isRequired,
+  el: ingredientPropTypes.isRequired,
 };
 
 export default Ingredient;

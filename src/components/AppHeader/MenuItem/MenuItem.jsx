@@ -12,7 +12,7 @@ function MenuItem({ linkStyle, href, icon, textStyle, text }) {
 MenuItem.propTypes = {
   linkStyle: PropTypes.string.isRequired,
   href: PropTypes.string.isRequired,
-  icon: PropTypes.object.isRequired,
+  icon: PropTypes.element.isRequired,
   textStyle: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
 };

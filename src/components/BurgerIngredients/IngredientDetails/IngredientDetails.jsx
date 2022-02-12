@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
 import styles from "./IngredientDetails.module.css";
+import { ingredientPropTypes } from "../../../constants/ingredient-prop-types";
 import { INGREDIENT_COMPOUND } from "../../../constants/content";
 
 function IngredientDetails({ el }) {
@@ -30,7 +30,7 @@ function IngredientDetails({ el }) {
 }
 
 IngredientDetails.propTypes = {
-  el: PropTypes.object.isRequired,
+  el: ingredientPropTypes.isRequired,
 };
 
 export default IngredientDetails;

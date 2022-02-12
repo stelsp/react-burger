@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import styles from "./Modal.module.css";
@@ -39,7 +38,10 @@ function Modal({ onClose, children, title }) {
 
 Modal.propTypes = {
   onClose: PropTypes.func,
-  children: PropTypes.object.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
   title: PropTypes.string,
 };
 

@@ -8,6 +8,7 @@ import OrderDetails from "../OrderDetails/OrderDetails";
 import Modal from "../../Modal/Modal";
 import { ORDER_BUTTON_TEXT } from "../../../constants/content";
 import { API_URL, URL_KEY_ORDERS } from "../../../constants/api-url";
+import Loader from "../../Loader/Loader";
 
 function Checkout({ ingredientsIDs, ingredientsPrice }) {
   const [order, setOrder] = useState(false);
@@ -24,9 +25,9 @@ function Checkout({ ingredientsIDs, ingredientsPrice }) {
       })
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
-  }, [order, ingredientsIDs]);
+  }, [ingredientsIDs]);
 
-  const closeModal = useCallback(() => setOrder(false), [order]);
+  const closeModal = useCallback(() => setOrder(false), []);
 
   return (
     <>
@@ -40,13 +41,11 @@ function Checkout({ ingredientsIDs, ingredientsPrice }) {
         </Button>
       </div>
       {loading ? (
-        <Modal>
-          <h1>Loading...</h1>
-        </Modal>
+        <Loader />
       ) : (
         order && (
           <Modal onClose={closeModal}>
-            <OrderDetails order={order}></OrderDetails>
+            <OrderDetails order={order} />
           </Modal>
         )
       )}

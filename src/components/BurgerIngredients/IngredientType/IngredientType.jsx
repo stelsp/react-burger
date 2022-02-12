@@ -1,6 +1,7 @@
 import styles from "./IngredientType.module.css";
 import PropTypes from "prop-types";
 import Ingredient from "../Ingredient/Ingredient";
+import { ingredientPropTypes } from "../../../constants/ingredient-prop-types";
 
 function IngredientType({ type, title }) {
   return (
@@ -16,7 +17,7 @@ function IngredientType({ type, title }) {
 }
 
 IngredientType.propTypes = {
-  type: PropTypes.arrayOf(PropTypes.object).isRequired,
+  type: PropTypes.arrayOf(ingredientPropTypes).isRequired,
   title: PropTypes.string.isRequired,
 };
 

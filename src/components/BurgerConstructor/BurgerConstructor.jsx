@@ -7,19 +7,25 @@ import Checkout from "./Checkout/Checkout";
 
 function BurgerConstructor() {
   const data = useData();
-  const bun = data.find((el) => el.type === "bun");
-  const main = data.filter((el) => el.type !== "bun").slice(6, 12);
 
-  const IngredientsIDs = useMemo(() => {
-    return [...main.map((el) => el._id), bun._id];
+  const bun = useMemo(() => {
+    return data.find((el) => el.type === "bun");
   }, [data]);
 
-  const IngredientsPrice = useMemo(() => {
+  const main = useMemo(() => {
+    return data.filter((el) => el.type !== "bun").slice(6, 12);
+  }, [data]);
+
+  const ingredientsIDs = useMemo(() => {
+    return [...main.map((el) => el._id), bun._id];
+  }, [main, bun]);
+
+  const ingredientsPrice = useMemo(() => {
     const mainPrice = main.reduce((sum, el) => sum + el.price, 0);
     const bunPrice = bun.price;
     const price = mainPrice + bunPrice * 2;
     return price;
-  }, [data]);
+  }, [main, bun]);
 
   return (
     <section className={style.container}>
@@ -59,8 +65,8 @@ function BurgerConstructor() {
         </div>
       </div>
       <Checkout
-        ingredientsIDs={IngredientsIDs}
-        ingredientsPrice={IngredientsPrice}
+        ingredientsIDs={ingredientsIDs}
+        ingredientsPrice={ingredientsPrice}
       />
     </section>
   );

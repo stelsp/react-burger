@@ -1,5 +1,5 @@
 import styles from "./OrderDetails.module.css";
-import PropTypes from "prop-types";
+import { OrderPropTypes } from "../../../constants/ingredient-prop-types";
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import { MODAL_TEXT_ORDER } from "../../../constants/content";
 
@@ -18,7 +18,7 @@ function OrderDetails({ order }) {
 }
 
 OrderDetails.propTypes = {
-  order: PropTypes.object.isRequired,
+  order: OrderPropTypes.isRequired,
 };
 
 export default OrderDetails;
