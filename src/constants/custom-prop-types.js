@@ -14,7 +14,7 @@ export const ingredientPropTypes = PropTypes.shape({
   type: PropTypes.string,
 });
 
-export const OrderPropTypes = PropTypes.shape({
+export const orderPropTypes = PropTypes.shape({
   name: PropTypes.string,
   order: PropTypes.objectOf(PropTypes.number),
 });

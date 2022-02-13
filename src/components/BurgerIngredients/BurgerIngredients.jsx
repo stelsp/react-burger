@@ -4,7 +4,7 @@ import { useData } from "../../services/DataProvider";
 import IngredientType from "./IngredientType/IngredientType";
 import Tabs from "./Tabs/Tabs";
 import {
-  INGREDIENT_TYPE,
+  INGREDIENT_CATEGORY,
   BURGER_INGREDIENTS_TITLE,
 } from "../../constants/content";
 
@@ -28,9 +28,9 @@ function BurgerIngredients() {
       <h2 className={styles.title}>{BURGER_INGREDIENTS_TITLE}</h2>
       <Tabs />
       <div className={styles.list}>
-        <IngredientType type={bun} title={INGREDIENT_TYPE.BUN} />
-        <IngredientType type={sauce} title={INGREDIENT_TYPE.SAUCE} />
-        <IngredientType type={main} title={INGREDIENT_TYPE.MAIN} />
+        <IngredientType category={bun} title={INGREDIENT_CATEGORY.BUN} />
+        <IngredientType category={sauce} title={INGREDIENT_CATEGORY.SAUCE} />
+        <IngredientType category={main} title={INGREDIENT_CATEGORY.MAIN} />
       </div>
     </div>
   );

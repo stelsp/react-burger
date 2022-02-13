@@ -2,7 +2,7 @@
 export const MODAL_TITLE_INGREDIENT = "Детали ингредиента";
 export const BURGER_INGREDIENTS_TITLE = "Соберите бургер";
 
-export const INGREDIENT_TYPE = {
+export const INGREDIENT_CATEGORY = {
   BUN: "Булки",
   SAUCE: "Соусы",
   MAIN: "Начинки",

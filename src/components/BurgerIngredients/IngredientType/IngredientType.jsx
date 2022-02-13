@@ -1,14 +1,14 @@
 import styles from "./IngredientType.module.css";
 import PropTypes from "prop-types";
 import Ingredient from "../Ingredient/Ingredient";
-import { ingredientPropTypes } from "../../../constants/ingredient-prop-types";
+import { ingredientPropTypes } from "../../../constants/custom-prop-types";
 
-function IngredientType({ type, title }) {
+function IngredientType({ category, title }) {
   return (
     <>
       <h3 className={styles.cards__title}>{title}</h3>
       <ul className={styles.cards}>
-        {type.map((el) => {
+        {category.map((el) => {
           return <Ingredient el={el} key={el._id} />;
         })}
       </ul>
@@ -17,7 +17,7 @@ function IngredientType({ type, title }) {
 }
 
 IngredientType.propTypes = {
-  type: PropTypes.arrayOf(ingredientPropTypes).isRequired,
+  category: PropTypes.arrayOf(ingredientPropTypes).isRequired,
   title: PropTypes.string.isRequired,
 };
 
