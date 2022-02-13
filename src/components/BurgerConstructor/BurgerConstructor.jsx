@@ -1,22 +1,31 @@
-import PropTypes from "prop-types";
 import style from "./BurgerConstructor.module.css";
+import { useMemo } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element";
-import { Button } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/button";
-import {
-  DragIcon,
-  CurrencyIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-import ingredientPropTypes from "../../constants/ingredient-prop-types";
+import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
+import { useData } from "../../services/DataProvider";
+import Checkout from "./Checkout/Checkout";
 
-function BurgerConstructor({ data, onOpen }) {
-  const ingredient = data.filter((el) => el.type !== "bun");
+function BurgerConstructor() {
+  const data = useData();
 
-  // сумма стоимости всех ингридиентов (демо, для отображения)
-  let total = 0;
-  data.map((el) => {
-    total += el.price;
-  });
-  //  //  //
+  const bun = useMemo(() => {
+    return data.find((el) => el.type === "bun");
+  }, [data]);
+
+  const main = useMemo(() => {
+    return data.filter((el) => el.type !== "bun").slice(6, 12);
+  }, [data]);
+
+  const ingredientsIDs = useMemo(() => {
+    return [...main.map((el) => el._id), bun._id];
+  }, [main, bun]);
+
+  const ingredientsPrice = useMemo(() => {
+    const mainPrice = main.reduce((sum, el) => sum + el.price, 0);
+    const bunPrice = bun.price;
+    const price = mainPrice + bunPrice * 2;
+    return price;
+  }, [main, bun]);
 
   return (
     <section className={style.container}>
@@ -25,15 +34,16 @@ function BurgerConstructor({ data, onOpen }) {
           <ConstructorElement
             type={"top"}
             isLocked={true}
-            text={"Краторная булка N-200i (верх)"}
-            thumbnail={require("@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png")}
-            price={20}
+            text={`${bun.name} (верх)`}
+            thumbnail={bun.image}
+            price={bun.price}
           />
         </div>
-        <ul className={style.list + " text custom-scroll"}>
-          {ingredient.map((el) => {
+
+        <ul className={style.list}>
+          {main.map((el) => {
             return (
-              <li className={style.item + " mb-4 ml-4 mr-1"} key={el._id}>
+              <li key={el._id} className={style.item + " mb-4 ml-4 mr-1"}>
                 <DragIcon type="primary" />
                 <ConstructorElement
                   text={el.name}
@@ -44,32 +54,22 @@ function BurgerConstructor({ data, onOpen }) {
             );
           })}
         </ul>
-        <div className={style.item + " ml-4 mr-4 pl-8"}>
+        <div className={style.item + " mt-4 ml-4 mr-4 pl-8"}>
           <ConstructorElement
             type={"bottom"}
             isLocked={true}
-            text={"Краторная булка N-200i (низ)"}
-            thumbnail={require("@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png")}
-            price={20}
+            text={`${bun.name} (низ)`}
+            thumbnail={bun.image}
+            price={bun.price}
           />
         </div>
       </div>
-      <div className={style.checkout + " mr-4"}>
-        <p className="text text_type_digits-medium">{total}</p>
-        <div className={style.icon + " mr-10"}>
-          <CurrencyIcon type="primary" />
-        </div>
-        <Button onClick={onOpen} size="large">
-          Оформить заказ
-        </Button>
-      </div>
+      <Checkout
+        ingredientsIDs={ingredientsIDs}
+        ingredientsPrice={ingredientsPrice}
+      />
     </section>
   );
 }
-
-BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(ingredientPropTypes).isRequired,
-  open: PropTypes.func.isRequired,
-};
 
 export default BurgerConstructor;

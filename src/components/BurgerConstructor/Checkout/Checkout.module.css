@@ -1,0 +1,12 @@
+.checkout {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  composes: mr-4 from global;
+}
+
+.icon {
+  transform: scale(1.5);
+  composes: mr-10 from global;
+}

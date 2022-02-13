@@ -1,0 +1,27 @@
+.card {
+  position: relative;
+  width: 272px;
+  margin-right: auto;
+  cursor: pointer;
+  composes: mt-6 mb-6 ml-4 from global;
+}
+
+.img {
+  composes: mr-4 ml-4 from global;
+}
+
+.price {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  composes: text text_type_digits-default text_color_primary mt-1 mb-2 from global;
+}
+
+.span {
+  composes: pr-2 from global;
+}
+
+.card__title {
+  text-align: center;
+  composes: text text_type_main-default text_color_primary from global;
+}

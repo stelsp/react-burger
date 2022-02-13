@@ -1,10 +1,9 @@
 import { useEffect } from "react";
-
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import styles from "./Modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-import ModalOverlay from "../ModalOverlay/ModalOverlay";
+import ModalOverlay from "./ModalOverlay/ModalOverlay";
 
 const MODAL_ROOT = document.getElementById("modal-root");
 
@@ -29,13 +28,7 @@ function Modal({ onClose, children, title }) {
         <span className={styles.close}>
           <CloseIcon type="primary" onClick={onClose} />
         </span>
-        <h3
-          className={
-            styles.title + " text text_type_main-large pt-3 mt-10 pr-10 pl-10"
-          }
-        >
-          {title}
-        </h3>
+        <h3 className={styles.title}>{title}</h3>
         {children}
       </div>
     </div>,
@@ -44,8 +37,11 @@ function Modal({ onClose, children, title }) {
 }
 
 Modal.propTypes = {
-  close: PropTypes.func.isRequired,
-  children: PropTypes.object.isRequired,
+  onClose: PropTypes.func,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
   title: PropTypes.string,
 };
 
