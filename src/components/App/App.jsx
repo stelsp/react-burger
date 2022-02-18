@@ -5,6 +5,7 @@ import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import DataProvider from "../../services/DataProvider";
 
 export default function App() {
+  
   return (
     <DataProvider>
       <AppHeader />
