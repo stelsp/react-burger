@@ -21,10 +21,7 @@ function BurgerConstructor() {
   }, [main, bun]);
 
   const ingredientsPrice = useMemo(() => {
-    const mainPrice = main.reduce((sum, el) => sum + el.price, 0);
-    const bunPrice = bun.price;
-    const price = mainPrice + bunPrice * 2;
-    return price;
+    return main.reduce((sum, el) => sum + el.price, bun.price * 2);
   }, [main, bun]);
 
   return (

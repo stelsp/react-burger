@@ -1,0 +1,5 @@
+export const ACTIONS = {
+  ADDED: "ADDED",
+  REMOVED: "REMOVED",
+  RESOLVED: "RESOLVED",
+};
