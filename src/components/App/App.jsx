@@ -1,29 +1,42 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { API_URL, URL_KEY_INGREDIENTS } from "../../constants/api-url";
+import Loader from "../Loader/Loader";
+import { getData } from "../../services/actions";
+import { useDispatch } from "react-redux";
+
 import styles from "./App.module.css";
 import AppHeader from "../AppHeader/AppHeader";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
-import DataProvider from "../../services/DataProvider";
-
-import store from "../../services/store";
-import { add, remove, resolve } from "../../services/actions";
-
-const unsubscribe = store.subscribe(() => {
-  console.log("Store changed!", store.getState());
-});
-
-store.dispatch(add("test1"));
-store.dispatch(resolve(1));
-store.dispatch(remove(1));
-unsubscribe();
 
 export default function App() {
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get(`${API_URL}${URL_KEY_INGREDIENTS}`)
+      .then(({ data }) => {
+        dispatch(getData(data.data));
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
-    <DataProvider>
-      <AppHeader />
-      <main className={styles.main}>
-        <BurgerIngredients />
-        <BurgerConstructor />
-      </main>
-    </DataProvider>
+    <>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <AppHeader />
+          <main className={styles.main}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </main>
+        </>
+      )}
+    </>
   );
 }

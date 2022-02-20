@@ -2,19 +2,17 @@ import style from "./BurgerConstructor.module.css";
 import { useMemo } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-import { useData } from "../../services/DataProvider";
 import Checkout from "./Checkout/Checkout";
+import { useSelector, shallowEqual } from "react-redux";
 
 function BurgerConstructor() {
-  const data = useData();
-
-  const bun = useMemo(() => {
-    return data.find((el) => el.type === "bun");
-  }, [data]);
-
-  const main = useMemo(() => {
-    return data.filter((el) => el.type !== "bun").slice(6, 12);
-  }, [data]);
+  const { bun, main } = useSelector(
+    (store) => ({
+      bun: store.reducer.find((el) => el.type === "bun"),
+      main: store.reducer.filter((el) => el.type !== "bun").slice(6, 12),
+    }),
+    shallowEqual
+  );
 
   const ingredientsIDs = useMemo(() => {
     return [...main.map((el) => el._id), bun._id];

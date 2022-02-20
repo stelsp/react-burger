@@ -1,5 +1,3 @@
 export const ACTIONS = {
-  ADDED: "ADDED",
-  REMOVED: "REMOVED",
-  RESOLVED: "RESOLVED",
+  GET_DATA: "GET_DATA",
 };

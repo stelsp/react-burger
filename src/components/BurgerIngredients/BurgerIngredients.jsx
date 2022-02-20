@@ -1,27 +1,21 @@
 import styles from "./BurgerIngredients.module.css";
-import { useMemo } from "react";
-import { useData } from "../../services/DataProvider";
 import IngredientType from "./IngredientType/IngredientType";
 import Tabs from "./Tabs/Tabs";
 import {
   INGREDIENT_CATEGORY,
   BURGER_INGREDIENTS_TITLE,
 } from "../../constants/content";
+import { useSelector, shallowEqual } from "react-redux";
 
 function BurgerIngredients() {
-  const data = useData();
-
-  const bun = useMemo(() => {
-    return data.filter((el) => el.type === "bun");
-  }, [data]);
-
-  const sauce = useMemo(() => {
-    return data.filter((el) => el.type === "sauce");
-  }, [data]);
-
-  const main = useMemo(() => {
-    return data.filter((el) => el.type === "main");
-  }, [data]);
+  const { bun, sauce, main } = useSelector(
+    (store) => ({
+      bun: store.reducer.filter((el) => el.type === "bun"),
+      sauce: store.reducer.filter((el) => el.type === "sauce"),
+      main: store.reducer.filter((el) => el.type === "main"),
+    }),
+    shallowEqual
+  );
 
   return (
     <div className={styles.container}>
