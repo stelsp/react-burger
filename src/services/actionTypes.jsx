@@ -1,3 +1,4 @@
 export const ACTIONS = {
   GET_DATA: "GET_DATA",
+  SET_LOADING_FALSE: "SET_LOADING_FALSE",
 };

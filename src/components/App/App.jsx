@@ -1,9 +1,10 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { API_URL, URL_KEY_INGREDIENTS } from "../../constants/api-url";
 import Loader from "../Loader/Loader";
 import { getData } from "../../services/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoadingFalse } from "../../services/actions";
 
 import styles from "./App.module.css";
 import AppHeader from "../AppHeader/AppHeader";
@@ -12,7 +13,7 @@ import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 
 export default function App() {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
+  const loading = useSelector((store) => store.loading);
 
   useEffect(() => {
     axios
@@ -21,7 +22,7 @@ export default function App() {
         dispatch(getData(data.data));
       })
       .catch((err) => console.log(err))
-      .finally(() => setLoading(false));
+      .finally(() => dispatch(setLoadingFalse(false)));
   }, []);
 
   return (
