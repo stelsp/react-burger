@@ -10,9 +10,9 @@ import { useSelector, shallowEqual } from "react-redux";
 function BurgerIngredients() {
   const { bun, sauce, main } = useSelector(
     (store) => ({
-      bun: store.data.filter((el) => el.type === "bun"),
-      sauce: store.data.filter((el) => el.type === "sauce"),
-      main: store.data.filter((el) => el.type === "main"),
+      bun: store.reducer.data.filter((el) => el.type === "bun"),
+      sauce: store.reducer.data.filter((el) => el.type === "sauce"),
+      main: store.reducer.data.filter((el) => el.type === "main"),
     }),
     shallowEqual
   );

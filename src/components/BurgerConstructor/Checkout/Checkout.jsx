@@ -1,33 +1,27 @@
 import style from "./Checkout.module.css";
 import PropTypes from "prop-types";
-import axios from "axios";
-import { useCallback, useState } from "react";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/button";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import OrderDetails from "../OrderDetails/OrderDetails";
 import Modal from "../../Modal/Modal";
-import { ORDER_BUTTON_TEXT } from "../../../constants/content";
-import { API_URL, URL_KEY_ORDERS } from "../../../constants/api-url";
 import Loader from "../../Loader/Loader";
+import { ORDER_BUTTON_TEXT } from "../../../constants/content";
+import { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchOrder, getOrder } from "../../../services/actions";
 
 function Checkout({ ingredientsIDs, ingredientsPrice }) {
-  const [order, setOrder] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const { order, loading } = useSelector((store) => ({
+    loading: store.reducer.loadingOrder,
+    order: store.reducer.order,
+  }));
 
   const openModal = useCallback(() => {
-    setLoading(true);
-    axios
-      .post(`${API_URL}${URL_KEY_ORDERS}`, {
-        ingredients: ingredientsIDs,
-      })
-      .then(({ data }) => {
-        setOrder(data);
-      })
-      .catch((err) => console.log(err))
-      .finally(() => setLoading(false));
-  }, [ingredientsIDs]);
+    dispatch(fetchOrder(ingredientsIDs));
+  }, [ingredientsIDs, dispatch]);
 
-  const closeModal = useCallback(() => setOrder(false), []);
+  const closeModal = useCallback(() => dispatch(getOrder(null)), [dispatch]);
 
   return (
     <>

@@ -1,29 +1,19 @@
-import axios from "axios";
-import { useEffect } from "react";
-import { API_URL, URL_KEY_INGREDIENTS } from "../../constants/api-url";
-import Loader from "../Loader/Loader";
-import { getData } from "../../services/actions";
-import { useDispatch, useSelector } from "react-redux";
-import { setLoadingFalse } from "../../services/actions";
-
 import styles from "./App.module.css";
 import AppHeader from "../AppHeader/AppHeader";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
+import Loader from "../Loader/Loader";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchData } from "../../services/actions";
 
 export default function App() {
   const dispatch = useDispatch();
-  const loading = useSelector((store) => store.loading);
+  const loading = useSelector((store) => store.reducer.loadingData);
 
   useEffect(() => {
-    axios
-      .get(`${API_URL}${URL_KEY_INGREDIENTS}`)
-      .then(({ data }) => {
-        dispatch(getData(data.data));
-      })
-      .catch((err) => console.log(err))
-      .finally(() => dispatch(setLoadingFalse(false)));
-  }, []);
+    dispatch(fetchData());
+  }, [dispatch]);
 
   return (
     <>

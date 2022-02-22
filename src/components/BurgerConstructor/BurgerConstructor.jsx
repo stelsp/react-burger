@@ -8,8 +8,8 @@ import { useSelector, shallowEqual } from "react-redux";
 function BurgerConstructor() {
   const { bun, main } = useSelector(
     (store) => ({
-      bun: store.reducer.find((el) => el.type === "bun"),
-      main: store.reducer.filter((el) => el.type !== "bun").slice(6, 12),
+      bun: store.reducer.data.find((el) => el.type === "bun"),
+      main: store.reducer.data.filter((el) => el.type !== "bun").slice(6, 12),
     }),
     shallowEqual
   );
