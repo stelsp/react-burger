@@ -5,7 +5,7 @@ import { MODAL_TEXT_ORDER } from "../../../constants/content";
 import { useSelector } from "react-redux";
 
 function OrderDetails() {
-  const order = useSelector((store) => store.reducer.order);
+  const order = useSelector((store) => store.orderReducer.order);
 
   return (
     <div className={styles.card}>

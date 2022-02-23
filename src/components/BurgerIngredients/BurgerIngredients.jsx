@@ -9,9 +9,9 @@ import { useSelector } from "react-redux";
 
 function BurgerIngredients() {
   const { bun, sauce, main } = useSelector((store) => ({
-    bun: store.reducer.bun,
-    sauce: store.reducer.sauce,
-    main: store.reducer.main,
+    bun: store.ingredientsReducer.category.bun,
+    sauce: store.ingredientsReducer.category.sauce,
+    main: store.ingredientsReducer.category.main,
   }));
 
   return (

@@ -6,33 +6,36 @@ import {
   URL_KEY_ORDERS,
 } from "../constants/api-url";
 
-const toggleLoadingData = (payload) => ({
+// LOADING ACTIONS
+const toggleLoadingData = (loading) => ({
   type: ACTIONS.TOGGLE_LOADING_DATA,
-  loading: payload,
+  loading,
 });
-const toggleLoadingOrder = (payload) => ({
+const toggleLoadingOrder = (loading) => ({
   type: ACTIONS.TOGGLE_LOADING_ORDER,
-  loading: payload,
+  loading,
 });
 
-const getData = (payload) => ({
-  type: ACTIONS.GET_DATA,
-  data: payload,
-});
-export const getOrder = (payload) => ({
-  type: ACTIONS.GET_ORDER,
-  order: payload,
-});
-
-export const getIngr = (payload) => ({
+// GET DATA / POST ORDER ACTIONS
+const getData = (ingredients) => ({
   type: ACTIONS.GET_INGR,
-  bun: payload.filter((el) => el.type === "bun"),
-  sauce: payload.filter((el) => el.type === "sauce"),
-  main: payload.filter((el) => el.type === "main"),
+  bun: ingredients.filter((el) => el.type === "bun"),
+  sauce: ingredients.filter((el) => el.type === "sauce"),
+  main: ingredients.filter((el) => el.type === "main"),
+});
+export const getOrder = (order) => ({
+  type: ACTIONS.GET_ORDER,
+  order,
+});
+
+// GET CONSTRUCTOR INGR ACTIONS
+const getConstructorIngr = (bun, sauce, main) => ({
+  type: ACTIONS.GET_CONSTRUCTOR_INGR,
+  outer: bun.find((el) => el.type === "bun"),
+  inner: [...sauce.slice(2, 6), ...main.slice(2, 6)],
 });
 
 // TODO: FIXME: fetchData/fetchOrder - надо перенести в отдельный файл
-
 export const fetchData = () => {
   return (dispatch) => {
     dispatch(toggleLoadingData(true));
@@ -40,7 +43,13 @@ export const fetchData = () => {
       .get(`${API_URL}${URL_KEY_INGREDIENTS}`)
       .then(({ data }) => {
         dispatch(getData(data.data));
-        dispatch(getIngr(data.data));
+        dispatch(
+          getConstructorIngr(
+            getData(data.data).bun,
+            getData(data.data).sauce,
+            getData(data.data).main
+          )
+        );
       })
       .catch((err) => console.log(err))
       .finally(() => dispatch(toggleLoadingData(false)));

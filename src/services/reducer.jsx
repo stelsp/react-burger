@@ -1,51 +1,44 @@
 import { ACTIONS } from "./actionTypes";
 
 const initialState = {
-  data: {
-    data: [], // FIXME: по ТЗ нужно, но по факту вроде как нет...
+  ingredients: {
+    currentIngredient: {},
+    category: {
+      bun: [],
+      sauce: [],
+      main: [],
+    },
     loading: true,
+  },
+  constructor: {
+    outer: {}, // bun
+    inner: [], // main + sauce
   },
   order: {
     order: null,
     loading: false,
   },
-  bun: [],
-  sauce: [],
-  main: [],
 };
-
-const reducer = (state = initialState, action) => {
+export const ingredientsReducer = (
+  state = initialState.ingredients,
+  action
+) => {
   switch (action.type) {
-    case ACTIONS.GET_DATA:
+    case ACTIONS.GET_INGR:
       return {
         ...state,
-        data: { ...state.data, data: action.data },
-      };
-
-    case ACTIONS.GET_ORDER:
-      return {
-        ...state,
-        order: { ...state.order, order: action.order },
+        category: {
+          ...state.category,
+          bun: action.bun,
+          sauce: action.sauce,
+          main: action.main,
+        },
       };
 
     case ACTIONS.TOGGLE_LOADING_DATA:
       return {
         ...state,
-        data: { ...state.data, loading: action.loading },
-      };
-
-    case ACTIONS.TOGGLE_LOADING_ORDER:
-      return {
-        ...state,
-        order: { ...state.order, loading: action.loading },
-      };
-
-    case ACTIONS.GET_INGR:
-      return {
-        ...state,
-        bun: action.bun,
-        sauce: action.sauce,
-        main: action.main,
+        loading: action.loading,
       };
 
     default:
@@ -53,4 +46,38 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export default reducer;
+export const orderReducer = (state = initialState.order, action) => {
+  switch (action.type) {
+    case ACTIONS.GET_ORDER:
+      return {
+        ...state,
+        order: action.order,
+      };
+
+    case ACTIONS.TOGGLE_LOADING_ORDER:
+      return {
+        ...state,
+        loading: action.loading,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const constructorReducer = (
+  state = initialState.constructor,
+  action
+) => {
+  switch (action.type) {
+    case ACTIONS.GET_CONSTRUCTOR_INGR:
+      return {
+        ...state,
+        outer: action.outer,
+        inner: action.inner,
+      };
+
+    default:
+      return state;
+  }
+};

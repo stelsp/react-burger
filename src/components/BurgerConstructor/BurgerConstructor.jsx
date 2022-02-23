@@ -3,27 +3,20 @@ import { useMemo } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import Checkout from "./Checkout/Checkout";
-import { useSelector, shallowEqual } from "react-redux";
+import { useSelector } from "react-redux";
 
 function BurgerConstructor() {
-  const { bun, main } = useSelector(
-    (store) => ({
-      bun: store.reducer.bun.find((el) => el.type === "bun"), // FIXME: .find временно
-      main: [
-        ...store.reducer.main.slice(2, 6),
-        ...store.reducer.sauce.slice(2, 6),
-      ], // FIXME: .slice временно
-    }),
-    shallowEqual
-  );
-
+  const { outer, inner } = useSelector((store) => ({
+    outer: store.constructorReducer.outer,
+    inner: store.constructorReducer.inner,
+  }));
   const ingredientsIDs = useMemo(() => {
-    return [...main.map((el) => el._id), bun._id];
-  }, [main, bun]);
+    return [...inner.map((el) => el._id), outer._id];
+  }, [inner, outer]);
 
   const ingredientsPrice = useMemo(() => {
-    return main.reduce((sum, el) => sum + el.price, bun.price * 2);
-  }, [main, bun]);
+    return inner.reduce((sum, el) => sum + el.price, outer.price * 2);
+  }, [inner, outer]);
 
   return (
     <section className={style.container}>
@@ -32,14 +25,14 @@ function BurgerConstructor() {
           <ConstructorElement
             type={"top"}
             isLocked={true}
-            text={`${bun.name} (верх)`}
-            thumbnail={bun.image}
-            price={bun.price}
+            text={`${outer.name} (верх)`}
+            thumbnail={outer.image}
+            price={outer.price}
           />
         </div>
 
         <ul className={style.list}>
-          {main.map((el) => {
+          {inner.map((el) => {
             return (
               <li key={el._id} className={style.item + " mb-4 ml-4 mr-1"}>
                 <DragIcon type="primary" />
@@ -56,9 +49,9 @@ function BurgerConstructor() {
           <ConstructorElement
             type={"bottom"}
             isLocked={true}
-            text={`${bun.name} (низ)`}
-            thumbnail={bun.image}
-            price={bun.price}
+            text={`${outer.name} (низ)`}
+            thumbnail={outer.image}
+            price={outer.price}
           />
         </div>
       </div>

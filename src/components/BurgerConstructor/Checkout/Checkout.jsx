@@ -13,8 +13,8 @@ import { fetchOrder, getOrder } from "../../../services/actions";
 function Checkout({ ingredientsIDs, ingredientsPrice }) {
   const dispatch = useDispatch();
   const { order, loading } = useSelector((store) => ({
-    loading: store.reducer.order.loading,
-    order: store.reducer.order.order,
+    loading: store.orderReducer.loading,
+    order: store.orderReducer.order,
   }));
 
   const openModal = useCallback(() => {
