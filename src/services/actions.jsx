@@ -10,7 +10,6 @@ const toggleLoadingData = (payload) => ({
   type: ACTIONS.TOGGLE_LOADING_DATA,
   loading: payload,
 });
-
 const toggleLoadingOrder = (payload) => ({
   type: ACTIONS.TOGGLE_LOADING_ORDER,
   loading: payload,
@@ -20,17 +19,16 @@ const getData = (payload) => ({
   type: ACTIONS.GET_DATA,
   data: payload,
 });
+export const getOrder = (payload) => ({
+  type: ACTIONS.GET_ORDER,
+  order: payload,
+});
 
 export const getIngr = (payload) => ({
   type: ACTIONS.GET_INGR,
   bun: payload.filter((el) => el.type === "bun"),
   sauce: payload.filter((el) => el.type === "sauce"),
   main: payload.filter((el) => el.type === "main"),
-});
-
-export const getOrder = (payload) => ({
-  type: ACTIONS.GET_ORDER,
-  order: payload,
 });
 
 // TODO: FIXME: fetchData/fetchOrder - надо перенести в отдельный файл

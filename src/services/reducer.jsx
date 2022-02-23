@@ -1,13 +1,17 @@
 import { ACTIONS } from "./actionTypes";
 
 const initialState = {
-  data: [], // FIXME: по ТЗ нужно, но по факту вроде как нет
+  data: {
+    data: [], // FIXME: по ТЗ нужно, но по факту вроде как нет...
+    loading: true,
+  },
+  order: {
+    order: null,
+    loading: false,
+  },
   bun: [],
   sauce: [],
   main: [],
-  order: null,
-  loadingData: true,
-  loadingOrder: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -15,7 +19,25 @@ const reducer = (state = initialState, action) => {
     case ACTIONS.GET_DATA:
       return {
         ...state,
-        data: action.data,
+        data: { ...state.data, data: action.data },
+      };
+
+    case ACTIONS.GET_ORDER:
+      return {
+        ...state,
+        order: { ...state.order, order: action.order },
+      };
+
+    case ACTIONS.TOGGLE_LOADING_DATA:
+      return {
+        ...state,
+        data: { ...state.data, loading: action.loading },
+      };
+
+    case ACTIONS.TOGGLE_LOADING_ORDER:
+      return {
+        ...state,
+        order: { ...state.order, loading: action.loading },
       };
 
     case ACTIONS.GET_INGR:
@@ -24,24 +46,6 @@ const reducer = (state = initialState, action) => {
         bun: action.bun,
         sauce: action.sauce,
         main: action.main,
-      };
-
-    case ACTIONS.GET_ORDER:
-      return {
-        ...state,
-        order: action.order,
-      };
-
-    case ACTIONS.TOGGLE_LOADING_DATA:
-      return {
-        ...state,
-        loadingData: action.loading,
-      };
-
-    case ACTIONS.TOGGLE_LOADING_ORDER:
-      return {
-        ...state,
-        loadingOrder: action.loading,
       };
 
     default:

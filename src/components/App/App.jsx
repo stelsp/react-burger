@@ -9,7 +9,7 @@ import { fetchData } from "../../services/actions";
 
 export default function App() {
   const dispatch = useDispatch();
-  const loading = useSelector((store) => store.reducer.loadingData);
+  const loading = useSelector((store) => store.reducer.data.loading);
 
   useEffect(() => {
     dispatch(fetchData());
