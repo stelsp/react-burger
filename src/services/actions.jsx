@@ -21,12 +21,19 @@ const getData = (payload) => ({
   data: payload,
 });
 
+export const getIngr = (payload) => ({
+  type: ACTIONS.GET_INGR,
+  bun: payload.filter((el) => el.type === "bun"),
+  sauce: payload.filter((el) => el.type === "sauce"),
+  main: payload.filter((el) => el.type === "main"),
+});
+
 export const getOrder = (payload) => ({
   type: ACTIONS.GET_ORDER,
   order: payload,
 });
 
-// fetchData/fetchOrder - надо перенести в отдельный файл
+// TODO: FIXME: fetchData/fetchOrder - надо перенести в отдельный файл
 
 export const fetchData = () => {
   return (dispatch) => {
@@ -35,6 +42,7 @@ export const fetchData = () => {
       .get(`${API_URL}${URL_KEY_INGREDIENTS}`)
       .then(({ data }) => {
         dispatch(getData(data.data));
+        dispatch(getIngr(data.data));
       })
       .catch((err) => console.log(err))
       .finally(() => dispatch(toggleLoadingData(false)));

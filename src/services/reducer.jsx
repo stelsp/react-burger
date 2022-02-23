@@ -1,7 +1,10 @@
 import { ACTIONS } from "./actionTypes";
 
 const initialState = {
-  data: [],
+  data: [], // FIXME: по ТЗ нужно, но по факту вроде как нет
+  bun: [],
+  sauce: [],
+  main: [],
   order: null,
   loadingData: true,
   loadingOrder: false,
@@ -14,6 +17,15 @@ const reducer = (state = initialState, action) => {
         ...state,
         data: action.data,
       };
+
+    case ACTIONS.GET_INGR:
+      return {
+        ...state,
+        bun: action.bun,
+        sauce: action.sauce,
+        main: action.main,
+      };
+
     case ACTIONS.GET_ORDER:
       return {
         ...state,

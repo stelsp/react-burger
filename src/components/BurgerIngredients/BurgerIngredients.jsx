@@ -5,17 +5,14 @@ import {
   INGREDIENT_CATEGORY,
   BURGER_INGREDIENTS_TITLE,
 } from "../../constants/content";
-import { useSelector, shallowEqual } from "react-redux";
+import { useSelector } from "react-redux";
 
 function BurgerIngredients() {
-  const { bun, sauce, main } = useSelector(
-    (store) => ({
-      bun: store.reducer.data.filter((el) => el.type === "bun"),
-      sauce: store.reducer.data.filter((el) => el.type === "sauce"),
-      main: store.reducer.data.filter((el) => el.type === "main"),
-    }),
-    shallowEqual
-  );
+  const { bun, sauce, main } = useSelector((store) => ({
+    bun: store.reducer.bun,
+    sauce: store.reducer.sauce,
+    main: store.reducer.main,
+  }));
 
   return (
     <div className={styles.container}>
