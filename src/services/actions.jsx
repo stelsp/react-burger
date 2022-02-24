@@ -28,6 +28,12 @@ export const getOrder = (order) => ({
   order,
 });
 
+// GET CURRENT INGR ACTIONS
+export const getCurrentIngr = (currentIngredient) => ({
+  type: ACTIONS.GET_CURRENT_INGR,
+  currentIngredient,
+});
+
 // GET CONSTRUCTOR INGR ACTIONS
 const getConstructorIngr = (bun, sauce, main) => ({
   type: ACTIONS.GET_CONSTRUCTOR_INGR,

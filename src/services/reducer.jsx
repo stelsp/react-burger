@@ -2,7 +2,7 @@ import { ACTIONS } from "./actionTypes";
 
 const initialState = {
   ingredients: {
-    currentIngredient: {},
+    currentIngredient: null,
     category: {
       bun: [],
       sauce: [],
@@ -39,6 +39,12 @@ export const ingredientsReducer = (
       return {
         ...state,
         loading: action.loading,
+      };
+
+    case ACTIONS.GET_CURRENT_INGR:
+      return {
+        ...state,
+        currentIngredient: action.currentIngredient,
       };
 
     default:

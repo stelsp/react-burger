@@ -6,11 +6,20 @@ import Modal from "../../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { MODAL_TITLE_INGREDIENT } from "../../../constants/content";
 import { ingredientPropTypes } from "../../../constants/custom-prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { getCurrentIngr } from "../../../services/actions";
 
 function Ingredient({ el }) {
-  const [show, setShow] = useState(false);
-  const openModal = useCallback(() => setShow(true), []);
-  const closeModal = useCallback(() => setShow(false), []);
+  const dispatch = useDispatch();
+  const ingredient = useSelector(
+    (store) => store.ingredientsReducer.currentIngredient
+  );
+  const openModal = useCallback(() => {
+    dispatch(getCurrentIngr(el));
+  }, []);
+  const closeModal = useCallback(() => {
+    dispatch(getCurrentIngr(null));
+  }, []);
 
   return (
     <>
@@ -23,9 +32,9 @@ function Ingredient({ el }) {
         </p>
         <h3 className={styles.card__title}>{el.name}</h3>
       </div>
-      {show && (
+      {ingredient && (
         <Modal onClose={closeModal} title={MODAL_TITLE_INGREDIENT}>
-          <IngredientDetails el={el} />
+          <IngredientDetails el={ingredient} />
         </Modal>
       )}
     </>
