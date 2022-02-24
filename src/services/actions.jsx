@@ -16,7 +16,7 @@ const toggleLoadingOrder = (loading) => ({
   loading,
 });
 
-// GET DATA / POST ORDER ACTIONS
+// GET DATA / GET ORDER ACTIONS
 const getData = (ingredients) => ({
   type: ACTIONS.GET_INGR,
   bun: ingredients.filter((el) => el.type === "bun"),
@@ -28,17 +28,23 @@ export const getOrder = (order) => ({
   order,
 });
 
+// GET CONSTRUCTOR INGR ACTIONS
+const getConstructorIngr = (bun, sauce, main) => ({
+  type: ACTIONS.GET_CONSTRUCTOR_INGR,
+  outer: bun.find((el) => el.type === "bun"),
+  inner: [...sauce.slice(2, 6), ...main.slice(2, 6)],
+});
+
 // GET CURRENT INGR ACTIONS
 export const getCurrentIngr = (currentIngredient) => ({
   type: ACTIONS.GET_CURRENT_INGR,
   currentIngredient,
 });
 
-// GET CONSTRUCTOR INGR ACTIONS
-const getConstructorIngr = (bun, sauce, main) => ({
-  type: ACTIONS.GET_CONSTRUCTOR_INGR,
-  outer: bun.find((el) => el.type === "bun"),
-  inner: [...sauce.slice(2, 6), ...main.slice(2, 6)],
+// SET CURRENT TAB
+export const setCurrentTab = (currentTab) => ({
+  type: ACTIONS.SET_CURRENT_TAB,
+  currentTab,
 });
 
 // TODO: FIXME: fetchData/fetchOrder - надо перенести в отдельный файл

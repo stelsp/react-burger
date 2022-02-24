@@ -2,13 +2,14 @@ import { ACTIONS } from "./actionTypes";
 
 const initialState = {
   ingredients: {
-    currentIngredient: null,
     category: {
       bun: [],
       sauce: [],
       main: [],
     },
     loading: true,
+    currentIngredient: null,
+    currentTab: "one",
   },
   constructor: {
     outer: {}, // bun
@@ -45,6 +46,12 @@ export const ingredientsReducer = (
       return {
         ...state,
         currentIngredient: action.currentIngredient,
+      };
+
+    case ACTIONS.SET_CURRENT_TAB:
+      return {
+        ...state,
+        currentTab: action.currentTab,
       };
 
     default:

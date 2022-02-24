@@ -1,17 +1,19 @@
 import styles from "./Tabs.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
-import { useState } from "react";
 import { INGREDIENT_CATEGORY } from "../../../constants/content";
+import { useSelector, useDispatch } from "react-redux";
+import { setCurrentTab } from "../../../services/actions";
 
 function Tabs({ bunRef, souceRef, mainRef }) {
-  const [current, setCurrent] = useState("one");
+  const dispatch = useDispatch();
+  const current = useSelector((store) => store.ingredientsReducer.currentTab);
   return (
     <div className={styles.tab}>
       <Tab
         value="one"
         active={current === "one"}
         onClick={(value) => {
-          setCurrent(value);
+          dispatch(setCurrentTab(value));
           bunRef.current.scrollIntoView({ behavior: "smooth" });
         }}
       >
@@ -21,7 +23,7 @@ function Tabs({ bunRef, souceRef, mainRef }) {
         value="two"
         active={current === "two"}
         onClick={(value) => {
-          setCurrent(value);
+          dispatch(setCurrentTab(value));
           souceRef.current.scrollIntoView({ behavior: "smooth" });
         }}
       >
@@ -31,7 +33,7 @@ function Tabs({ bunRef, souceRef, mainRef }) {
         value="three"
         active={current === "three"}
         onClick={(value) => {
-          setCurrent(value);
+          dispatch(setCurrentTab(value));
           mainRef.current.scrollIntoView({ behavior: "smooth" });
         }}
       >
