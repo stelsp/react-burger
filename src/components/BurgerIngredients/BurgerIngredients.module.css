@@ -8,6 +8,9 @@
 }
 
 .list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
   overflow-y: scroll;
   overflow-x: hidden;
   max-height: 716px;

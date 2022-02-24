@@ -6,6 +6,7 @@ import {
   BURGER_INGREDIENTS_TITLE,
 } from "../../constants/content";
 import { useSelector } from "react-redux";
+import { useRef } from "react";
 
 function BurgerIngredients() {
   const { bun, sauce, main } = useSelector((store) => ({
@@ -14,15 +15,25 @@ function BurgerIngredients() {
     main: store.ingredientsReducer.category.main,
   }));
 
+  const bunRef = useRef(null);
+  const souceRef = useRef(null);
+  const mainRef = useRef(null);
+
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>{BURGER_INGREDIENTS_TITLE}</h2>
-      <Tabs />
-      <div className={styles.list}>
-        <IngredientType category={bun} title={INGREDIENT_CATEGORY.BUN} />
-        <IngredientType category={sauce} title={INGREDIENT_CATEGORY.SAUCE} />
-        <IngredientType category={main} title={INGREDIENT_CATEGORY.MAIN} />
-      </div>
+      <Tabs bunRef={bunRef} souceRef={souceRef} mainRef={mainRef} />
+      <ul className={styles.list}>
+        <li ref={bunRef}>
+          <IngredientType category={bun} title={INGREDIENT_CATEGORY.BUN} />
+        </li>
+        <li ref={souceRef}>
+          <IngredientType category={sauce} title={INGREDIENT_CATEGORY.SAUCE} />
+        </li>
+        <li ref={mainRef}>
+          <IngredientType category={main} title={INGREDIENT_CATEGORY.MAIN} />
+        </li>
+      </ul>
     </div>
   );
 }

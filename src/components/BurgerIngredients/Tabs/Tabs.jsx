@@ -3,17 +3,38 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/
 import { useState } from "react";
 import { INGREDIENT_CATEGORY } from "../../../constants/content";
 
-function Tabs() {
+function Tabs({ bunRef, souceRef, mainRef }) {
   const [current, setCurrent] = useState("one");
   return (
     <div className={styles.tab}>
-      <Tab value="one" active={current === "one"} onClick={setCurrent}>
+      <Tab
+        value="one"
+        active={current === "one"}
+        onClick={(value) => {
+          setCurrent(value);
+          bunRef.current.scrollIntoView({ behavior: "smooth" });
+        }}
+      >
         {INGREDIENT_CATEGORY.BUN}
       </Tab>
-      <Tab value="two" active={current === "two"} onClick={setCurrent}>
+      <Tab
+        value="two"
+        active={current === "two"}
+        onClick={(value) => {
+          setCurrent(value);
+          souceRef.current.scrollIntoView({ behavior: "smooth" });
+        }}
+      >
         {INGREDIENT_CATEGORY.SAUCE}
       </Tab>
-      <Tab value="three" active={current === "three"} onClick={setCurrent}>
+      <Tab
+        value="three"
+        active={current === "three"}
+        onClick={(value) => {
+          setCurrent(value);
+          mainRef.current.scrollIntoView({ behavior: "smooth" });
+        }}
+      >
         {INGREDIENT_CATEGORY.MAIN}
       </Tab>
     </div>
