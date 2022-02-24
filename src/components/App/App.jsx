@@ -5,7 +5,7 @@ import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import Loader from "../Loader/Loader";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchData } from "../../services/actions";
+import { fetchData } from "../../utils/api";
 
 export default function App() {
   const dispatch = useDispatch();

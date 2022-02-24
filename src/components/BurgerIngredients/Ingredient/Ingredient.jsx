@@ -1,13 +1,13 @@
-import { useCallback } from "react";
 import styles from "./Ingredient.module.css";
+import { ingredientPropTypes } from "../../../constants/custom-prop-types";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import Modal from "../../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { MODAL_TITLE_INGREDIENT } from "../../../constants/content";
-import { ingredientPropTypes } from "../../../constants/custom-prop-types";
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentIngr } from "../../../services/actions";
+import { getCurrentIngr } from "../../../services/actions/actions";
 
 function Ingredient({ el }) {
   const dispatch = useDispatch();
@@ -16,10 +16,10 @@ function Ingredient({ el }) {
   );
   const openModal = useCallback(() => {
     dispatch(getCurrentIngr(el));
-  }, []);
+  }, [dispatch, el]);
   const closeModal = useCallback(() => {
     dispatch(getCurrentIngr(null));
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

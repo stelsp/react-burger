@@ -8,7 +8,8 @@ import Loader from "../../Loader/Loader";
 import { ORDER_BUTTON_TEXT } from "../../../constants/content";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchOrder, getOrder } from "../../../services/actions";
+import { getOrder } from "../../../services/actions/actions";
+import { fetchOrder } from "../../../utils/api";
 
 function Checkout({ ingredientsIDs, ingredientsPrice }) {
   const dispatch = useDispatch();

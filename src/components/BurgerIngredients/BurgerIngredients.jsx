@@ -5,8 +5,8 @@ import {
   INGREDIENT_CATEGORY,
   BURGER_INGREDIENTS_TITLE,
 } from "../../constants/content";
-import { useSelector } from "react-redux";
 import { useRef } from "react";
+import { useSelector } from "react-redux";
 
 function BurgerIngredients() {
   const { bun, sauce, main } = useSelector((store) => ({
