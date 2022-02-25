@@ -1,15 +1,18 @@
 import style from "./BurgerConstructor.module.css";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import Checkout from "./Checkout/Checkout";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteConstructorIngr } from "../../services/actions/actions";
 
 function BurgerConstructor() {
+  const dispatch = useDispatch();
   const { outer, inner } = useSelector((store) => ({
     outer: store.constructorReducer.outer,
     inner: store.constructorReducer.inner,
   }));
+
   const ingredientsIDs = useMemo(() => {
     return [...inner.map((el) => el._id), outer._id];
   }, [inner, outer]);
@@ -40,6 +43,9 @@ function BurgerConstructor() {
                   text={el.name}
                   thumbnail={el.image}
                   price={el.price}
+                  handleClose={() =>
+                    dispatch(deleteConstructorIngr(inner, el._id))
+                  }
                 />
               </li>
             );

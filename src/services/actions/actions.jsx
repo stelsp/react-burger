@@ -26,7 +26,11 @@ export const getOrder = (order) => ({
 export const getConstructorIngr = (bun, sauce, main) => ({
   type: ACTIONS.GET_CONSTRUCTOR_INGR,
   outer: bun.find((el) => el.type === "bun"),
-  inner: [...sauce.slice(2, 6), ...main.slice(2, 6)],
+  inner: [...sauce.slice(0, 2), ...main.slice(1, 4)],
+});
+export const deleteConstructorIngr = (inner, id) => ({
+  type: ACTIONS.DELETE_CONSTRUCTOR_INGR,
+  inner: inner.filter((el) => el._id !== id),
 });
 
 // CURRENT INGR
