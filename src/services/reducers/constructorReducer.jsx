@@ -16,6 +16,18 @@ const constructorReducer = (state = initialState.constructor, action) => {
         inner: action.inner,
       };
 
+    case ACTIONS.DRAG_OUTER:
+      return {
+        ...state,
+        outer: action.outer,
+      };
+
+    case ACTIONS.DRAG_INNER:
+      return {
+        ...state,
+        inner: action.inner,
+      };
+
     default:
       return state;
   }

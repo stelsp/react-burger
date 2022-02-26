@@ -26,12 +26,24 @@ export const getOrder = (order) => ({
 export const getConstructorIngr = (bun, sauce, main) => ({
   type: ACTIONS.GET_CONSTRUCTOR_INGR,
   outer: bun.find((el) => el.type === "bun"),
-  inner: [...sauce.slice(0, 2), ...main.slice(1, 4)],
+  inner: [...sauce.slice(0, 1), ...main.slice(1, 2)],
 });
 export const deleteConstructorIngr = (inner, id) => ({
   type: ACTIONS.DELETE_CONSTRUCTOR_INGR,
   inner: inner.filter((el) => el._id !== id),
 });
+export const dragIngr = (inner, ingr) => {
+  if (ingr.type !== "bun")
+    return {
+      type: ACTIONS.DRAG_INNER,
+      inner: [...inner, ingr],
+    };
+  if (ingr.type === "bun")
+    return {
+      type: ACTIONS.DRAG_OUTER,
+      outer: ingr,
+    };
+};
 
 // CURRENT INGR
 export const getCurrentIngr = (currentIngredient) => ({

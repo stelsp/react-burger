@@ -7,6 +7,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "../../utils/api";
 
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+
 export default function App() {
   const dispatch = useDispatch();
   const loading = useSelector((store) => store.ingredientsReducer.loading);
@@ -16,7 +19,7 @@ export default function App() {
   }, [dispatch]);
 
   return (
-    <>
+    <DndProvider backend={HTML5Backend}>
       {loading ? (
         <Loader />
       ) : (
@@ -28,6 +31,6 @@ export default function App() {
           </main>
         </>
       )}
-    </>
+    </DndProvider>
   );
 }

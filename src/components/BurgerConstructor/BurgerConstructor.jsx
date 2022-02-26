@@ -1,10 +1,15 @@
 import style from "./BurgerConstructor.module.css";
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import Checkout from "./Checkout/Checkout";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteConstructorIngr } from "../../services/actions/actions";
+import {
+  deleteConstructorIngr,
+  dragIngr,
+} from "../../services/actions/actions";
+import { useDrop } from "react-dnd";
+import { nanoid } from "@reduxjs/toolkit";
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -21,8 +26,18 @@ function BurgerConstructor() {
     return inner.reduce((sum, el) => sum + el.price, outer.price * 2);
   }, [inner, outer]);
 
+  const [, drop] = useDrop(
+    () => ({
+      accept: "ingredient",
+      drop(item) {
+        dispatch(dragIngr(inner, item));
+      },
+    }),
+    [inner, dispatch]
+  );
+
   return (
-    <section className={style.container}>
+    <section className={style.container} ref={drop}>
       <div className={"mt-25 mb-10"}>
         <div className={style.item + " mb-4 ml-4 mr-4 pl-8"}>
           <ConstructorElement
@@ -37,9 +52,10 @@ function BurgerConstructor() {
         <ul className={style.list}>
           {inner.map((el) => {
             return (
-              <li key={el._id} className={style.item + " mb-4 ml-4 mr-1"}>
+              <li key={nanoid()} className={style.item + " mb-4 ml-4 mr-1"}>
                 <DragIcon type="primary" />
                 <ConstructorElement
+                  id={nanoid()}
                   text={el.name}
                   thumbnail={el.image}
                   price={el.price}

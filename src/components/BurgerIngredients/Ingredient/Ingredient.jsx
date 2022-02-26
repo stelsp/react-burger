@@ -7,7 +7,9 @@ import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { MODAL_TITLE_INGREDIENT } from "../../../constants/content";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentIngr } from "../../../services/actions/actions";
+import { getCurrentIngr, dragIngr } from "../../../services/actions/actions";
+
+import { useDrag } from "react-dnd";
 
 function Ingredient({ el }) {
   const dispatch = useDispatch();
@@ -21,9 +23,14 @@ function Ingredient({ el }) {
     dispatch(getCurrentIngr(null));
   }, [dispatch]);
 
+  const [, drag] = useDrag(() => ({
+    type: "ingredient",
+    item: el,
+  }));
+
   return (
     <>
-      <div onClick={openModal} className={styles.card}>
+      <div onClick={openModal} className={styles.card} ref={drag}>
         <Counter count={1} size={"default"} />
         <img src={el.image} alt={el.name} className={styles.img} />
         <p className={styles.price}>
