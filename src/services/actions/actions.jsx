@@ -1,4 +1,5 @@
 import { ACTIONS } from "./actionTypes";
+import { nanoid } from "@reduxjs/toolkit";
 
 // DATA
 export const toggleLoadingData = (loading) => ({
@@ -22,21 +23,15 @@ export const getOrder = (order) => ({
   order,
 });
 
-// CONSTRUCTOR INGR
-export const getConstructorIngr = (bun, sauce, main) => ({
-  type: ACTIONS.GET_CONSTRUCTOR_INGR,
-  outer: bun.find((el) => el.type === "bun"),
-  inner: [...sauce.slice(0, 1), ...main.slice(1, 2)],
-});
 export const deleteConstructorIngr = (inner, id) => ({
   type: ACTIONS.DELETE_CONSTRUCTOR_INGR,
-  inner: inner.filter((el) => el._id !== id),
+  inner: inner.filter((el) => el.id !== id),
 });
 export const dragIngr = (inner, ingr) => {
   if (ingr.type !== "bun")
     return {
       type: ACTIONS.DRAG_INNER,
-      inner: [...inner, ingr],
+      inner: [...inner, { ...ingr, id: nanoid() }],
     };
   if (ingr.type === "bun")
     return {

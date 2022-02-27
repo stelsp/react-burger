@@ -15,7 +15,7 @@ export const initialState = {
     currentIngredient: null,
   },
   constructor: {
-    outer: {}, // bun
+    outer: "", // bun
     inner: [], // main + sauce
   },
   order: {

@@ -20,13 +20,6 @@ export const fetchData = () => {
       .get(`${API_URL}${URL_KEY_INGREDIENTS}`)
       .then(({ data }) => {
         dispatch(getData(data.data));
-        dispatch(
-          getConstructorIngr(
-            getData(data.data).bun,
-            getData(data.data).sauce,
-            getData(data.data).main
-          )
-        );
       })
       .catch((err) => console.log(err))
       .finally(() => dispatch(toggleLoadingData(false)));
