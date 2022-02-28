@@ -5,22 +5,32 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import Modal from "../../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { MODAL_TITLE_INGREDIENT } from "../../../constants/content";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentIngr, dragIngr } from "../../../services/actions/actions";
+import { getCurrentIngredient } from "../../../services/actions/actions";
 
 import { useDrag } from "react-dnd";
 
 function Ingredient({ el }) {
   const dispatch = useDispatch();
-  const ingredient = useSelector(
-    (store) => store.ingredientsReducer.currentIngredient
-  );
+  const { currentIngredient, outer, inner } = useSelector((store) => ({
+    currentIngredient: store.ingredientsReducer.currentIngredient,
+    outer: store.constructorReducer.outer,
+    inner: store.constructorReducer.inner,
+  }));
+
+  const setCount = useMemo(() => {
+    return el.type === "bun" && el._id === outer._id
+      ? 2
+      : inner.filter((item) => item._id === el._id).length;
+  }, [inner, outer, el]);
+
   const openModal = useCallback(() => {
-    dispatch(getCurrentIngr(el));
+    dispatch(getCurrentIngredient(el));
   }, [dispatch, el]);
+
   const closeModal = useCallback(() => {
-    dispatch(getCurrentIngr(null));
+    dispatch(getCurrentIngredient(null));
   }, [dispatch]);
 
   const [, drag] = useDrag(() => ({
@@ -31,7 +41,7 @@ function Ingredient({ el }) {
   return (
     <>
       <div onClick={openModal} className={styles.card} ref={drag}>
-        <Counter count={1} size={"default"} />
+        {setCount > 0 && <Counter count={setCount} size={"default"} />}
         <img src={el.image} alt={el.name} className={styles.img} />
         <p className={styles.price}>
           <span className={styles.span}>{el.price}</span>
@@ -39,9 +49,9 @@ function Ingredient({ el }) {
         </p>
         <h3 className={styles.card__title}>{el.name}</h3>
       </div>
-      {ingredient && (
+      {currentIngredient && (
         <Modal onClose={closeModal} title={MODAL_TITLE_INGREDIENT}>
-          <IngredientDetails el={ingredient} />
+          <IngredientDetails el={currentIngredient} />
         </Modal>
       )}
     </>

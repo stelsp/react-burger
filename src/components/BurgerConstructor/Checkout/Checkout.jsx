@@ -1,22 +1,33 @@
 import style from "./Checkout.module.css";
-import PropTypes from "prop-types";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/button";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import OrderDetails from "../OrderDetails/OrderDetails";
 import Modal from "../../Modal/Modal";
 import Loader from "../../Loader/Loader";
 import { ORDER_BUTTON_TEXT } from "../../../constants/content";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrder } from "../../../services/actions/actions";
 import { fetchOrder } from "../../../utils/api";
 
-function Checkout({ ingredientsIDs, ingredientsPrice }) {
+function Checkout() {
   const dispatch = useDispatch();
-  const { order, loading } = useSelector((store) => ({
+  const { order, loading, outer, inner } = useSelector((store) => ({
     loading: store.orderReducer.loading,
     order: store.orderReducer.order,
+    outer: store.constructorReducer.outer,
+    inner: store.constructorReducer.inner,
   }));
+
+  const ingredientsIDs = useMemo(() => {
+    return inner ? [...inner.map((el) => el._id), outer._id] : [];
+  }, [inner, outer]);
+
+  const ingredientsPrice = useMemo(() => {
+    return inner
+      ? inner.reduce((sum, el) => sum + el.price, outer.price * 2)
+      : 0;
+  }, [inner, outer]);
 
   const openModal = useCallback(() => {
     dispatch(fetchOrder(ingredientsIDs));
@@ -47,10 +58,5 @@ function Checkout({ ingredientsIDs, ingredientsPrice }) {
     </>
   );
 }
-
-Checkout.propTypes = {
-  ingredientsIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
-  ingredientsPrice: PropTypes.number.isRequired,
-};
 
 export default Checkout;

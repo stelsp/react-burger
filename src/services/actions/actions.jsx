@@ -23,11 +23,11 @@ export const getOrder = (order) => ({
   order,
 });
 
-export const deleteConstructorIngr = (inner, id) => ({
+export const deleteConstructorIngredient = (inner, id) => ({
   type: ACTIONS.DELETE_CONSTRUCTOR_INGR,
   inner: inner.filter((el) => el.id !== id),
 });
-export const dragIngr = (inner, ingr) => {
+export const dragIngredient = (inner, ingr) => {
   if (ingr.type !== "bun")
     return {
       type: ACTIONS.DRAG_INNER,
@@ -41,7 +41,7 @@ export const dragIngr = (inner, ingr) => {
 };
 
 // CURRENT INGR
-export const getCurrentIngr = (currentIngredient) => ({
+export const getCurrentIngredient = (currentIngredient) => ({
   type: ACTIONS.GET_CURRENT_INGR,
   currentIngredient,
 });

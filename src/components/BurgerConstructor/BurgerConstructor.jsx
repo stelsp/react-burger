@@ -1,15 +1,13 @@
 import style from "./BurgerConstructor.module.css";
-import { useCallback, useMemo } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import Checkout from "./Checkout/Checkout";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  deleteConstructorIngr,
-  dragIngr,
+  deleteConstructorIngredient,
+  dragIngredient,
 } from "../../services/actions/actions";
 import { useDrop } from "react-dnd";
-import { nanoid } from "@reduxjs/toolkit";
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -18,21 +16,11 @@ function BurgerConstructor() {
     inner: store.constructorReducer.inner,
   }));
 
-  const ingredientsIDs = useMemo(() => {
-    return inner ? [...inner.map((el) => el._id), outer._id] : [];
-  }, [inner, outer]);
-
-  const ingredientsPrice = useMemo(() => {
-    return inner
-      ? inner.reduce((sum, el) => sum + el.price, outer.price * 2)
-      : 0;
-  }, [inner, outer]);
-
   const [, drop] = useDrop(
     () => ({
       accept: "ingredient",
       drop(item) {
-        dispatch(dragIngr(inner, item));
+        dispatch(dragIngredient(inner, item));
       },
     }),
     [inner, dispatch]
@@ -56,17 +44,14 @@ function BurgerConstructor() {
               <ul className={style.list}>
                 {inner.map((el) => {
                   return (
-                    <li
-                      key={nanoid()}
-                      className={style.item + " mb-4 ml-4 mr-1"}
-                    >
+                    <li key={el.id} className={style.item + " mb-4 ml-4 mr-1"}>
                       <DragIcon type="primary" />
                       <ConstructorElement
                         text={el.name}
                         thumbnail={el.image}
                         price={el.price}
                         handleClose={() =>
-                          dispatch(deleteConstructorIngr(inner, el.id))
+                          dispatch(deleteConstructorIngredient(inner, el.id))
                         }
                       />
                     </li>
@@ -90,10 +75,7 @@ function BurgerConstructor() {
               />
             </div>
           </div>
-          <Checkout
-            ingredientsIDs={ingredientsIDs}
-            ingredientsPrice={ingredientsPrice}
-          />
+          <Checkout />
         </>
       ) : (
         <div className={"mt-25 mb-10"}>
