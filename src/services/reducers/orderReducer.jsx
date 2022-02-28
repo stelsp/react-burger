@@ -3,7 +3,7 @@ import { ACTIONS } from "../actions/actionTypes";
 
 const orderReducer = (state = initialState.order, action) => {
   switch (action.type) {
-    case ACTIONS.GET_ORDER:
+    case ACTIONS.SET_ORDER:
       return {
         ...state,
         order: action.order,

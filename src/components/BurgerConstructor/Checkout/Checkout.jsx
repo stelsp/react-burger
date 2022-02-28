@@ -7,16 +7,16 @@ import Loader from "../../Loader/Loader";
 import { ORDER_BUTTON_TEXT } from "../../../constants/content";
 import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrder } from "../../../services/actions/actions";
+import { setOrder } from "../../../services/actions/actions";
 import { fetchOrder } from "../../../utils/api";
 
 function Checkout() {
   const dispatch = useDispatch();
   const { order, loading, outer, inner } = useSelector((store) => ({
-    loading: store.orderReducer.loading,
-    order: store.orderReducer.order,
-    outer: store.constructorReducer.outer,
-    inner: store.constructorReducer.inner,
+    loading: store.order.loading,
+    order: store.order.order,
+    outer: store.constructo.outer,
+    inner: store.constructo.inner,
   }));
 
   const ingredientsIDs = useMemo(() => {
@@ -33,7 +33,7 @@ function Checkout() {
     dispatch(fetchOrder(ingredientsIDs));
   }, [ingredientsIDs, dispatch]);
 
-  const closeModal = useCallback(() => dispatch(getOrder(null)), [dispatch]);
+  const closeModal = useCallback(() => dispatch(setOrder(null)), [dispatch]);
 
   return (
     <>

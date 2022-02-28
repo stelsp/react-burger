@@ -12,8 +12,8 @@ import { useDrop } from "react-dnd";
 function BurgerConstructor() {
   const dispatch = useDispatch();
   const { outer, inner } = useSelector((store) => ({
-    outer: store.constructorReducer.outer,
-    inner: store.constructorReducer.inner,
+    outer: store.constructo.outer,
+    inner: store.constructo.inner,
   }));
 
   const [, drop] = useDrop(

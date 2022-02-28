@@ -7,16 +7,15 @@ import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { MODAL_TITLE_INGREDIENT } from "../../../constants/content";
 import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentIngredient } from "../../../services/actions/actions";
-
+import { setCurrentIngredient } from "../../../services/actions/actions";
 import { useDrag } from "react-dnd";
 
 function Ingredient({ el }) {
   const dispatch = useDispatch();
   const { currentIngredient, outer, inner } = useSelector((store) => ({
-    currentIngredient: store.ingredientsReducer.currentIngredient,
-    outer: store.constructorReducer.outer,
-    inner: store.constructorReducer.inner,
+    currentIngredient: store.currentIngredient,
+    outer: store.constructo.outer,
+    inner: store.constructo.inner,
   }));
 
   const setCount = useMemo(() => {
@@ -26,11 +25,11 @@ function Ingredient({ el }) {
   }, [inner, outer, el]);
 
   const openModal = useCallback(() => {
-    dispatch(getCurrentIngredient(el));
+    dispatch(setCurrentIngredient(el));
   }, [dispatch, el]);
 
   const closeModal = useCallback(() => {
-    dispatch(getCurrentIngredient(null));
+    dispatch(setCurrentIngredient(null));
   }, [dispatch]);
 
   const [, drag] = useDrag(() => ({

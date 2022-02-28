@@ -10,9 +10,9 @@ import { useSelector } from "react-redux";
 
 function BurgerIngredients() {
   const { bun, sauce, main } = useSelector((store) => ({
-    bun: store.ingredientsReducer.category.bun,
-    sauce: store.ingredientsReducer.category.sauce,
-    main: store.ingredientsReducer.category.main,
+    bun: store.ingredients.category.bun,
+    sauce: store.ingredients.category.sauce,
+    main: store.ingredients.category.main,
   }));
 
   const bunRef = useRef(null);

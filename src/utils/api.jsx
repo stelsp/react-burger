@@ -6,23 +6,22 @@ import {
 } from "../constants/api-url";
 
 import {
-  toggleLoadingData,
+  toggleLoadingIngredients,
   toggleLoadingOrder,
-  getData,
-  getOrder,
-  getConstructorIngr,
+  setOrder,
+  setIngredients,
 } from "../services/actions/actions";
 
 export const fetchData = () => {
   return (dispatch) => {
-    dispatch(toggleLoadingData(true));
+    dispatch(toggleLoadingIngredients(true));
     axios
       .get(`${API_URL}${URL_KEY_INGREDIENTS}`)
       .then(({ data }) => {
-        dispatch(getData(data.data));
+        dispatch(setIngredients(data.data));
       })
       .catch((err) => console.log(err))
-      .finally(() => dispatch(toggleLoadingData(false)));
+      .finally(() => dispatch(toggleLoadingIngredients(false)));
   };
 };
 
@@ -34,7 +33,7 @@ export const fetchOrder = (ingredientsIDs) => {
         ingredients: ingredientsIDs,
       })
       .then(({ data }) => {
-        dispatch(getOrder(data));
+        dispatch(setOrder(data));
       })
       .catch((err) => console.log(err))
       .finally(() => dispatch(toggleLoadingOrder(false)));
