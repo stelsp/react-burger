@@ -7,8 +7,64 @@ import {
   deleteConstructorIngredient,
   dragIngredient,
 } from "../../services/actions/actions";
-import { useDrop } from "react-dnd";
-import { useState } from "react";
+import { useDrop, useDrag } from "react-dnd";
+import { useState, useCallback } from "react";
+import update from "immutability-helper";
+
+function Inner({ id, name, image, price, moveCard, findCard }) {
+  const dispatch = useDispatch();
+  const { inner } = useSelector((store) => ({
+    inner: store.constructo.inner,
+  }));
+
+  const originalIndex = findCard(id).index;
+  const [{ isDragging }, drag] = useDrag(
+    () => ({
+      type: "card",
+      item: { id, originalIndex },
+      collect: (monitor) => ({
+        isDragging: monitor.isDragging(),
+      }),
+      end: (item, monitor) => {
+        const { id: droppedId, originalIndex } = item;
+        const didDrop = monitor.didDrop();
+        if (!didDrop) {
+          moveCard(droppedId, originalIndex);
+        }
+      },
+    }),
+    [id, originalIndex, moveCard]
+  );
+  const [, drop3] = useDrop(
+    () => ({
+      accept: "card",
+      hover({ id: draggedId }) {
+        if (draggedId !== id) {
+          const { index: overIndex } = findCard(id);
+          moveCard(draggedId, overIndex);
+        }
+      },
+    }),
+    [findCard, moveCard]
+  );
+  const opacity = isDragging ? 0 : 1;
+
+  return (
+    <li
+      className={style.item + " mb-4 ml-4 mr-1"}
+      ref={(node) => drag(drop3(node))}
+      style={{ opacity }}
+    >
+      <DragIcon type="primary" />
+      <ConstructorElement
+        text={name}
+        thumbnail={image}
+        price={price}
+        handleClose={() => dispatch(deleteConstructorIngredient(inner, id))}
+      />
+    </li>
+  );
+}
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -27,6 +83,33 @@ function BurgerConstructor() {
     [inner, dispatch]
   );
 
+  const [cards, setCards] = useState(inner);
+  const findCard = useCallback(
+    (id) => {
+      const card = inner.filter((el) => el.id === id)[0];
+      return {
+        card,
+        index: inner.indexOf(card),
+      };
+    },
+    [inner]
+  );
+  const moveCard = useCallback(
+    (id, atIndex) => {
+      const { card, index } = findCard(id);
+      setCards(
+        update(cards, {
+          $splice: [
+            [index, 1],
+            [atIndex, 0, card],
+          ],
+        })
+      );
+    },
+    [findCard, cards, setCards]
+  );
+  const [, drop2] = useDrop(() => ({ accept: "card" }));
+
   return (
     <section className={style.container} ref={drop}>
       {outer ? (
@@ -42,20 +125,18 @@ function BurgerConstructor() {
               />
             </div>
             {inner.length > 0 ? (
-              <ul className={style.list}>
+              <ul className={style.list} ref={drop2}>
                 {inner.map((el) => {
                   return (
-                    <li key={el.id} className={style.item + " mb-4 ml-4 mr-1"}>
-                      <DragIcon type="primary" />
-                      <ConstructorElement
-                        text={el.name}
-                        thumbnail={el.image}
-                        price={el.price}
-                        handleClose={() =>
-                          dispatch(deleteConstructorIngredient(inner, el.id))
-                        }
-                      />
-                    </li>
+                    <Inner
+                      key={el.id}
+                      id={el.id}
+                      name={el.name}
+                      image={el.image}
+                      price={el.price}
+                      moveCard={moveCard}
+                      findCard={findCard}
+                    />
                   );
                 })}
               </ul>

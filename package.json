@@ -13,6 +13,7 @@
     "@types/react-dom": "^17.0.11",
     "@ya.praktikum/react-developer-burger-ui-components": "^1.13.1",
     "axios": "^0.25.0",
+    "immutability-helper": "^3.1.1",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-dnd": "^15.1.1",

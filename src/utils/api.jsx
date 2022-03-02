@@ -6,7 +6,6 @@ import {
 } from "../constants/api-url";
 
 import {
-  toggleLoadingOrder,
   getOrder,
   getOrderSuccess,
   getOrderFailed,
@@ -32,9 +31,7 @@ export const fetchOrder = (ingredientsIDs) => {
       .post(`${API_URL}${URL_KEY_ORDERS}`, {
         ingredients: ingredientsIDs,
       })
-      .then(({ data }) => {
-        dispatch(getOrderSuccess(data));
-      })
+      .then(({ data }) => dispatch(getOrderSuccess(data)))
       .catch(() => dispatch(getOrderFailed()));
   };
 };
