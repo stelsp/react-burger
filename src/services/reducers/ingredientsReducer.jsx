@@ -3,7 +3,14 @@ import { ACTIONS } from "../actions/actionTypes";
 
 const ingredientsReducer = (state = initialState.ingredients, action) => {
   switch (action.type) {
-    case ACTIONS.SET_INGREDIENTS:
+    case ACTIONS.GET_INGREDIENTS:
+      return {
+        ...state,
+        ingredientsRequest: true,
+        ingredientsFailed: false,
+      };
+
+    case ACTIONS.GET_INGREDIENTS_SUCCESS:
       return {
         ...state,
         category: {
@@ -12,18 +19,26 @@ const ingredientsReducer = (state = initialState.ingredients, action) => {
           sauce: action.sauce,
           main: action.main,
         },
+        ingredientsRequest: false,
+      };
+
+    case ACTIONS.GET_INGREDIENTS_FAILED:
+      return {
+        ...state,
+        category: {
+          ...state.category,
+          bun: [],
+          sauce: [],
+          main: [],
+        },
+        ingredientsFailed: true,
+        ingredientsRequest: false,
       };
 
     case ACTIONS.SET_CURRENT_TAB:
       return {
         ...state,
         currentTab: action.currentTab,
-      };
-
-    case ACTIONS.TOGGLE_LOADING_DATA:
-      return {
-        ...state,
-        loading: action.loading,
       };
 
     default:

@@ -11,7 +11,9 @@ export const initialState = {
       sauce: [],
       main: [],
     },
-    loading: true,
+    ingredientsRequest: false,
+    ingredientsFailed: false,
+
     currentTab: "one",
   },
   constructor: {
@@ -20,7 +22,8 @@ export const initialState = {
   },
   order: {
     order: null,
-    loading: false,
+    orderRequest: false,
+    orderFailed: false,
   },
   currentIngredient: null,
 };

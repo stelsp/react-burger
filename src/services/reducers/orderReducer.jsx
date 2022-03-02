@@ -3,16 +3,26 @@ import { ACTIONS } from "../actions/actionTypes";
 
 const orderReducer = (state = initialState.order, action) => {
   switch (action.type) {
-    case ACTIONS.SET_ORDER:
+    case ACTIONS.GET_ORDER:
+      return {
+        ...state,
+        orderRequest: true,
+        orderFailed: false,
+      };
+
+    case ACTIONS.GET_ORDER_SUCCESS:
       return {
         ...state,
         order: action.order,
+        orderRequest: false,
       };
 
-    case ACTIONS.TOGGLE_LOADING_ORDER:
+    case ACTIONS.GET_ORDER_FAILED:
       return {
         ...state,
-        loading: action.loading,
+        order: null,
+        orderFailed: true,
+        orderRequest: false,
       };
 
     default:

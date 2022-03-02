@@ -12,7 +12,10 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 export default function App() {
   const dispatch = useDispatch();
-  const loading = useSelector((store) => store.ingredients.loading);
+  const { ingredientsRequest, ingredientsFailed } = useSelector((store) => ({
+    ingredientsRequest: store.ingredients.ingredientsRequest,
+    ingredientsFailed: store.ingredients.ingredientsFailed,
+  }));
 
   useEffect(() => {
     dispatch(fetchData());
@@ -20,8 +23,10 @@ export default function App() {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      {loading ? (
+      {ingredientsRequest ? (
         <Loader />
+      ) : ingredientsFailed ? (
+        <h1>Произошла ошибка при получении данных</h1>
       ) : (
         <>
           <AppHeader />

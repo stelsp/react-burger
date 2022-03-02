@@ -7,17 +7,20 @@ import Loader from "../../Loader/Loader";
 import { ORDER_BUTTON_TEXT } from "../../../constants/content";
 import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setOrder } from "../../../services/actions/actions";
+import { getOrderSuccess } from "../../../services/actions/actions";
 import { fetchOrder } from "../../../utils/api";
 
 function Checkout() {
   const dispatch = useDispatch();
-  const { order, loading, outer, inner } = useSelector((store) => ({
-    loading: store.order.loading,
-    order: store.order.order,
-    outer: store.constructo.outer,
-    inner: store.constructo.inner,
-  }));
+  const { order, orderRequest, orderFailed, outer, inner } = useSelector(
+    (store) => ({
+      orderRequest: store.order.orderRequest,
+      orderFailed: store.order.orderFailed,
+      order: store.order.order,
+      outer: store.constructo.outer,
+      inner: store.constructo.inner,
+    })
+  );
 
   const ingredientsIDs = useMemo(() => {
     return inner ? [...inner.map((el) => el._id), outer._id] : [];
@@ -33,7 +36,10 @@ function Checkout() {
     dispatch(fetchOrder(ingredientsIDs));
   }, [ingredientsIDs, dispatch]);
 
-  const closeModal = useCallback(() => dispatch(setOrder(null)), [dispatch]);
+  const closeModal = useCallback(
+    () => dispatch(getOrderSuccess(null)),
+    [dispatch]
+  );
 
   return (
     <>
@@ -46,8 +52,10 @@ function Checkout() {
           {ORDER_BUTTON_TEXT}
         </Button>
       </div>
-      {loading ? (
+      {orderRequest ? (
         <Loader />
+      ) : orderFailed ? (
+        <h2>Произошла ошибка при получении данных</h2>
       ) : (
         order && (
           <Modal onClose={closeModal}>

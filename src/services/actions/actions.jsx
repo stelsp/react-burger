@@ -2,11 +2,19 @@ import { ACTIONS } from "./actionTypes";
 import { nanoid } from "@reduxjs/toolkit";
 
 // ingredients
-export const setIngredients = (ingredients) => ({
-  type: ACTIONS.SET_INGREDIENTS,
+export const getIngredients = () => ({
+  type: ACTIONS.GET_INGREDIENTS,
+});
+
+export const getIngredientsSuccess = (ingredients) => ({
+  type: ACTIONS.GET_INGREDIENTS_SUCCESS,
   bun: ingredients.filter((el) => el.type === "bun"),
   sauce: ingredients.filter((el) => el.type === "sauce"),
   main: ingredients.filter((el) => el.type === "main"),
+});
+
+export const getIngredientsFailed = () => ({
+  type: ACTIONS.GET_INGREDIENTS_FAILED,
 });
 
 export const setCurrentIngredient = (currentIngredient) => ({
@@ -19,17 +27,26 @@ export const setCurrentTab = (currentTab) => ({
   currentTab,
 });
 
-export const toggleLoadingIngredients = (loading) => ({
-  type: ACTIONS.TOGGLE_LOADING_DATA,
-  loading,
+// constructor
+export const getOrder = () => ({
+  type: ACTIONS.GET_ORDER,
 });
 
-// constructor
-export const setOrder = (order) => ({
-  type: ACTIONS.SET_ORDER,
+export const getOrderSuccess = (order) => ({
+  type: ACTIONS.GET_ORDER_SUCCESS,
   order,
 });
 
+export const getOrderFailed = () => ({
+  type: ACTIONS.GET_ORDER_FAILED,
+});
+
+export const deleteConstructorIngredient = (inner, id) => ({
+  type: ACTIONS.DELETE_CONSTRUCTOR_INGREDIENT,
+  inner: inner.filter((el) => el.id !== id),
+});
+
+// dnd
 export const dragIngredient = (inner, ingr) => {
   return ingr.type !== "bun"
     ? {
@@ -41,13 +58,3 @@ export const dragIngredient = (inner, ingr) => {
         outer: ingr,
       };
 };
-
-export const deleteConstructorIngredient = (inner, id) => ({
-  type: ACTIONS.DELETE_CONSTRUCTOR_INGREDIENT,
-  inner: inner.filter((el) => el.id !== id),
-});
-
-export const toggleLoadingOrder = (loading) => ({
-  type: ACTIONS.TOGGLE_LOADING_ORDER,
-  loading,
-});
