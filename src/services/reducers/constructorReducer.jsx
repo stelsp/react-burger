@@ -21,6 +21,12 @@ const constructorReducer = (state = initialState.constructor, action) => {
         inner: action.inner,
       };
 
+    case "test":
+      return {
+        ...state,
+        inner: action.inner,
+      };
+
     default:
       return state;
   }

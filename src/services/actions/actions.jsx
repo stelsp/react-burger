@@ -1,5 +1,6 @@
 import { ACTIONS } from "./actionTypes";
 import { nanoid } from "@reduxjs/toolkit";
+import update from "immutability-helper";
 
 // ingredients
 export const getIngredients = () => ({
@@ -58,3 +59,13 @@ export const dragIngredient = (inner, ingr) => {
         outer: ingr,
       };
 };
+
+export const test = (card, index, atIndex, inner) => ({
+  type: "test",
+  inner: update(inner, {
+    $splice: [
+      [index, 1],
+      [atIndex, 0, card],
+    ],
+  }),
+});

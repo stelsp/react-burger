@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   deleteConstructorIngredient,
   dragIngredient,
+  test,
 } from "../../services/actions/actions";
 import { useDrop, useDrag } from "react-dnd";
 import { useState, useCallback } from "react";
@@ -83,7 +84,6 @@ function BurgerConstructor() {
     [inner, dispatch]
   );
 
-  const [cards, setCards] = useState(inner);
   const findCard = useCallback(
     (id) => {
       const card = inner.filter((el) => el.id === id)[0];
@@ -97,16 +97,9 @@ function BurgerConstructor() {
   const moveCard = useCallback(
     (id, atIndex) => {
       const { card, index } = findCard(id);
-      setCards(
-        update(cards, {
-          $splice: [
-            [index, 1],
-            [atIndex, 0, card],
-          ],
-        })
-      );
+      dispatch(test(card, index, atIndex, inner));
     },
-    [findCard, cards, setCards]
+    [findCard, dispatch]
   );
   const [, drop2] = useDrop(() => ({ accept: "card" }));
 
