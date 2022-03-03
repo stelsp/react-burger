@@ -21,7 +21,7 @@ const constructorReducer = (state = initialState.constructor, action) => {
         inner: action.inner,
       };
 
-    case "test":
+    case ACTIONS.SORT_INNER_INGREDIENT:
       return {
         ...state,
         inner: action.inner,

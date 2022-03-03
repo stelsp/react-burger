@@ -14,11 +14,11 @@ function Ingredient({ el }) {
   const dispatch = useDispatch();
   const { currentIngredient, outer, inner } = useSelector((store) => ({
     currentIngredient: store.currentIngredient,
-    outer: store.constructo.outer,
-    inner: store.constructo.inner,
+    outer: store.burgerConstructor.outer,
+    inner: store.burgerConstructor.inner,
   }));
 
-  const setCount = useMemo(() => {
+  const count = useMemo(() => {
     return el.type === "bun" && el._id === outer._id
       ? 2
       : inner.filter((item) => item._id === el._id).length;
@@ -40,7 +40,7 @@ function Ingredient({ el }) {
   return (
     <>
       <div onClick={openModal} className={styles.card} ref={drag}>
-        {setCount > 0 && <Counter count={setCount} size={"default"} />}
+        {count > 0 && <Counter count={count} size={"default"} />}
         <img src={el.image} alt={el.name} className={styles.img} />
         <p className={styles.price}>
           <span className={styles.span}>{el.price}</span>

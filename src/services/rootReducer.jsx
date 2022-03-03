@@ -31,7 +31,7 @@ export const initialState = {
 const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
   order: orderReducer,
-  constructo: constructorReducer,
+  burgerConstructor: constructorReducer,
   currentIngredient: currentIngredientReducer,
 });
 

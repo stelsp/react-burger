@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   deleteConstructorIngredient,
   dragIngredient,
-  test,
+  sortIngredient,
 } from "../../services/actions/actions";
 import { useDrop, useDrag } from "react-dnd";
 import { useCallback } from "react";
@@ -14,7 +14,7 @@ import { useCallback } from "react";
 function Inner({ id, name, image, price, moveCard, findCard }) {
   const dispatch = useDispatch();
   const { inner } = useSelector((store) => ({
-    inner: store.constructo.inner,
+    inner: store.burgerConstructor.inner,
   }));
 
   const originalIndex = findCard(id).index;
@@ -69,8 +69,8 @@ function Inner({ id, name, image, price, moveCard, findCard }) {
 function BurgerConstructor() {
   const dispatch = useDispatch();
   const { outer, inner } = useSelector((store) => ({
-    outer: store.constructo.outer,
-    inner: store.constructo.inner,
+    outer: store.burgerConstructor.outer,
+    inner: store.burgerConstructor.inner,
   }));
 
   const [, drop] = useDrop(
@@ -96,9 +96,9 @@ function BurgerConstructor() {
   const moveCard = useCallback(
     (id, atIndex) => {
       const { card, index } = findCard(id);
-      dispatch(test(card, index, atIndex, inner));
+      dispatch(sortIngredient(card, index, atIndex, inner));
     },
-    [findCard, dispatch]
+    [findCard, dispatch, inner]
   );
   const [, drop2] = useDrop(() => ({ accept: "card" }));
 

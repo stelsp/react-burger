@@ -17,8 +17,8 @@ function Checkout() {
       orderRequest: store.order.orderRequest,
       orderFailed: store.order.orderFailed,
       order: store.order.order,
-      outer: store.constructo.outer,
-      inner: store.constructo.inner,
+      outer: store.burgerConstructor.outer,
+      inner: store.burgerConstructor.inner,
     })
   );
 
