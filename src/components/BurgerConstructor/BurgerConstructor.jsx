@@ -9,8 +9,7 @@ import {
   test,
 } from "../../services/actions/actions";
 import { useDrop, useDrag } from "react-dnd";
-import { useState, useCallback } from "react";
-import update from "immutability-helper";
+import { useCallback } from "react";
 
 function Inner({ id, name, image, price, moveCard, findCard }) {
   const dispatch = useDispatch();

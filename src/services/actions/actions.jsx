@@ -60,8 +60,8 @@ export const dragIngredient = (inner, ingr) => {
       };
 };
 
-export const test = (card, index, atIndex, inner) => ({
-  type: "test",
+export const sortIngredient = (card, index, atIndex, inner) => ({
+  type: ACTIONS.SORT_INNER_INGREDIENT,
   inner: update(inner, {
     $splice: [
       [index, 1],
