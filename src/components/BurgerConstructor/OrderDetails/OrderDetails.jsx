@@ -1,9 +1,11 @@
 import styles from "./OrderDetails.module.css";
-import { orderPropTypes } from "../../../constants/custom-prop-types";
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import { MODAL_TEXT_ORDER } from "../../../constants/content";
+import { useSelector } from "react-redux";
 
-function OrderDetails({ order }) {
+function OrderDetails() {
+  const order = useSelector((store) => store.order.order);
+
   return (
     <div className={styles.card}>
       <h3 className={styles.order}>{order.order.number}</h3>
@@ -16,9 +18,5 @@ function OrderDetails({ order }) {
     </div>
   );
 }
-
-OrderDetails.propTypes = {
-  order: orderPropTypes.isRequired,
-};
 
 export default OrderDetails;

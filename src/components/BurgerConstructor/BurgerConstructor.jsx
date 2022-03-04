@@ -1,73 +1,165 @@
 import style from "./BurgerConstructor.module.css";
-import { useMemo } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-import { useData } from "../../services/DataProvider";
 import Checkout from "./Checkout/Checkout";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  deleteConstructorIngredient,
+  dragIngredient,
+  sortIngredient,
+} from "../../services/actions/actions";
+import { useDrop, useDrag } from "react-dnd";
+import { useCallback } from "react";
 
-function BurgerConstructor() {
-  const data = useData();
+function Inner({ id, name, image, price, moveCard, findCard }) {
+  const dispatch = useDispatch();
+  const { inner } = useSelector((store) => ({
+    inner: store.burgerConstructor.inner,
+  }));
 
-  const bun = useMemo(() => {
-    return data.find((el) => el.type === "bun");
-  }, [data]);
-
-  const main = useMemo(() => {
-    return data.filter((el) => el.type !== "bun").slice(6, 12);
-  }, [data]);
-
-  const ingredientsIDs = useMemo(() => {
-    return [...main.map((el) => el._id), bun._id];
-  }, [main, bun]);
-
-  const ingredientsPrice = useMemo(() => {
-    const mainPrice = main.reduce((sum, el) => sum + el.price, 0);
-    const bunPrice = bun.price;
-    const price = mainPrice + bunPrice * 2;
-    return price;
-  }, [main, bun]);
+  const originalIndex = findCard(id).index;
+  const [{ isDragging }, drag] = useDrag(
+    () => ({
+      type: "card",
+      item: { id, originalIndex },
+      collect: (monitor) => ({
+        isDragging: monitor.isDragging(),
+      }),
+      end: (item, monitor) => {
+        const { id: droppedId, originalIndex } = item;
+        const didDrop = monitor.didDrop();
+        if (!didDrop) {
+          moveCard(droppedId, originalIndex);
+        }
+      },
+    }),
+    [id, originalIndex, moveCard]
+  );
+  const [, drop3] = useDrop(
+    () => ({
+      accept: "card",
+      hover({ id: draggedId }) {
+        if (draggedId !== id) {
+          const { index: overIndex } = findCard(id);
+          moveCard(draggedId, overIndex);
+        }
+      },
+    }),
+    [findCard, moveCard]
+  );
+  const opacity = isDragging ? 0 : 1;
 
   return (
-    <section className={style.container}>
-      <div className={"mt-25 mb-10"}>
-        <div className={style.item + " mb-4 ml-4 mr-4 pl-8"}>
-          <ConstructorElement
-            type={"top"}
-            isLocked={true}
-            text={`${bun.name} (верх)`}
-            thumbnail={bun.image}
-            price={bun.price}
-          />
-        </div>
-
-        <ul className={style.list}>
-          {main.map((el) => {
-            return (
-              <li key={el._id} className={style.item + " mb-4 ml-4 mr-1"}>
-                <DragIcon type="primary" />
-                <ConstructorElement
-                  text={el.name}
-                  thumbnail={el.image}
-                  price={el.price}
-                />
-              </li>
-            );
-          })}
-        </ul>
-        <div className={style.item + " mt-4 ml-4 mr-4 pl-8"}>
-          <ConstructorElement
-            type={"bottom"}
-            isLocked={true}
-            text={`${bun.name} (низ)`}
-            thumbnail={bun.image}
-            price={bun.price}
-          />
-        </div>
-      </div>
-      <Checkout
-        ingredientsIDs={ingredientsIDs}
-        ingredientsPrice={ingredientsPrice}
+    <li
+      className={style.item + " mb-4 ml-4 mr-1"}
+      ref={(node) => drag(drop3(node))}
+      style={{ opacity }}
+    >
+      <DragIcon type="primary" />
+      <ConstructorElement
+        text={name}
+        thumbnail={image}
+        price={price}
+        handleClose={() => dispatch(deleteConstructorIngredient(inner, id))}
       />
+    </li>
+  );
+}
+
+function BurgerConstructor() {
+  const dispatch = useDispatch();
+  const { outer, inner } = useSelector((store) => ({
+    outer: store.burgerConstructor.outer,
+    inner: store.burgerConstructor.inner,
+  }));
+
+  const [, drop] = useDrop(
+    () => ({
+      accept: "ingredient",
+      drop(item) {
+        dispatch(dragIngredient(inner, item));
+      },
+    }),
+    [inner, dispatch]
+  );
+
+  const findCard = useCallback(
+    (id) => {
+      const card = inner.filter((el) => el.id === id)[0];
+      return {
+        card,
+        index: inner.indexOf(card),
+      };
+    },
+    [inner]
+  );
+  const moveCard = useCallback(
+    (id, atIndex) => {
+      const { card, index } = findCard(id);
+      dispatch(sortIngredient(card, index, atIndex, inner));
+    },
+    [findCard, dispatch, inner]
+  );
+  const [, drop2] = useDrop(() => ({ accept: "card" }));
+
+  return (
+    <section className={style.container} ref={drop}>
+      {outer ? (
+        <>
+          <div className={"mt-25 mb-10"}>
+            <div className={style.item + " mb-4 ml-4 mr-4 pl-8"}>
+              <ConstructorElement
+                type={"top"}
+                isLocked={true}
+                text={`${outer.name} (верх)`}
+                thumbnail={outer.image}
+                price={outer.price}
+              />
+            </div>
+            {inner.length > 0 ? (
+              <ul className={style.list} ref={drop2}>
+                {inner.map((el) => {
+                  return (
+                    <Inner
+                      key={el.id}
+                      id={el.id}
+                      name={el.name}
+                      image={el.image}
+                      price={el.price}
+                      moveCard={moveCard}
+                      findCard={findCard}
+                    />
+                  );
+                })}
+              </ul>
+            ) : (
+              <div className={"mt-10 mb-10 ml-25"}>
+                <h3 className={style.description}>
+                  Теперь добавьте ингридиенты!
+                </h3>
+              </div>
+            )}
+            <div className={style.item + " mt-4 ml-4 mr-4 pl-8"}>
+              <ConstructorElement
+                type={"bottom"}
+                isLocked={true}
+                text={`${outer.name} (низ)`}
+                thumbnail={outer.image}
+                price={outer.price}
+              />
+            </div>
+          </div>
+          <Checkout />
+        </>
+      ) : (
+        <div className={"mt-25 mb-10"}>
+          <h2 className={style.title}>Соберите свой бургер!</h2>
+          <h3 className={style.description}>Начните с булки.</h3>
+          <h3 className={style.description}>
+            Перетаскивайте ингридиенты из списка слева.
+          </h3>
+        </div>
+      )}
     </section>
   );
 }
