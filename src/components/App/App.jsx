@@ -1,4 +1,5 @@
 import styles from "./App.module.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AppHeader from "../AppHeader/AppHeader";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
@@ -22,20 +23,26 @@ export default function App() {
   }, [dispatch]);
 
   return (
-    <DndProvider backend={HTML5Backend}>
-      {ingredientsRequest ? (
-        <Loader />
-      ) : ingredientsFailed ? (
-        <h1>Произошла ошибка при получении данных</h1>
-      ) : (
-        <>
-          <AppHeader />
-          <main className={styles.main}>
-            <BurgerIngredients />
-            <BurgerConstructor />
-          </main>
-        </>
-      )}
-    </DndProvider>
+    <Router>
+      <Switch>
+        <DndProvider backend={HTML5Backend}>
+          {ingredientsRequest ? (
+            <Loader />
+          ) : ingredientsFailed ? (
+            <h1>Произошла ошибка при получении данных</h1>
+          ) : (
+            <>
+              <AppHeader />
+              <Route path="/" exact={true}>
+                <main className={styles.main}>
+                  <BurgerIngredients />
+                  <BurgerConstructor />
+                </main>
+              </Route>
+            </>
+          )}
+        </DndProvider>
+      </Switch>
+    </Router>
   );
 }
