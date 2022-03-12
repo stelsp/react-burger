@@ -39,6 +39,24 @@ export default function App() {
                   <BurgerConstructor />
                 </main>
               </Route>
+              <Route path="/login" exact={true}>
+                login
+              </Route>
+              <Route path="/register" exact={true}>
+                register
+              </Route>
+              <Route path="/forgot-password" exact={true}>
+                forgot-password
+              </Route>
+              <Route path="/reset-password" exact={true}>
+                reset-password
+              </Route>
+              <Route path="/profile" exact={true}>
+                profile
+              </Route>
+              <Route path="/ingredients/:id" exact={true}>
+                ingredients/:id
+              </Route>
             </>
           )}
         </DndProvider>
