@@ -7,7 +7,10 @@ import Loader from "../../Loader/Loader";
 import { ORDER_BUTTON_TEXT } from "../../../constants/content";
 import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrderSuccess } from "../../../services/actions/actions";
+import {
+  getOrderSuccess,
+  resetConstructor,
+} from "../../../services/actions/actions";
 import { fetchOrder } from "../../../utils/api";
 
 function Checkout() {
@@ -37,7 +40,7 @@ function Checkout() {
   }, [ingredientsIDs, dispatch]);
 
   const closeModal = useCallback(
-    () => dispatch(getOrderSuccess(null)),
+    () => (dispatch(getOrderSuccess(null)), dispatch(resetConstructor())),
     [dispatch]
   );
 

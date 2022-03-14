@@ -27,6 +27,13 @@ const constructorReducer = (state = initialState.constructor, action) => {
         inner: action.inner,
       };
 
+    case ACTIONS.RESET_CONSTRUCTOR:
+      return {
+        ...state,
+        outer: "",
+        inner: [],
+      };
+
     default:
       return state;
   }
