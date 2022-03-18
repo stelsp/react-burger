@@ -73,3 +73,10 @@ export const sortIngredient = (card, index, atIndex, inner) => ({
     ],
   }),
 });
+
+// login
+export const setLoginFormValue = (field, value) => ({
+  type: ACTIONS.LOGIN_FORM_SET_VALUE,
+  field: field,
+  value: value,
+});

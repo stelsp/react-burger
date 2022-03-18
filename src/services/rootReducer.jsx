@@ -3,6 +3,7 @@ import ingredientsReducer from "./reducers/ingredientsReducer";
 import orderReducer from "./reducers/orderReducer";
 import constructorReducer from "./reducers/constructorReducer";
 import currentIngredientReducer from "./reducers/currentIngredientReducer";
+import loginReducer from "./reducers/loginReducer";
 
 export const initialState = {
   ingredients: {
@@ -26,6 +27,40 @@ export const initialState = {
     orderFailed: false,
   },
   currentIngredient: null,
+  login: {
+    login: {
+      form: {
+        email: "",
+        password: "",
+      },
+      loginRequest: false,
+      loginFailed: false,
+    },
+    register: {
+      form: {
+        name: "",
+        email: "",
+        password: "",
+      },
+      registrationRequest: false,
+      registrationFailed: false,
+    },
+    forgotPassword: {
+      form: {
+        email: "",
+      },
+      forgotPasswordRequest: false,
+      forgotPasswordFailed: false,
+    },
+    resetPassword: {
+      form: {
+        newPassword: "",
+        emailCode: "",
+      },
+      resetPasswordRequest: false,
+      resetPasswordFailed: false,
+    },
+  },
 };
 
 const rootReducer = combineReducers({
@@ -33,6 +68,7 @@ const rootReducer = combineReducers({
   order: orderReducer,
   burgerConstructor: constructorReducer,
   currentIngredient: currentIngredientReducer,
+  login: loginReducer,
 });
 
 export default rootReducer;

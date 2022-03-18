@@ -16,7 +16,6 @@ function ForgotPassword() {
       <form className={styles.form}>
         <div className={styles.input}>
           <Input
-            className={styles.input}
             type={"email"}
             placeholder={"Укажите e-mail"}
             onChange={(e) => setEmail(e.target.value)}

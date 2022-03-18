@@ -34,7 +34,6 @@ function Register() {
         </div>
         <div className={styles.input}>
           <Input
-            className={styles.input}
             type={"email"}
             placeholder={"E-mail"}
             onChange={(e) => setEmail(e.target.value)}
@@ -45,11 +44,7 @@ function Register() {
           />
         </div>
         <div className={styles.input}>
-          <PasswordInput
-            className={styles.input}
-            onChange={onChange}
-            value={password}
-          />
+          <PasswordInput onChange={onChange} value={password} />
         </div>
         <div className={styles.button}>
           <Button type="primary" size="medium">

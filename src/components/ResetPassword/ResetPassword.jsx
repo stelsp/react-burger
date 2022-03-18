@@ -22,7 +22,6 @@ function ResetPassword() {
       <form className={styles.form}>
         <div className={styles.input}>
           <PasswordInput
-            className={styles.input}
             onChange={onChange}
             value={password}
             placeholder={"Введите новый пароль"}
@@ -30,7 +29,6 @@ function ResetPassword() {
         </div>
         <div className={styles.input}>
           <Input
-            className={styles.input}
             type={"text"}
             placeholder={"Введите код из письма"}
             onChange={(e) => setEmailCode(e.target.value)}

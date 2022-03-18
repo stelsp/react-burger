@@ -1,19 +1,22 @@
 import styles from "./Login.module.css";
-import { useState } from "react";
+
 import {
   Input,
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setLoginFormValue } from "../../services/actions/actions";
 
 function Login() {
   // TODO: перенести в REDUX
-  const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
 
-  const [password, setPassword] = useState("");
-  const onChange = (e) => {
-    setPassword(e.target.value);
+  const { email, password } = useSelector((store) => store.login.login.form);
+
+  const onFormChange = (e) => {
+    dispatch(setLoginFormValue(e.target.name, e.target.value));
   };
 
   return (
@@ -22,21 +25,21 @@ function Login() {
       <form className={styles.form}>
         <div className={styles.input}>
           <Input
-            className={styles.input}
             type={"email"}
             placeholder={"E-mail"}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={onFormChange}
             value={email}
             error={false}
             errorText={"Ошибка"}
             size={"default"}
+            name={"email"}
           />
         </div>
         <div className={styles.input}>
           <PasswordInput
-            className={styles.input}
-            onChange={onChange}
+            onChange={onFormChange}
             value={password}
+            name={"password"}
           />
         </div>
         <div className={styles.button}>
