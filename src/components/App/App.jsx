@@ -3,13 +3,17 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AppHeader from "../AppHeader/AppHeader";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
+import Register from "../Register/Register";
 import Login from "../Login/Login";
+
 import Loader from "../Loader/Loader";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "../../utils/api";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import ForgotPassword from "../ForgotPassword/ForgotPassword";
+import ResetPassword from "../ResetPassword/ResetPassword";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -40,7 +44,9 @@ export default function App() {
                 </main>
               </Route>
               <Route path="/register" exact={true}>
-                register
+                <main className={styles.main__login}>
+                  <Register />
+                </main>
               </Route>
               <Route path="/login" exact={true}>
                 <main className={styles.main__login}>
@@ -48,10 +54,14 @@ export default function App() {
                 </main>
               </Route>
               <Route path="/forgot-password" exact={true}>
-                forgot-password
+                <main className={styles.main__login}>
+                  <ForgotPassword />
+                </main>
               </Route>
               <Route path="/reset-password" exact={true}>
-                reset-password
+                <main className={styles.main__login}>
+                  <ResetPassword />
+                </main>
               </Route>
               <Route path="/profile" exact={true}>
                 profile

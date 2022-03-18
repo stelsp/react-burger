@@ -1,0 +1,33 @@
+.container {
+  margin-top: 180px;
+  width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heading {
+  composes: text text_type_main-medium mb-6 from global;
+}
+
+.input {
+  composes: mb-6 from global;
+}
+
+.form {
+  composes: mb-20 from global;
+}
+
+.text {
+  composes: text text_type_main-default text_color_inactive mr-2 from global;
+}
+
+.button {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.footer {
+  display: flex;
+}

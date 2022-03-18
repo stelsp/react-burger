@@ -1,4 +1,4 @@
-import styles from "./Login.module.css";
+import styles from "./Register.module.css";
 import { useState } from "react";
 import {
   Input,
@@ -7,8 +7,9 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
 
-function Login() {
+function Register() {
   // TODO: перенести в REDUX
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
@@ -18,8 +19,19 @@ function Login() {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.heading}>Вход</h2>
+      <h2 className={styles.heading}>Регистрация</h2>
       <form className={styles.form}>
+        <div className={styles.input}>
+          <Input
+            type={"text"}
+            placeholder={"Имя"}
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            error={false}
+            errorText={"Ошибка"}
+            size={"default"}
+          />
+        </div>
         <div className={styles.input}>
           <Input
             className={styles.input}
@@ -41,24 +53,18 @@ function Login() {
         </div>
         <div className={styles.button}>
           <Button type="primary" size="medium">
-            Войти
+            Зарегистрироваться
           </Button>
         </div>
       </form>
       <div className={styles.footer}>
-        <p className={styles.text}>Вы — новый пользователь?</p>
-        <Link className={styles.text} to="/register">
-          Зарегистрироваться
-        </Link>
-      </div>
-      <div className={styles.footer}>
-        <p className={styles.text}>Забыли пароль?</p>
-        <Link className={styles.text} to="/forgot-password">
-          Восстановить пароль
+        <p className={styles.text}>Уже зарегистрированы?</p>
+        <Link className={styles.text} to="/login">
+          Войти
         </Link>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default Register;

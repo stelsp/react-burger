@@ -1,30 +1,24 @@
-import styles from "./Login.module.css";
+import styles from "./ForgotPassword.module.css";
 import { useState } from "react";
 import {
   Input,
-  PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
 
-function Login() {
+function ForgotPassword() {
   // TODO: перенести в REDUX
   const [email, setEmail] = useState("");
 
-  const [password, setPassword] = useState("");
-  const onChange = (e) => {
-    setPassword(e.target.value);
-  };
-
   return (
     <div className={styles.container}>
-      <h2 className={styles.heading}>Вход</h2>
+      <h2 className={styles.heading}>Восстановление пароля</h2>
       <form className={styles.form}>
         <div className={styles.input}>
           <Input
             className={styles.input}
             type={"email"}
-            placeholder={"E-mail"}
+            placeholder={"Укажите e-mail"}
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             error={false}
@@ -32,33 +26,20 @@ function Login() {
             size={"default"}
           />
         </div>
-        <div className={styles.input}>
-          <PasswordInput
-            className={styles.input}
-            onChange={onChange}
-            value={password}
-          />
-        </div>
         <div className={styles.button}>
           <Button type="primary" size="medium">
-            Войти
+            Восстановить
           </Button>
         </div>
       </form>
       <div className={styles.footer}>
-        <p className={styles.text}>Вы — новый пользователь?</p>
+        <p className={styles.text}>Вспомнили пароль?</p>
         <Link className={styles.text} to="/register">
-          Зарегистрироваться
-        </Link>
-      </div>
-      <div className={styles.footer}>
-        <p className={styles.text}>Забыли пароль?</p>
-        <Link className={styles.text} to="/forgot-password">
-          Восстановить пароль
+          Войти
         </Link>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default ForgotPassword;
