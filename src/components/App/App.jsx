@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AppHeader from "../AppHeader/AppHeader";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
+import Login from "../Login/Login";
 import Loader from "../Loader/Loader";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "../../utils/api";
-
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
@@ -39,11 +39,13 @@ export default function App() {
                   <BurgerConstructor />
                 </main>
               </Route>
-              <Route path="/login" exact={true}>
-                login
-              </Route>
               <Route path="/register" exact={true}>
                 register
+              </Route>
+              <Route path="/login" exact={true}>
+                <main className={styles.main__login}>
+                  <Login />
+                </main>
               </Route>
               <Route path="/forgot-password" exact={true}>
                 forgot-password
