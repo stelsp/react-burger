@@ -12,6 +12,30 @@ const registerReducer = (state = initialState.register, action) => {
         },
       };
     }
+    case ACTIONS.REGISTER_FORM_SUBMIT: {
+      return {
+        ...state,
+        registerRequest: true,
+        registerFailed: false,
+      };
+    }
+    case ACTIONS.REGISTER_FORM_SUBMIT_SUCCESS: {
+      return {
+        ...state,
+        form: {
+          // При успешной регистрацией сбрасываем форму до исходного состояния
+          ...initialState.form,
+        },
+        registerRequest: false,
+      };
+    }
+    case ACTIONS.REGISTER_FORM_SUBMIT_FAILED: {
+      return {
+        ...state,
+        registerRequest: false,
+        registerFailed: true,
+      };
+    }
 
     default:
       return state;

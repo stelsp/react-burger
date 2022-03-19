@@ -12,6 +12,30 @@ const resetPasswordReducer = (state = initialState.resetPassword, action) => {
         },
       };
     }
+    case ACTIONS.RESET_PASSWORD_FORM_SUBMIT: {
+      return {
+        ...state,
+        resetPasswordRequest: true,
+        resetPasswordFailed: false,
+      };
+    }
+    case ACTIONS.RESET_PASSWORD_FORM_SUBMIT_SUCCESS: {
+      return {
+        ...state,
+        form: {
+          // При успешной регистрацией сбрасываем форму до исходного состояния
+          ...initialState.form,
+        },
+        resetPasswordRequest: false,
+      };
+    }
+    case ACTIONS.RESET_PASSWORD_FORM_SUBMIT_FAILED: {
+      return {
+        ...state,
+        resetPasswordRequest: false,
+        resetPasswordFailed: true,
+      };
+    }
 
     default:
       return state;

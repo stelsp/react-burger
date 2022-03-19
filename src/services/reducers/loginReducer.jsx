@@ -12,6 +12,30 @@ const loginReducer = (state = initialState.login, action) => {
         },
       };
     }
+    case ACTIONS.LOGIN_FORM_SUBMIT: {
+      return {
+        ...state,
+        loginRequest: true,
+        loginFailed: false,
+      };
+    }
+    case ACTIONS.LOGIN_FORM_SUBMIT_SUCCESS: {
+      return {
+        ...state,
+        form: {
+          // При успешной регистрацией сбрасываем форму до исходного состояния
+          ...initialState.form,
+        },
+        loginRequest: false,
+      };
+    }
+    case ACTIONS.LOGIN_FORM_SUBMIT_FAILED: {
+      return {
+        ...state,
+        loginRequest: false,
+        loginFailed: true,
+      };
+    }
 
     default:
       return state;

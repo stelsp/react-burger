@@ -12,6 +12,30 @@ const forgotPasswordReducer = (state = initialState.forgotPassword, action) => {
         },
       };
     }
+    case ACTIONS.FORGOT_PASSWORD_FORM_SUBMIT: {
+      return {
+        ...state,
+        forgotPasswordRequest: true,
+        forgotPasswordFailed: false,
+      };
+    }
+    case ACTIONS.FORGOT_PASSWORD_FORM_SUBMIT_SUCCESS: {
+      return {
+        ...state,
+        form: {
+          // При успешной регистрацией сбрасываем форму до исходного состояния
+          ...initialState.form,
+        },
+        forgotPasswordRequest: false,
+      };
+    }
+    case ACTIONS.FORGOT_PASSWORD_FORM_SUBMIT_FAILED: {
+      return {
+        ...state,
+        forgotPasswordRequest: false,
+        forgotPasswordFailed: true,
+      };
+    }
 
     default:
       return state;

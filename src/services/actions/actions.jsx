@@ -80,11 +80,29 @@ export const setLoginFormValue = (field, value) => ({
   field,
   value,
 });
+export const loginFormSubmit = () => ({
+  type: ACTIONS.LOGIN_FORM_SUBMIT,
+});
+export const loginFormSubmitSuccess = () => ({
+  type: ACTIONS.LOGIN_FORM_SUBMIT_SUCCESS,
+});
+export const loginFormSubmitFailed = () => ({
+  type: ACTIONS.LOGIN_FORM_SUBMIT_FAILED,
+});
 // register
 export const setRegisterFormValue = (field, value) => ({
   type: ACTIONS.REGISTER_FORM_SET_VALUE,
   field,
   value,
+});
+export const registerFormSubmit = () => ({
+  type: ACTIONS.REGISTER_FORM_SUBMIT,
+});
+export const registerFormSubmitSuccess = () => ({
+  type: ACTIONS.REGISTER_FORM_SUBMIT_SUCCESS,
+});
+export const registerFormSubmitFailed = () => ({
+  type: ACTIONS.REGISTER_FORM_SUBMIT_FAILED,
 });
 // forgotPassword
 export const setForgotPasswordFormValue = (field, value) => ({
@@ -92,9 +110,27 @@ export const setForgotPasswordFormValue = (field, value) => ({
   field,
   value,
 });
+export const forgotPasswordFormSubmit = () => ({
+  type: ACTIONS.FORGOT_PASSWORD_FORM_SUBMIT,
+});
+export const forgotPasswordFormSubmitSuccess = () => ({
+  type: ACTIONS.FORGOT_PASSWORD_FORM_SUBMIT_SUCCESS,
+});
+export const forgotPasswordFormSubmitFailed = () => ({
+  type: ACTIONS.FORGOT_PASSWORD_FORM_SUBMIT_FAILED,
+});
 // resetPassword
 export const setResetPasswordFormValue = (field, value) => ({
   type: ACTIONS.RESET_PASSWORD_FORM_SET_VALUE,
   field,
   value,
+});
+export const resetPasswordFormSubmit = () => ({
+  type: ACTIONS.RESET_PASSWORD_FORM_SUBMIT,
+});
+export const resetPasswordFormSubmitSuccess = () => ({
+  type: ACTIONS.RESET_PASSWORD_FORM_SUBMIT_SUCCESS,
+});
+export const resetPasswordFormSubmitFailed = () => ({
+  type: ACTIONS.RESET_PASSWORD_FORM_SUBMIT_FAILED,
 });
