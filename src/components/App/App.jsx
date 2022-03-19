@@ -14,6 +14,9 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import ForgotPassword from "../ForgotPassword/ForgotPassword";
 import ResetPassword from "../ResetPassword/ResetPassword";
+import Profile from "../Profile/Profile";
+
+import { NotFound404 } from "../NotFount404/NotFound404";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -28,15 +31,15 @@ export default function App() {
 
   return (
     <Router>
-      <Switch>
-        <DndProvider backend={HTML5Backend}>
-          {ingredientsRequest ? (
-            <Loader />
-          ) : ingredientsFailed ? (
-            <h1>Произошла ошибка при получении данных</h1>
-          ) : (
-            <>
-              <AppHeader />
+      <DndProvider backend={HTML5Backend}>
+        {ingredientsRequest ? (
+          <Loader />
+        ) : ingredientsFailed ? (
+          <h1>Произошла ошибка при получении данных</h1>
+        ) : (
+          <>
+            <AppHeader />
+            <Switch>
               <Route path="/" exact={true}>
                 <main className={styles.main}>
                   <BurgerIngredients />
@@ -44,35 +47,42 @@ export default function App() {
                 </main>
               </Route>
               <Route path="/register" exact={true}>
-                <main className={styles.main__login}>
+                <main className={styles.login}>
                   <Register />
                 </main>
               </Route>
               <Route path="/login" exact={true}>
-                <main className={styles.main__login}>
+                <main className={styles.login}>
                   <Login />
                 </main>
               </Route>
               <Route path="/forgot-password" exact={true}>
-                <main className={styles.main__login}>
+                <main className={styles.login}>
                   <ForgotPassword />
                 </main>
               </Route>
               <Route path="/reset-password" exact={true}>
-                <main className={styles.main__login}>
+                <main className={styles.login}>
                   <ResetPassword />
                 </main>
               </Route>
               <Route path="/profile" exact={true}>
-                profile
+                <main className={styles.profile}>
+                  <Profile />
+                </main>
               </Route>
               <Route path="/ingredients/:id" exact={true}>
                 ingredients/:id
               </Route>
-            </>
-          )}
-        </DndProvider>
-      </Switch>
+              <Route>
+                <main className={styles.login}>
+                  <NotFound404 />
+                </main>
+              </Route>
+            </Switch>
+          </>
+        )}
+      </DndProvider>
     </Router>
   );
 }
