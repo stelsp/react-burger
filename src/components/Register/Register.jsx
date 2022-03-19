@@ -1,20 +1,20 @@
 import styles from "./Register.module.css";
-import { useState } from "react";
 import {
   Input,
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setRegisterFormValue } from "../../services/actions/actions";
 
 function Register() {
-  // TODO: перенести в REDUX
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
 
-  const [password, setPassword] = useState("");
-  const onChange = (e) => {
-    setPassword(e.target.value);
+  const { name, email, password } = useSelector((store) => store.register.form);
+
+  const onFormChange = (e) => {
+    dispatch(setRegisterFormValue(e.target.name, e.target.value));
   };
 
   return (
@@ -25,26 +25,32 @@ function Register() {
           <Input
             type={"text"}
             placeholder={"Имя"}
-            onChange={(e) => setName(e.target.value)}
+            onChange={onFormChange}
             value={name}
             error={false}
             errorText={"Ошибка"}
             size={"default"}
+            name={"name"}
           />
         </div>
         <div className={styles.input}>
           <Input
             type={"email"}
             placeholder={"E-mail"}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={onFormChange}
             value={email}
             error={false}
             errorText={"Ошибка"}
             size={"default"}
+            name={"email"}
           />
         </div>
         <div className={styles.input}>
-          <PasswordInput onChange={onChange} value={password} />
+          <PasswordInput
+            onChange={onFormChange}
+            value={password}
+            name={"password"}
+          />
         </div>
         <div className={styles.button}>
           <Button type="primary" size="medium">

@@ -77,6 +77,24 @@ export const sortIngredient = (card, index, atIndex, inner) => ({
 // login
 export const setLoginFormValue = (field, value) => ({
   type: ACTIONS.LOGIN_FORM_SET_VALUE,
-  field: field,
-  value: value,
+  field,
+  value,
+});
+// register
+export const setRegisterFormValue = (field, value) => ({
+  type: ACTIONS.REGISTER_FORM_SET_VALUE,
+  field,
+  value,
+});
+// forgotPassword
+export const setForgotPasswordFormValue = (field, value) => ({
+  type: ACTIONS.FORGOT_PASSWORD_FORM_SET_VALUE,
+  field,
+  value,
+});
+// resetPassword
+export const setResetPasswordFormValue = (field, value) => ({
+  type: ACTIONS.RESET_PASSWORD_FORM_SET_VALUE,
+  field,
+  value,
 });

@@ -1,14 +1,20 @@
 import styles from "./ForgotPassword.module.css";
-import { useState } from "react";
 import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setForgotPasswordFormValue } from "../../services/actions/actions";
 
 function ForgotPassword() {
-  // TODO: перенести в REDUX
-  const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
+
+  const { email } = useSelector((store) => store.forgotPassword.form);
+
+  const onFormChange = (e) => {
+    dispatch(setForgotPasswordFormValue(e.target.name, e.target.value));
+  };
 
   return (
     <div className={styles.container}>
@@ -18,11 +24,12 @@ function ForgotPassword() {
           <Input
             type={"email"}
             placeholder={"Укажите e-mail"}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={onFormChange}
             value={email}
             error={false}
             errorText={"Ошибка"}
             size={"default"}
+            name={"email"}
           />
         </div>
         <div className={styles.button}>

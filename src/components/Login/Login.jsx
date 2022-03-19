@@ -10,10 +10,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { setLoginFormValue } from "../../services/actions/actions";
 
 function Login() {
-  // TODO: перенести в REDUX
   const dispatch = useDispatch();
 
-  const { email, password } = useSelector((store) => store.login.login.form);
+  const { email, password } = useSelector((store) => store.login.form);
 
   const onFormChange = (e) => {
     dispatch(setLoginFormValue(e.target.name, e.target.value));

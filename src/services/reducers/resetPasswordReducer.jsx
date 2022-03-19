@@ -1,9 +1,9 @@
 import { initialState } from "../rootReducer";
 import { ACTIONS } from "../actions/actionTypes";
 
-const loginReducer = (state = initialState.login, action) => {
+const resetPasswordReducer = (state = initialState.resetPassword, action) => {
   switch (action.type) {
-    case ACTIONS.LOGIN_FORM_SET_VALUE: {
+    case ACTIONS.RESET_PASSWORD_FORM_SET_VALUE: {
       return {
         ...state,
         form: {
@@ -18,4 +18,4 @@ const loginReducer = (state = initialState.login, action) => {
   }
 };
 
-export default loginReducer;
+export default resetPasswordReducer;

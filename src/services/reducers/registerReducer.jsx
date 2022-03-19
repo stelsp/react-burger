@@ -1,9 +1,9 @@
 import { initialState } from "../rootReducer";
 import { ACTIONS } from "../actions/actionTypes";
 
-const loginReducer = (state = initialState.login, action) => {
+const registerReducer = (state = initialState.register, action) => {
   switch (action.type) {
-    case ACTIONS.LOGIN_FORM_SET_VALUE: {
+    case ACTIONS.REGISTER_FORM_SET_VALUE: {
       return {
         ...state,
         form: {
@@ -18,4 +18,4 @@ const loginReducer = (state = initialState.login, action) => {
   }
 };
 
-export default loginReducer;
+export default registerReducer;

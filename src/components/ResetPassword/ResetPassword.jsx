@@ -1,19 +1,22 @@
 import styles from "./ResetPassword.module.css";
-import { useState } from "react";
 import {
   Input,
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setResetPasswordFormValue } from "../../services/actions/actions";
 
 function ResetPassword() {
-  // TODO: перенести в REDUX
-  const [emailCode, setEmailCode] = useState("");
+  const dispatch = useDispatch();
 
-  const [password, setPassword] = useState("");
-  const onChange = (e) => {
-    setPassword(e.target.value);
+  const { emailCode, newPassword } = useSelector(
+    (store) => store.resetPassword.form
+  );
+
+  const onFormChange = (e) => {
+    dispatch(setResetPasswordFormValue(e.target.name, e.target.value));
   };
 
   return (
@@ -22,20 +25,22 @@ function ResetPassword() {
       <form className={styles.form}>
         <div className={styles.input}>
           <PasswordInput
-            onChange={onChange}
-            value={password}
+            onChange={onFormChange}
+            value={newPassword}
             placeholder={"Введите новый пароль"}
+            name={"newPassword"}
           />
         </div>
         <div className={styles.input}>
           <Input
             type={"text"}
             placeholder={"Введите код из письма"}
-            onChange={(e) => setEmailCode(e.target.value)}
+            onChange={onFormChange}
             value={emailCode}
             error={false}
             errorText={"Ошибка"}
             size={"default"}
+            name={"emailCode"}
           />
         </div>
         <div className={styles.button}>
