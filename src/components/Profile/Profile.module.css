@@ -21,6 +21,7 @@
 
 .text {
   composes: text text_type_main-default text_color_inactive mt-20 from global;
+  opacity: 0.6;
 }
 
 .info {

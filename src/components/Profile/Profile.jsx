@@ -14,7 +14,7 @@ function Profile() {
   return (
     <div className={styles.container}>
       <div className={styles.links}>
-        <Link to="/profile" className={styles.link}>
+        <Link to="profile" className={styles.link}>
           Профиль
         </Link>
         <Link className={styles.link}>История заказов</Link>

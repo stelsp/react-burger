@@ -20,7 +20,7 @@ function AppHeader() {
               linkStyle={styles.link + " pr-5 mr-2"}
               textStyle={"ml-2"}
               icon={<BurgerIcon type="secondary" />}
-              to={"#"}
+              to={"/"}
               text={APP_HEADER_LINKS.CONSTRUCTOR}
             />
 
