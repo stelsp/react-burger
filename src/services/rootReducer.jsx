@@ -56,8 +56,8 @@ export const initialState = {
   },
   resetPassword: {
     form: {
-      emailCode: "",
-      newPassword: "",
+      token: "",
+      password: "",
     },
     resetPasswordRequest: false,
     resetPasswordFailed: false,

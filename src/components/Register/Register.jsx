@@ -1,4 +1,5 @@
 import styles from "./Register.module.css";
+import { useCallback } from "react";
 import {
   Input,
   PasswordInput,
@@ -7,6 +8,7 @@ import {
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setRegisterFormValue } from "../../services/actions/actions";
+import { postRegisterRequest } from "../../utils/api";
 
 function Register() {
   const dispatch = useDispatch();
@@ -17,10 +19,18 @@ function Register() {
     dispatch(setRegisterFormValue(e.target.name, e.target.value));
   };
 
+  const onFormSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      postRegisterRequest(email, password, name);
+    },
+    [email, password, name]
+  );
+
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>Регистрация</h2>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={onFormSubmit}>
         <div className={styles.input}>
           <Input
             type={"text"}
@@ -53,7 +63,7 @@ function Register() {
           />
         </div>
         <div className={styles.button}>
-          <Button type="primary" size="medium">
+          <Button type="primary" size="medium" htmlType="submit">
             Зарегистрироваться
           </Button>
         </div>

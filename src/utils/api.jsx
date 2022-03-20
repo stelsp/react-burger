@@ -3,6 +3,9 @@ import {
   API_URL,
   URL_KEY_INGREDIENTS,
   URL_KEY_ORDERS,
+  URL_KEY_PASSWORD_FORGOT,
+  URL_KEY_PASSWORD_RESET,
+  URL_KEY_REGISTER,
 } from "../constants/api-url";
 
 import {
@@ -12,6 +15,15 @@ import {
   getIngredients,
   getIngredientsSuccess,
   getIngredientsFailed,
+  forgotPasswordFormSubmit,
+  forgotPasswordFormSubmitSuccess,
+  forgotPasswordFormSubmitFailed,
+  resetPasswordFormSubmit,
+  resetPasswordFormSubmitSuccess,
+  resetPasswordFormSubmitFailed,
+  registerFormSubmit,
+  registerFormSubmitSuccess,
+  registerFormSubmitFailed,
 } from "../services/actions/actions";
 
 export const fetchData = () => {
@@ -33,5 +45,45 @@ export const fetchOrder = (ingredientsIDs) => {
       })
       .then(({ data }) => dispatch(getOrderSuccess(data)))
       .catch(() => dispatch(getOrderFailed()));
+  };
+};
+
+export const postForgotPasswordRequest = (email) => {
+  return (dispatch) => {
+    dispatch(forgotPasswordFormSubmit());
+    axios
+      .post(`${API_URL}${URL_KEY_PASSWORD_FORGOT}`, {
+        email: email,
+      })
+      .then(() => dispatch(forgotPasswordFormSubmitSuccess()))
+      .catch(() => dispatch(forgotPasswordFormSubmitFailed()));
+  };
+};
+
+export const postResetPasswordRequest = (password, token) => {
+  return (dispatch) => {
+    dispatch(resetPasswordFormSubmit());
+    axios
+      .post(`${API_URL}${URL_KEY_PASSWORD_RESET}`, {
+        password: password,
+        token: token,
+      })
+      .then(() => dispatch(resetPasswordFormSubmitSuccess()))
+      .catch(() => dispatch(resetPasswordFormSubmitFailed()));
+  };
+};
+
+export const postRegisterRequest = (email, password, name) => {
+  return (dispatch) => {
+    dispatch(registerFormSubmit());
+    axios
+      .post(`${API_URL}${URL_KEY_REGISTER}`, {
+        email: email,
+        password: password,
+        name: name,
+      })
+      .then((res) => console.log(res))
+      .then(() => dispatch(registerFormSubmitSuccess()))
+      .catch(() => dispatch(registerFormSubmitFailed()));
   };
 };

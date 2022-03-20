@@ -16,7 +16,7 @@ import ForgotPassword from "../ForgotPassword/ForgotPassword";
 import ResetPassword from "../ResetPassword/ResetPassword";
 import Profile from "../Profile/Profile";
 
-import { NotFound404 } from "../NotFount404/NotFound404";
+import { NotFound404 } from "../NotFound404/NotFound404";
 
 export default function App() {
   const dispatch = useDispatch();
