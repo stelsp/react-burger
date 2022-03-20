@@ -22,7 +22,7 @@ function Register() {
   const onFormSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      postRegisterRequest(email, password, name);
+      dispatch(postRegisterRequest(email, password, name));
     },
     [email, password, name]
   );

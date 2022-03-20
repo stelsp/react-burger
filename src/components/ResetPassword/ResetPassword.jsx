@@ -22,7 +22,7 @@ function ResetPassword() {
   const onFormSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      postResetPasswordRequest(password, token);
+      dispatch(postResetPasswordRequest(password, token));
     },
     [password, token]
   );

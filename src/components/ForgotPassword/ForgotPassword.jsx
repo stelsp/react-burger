@@ -22,7 +22,7 @@ function ForgotPassword() {
   const onFormSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      postForgotPasswordRequest(email);
+      dispatch(postForgotPasswordRequest(email));
       history.push("/reset-password");
     },
     [history, email]
