@@ -134,3 +134,14 @@ export const resetPasswordFormSubmitSuccess = () => ({
 export const resetPasswordFormSubmitFailed = () => ({
   type: ACTIONS.RESET_PASSWORD_FORM_SUBMIT_FAILED,
 });
+// profile
+export const getProfileValue = (field, value) => ({
+  type: ACTIONS.PROFILE_GET_VALUE,
+  field,
+  value,
+});
+export const setProfileValue = (field, value) => ({
+  type: ACTIONS.PROFILE_SET_VALUE,
+  field,
+  value,
+});

@@ -1,14 +1,31 @@
 import styles from "./Profile.module.css";
 import { Link } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
+import { setProfileValue } from "../../services/actions/actions";
 
 function Profile() {
-  const [value, setValue] = useState("value");
-  const inputRef = useRef(null);
-  const onIconClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0);
-    alert("Icon Click Callback");
+  // TODO: это какая то дичь, наджо придумать элегентнее както хз
+  const nameRef = useRef(null);
+  const loginRef = useRef(null);
+  const passwordRef = useRef(null);
+  const onNameIconClick = () => {
+    setTimeout(() => nameRef.current.focus(), 0);
+  };
+  const onLoginIconClick = () => {
+    setTimeout(() => loginRef.current.focus(), 0);
+  };
+  const onPasswordIconClick = () => {
+    setTimeout(() => passwordRef.current.focus(), 0);
+  };
+
+  const dispatch = useDispatch();
+
+  const { name, login, password } = useSelector((store) => store.profile);
+
+  const onChange = (e) => {
+    dispatch(setProfileValue(e.target.name, e.target.value));
   };
 
   return (
@@ -17,8 +34,12 @@ function Profile() {
         <Link to="profile" className={styles.link}>
           Профиль
         </Link>
-        <Link className={styles.link}>История заказов</Link>
-        <Link className={styles.link}>Выход</Link>
+        <Link to="/" className={styles.link}>
+          История заказов
+        </Link>
+        <Link to="/" className={styles.link}>
+          Выход
+        </Link>
         <p className={styles.text}>
           В этом разделе вы можете изменить свои персональные данные
         </p>
@@ -28,44 +49,45 @@ function Profile() {
           <Input
             type={"text"}
             placeholder={"Имя"}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={onChange}
             icon={"EditIcon"}
-            value={value}
+            value={name}
             name={"name"}
             error={false}
-            ref={inputRef}
-            onIconClick={onIconClick}
+            onIconClick={onNameIconClick}
             errorText={"Ошибка"}
             size={"default"}
+            ref={nameRef}
           />
         </div>
         <div className={styles.input}>
           <Input
-            type={"text"}
+            type={"email"}
             placeholder={"Логин"}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={onChange}
             icon={"EditIcon"}
-            value={value}
-            name={"name"}
+            value={login}
+            name={"login"}
             error={false}
-            ref={inputRef}
-            onIconClick={onIconClick}
+            onIconClick={onLoginIconClick}
             errorText={"Ошибка"}
             size={"default"}
+            ref={loginRef}
           />
         </div>
         <div className={styles.input}>
           <Input
-            type={"text"}
+            type={"password"}
             placeholder={"Пароль"}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={onChange}
             icon={"EditIcon"}
-            value={value}
-            name={"name"}
+            value={password}
+            name={"password"}
             error={false}
-            onIconClick={onIconClick}
+            onIconClick={onPasswordIconClick}
             errorText={"Ошибка"}
             size={"default"}
+            ref={passwordRef}
           />
         </div>
       </div>

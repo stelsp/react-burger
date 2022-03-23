@@ -7,6 +7,7 @@ import loginReducer from "./reducers/loginReducer";
 import registerReducer from "./reducers/registerReducer";
 import forgotPasswordReducer from "./reducers/forgotPasswordReducer";
 import resetPasswordReducer from "./reducers/resetPasswordReducer";
+import profileReducer from "./reducers/profileReducer";
 
 export const initialState = {
   ingredients: {
@@ -62,6 +63,11 @@ export const initialState = {
     resetPasswordRequest: false,
     resetPasswordFailed: false,
   },
+  profile: {
+    name: "",
+    login: "",
+    password: "",
+  },
 };
 
 const rootReducer = combineReducers({
@@ -73,6 +79,7 @@ const rootReducer = combineReducers({
   register: registerReducer,
   forgotPassword: forgotPasswordReducer,
   resetPassword: resetPasswordReducer,
+  profile: profileReducer,
 });
 
 export default rootReducer;
