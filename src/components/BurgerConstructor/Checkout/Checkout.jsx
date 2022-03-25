@@ -15,15 +15,10 @@ import { fetchOrder } from "../../../utils/api";
 
 function Checkout() {
   const dispatch = useDispatch();
-  const { order, orderRequest, orderFailed, outer, inner } = useSelector(
-    (store) => ({
-      orderRequest: store.order.orderRequest,
-      orderFailed: store.order.orderFailed,
-      order: store.order.order,
-      outer: store.burgerConstructor.outer,
-      inner: store.burgerConstructor.inner,
-    })
+  const { order, orderRequest, orderFailed } = useSelector(
+    (store) => store.order
   );
+  const { outer, inner } = useSelector((store) => store.burgerConstructor);
 
   const ingredientsIDs = useMemo(() => {
     return inner ? [...inner.map((el) => el._id), outer._id] : [];
@@ -39,10 +34,10 @@ function Checkout() {
     dispatch(fetchOrder(ingredientsIDs));
   }, [ingredientsIDs, dispatch]);
 
-  const closeModal = useCallback(
-    () => (dispatch(getOrderSuccess(null)), dispatch(resetConstructor())),
-    [dispatch]
-  );
+  const closeModal = useCallback(() => {
+    dispatch(getOrderSuccess(null));
+    dispatch(resetConstructor());
+  }, [dispatch]);
 
   return (
     <>

@@ -6,7 +6,7 @@ import { setCurrentTab } from "../../../services/actions/actions";
 
 function Tabs({ bunRef, souceRef, mainRef }) {
   const dispatch = useDispatch();
-  const current = useSelector((store) => store.ingredients.currentTab);
+  const { current } = useSelector((store) => store.ingredients);
   return (
     <div className={styles.tab}>
       <Tab

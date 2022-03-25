@@ -68,10 +68,7 @@ function Inner({ id, name, image, price, moveCard, findCard }) {
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
-  const { outer, inner } = useSelector((store) => ({
-    outer: store.burgerConstructor.outer,
-    inner: store.burgerConstructor.inner,
-  }));
+  const { outer, inner } = useSelector((store) => store.burgerConstructor);
 
   const [, drop] = useDrop(
     () => ({
