@@ -12,7 +12,8 @@ const profileReducer = (state = initialState.profile, action) => {
     case ACTIONS.PROFILE_SET_VALUE: {
       return {
         ...state,
-        [action.field]: action.value,
+        name: action.name,
+        email: action.email,
       };
     }
 

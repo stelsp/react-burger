@@ -24,7 +24,7 @@ const loginReducer = (state = initialState.login, action) => {
         ...state,
         form: {
           // При успешной регистрацией сбрасываем форму до исходного состояния
-          ...initialState.form,
+          ...state.form,
         },
         loginRequest: false,
       };

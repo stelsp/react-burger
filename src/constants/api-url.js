@@ -4,3 +4,4 @@ export const URL_KEY_ORDERS = "/orders";
 export const URL_KEY_PASSWORD_FORGOT = "/password-reset";
 export const URL_KEY_PASSWORD_RESET = "/password-reset/reset";
 export const URL_KEY_REGISTER = "/auth/register";
+export const URL_KEY_LOGIN = "/auth/login";

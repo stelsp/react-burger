@@ -1,5 +1,5 @@
 import styles from "./Login.module.css";
-
+import { useCallback } from "react";
 import {
   Input,
   PasswordInput,
@@ -8,6 +8,7 @@ import {
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setLoginFormValue } from "../../services/actions/actions";
+import { postLoginRequest } from "../../utils/api";
 
 function Login() {
   const dispatch = useDispatch();
@@ -18,10 +19,18 @@ function Login() {
     dispatch(setLoginFormValue(e.target.name, e.target.value));
   };
 
+  const onFormSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      dispatch(postLoginRequest(email, password));
+    },
+    [email, password, dispatch]
+  );
+
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>Вход</h2>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={onFormSubmit}>
         <div className={styles.input}>
           <Input
             type={"email"}
