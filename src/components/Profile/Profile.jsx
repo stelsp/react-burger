@@ -1,12 +1,12 @@
 import styles from "./Profile.module.css";
 import { Link } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { setProfileValue } from "../../services/actions/actions";
+import { fetchProfileInfo } from "../../utils/api";
 
 function Profile() {
-  // TODO: это какая то дичь, наджо придумать элегентнее както хз
   const nameRef = useRef(null);
   const loginRef = useRef(null);
   const passwordRef = useRef(null);
@@ -24,24 +24,24 @@ function Profile() {
 
   const { name, login, password } = useSelector((store) => store.profile);
 
+  useEffect(() => {
+    dispatch(fetchProfileInfo());
+  }, [dispatch]);
+
   const onChange = (e) => {
     dispatch(setProfileValue(e.target.name, e.target.value));
-  };
-
-  const delete_cookie = () => {
-    document.cookie = "token" + "=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.links}>
-        <Link to="profile" className={styles.link}>
+        <Link to={"profile"} className={styles.link}>
           Профиль
         </Link>
-        <Link to="/" className={styles.link}>
+        <Link to={"/"} className={styles.link}>
           История заказов
         </Link>
-        <Link to="/" onClick={delete_cookie} className={styles.link}>
+        <Link to={"login"} className={styles.link}>
           Выход
         </Link>
         <p className={styles.text}>

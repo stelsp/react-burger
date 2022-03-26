@@ -29,7 +29,7 @@ import {
   loginFormSubmit,
   loginFormSubmitSuccess,
   loginFormSubmitFailed,
-  setProfileValue,
+  getProfileValue,
 } from "../services/actions/actions";
 
 import { getCookie, setCookie } from "./cookie";
@@ -105,14 +105,14 @@ export const postLoginRequest = (email, password) => {
       })
       .then(({ data }) => {
         setCookie("token", data.accessToken);
-        dispatch(loginFormSubmitSuccess());
       })
-      .then(() => dispatch(fetchUserInfo()))
+      .then(() => dispatch(fetchProfileInfo()))
+      .then(() => dispatch(loginFormSubmitSuccess()))
       .catch(() => dispatch(loginFormSubmitFailed()));
   };
 };
 
-export const fetchUserInfo = () => {
+export const fetchProfileInfo = () => {
   return (dispatch) => {
     axios
       .get(`${API_URL}${URL_KEY_USER}`, {
@@ -120,10 +120,9 @@ export const fetchUserInfo = () => {
           Authorization: getCookie("token"),
         },
       })
-      .then((res) => {
-        console.log(res);
-        dispatch(setProfileValue(res.data.user.name, res.data.user.email));
-      })
+      .then(({ data }) =>
+        dispatch(getProfileValue(data.user.name, data.user.email))
+      )
       .catch((err) => console.log(err));
   };
 };

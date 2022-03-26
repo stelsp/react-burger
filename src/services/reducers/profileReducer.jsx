@@ -6,14 +6,15 @@ const profileReducer = (state = initialState.profile, action) => {
     case ACTIONS.PROFILE_GET_VALUE: {
       return {
         ...state,
-        [action.field]: action.value,
+        name: action.name,
+        login: action.login,
+        password: action.password,
       };
     }
     case ACTIONS.PROFILE_SET_VALUE: {
       return {
         ...state,
-        name: action.name,
-        login: action.login,
+        [action.field]: action.value,
       };
     }
 

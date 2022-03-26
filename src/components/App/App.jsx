@@ -15,8 +15,9 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import ForgotPassword from "../ForgotPassword/ForgotPassword";
 import ResetPassword from "../ResetPassword/ResetPassword";
 import Profile from "../Profile/Profile";
-
 import { NotFound404 } from "../NotFound404/NotFound404";
+import { getCookie } from "../../utils/cookie";
+import { Redirect } from "react-router-dom";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -41,10 +42,14 @@ export default function App() {
             <AppHeader />
             <Switch>
               <Route path="/" exact={true}>
-                <main className={styles.main}>
-                  <BurgerIngredients />
-                  <BurgerConstructor />
-                </main>
+                {getCookie("token") ? (
+                  <main className={styles.main}>
+                    <BurgerIngredients />
+                    <BurgerConstructor />
+                  </main>
+                ) : (
+                  <Redirect to="/login" />
+                )}
               </Route>
               <Route path="/register" exact={true}>
                 <main className={styles.login}>
@@ -52,9 +57,13 @@ export default function App() {
                 </main>
               </Route>
               <Route path="/login" exact={true}>
-                <main className={styles.login}>
-                  <Login />
-                </main>
+                {getCookie("token") ? (
+                  <Redirect to="/" />
+                ) : (
+                  <main className={styles.login}>
+                    <Login />
+                  </main>
+                )}
               </Route>
               <Route path="/forgot-password" exact={true}>
                 <main className={styles.login}>
@@ -67,9 +76,13 @@ export default function App() {
                 </main>
               </Route>
               <Route path="/profile" exact={true}>
-                <main className={styles.profile}>
-                  <Profile />
-                </main>
+                {getCookie("token") ? (
+                  <main className={styles.profile}>
+                    <Profile />
+                  </main>
+                ) : (
+                  <Redirect to="/login" />
+                )}
               </Route>
               <Route path="/ingredients/:id" exact={true}>
                 ingredients/:id

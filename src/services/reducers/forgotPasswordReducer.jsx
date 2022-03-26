@@ -24,7 +24,7 @@ const forgotPasswordReducer = (state = initialState.forgotPassword, action) => {
         ...state,
         form: {
           // При успешной регистрацией сбрасываем форму до исходного состояния
-          ...state.form,
+          ...initialState.form,
         },
         forgotPasswordRequest: false,
       };

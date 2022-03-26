@@ -9,14 +9,12 @@ import {
 import { APP_HEADER_LINKS } from "../../constants/content";
 
 import { Link } from "react-router-dom";
-import { useCallback } from "react";
 import { getCookie } from "../../utils/cookie";
 
 function AppHeader() {
-  const isAuth = useCallback(() => {
+  const isAuth = () => {
     return getCookie("token") ? "/profile" : "/login";
-  }, []);
-
+  };
   return (
     <header className={styles.header}>
       <div className={styles.wrapper}>

@@ -6,12 +6,12 @@ import { setCurrentTab } from "../../../services/actions/actions";
 
 function Tabs({ bunRef, souceRef, mainRef }) {
   const dispatch = useDispatch();
-  const { current } = useSelector((store) => store.ingredients);
+  const { currentTab } = useSelector((store) => store.ingredients);
   return (
     <div className={styles.tab}>
       <Tab
         value="one"
-        active={current === "one"}
+        active={currentTab === "one"}
         onClick={(value) => {
           dispatch(setCurrentTab(value));
           bunRef.current.scrollIntoView({ behavior: "smooth" });
@@ -21,7 +21,7 @@ function Tabs({ bunRef, souceRef, mainRef }) {
       </Tab>
       <Tab
         value="two"
-        active={current === "two"}
+        active={currentTab === "two"}
         onClick={(value) => {
           dispatch(setCurrentTab(value));
           souceRef.current.scrollIntoView({ behavior: "smooth" });
@@ -31,7 +31,7 @@ function Tabs({ bunRef, souceRef, mainRef }) {
       </Tab>
       <Tab
         value="three"
-        active={current === "three"}
+        active={currentTab === "three"}
         onClick={(value) => {
           dispatch(setCurrentTab(value));
           mainRef.current.scrollIntoView({ behavior: "smooth" });

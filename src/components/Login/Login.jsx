@@ -5,14 +5,14 @@ import {
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setLoginFormValue } from "../../services/actions/actions";
 import { postLoginRequest } from "../../utils/api";
+import { Redirect } from "react-router-dom";
 
 function Login() {
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const { email, password } = useSelector((store) => store.login.form);
 
@@ -24,9 +24,8 @@ function Login() {
     (e) => {
       e.preventDefault();
       dispatch(postLoginRequest(email, password));
-      history.push("/");
     },
-    [email, password, dispatch, history]
+    [email, password, dispatch]
   );
 
   return (

@@ -24,7 +24,7 @@ const registerReducer = (state = initialState.register, action) => {
         ...state,
         form: {
           // При успешной регистрацией сбрасываем форму до исходного состояния
-          ...state.form,
+          ...initialState.form,
         },
         registerRequest: false,
       };
