@@ -25,7 +25,7 @@ function ForgotPassword() {
       dispatch(postForgotPasswordRequest(email));
       history.push("/reset-password");
     },
-    [history, email]
+    [email, dispatch, history]
   );
 
   return (

@@ -7,6 +7,7 @@ import {
   URL_KEY_PASSWORD_RESET,
   URL_KEY_REGISTER,
   URL_KEY_LOGIN,
+  URL_KEY_USER,
 } from "../constants/api-url";
 
 import {
@@ -28,7 +29,10 @@ import {
   loginFormSubmit,
   loginFormSubmitSuccess,
   loginFormSubmitFailed,
+  setProfileValue,
 } from "../services/actions/actions";
+
+import { getCookie, setCookie } from "./cookie";
 
 export const fetchData = () => {
   return (dispatch) => {
@@ -103,36 +107,23 @@ export const postLoginRequest = (email, password) => {
         setCookie("token", data.accessToken);
         dispatch(loginFormSubmitSuccess());
       })
+      .then(() => dispatch(fetchUserInfo()))
       .catch(() => dispatch(loginFormSubmitFailed()));
   };
 };
 
-export function getCookie(name) {
-  const matches = document.cookie.match(
-    new RegExp("(?:^|; )" + name.replace(/([$?*|{}\\^])/g, "\\$1") + "=([^;]*)")
-  );
-  return matches ? decodeURIComponent(matches[1]) : undefined;
-}
-
-export function setCookie(name, value, props) {
-  props = props || {};
-  let exp = props.expires;
-  if (typeof exp == "number" && exp) {
-    const d = new Date();
-    d.setTime(d.getTime() + exp * 1000);
-    exp = props.expires = d;
-  }
-  if (exp && exp.toUTCString) {
-    props.expires = exp.toUTCString();
-  }
-  value = encodeURIComponent(value);
-  let updatedCookie = name + "=" + value;
-  for (const propName in props) {
-    updatedCookie += "; " + propName;
-    const propValue = props[propName];
-    if (propValue !== true) {
-      updatedCookie += "=" + propValue;
-    }
-  }
-  document.cookie = updatedCookie;
-}
+export const fetchUserInfo = () => {
+  return (dispatch) => {
+    axios
+      .get(`${API_URL}${URL_KEY_USER}`, {
+        headers: {
+          Authorization: getCookie("token"),
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch(setProfileValue(res.data.user.name, res.data.user.email));
+      })
+      .catch((err) => console.log(err));
+  };
+};

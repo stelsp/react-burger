@@ -28,6 +28,10 @@ function Profile() {
     dispatch(setProfileValue(e.target.name, e.target.value));
   };
 
+  const delete_cookie = () => {
+    document.cookie = "token" + "=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.links}>
@@ -37,7 +41,7 @@ function Profile() {
         <Link to="/" className={styles.link}>
           История заказов
         </Link>
-        <Link to="/" className={styles.link}>
+        <Link to="/" onClick={delete_cookie} className={styles.link}>
           Выход
         </Link>
         <p className={styles.text}>

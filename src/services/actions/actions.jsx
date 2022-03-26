@@ -140,8 +140,8 @@ export const getProfileValue = (field, value) => ({
   field,
   value,
 });
-export const setProfileValue = (name, email) => ({
+export const setProfileValue = (name, login) => ({
   type: ACTIONS.PROFILE_SET_VALUE,
   name,
-  email,
+  login,
 });

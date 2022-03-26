@@ -13,7 +13,7 @@ const profileReducer = (state = initialState.profile, action) => {
       return {
         ...state,
         name: action.name,
-        email: action.email,
+        login: action.login,
       };
     }
 
