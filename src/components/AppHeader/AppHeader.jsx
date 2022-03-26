@@ -9,12 +9,8 @@ import {
 import { APP_HEADER_LINKS } from "../../constants/content";
 
 import { Link } from "react-router-dom";
-import { getCookie } from "../../utils/cookie";
 
 function AppHeader() {
-  const isAuth = () => {
-    return getCookie("token") ? "/profile" : "/login";
-  };
   return (
     <header className={styles.header}>
       <div className={styles.wrapper}>
@@ -46,7 +42,7 @@ function AppHeader() {
             linkStyle={styles.link + " pl-5"}
             textStyle={"ml-2"}
             icon={<ProfileIcon type="secondary" />}
-            to={isAuth}
+            to={"profile"}
             text={APP_HEADER_LINKS.ACCOUNT}
           />
         </nav>

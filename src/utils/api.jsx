@@ -30,6 +30,7 @@ import {
   loginFormSubmitSuccess,
   loginFormSubmitFailed,
   getProfileValue,
+  patchProfileValue,
 } from "../services/actions/actions";
 
 import { getCookie, setCookie } from "./cookie";

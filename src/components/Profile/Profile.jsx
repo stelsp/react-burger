@@ -1,10 +1,13 @@
 import styles from "./Profile.module.css";
 import { Link } from "react-router-dom";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+  Input,
+  Button,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 import { setProfileValue } from "../../services/actions/actions";
-import { fetchProfileInfo } from "../../utils/api";
+import { fetchProfileInfo, patchProfileInfo } from "../../utils/api";
 
 function Profile() {
   const nameRef = useRef(null);
@@ -28,7 +31,7 @@ function Profile() {
     dispatch(fetchProfileInfo());
   }, [dispatch]);
 
-  const onChange = (e) => {
+  const onFormChange = (e) => {
     dispatch(setProfileValue(e.target.name, e.target.value));
   };
 
@@ -48,12 +51,12 @@ function Profile() {
           В этом разделе вы можете изменить свои персональные данные
         </p>
       </div>
-      <div className={styles.info}>
+      <form className={styles.form}>
         <div className={styles.input}>
           <Input
             type={"text"}
             placeholder={"Имя"}
-            onChange={onChange}
+            onChange={onFormChange}
             icon={"EditIcon"}
             value={name}
             name={"name"}
@@ -68,7 +71,7 @@ function Profile() {
           <Input
             type={"email"}
             placeholder={"Логин"}
-            onChange={onChange}
+            onChange={onFormChange}
             icon={"EditIcon"}
             value={login}
             name={"login"}
@@ -83,7 +86,7 @@ function Profile() {
           <Input
             type={"password"}
             placeholder={"Пароль"}
-            onChange={onChange}
+            onChange={onFormChange}
             icon={"EditIcon"}
             value={password}
             name={"password"}
@@ -94,7 +97,12 @@ function Profile() {
             ref={passwordRef}
           />
         </div>
-      </div>
+        <div className={styles.button}>
+          <Button type="primary" size="medium">
+            Сохранить
+          </Button>
+        </div>
+      </form>
     </div>
   );
 }

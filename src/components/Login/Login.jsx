@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setLoginFormValue } from "../../services/actions/actions";
 import { postLoginRequest } from "../../utils/api";
-import { Redirect } from "react-router-dom";
 
 function Login() {
   const dispatch = useDispatch();

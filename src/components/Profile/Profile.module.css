@@ -24,10 +24,16 @@
   opacity: 0.6;
 }
 
-.info {
+.form {
   composes: pl-6 from global; /* при нормальнйо ширине инпутов убрать pl-6 */
 }
 
 .input {
   composes: pb-6 from global;
+}
+
+.button {
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
 }
