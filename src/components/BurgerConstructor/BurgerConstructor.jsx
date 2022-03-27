@@ -3,11 +3,11 @@ import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-comp
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import Checkout from "./Checkout/Checkout";
 import { useSelector, useDispatch } from "react-redux";
+import { deleteConstructorIngredient } from "../../services/actions/constructorActions";
 import {
-  deleteConstructorIngredient,
   dragIngredient,
   sortIngredient,
-} from "../../services/actions/actions";
+} from "../../services/actions/ingredientsActions";
 import { useDrop, useDrag } from "react-dnd";
 import { useCallback } from "react";
 

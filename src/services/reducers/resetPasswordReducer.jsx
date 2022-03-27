@@ -24,7 +24,8 @@ const resetPasswordReducer = (state = initialState.resetPassword, action) => {
         ...state,
         form: {
           // При успешной регистрацией сбрасываем форму до исходного состояния
-          ...initialState.form,
+          token: "",
+          password: "",
         },
         resetPasswordRequest: false,
       };

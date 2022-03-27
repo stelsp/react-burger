@@ -6,7 +6,7 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useHistory } from "react-router-dom";
-import { setForgotPasswordFormValue } from "../../services/actions/actions";
+import { setForgotPasswordFormValue } from "../../services/actions/forgotPasswordActions";
 import { postForgotPasswordRequest } from "../../utils/api";
 
 function ForgotPassword() {

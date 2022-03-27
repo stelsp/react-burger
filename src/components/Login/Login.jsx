@@ -7,11 +7,13 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setLoginFormValue } from "../../services/actions/actions";
+import { setLoginFormValue } from "../../services/actions/loginActions";
 import { postLoginRequest } from "../../utils/api";
+import { useHistory } from "react-router-dom";
 
 function Login() {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const { email, password } = useSelector((store) => store.login.form);
 
@@ -23,6 +25,7 @@ function Login() {
     (e) => {
       e.preventDefault();
       dispatch(postLoginRequest(email, password));
+      history.replace({ path: "/" });
     },
     [email, password, dispatch]
   );

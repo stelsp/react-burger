@@ -14,28 +14,37 @@ import {
   getOrder,
   getOrderSuccess,
   getOrderFailed,
+} from "../services/actions/constructorActions";
+import {
   getIngredients,
   getIngredientsSuccess,
   getIngredientsFailed,
+} from "../services/actions/ingredientsActions";
+import {
   forgotPasswordFormSubmit,
   forgotPasswordFormSubmitSuccess,
   forgotPasswordFormSubmitFailed,
+} from "../services/actions/forgotPasswordActions";
+import {
   resetPasswordFormSubmit,
   resetPasswordFormSubmitSuccess,
   resetPasswordFormSubmitFailed,
+} from "../services/actions/resetPasswordActions";
+import {
   registerFormSubmit,
   registerFormSubmitSuccess,
   registerFormSubmitFailed,
+} from "../services/actions/registerActions";
+import {
   loginFormSubmit,
   loginFormSubmitSuccess,
   loginFormSubmitFailed,
-  getProfileValue,
-  patchProfileValue,
-} from "../services/actions/actions";
+} from "../services/actions/loginActions";
+import { getProfileValue } from "../services/actions/profileActions";
 
 import { getCookie, setCookie } from "./cookie";
 
-export const fetchData = () => {
+export const getData = () => {
   return (dispatch) => {
     dispatch(getIngredients());
     axios
@@ -45,7 +54,7 @@ export const fetchData = () => {
   };
 };
 
-export const fetchOrder = (ingredientsIDs) => {
+export const postOrder = (ingredientsIDs) => {
   return (dispatch) => {
     dispatch(getOrder());
     axios
@@ -107,13 +116,13 @@ export const postLoginRequest = (email, password) => {
       .then(({ data }) => {
         setCookie("token", data.accessToken);
       })
-      .then(() => dispatch(fetchProfileInfo()))
+      .then(() => dispatch(getProfileInfo()))
       .then(() => dispatch(loginFormSubmitSuccess()))
       .catch(() => dispatch(loginFormSubmitFailed()));
   };
 };
 
-export const fetchProfileInfo = () => {
+export const getProfileInfo = () => {
   return (dispatch) => {
     axios
       .get(`${API_URL}${URL_KEY_USER}`, {

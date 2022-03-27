@@ -10,8 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getOrderSuccess,
   resetConstructor,
-} from "../../../services/actions/actions";
-import { fetchOrder } from "../../../utils/api";
+} from "../../../services/actions/constructorActions";
+import { postOrder } from "../../../utils/api";
 
 function Checkout() {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ function Checkout() {
   }, [inner, outer]);
 
   const openModal = useCallback(() => {
-    dispatch(fetchOrder(ingredientsIDs));
+    dispatch(postOrder(ingredientsIDs));
   }, [ingredientsIDs, dispatch]);
 
   const closeModal = useCallback(() => {

@@ -1,13 +1,12 @@
 import styles from "./Profile.module.css";
 import { Link } from "react-router-dom";
-import { useRef, useEffect, useCallback } from "react";
+import { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { setProfileValue } from "../../services/actions/actions";
-import { fetchProfileInfo, patchProfileInfo } from "../../utils/api";
+import { setProfileValue } from "../../services/actions/profileActions";
 
 function Profile() {
   const nameRef = useRef(null);
@@ -26,10 +25,6 @@ function Profile() {
   const dispatch = useDispatch();
 
   const { name, login, password } = useSelector((store) => store.profile);
-
-  useEffect(() => {
-    dispatch(fetchProfileInfo());
-  }, [dispatch]);
 
   const onFormChange = (e) => {
     dispatch(setProfileValue(e.target.name, e.target.value));

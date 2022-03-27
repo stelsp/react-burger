@@ -7,7 +7,7 @@ import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { MODAL_TITLE_INGREDIENT } from "../../../constants/content";
 import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentIngredient } from "../../../services/actions/actions";
+import { setCurrentIngredient } from "../../../services/actions/ingredientsActions";
 import { useDrag } from "react-dnd";
 
 function Ingredient({ el }) {

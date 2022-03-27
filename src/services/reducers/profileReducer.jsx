@@ -8,7 +8,6 @@ const profileReducer = (state = initialState.profile, action) => {
         ...state,
         name: action.name,
         login: action.login,
-        password: action.password,
       };
     }
     case ACTIONS.PROFILE_SET_VALUE: {

@@ -7,7 +7,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setRegisterFormValue } from "../../services/actions/actions";
+import { setRegisterFormValue } from "../../services/actions/registerActions";
 import { postRegisterRequest } from "../../utils/api";
 
 function Register() {
