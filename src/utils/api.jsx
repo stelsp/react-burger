@@ -53,7 +53,7 @@ export const getData = () => {
         dispatch(getIngredientsSuccess(res.data.data));
       } catch (err) {
         let error = await err;
-        console.error(error);
+        console.log(error.response);
         dispatch(getIngredientsFailed());
       }
     })();
@@ -71,14 +71,14 @@ export const postOrder = (ingredientsIDs) => {
         dispatch(getOrderSuccess(res.data.data));
       } catch (err) {
         let error = await err;
-        console.error(error);
+        console.log(error.response);
         dispatch(getOrderFailed());
       }
     })();
   };
 };
 
-export const postForgotPasswordRequest = (email) => {
+export const postForgotPasswordRequest = (email, history) => {
   return (dispatch) => {
     dispatch(forgotPasswordFormSubmit());
     (async () => {
@@ -86,11 +86,11 @@ export const postForgotPasswordRequest = (email) => {
         await axios.post(`${API_URL}${URL_KEY_PASSWORD_FORGOT}`, {
           email: email,
         });
-
-        dispatch(forgotPasswordFormSubmitSuccess());
+        await dispatch(forgotPasswordFormSubmitSuccess());
+        history.replace({ pathname: "/reset-password" });
       } catch (err) {
         let error = await err;
-        console.error(error);
+        console.log(error.response);
         dispatch(forgotPasswordFormSubmitFailed());
       }
     })();
@@ -106,18 +106,17 @@ export const postResetPasswordRequest = (password, token) => {
           password: password,
           token: token,
         });
-
         dispatch(resetPasswordFormSubmitSuccess());
       } catch (err) {
         let error = await err;
-        console.error(error);
+        console.log(error.response);
         dispatch(resetPasswordFormSubmitFailed());
       }
     })();
   };
 };
 
-export const postRegisterRequest = (email, password, name) => {
+export const postRegisterRequest = (email, password, name, history) => {
   return (dispatch) => {
     dispatch(registerFormSubmit());
     (async () => {
@@ -127,11 +126,11 @@ export const postRegisterRequest = (email, password, name) => {
           password: password,
           name: name,
         });
-
-        dispatch(registerFormSubmitSuccess());
+        await dispatch(registerFormSubmitSuccess());
+        history.replace({ pathname: "/login" });
       } catch (err) {
         let error = await err;
-        console.error(error);
+        console.log(error.response);
         dispatch(registerFormSubmitFailed());
       }
     })();
@@ -148,12 +147,12 @@ export const postLoginRequest = (email, password, history) => {
           password: password,
         });
         setCookie("token", res.data.accessToken);
-        dispatch(getProfileInfo());
-        dispatch(loginFormSubmitSuccess());
+        await dispatch(getProfileInfo());
+        await dispatch(loginFormSubmitSuccess());
         history.replace({ pathname: "/" });
       } catch (err) {
         let error = await err;
-        console.error(error);
+        console.log(error.response);
         dispatch(loginFormSubmitFailed());
       }
     })();
@@ -172,7 +171,7 @@ export const getProfileInfo = () => {
         dispatch(getProfileValue(res.data.user.name, res.data.user.email));
       } catch (err) {
         let error = await err;
-        console.error(error);
+        console.log(error.response);
       }
     })();
   };

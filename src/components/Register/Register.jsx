@@ -6,13 +6,14 @@ import {
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setRegisterFormValue } from "../../services/actions/registerActions";
 import { postRegisterRequest } from "../../utils/api";
 
 function Register() {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const { name, email, password } = useSelector((store) => store.register.form);
   const { registerRequest, registerFailed } = useSelector(
@@ -26,9 +27,9 @@ function Register() {
   const onFormSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      dispatch(postRegisterRequest(email, password, name));
+      dispatch(postRegisterRequest(email, password, name, history));
     },
-    [email, password, name, dispatch]
+    [email, password, name, dispatch, history]
   );
 
   return (

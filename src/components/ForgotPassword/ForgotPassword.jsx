@@ -6,12 +6,13 @@ import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { setForgotPasswordFormValue } from "../../services/actions/forgotPasswordActions";
 import { postForgotPasswordRequest } from "../../utils/api";
 
 function ForgotPassword() {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const { email } = useSelector((store) => store.forgotPassword.form);
   const { forgotPasswordRequest, forgotPasswordFailed } = useSelector(
@@ -25,7 +26,7 @@ function ForgotPassword() {
   const onFormSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      dispatch(postForgotPasswordRequest(email));
+      dispatch(postForgotPasswordRequest(email, history));
     },
     [email, dispatch]
   );
