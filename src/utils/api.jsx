@@ -47,92 +47,133 @@ import { getCookie, setCookie } from "./cookie";
 export const getData = () => {
   return (dispatch) => {
     dispatch(getIngredients());
-    axios
-      .get(`${API_URL}${URL_KEY_INGREDIENTS}`)
-      .then(({ data }) => dispatch(getIngredientsSuccess(data.data)))
-      .catch(() => dispatch(getIngredientsFailed()));
+    (async () => {
+      try {
+        const res = await axios.get(`${API_URL}${URL_KEY_INGREDIENTS}`);
+        dispatch(getIngredientsSuccess(res.data.data));
+      } catch (err) {
+        let error = await err;
+        console.error(error);
+        dispatch(getIngredientsFailed());
+      }
+    })();
   };
 };
 
 export const postOrder = (ingredientsIDs) => {
   return (dispatch) => {
     dispatch(getOrder());
-    axios
-      .post(`${API_URL}${URL_KEY_ORDERS}`, {
-        ingredients: ingredientsIDs,
-      })
-      .then(({ data }) => dispatch(getOrderSuccess(data)))
-      .catch(() => dispatch(getOrderFailed()));
+    (async () => {
+      try {
+        const res = await axios.post(`${API_URL}${URL_KEY_ORDERS}`, {
+          ingredients: ingredientsIDs,
+        });
+        dispatch(getOrderSuccess(res.data.data));
+      } catch (err) {
+        let error = await err;
+        console.error(error);
+        dispatch(getOrderFailed());
+      }
+    })();
   };
 };
 
 export const postForgotPasswordRequest = (email) => {
   return (dispatch) => {
     dispatch(forgotPasswordFormSubmit());
-    axios
-      .post(`${API_URL}${URL_KEY_PASSWORD_FORGOT}`, {
-        email: email,
-      })
-      .then(() => dispatch(forgotPasswordFormSubmitSuccess()))
-      .catch(() => dispatch(forgotPasswordFormSubmitFailed()));
+    (async () => {
+      try {
+        await axios.post(`${API_URL}${URL_KEY_PASSWORD_FORGOT}`, {
+          email: email,
+        });
+
+        dispatch(forgotPasswordFormSubmitSuccess());
+      } catch (err) {
+        let error = await err;
+        console.error(error);
+        dispatch(forgotPasswordFormSubmitFailed());
+      }
+    })();
   };
 };
 
 export const postResetPasswordRequest = (password, token) => {
   return (dispatch) => {
     dispatch(resetPasswordFormSubmit());
-    axios
-      .post(`${API_URL}${URL_KEY_PASSWORD_RESET}`, {
-        password: password,
-        token: token,
-      })
-      .then(() => dispatch(resetPasswordFormSubmitSuccess()))
-      .catch(() => dispatch(resetPasswordFormSubmitFailed()));
+    (async () => {
+      try {
+        await axios.post(`${API_URL}${URL_KEY_PASSWORD_RESET}`, {
+          password: password,
+          token: token,
+        });
+
+        dispatch(resetPasswordFormSubmitSuccess());
+      } catch (err) {
+        let error = await err;
+        console.error(error);
+        dispatch(resetPasswordFormSubmitFailed());
+      }
+    })();
   };
 };
 
 export const postRegisterRequest = (email, password, name) => {
   return (dispatch) => {
     dispatch(registerFormSubmit());
-    axios
-      .post(`${API_URL}${URL_KEY_REGISTER}`, {
-        email: email,
-        password: password,
-        name: name,
-      })
-      .then(() => dispatch(registerFormSubmitSuccess()))
-      .catch(() => dispatch(registerFormSubmitFailed()));
+    (async () => {
+      try {
+        await axios.post(`${API_URL}${URL_KEY_REGISTER}`, {
+          email: email,
+          password: password,
+          name: name,
+        });
+
+        dispatch(registerFormSubmitSuccess());
+      } catch (err) {
+        let error = await err;
+        console.error(error);
+        dispatch(registerFormSubmitFailed());
+      }
+    })();
   };
 };
 
-export const postLoginRequest = (email, password) => {
+export const postLoginRequest = (email, password, history) => {
   return (dispatch) => {
     dispatch(loginFormSubmit());
-    axios
-      .post(`${API_URL}${URL_KEY_LOGIN}`, {
-        email: email,
-        password: password,
-      })
-      .then(({ data }) => {
-        setCookie("token", data.accessToken);
-      })
-      .then(() => dispatch(getProfileInfo()))
-      .then(() => dispatch(loginFormSubmitSuccess()))
-      .catch(() => dispatch(loginFormSubmitFailed()));
+    (async () => {
+      try {
+        const res = await axios.post(`${API_URL}${URL_KEY_LOGIN}`, {
+          email: email,
+          password: password,
+        });
+        setCookie("token", res.data.accessToken);
+        dispatch(getProfileInfo());
+        dispatch(loginFormSubmitSuccess());
+        history.replace({ pathname: "/" });
+      } catch (err) {
+        let error = await err;
+        console.error(error);
+        dispatch(loginFormSubmitFailed());
+      }
+    })();
   };
 };
 
 export const getProfileInfo = () => {
   return (dispatch) => {
-    axios
-      .get(`${API_URL}${URL_KEY_USER}`, {
-        headers: {
-          Authorization: getCookie("token"),
-        },
-      })
-      .then(({ data }) =>
-        dispatch(getProfileValue(data.user.name, data.user.email))
-      )
-      .catch((err) => console.log(err));
+    (async () => {
+      try {
+        const res = await axios.get(`${API_URL}${URL_KEY_USER}`, {
+          headers: {
+            Authorization: getCookie("token"),
+          },
+        });
+        dispatch(getProfileValue(res.data.user.name, res.data.user.email));
+      } catch (err) {
+        let error = await err;
+        console.error(error);
+      }
+    })();
   };
 };
