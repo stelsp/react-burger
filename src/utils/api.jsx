@@ -8,6 +8,8 @@ import {
   URL_KEY_REGISTER,
   URL_KEY_LOGIN,
   URL_KEY_USER,
+  URL_KEY_TOKEN,
+  URL_KEY_LOGOUT,
 } from "../constants/api-url";
 
 import {
@@ -45,7 +47,7 @@ import {
   patchProfileValue,
 } from "../services/actions/profileActions";
 
-import { getCookie, setCookie } from "./cookie";
+import { getCookie, setCookie, deleteCookie } from "./cookie";
 
 export const getData = () => {
   return (dispatch) => {
@@ -129,8 +131,8 @@ export const postRegisterRequest = (email, password, name, history) => {
           password: password,
           name: name,
         });
-        await dispatch(registerFormSubmitSuccess());
-        history.replace({ pathname: "/login" });
+        await dispatch(postLoginRequest(email, password, history));
+        dispatch(registerFormSubmitSuccess());
       } catch (err) {
         let error = await err;
         console.log(error.response);
@@ -149,7 +151,8 @@ export const postLoginRequest = (email, password, history) => {
           email: email,
           password: password,
         });
-        setCookie("token", res.data.accessToken);
+        setCookie("refreshToken", res.data.refreshToken);
+        setCookie("accessToken", res.data.accessToken);
         await dispatch(getProfileInfo());
         await dispatch(loginFormSubmitSuccess());
         history.replace({ pathname: "/" });
@@ -168,7 +171,7 @@ export const getProfileInfo = () => {
       try {
         const res = await axios.get(`${API_URL}${URL_KEY_USER}`, {
           headers: {
-            Authorization: getCookie("token"),
+            Authorization: getCookie("accessToken"),
           },
         });
         dispatch(getProfileValue(res.data.user.name, res.data.user.email));
@@ -189,11 +192,10 @@ export const patchProfileInfo = (name, email, password) => {
           { name: name, email: email, password: password },
           {
             headers: {
-              Authorization: getCookie("token"),
+              Authorization: getCookie("accessToken"),
             },
           }
         );
-        console.log(res);
         dispatch(patchProfileValue(name, res.data.user.name));
         dispatch(patchProfileValue(email, res.data.user.email));
         dispatch(patchProfileValue(password, res.data.user.password));
@@ -203,4 +205,34 @@ export const patchProfileInfo = (name, email, password) => {
       }
     })();
   };
+};
+
+export const refreshTokenRequest = () => {
+  (async () => {
+    try {
+      const res = await axios.post(`${API_URL}${URL_KEY_TOKEN}`, {
+        token: getCookie("refreshToken"),
+      });
+      setCookie("refreshToken", res.data.refreshToken);
+      setCookie("accessToken", res.data.accessToken);
+    } catch (err) {
+      const error = await err;
+      console.log(error.response);
+    }
+  })();
+};
+// TODO: добавить диспатч isAuth: true/false в зависимости от наличия accessToken
+export const logOutRequest = () => {
+  (async () => {
+    try {
+      await axios.post(`${API_URL}${URL_KEY_LOGOUT}`, {
+        token: getCookie("refreshToken"),
+      });
+      deleteCookie("accessToken");
+      deleteCookie("refreshToken");
+    } catch (err) {
+      const error = await err;
+      console.log(error.response);
+    }
+  })();
 };

@@ -6,3 +6,5 @@ export const URL_KEY_PASSWORD_RESET = "/password-reset/reset";
 export const URL_KEY_REGISTER = "/auth/register";
 export const URL_KEY_LOGIN = "/auth/login";
 export const URL_KEY_USER = "/auth/user";
+export const URL_KEY_TOKEN = "/auth/token";
+export const URL_KEY_LOGOUT = "/auth/logout";

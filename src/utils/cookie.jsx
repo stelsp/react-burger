@@ -27,3 +27,8 @@ export function setCookie(name, value, props) {
   }
   document.cookie = updatedCookie;
 }
+
+export function deleteCookie(name) {
+  // устанавливаем отрицательное время жизни, чтобы удалить сам ключ token
+  setCookie(name, null, { expires: -1 });
+}

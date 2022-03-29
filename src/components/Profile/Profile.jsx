@@ -7,7 +7,11 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { setProfileValue } from "../../services/actions/profileActions";
-import { getProfileInfo, patchProfileInfo } from "../../utils/api";
+import {
+  getProfileInfo,
+  logOutRequest,
+  patchProfileInfo,
+} from "../../utils/api";
 import { getCookie } from "../../utils/cookie";
 
 function Profile() {
@@ -29,7 +33,7 @@ function Profile() {
   const { name, login, password } = useSelector((store) => store.profile);
 
   useEffect(() => {
-    if (getCookie("token")) return dispatch(getProfileInfo());
+    if (getCookie("accessToken")) return dispatch(getProfileInfo());
   }, [dispatch]);
 
   const onFormChange = (e) => {
@@ -45,8 +49,13 @@ function Profile() {
   );
 
   const onFormReset = useCallback(() => {
-    if (getCookie("token")) return dispatch(getProfileInfo());
+    if (getCookie("accessToken")) return dispatch(getProfileInfo());
   }, [dispatch]);
+
+  // TODO: добавить диспатч isAuth: true/false в зависимости от наличия accessToken
+  const onLogOut = useCallback(() => {
+    logOutRequest();
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -57,7 +66,7 @@ function Profile() {
         <Link to={"/"} className={styles.link}>
           История заказов
         </Link>
-        <Link to={"login"} className={styles.link}>
+        <Link to={"login"} className={styles.link} onClick={onLogOut}>
           Выход
         </Link>
         <p className={styles.text}>
@@ -112,14 +121,14 @@ function Profile() {
         </div>
         <div className={styles.buttons}>
           <div className={styles.button}>
-            <Button type="primary" size="small">
+            <Button type="primary" size="medium">
               Сохранить
             </Button>
           </div>
           <div className={styles.button}>
             <Button
               type="primary"
-              size="small"
+              size="medium"
               onClick={onFormReset}
               htmlType="reset"
             >
