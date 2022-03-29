@@ -40,7 +40,10 @@ import {
   loginFormSubmitSuccess,
   loginFormSubmitFailed,
 } from "../services/actions/loginActions";
-import { getProfileValue } from "../services/actions/profileActions";
+import {
+  getProfileValue,
+  patchProfileValue,
+} from "../services/actions/profileActions";
 
 import { getCookie, setCookie } from "./cookie";
 
@@ -169,6 +172,31 @@ export const getProfileInfo = () => {
           },
         });
         dispatch(getProfileValue(res.data.user.name, res.data.user.email));
+      } catch (err) {
+        let error = await err;
+        console.log(error.response);
+      }
+    })();
+  };
+};
+
+export const patchProfileInfo = (name, email, password) => {
+  return (dispatch) => {
+    (async () => {
+      try {
+        const res = await axios.patch(
+          `${API_URL}${URL_KEY_USER}`,
+          { name: name, email: email, password: password },
+          {
+            headers: {
+              Authorization: getCookie("token"),
+            },
+          }
+        );
+        console.log(res);
+        dispatch(patchProfileValue(name, res.data.user.name));
+        dispatch(patchProfileValue(email, res.data.user.email));
+        dispatch(patchProfileValue(password, res.data.user.password));
       } catch (err) {
         let error = await err;
         console.log(error.response);

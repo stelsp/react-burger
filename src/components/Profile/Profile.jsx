@@ -1,12 +1,14 @@
 import styles from "./Profile.module.css";
 import { Link } from "react-router-dom";
-import { useRef } from "react";
+import { useCallback, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { setProfileValue } from "../../services/actions/profileActions";
+import { getProfileInfo, patchProfileInfo } from "../../utils/api";
+import { getCookie } from "../../utils/cookie";
 
 function Profile() {
   const nameRef = useRef(null);
@@ -26,9 +28,25 @@ function Profile() {
 
   const { name, login, password } = useSelector((store) => store.profile);
 
+  useEffect(() => {
+    if (getCookie("token")) return dispatch(getProfileInfo());
+  }, [dispatch]);
+
   const onFormChange = (e) => {
     dispatch(setProfileValue(e.target.name, e.target.value));
   };
+
+  const onFormSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      dispatch(patchProfileInfo(name, login, password));
+    },
+    [name, login, password, dispatch]
+  );
+
+  const onFormReset = useCallback(() => {
+    if (getCookie("token")) return dispatch(getProfileInfo());
+  }, [dispatch]);
 
   return (
     <div className={styles.container}>
@@ -46,7 +64,7 @@ function Profile() {
           В этом разделе вы можете изменить свои персональные данные
         </p>
       </div>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={onFormSubmit}>
         <div className={styles.input}>
           <Input
             type={"text"}
@@ -92,10 +110,22 @@ function Profile() {
             ref={passwordRef}
           />
         </div>
-        <div className={styles.button}>
-          <Button type="primary" size="medium">
-            Сохранить
-          </Button>
+        <div className={styles.buttons}>
+          <div className={styles.button}>
+            <Button type="primary" size="small">
+              Сохранить
+            </Button>
+          </div>
+          <div className={styles.button}>
+            <Button
+              type="primary"
+              size="small"
+              onClick={onFormReset}
+              htmlType="reset"
+            >
+              Отмена
+            </Button>
+          </div>
         </div>
       </form>
     </div>

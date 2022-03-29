@@ -11,3 +11,8 @@ export const getProfileValue = (name, login) => ({
   name,
   login,
 });
+export const patchProfileValue = (field, value) => ({
+  type: ACTIONS.PROFILE_PATCH_VALUE,
+  field,
+  value,
+});

@@ -16,6 +16,12 @@ const profileReducer = (state = initialState.profile, action) => {
         [action.field]: action.value,
       };
     }
+    case ACTIONS.PROFILE_PATCH_VALUE: {
+      return {
+        ...state,
+        [action.field]: action.value,
+      };
+    }
 
     default:
       return state;

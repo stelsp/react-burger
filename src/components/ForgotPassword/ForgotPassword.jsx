@@ -28,7 +28,7 @@ function ForgotPassword() {
       e.preventDefault();
       dispatch(postForgotPasswordRequest(email, history));
     },
-    [email, dispatch]
+    [email, dispatch, history]
   );
 
   return (
