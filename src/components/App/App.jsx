@@ -1,5 +1,10 @@
 import styles from "./App.module.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import AppHeader from "../AppHeader/AppHeader";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
@@ -15,6 +20,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getData } from "../../utils/api";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+
+import { getCookie } from "../../utils/cookie";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -38,10 +45,14 @@ export default function App() {
             <AppHeader />
             <Switch>
               <Route path="/" exact={true}>
-                <main className={styles.main}>
-                  <BurgerIngredients />
-                  <BurgerConstructor />
-                </main>
+                {getCookie("accessToken") ? (
+                  <main className={styles.main}>
+                    <BurgerIngredients />
+                    <BurgerConstructor />
+                  </main>
+                ) : (
+                  <Redirect to={{ pathname: "/login" }} />
+                )}
               </Route>
               <Route path="/register" exact={true}>
                 <main className={styles.login}>
@@ -49,9 +60,13 @@ export default function App() {
                 </main>
               </Route>
               <Route path="/login" exact={true}>
-                <main className={styles.login}>
-                  <Login />
-                </main>
+                {getCookie("accessToken") ? (
+                  <Redirect to={{ pathname: "/" }} />
+                ) : (
+                  <main className={styles.login}>
+                    <Login />
+                  </main>
+                )}
               </Route>
               <Route path="/forgot-password" exact={true}>
                 <main className={styles.login}>

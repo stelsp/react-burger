@@ -131,8 +131,8 @@ export const postRegisterRequest = (email, password, name, history) => {
           password: password,
           name: name,
         });
-        await dispatch(postLoginRequest(email, password, history));
-        dispatch(registerFormSubmitSuccess());
+        await dispatch(registerFormSubmitSuccess());
+        dispatch(postLoginRequest(email, password, history));
       } catch (err) {
         let error = await err;
         console.log(error.response);
@@ -223,16 +223,18 @@ export const refreshTokenRequest = () => {
 };
 // TODO: добавить диспатч isAuth: true/false в зависимости от наличия accessToken
 export const logOutRequest = () => {
-  (async () => {
-    try {
-      await axios.post(`${API_URL}${URL_KEY_LOGOUT}`, {
-        token: getCookie("refreshToken"),
-      });
-      deleteCookie("accessToken");
-      deleteCookie("refreshToken");
-    } catch (err) {
-      const error = await err;
-      console.log(error.response);
-    }
-  })();
+  return (dispatch) => {
+    (async () => {
+      try {
+        await axios.post(`${API_URL}${URL_KEY_LOGOUT}`, {
+          token: getCookie("refreshToken"),
+        });
+        deleteCookie("accessToken");
+        deleteCookie("refreshToken");
+      } catch (err) {
+        const error = await err;
+        console.log(error.response);
+      }
+    })();
+  };
 };

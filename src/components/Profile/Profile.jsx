@@ -54,8 +54,8 @@ function Profile() {
 
   // TODO: добавить диспатч isAuth: true/false в зависимости от наличия accessToken
   const onLogOut = useCallback(() => {
-    logOutRequest();
-  }, []);
+    dispatch(logOutRequest());
+  }, [dispatch]);
 
   return (
     <div className={styles.container}>

@@ -16,3 +16,5 @@ export const patchProfileValue = (field, value) => ({
   field,
   value,
 });
+export const logIn = () => ({ type: ACTIONS.PROFILE_LOG_IN });
+export const logOut = () => ({ type: ACTIONS.PROFILE_LOG_OUT });
