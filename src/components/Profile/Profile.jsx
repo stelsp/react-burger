@@ -6,7 +6,10 @@ import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { setProfileValue } from "../../services/actions/profileActions";
+import {
+  setProfileValue,
+  userOut,
+} from "../../services/actions/profileActions";
 import {
   getProfileInfo,
   logOutRequest,
@@ -55,6 +58,7 @@ function Profile() {
   // TODO: добавить диспатч isAuth: true/false в зависимости от наличия accessToken
   const onLogOut = useCallback(() => {
     dispatch(logOutRequest());
+    dispatch(userOut());
   }, [dispatch]);
 
   return (

@@ -45,6 +45,7 @@ import {
 import {
   getProfileValue,
   patchProfileValue,
+  userIn,
 } from "../services/actions/profileActions";
 
 import { getCookie, setCookie, deleteCookie } from "./cookie";
@@ -155,6 +156,7 @@ export const postLoginRequest = (email, password, history) => {
         setCookie("accessToken", res.data.accessToken);
         await dispatch(getProfileInfo());
         await dispatch(loginFormSubmitSuccess());
+        await dispatch(userIn());
         history.replace({ pathname: "/" });
       } catch (err) {
         let error = await err;

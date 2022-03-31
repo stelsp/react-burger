@@ -22,6 +22,18 @@ const profileReducer = (state = initialState.profile, action) => {
         [action.field]: action.value,
       };
     }
+    case ACTIONS.PROFILE_USER_IN: {
+      return {
+        ...state,
+        user: true,
+      };
+    }
+    case ACTIONS.PROFILE_USER_OUT: {
+      return {
+        ...state,
+        user: false,
+      };
+    }
 
     default:
       return state;

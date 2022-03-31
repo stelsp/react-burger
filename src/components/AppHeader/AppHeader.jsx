@@ -28,7 +28,7 @@ function AppHeader() {
               linkStyle={styles.link + " pr-5 pl-5"}
               textStyle={"ml-2"}
               icon={<ListIcon type="secondary" />}
-              to={"#"}
+              to={"login"}
               text={APP_HEADER_LINKS.ORDER_FEED}
             />
           </div>

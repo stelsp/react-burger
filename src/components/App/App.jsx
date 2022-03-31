@@ -28,6 +28,7 @@ export default function App() {
   const { ingredientsRequest, ingredientsFailed } = useSelector(
     (store) => store.ingredients
   );
+  const { user } = useSelector((store) => store.profile);
 
   useEffect(() => {
     dispatch(getData());
@@ -45,7 +46,7 @@ export default function App() {
             <AppHeader />
             <Switch>
               <Route path="/" exact={true}>
-                {getCookie("accessToken") ? (
+                {user ? (
                   <main className={styles.main}>
                     <BurgerIngredients />
                     <BurgerConstructor />
@@ -60,7 +61,7 @@ export default function App() {
                 </main>
               </Route>
               <Route path="/login" exact={true}>
-                {getCookie("accessToken") ? (
+                {user ? (
                   <Redirect to={{ pathname: "/" }} />
                 ) : (
                   <main className={styles.login}>
@@ -79,9 +80,13 @@ export default function App() {
                 </main>
               </Route>
               <Route path="/profile" exact={true}>
-                <main className={styles.profile}>
-                  <Profile />
-                </main>
+                {user ? (
+                  <main className={styles.profile}>
+                    <Profile />
+                  </main>
+                ) : (
+                  <Redirect to={{ pathname: "/login" }} />
+                )}
               </Route>
               <Route path="/ingredients/:id" exact={true}>
                 ingredients/:id
