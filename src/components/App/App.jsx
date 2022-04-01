@@ -99,7 +99,7 @@ export default function App() {
                     <Profile />
                   </main>
                 ) : (
-                  <Redirect to={{ pathname: "/login" }} />
+                  <Redirect to={{ pathname: "/" }} />
                 )}
               </Route>
               <Route path="/ingredients/:id" exact={true}>
