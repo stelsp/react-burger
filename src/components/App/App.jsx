@@ -22,6 +22,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
 import { getCookie } from "../../utils/cookie";
+import { userIn } from "../../services/actions/profileActions";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ export default function App() {
 
   useEffect(() => {
     dispatch(getData());
+    if (getCookie("accessToken")) return dispatch(userIn());
   }, [dispatch]);
 
   return (
@@ -56,9 +58,13 @@ export default function App() {
                 )}
               </Route>
               <Route path="/register" exact={true}>
-                <main className={styles.login}>
-                  <Register />
-                </main>
+                {user ? (
+                  <Redirect to={{ pathname: "/" }} />
+                ) : (
+                  <main className={styles.login}>
+                    <Register />
+                  </main>
+                )}
               </Route>
               <Route path="/login" exact={true}>
                 {user ? (
@@ -70,14 +76,22 @@ export default function App() {
                 )}
               </Route>
               <Route path="/forgot-password" exact={true}>
-                <main className={styles.login}>
-                  <ForgotPassword />
-                </main>
+                {user ? (
+                  <Redirect to={{ pathname: "/" }} />
+                ) : (
+                  <main className={styles.login}>
+                    <ForgotPassword />
+                  </main>
+                )}
               </Route>
               <Route path="/reset-password" exact={true}>
-                <main className={styles.login}>
-                  <ResetPassword />
-                </main>
+                {user ? (
+                  <Redirect to={{ pathname: "/" }} />
+                ) : (
+                  <main className={styles.login}>
+                    <ResetPassword />
+                  </main>
+                )}
               </Route>
               <Route path="/profile" exact={true}>
                 {user ? (

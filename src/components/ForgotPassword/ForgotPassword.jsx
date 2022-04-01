@@ -61,7 +61,7 @@ function ForgotPassword() {
           </form>
           <div className={styles.footer}>
             <p className={styles.text}>Вспомнили пароль?</p>
-            <Link className={styles.text} to="/register">
+            <Link className={styles.text} to="/login">
               Войти
             </Link>
           </div>

@@ -46,6 +46,7 @@ import {
   getProfileValue,
   patchProfileValue,
   userIn,
+  userOut,
 } from "../services/actions/profileActions";
 
 import { getCookie, setCookie, deleteCookie } from "./cookie";
@@ -223,7 +224,7 @@ export const refreshTokenRequest = () => {
     }
   })();
 };
-// TODO: добавить диспатч isAuth: true/false в зависимости от наличия accessToken
+
 export const logOutRequest = () => {
   return (dispatch) => {
     (async () => {
@@ -233,6 +234,7 @@ export const logOutRequest = () => {
         });
         deleteCookie("accessToken");
         deleteCookie("refreshToken");
+        dispatch(userOut());
       } catch (err) {
         const error = await err;
         console.log(error.response);
