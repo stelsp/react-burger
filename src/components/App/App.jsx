@@ -36,6 +36,8 @@ export default function App() {
     if (getCookie("accessToken")) return dispatch(userIn());
   }, [dispatch]);
 
+  const test = 1;
+
   return (
     <Router>
       <DndProvider backend={HTML5Backend}>
