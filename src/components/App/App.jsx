@@ -23,6 +23,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 import { getCookie } from "../../utils/cookie";
 import { userIn } from "../../services/actions/profileActions";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -36,8 +37,6 @@ export default function App() {
     if (getCookie("accessToken")) return dispatch(userIn());
   }, [dispatch]);
 
-  const test = 1;
-
   return (
     <Router>
       <DndProvider backend={HTML5Backend}>
@@ -49,60 +48,36 @@ export default function App() {
           <>
             <AppHeader />
             <Switch>
-              <Route path="/" exact={true}>
-                {user ? (
-                  <main className={styles.main}>
-                    <BurgerIngredients />
-                    <BurgerConstructor />
-                  </main>
-                ) : (
-                  <Redirect to={{ pathname: "/login" }} />
-                )}
-              </Route>
+              <ProtectedRoute path="/" to="/login" exact={true}>
+                <main className={styles.main}>
+                  <BurgerIngredients />
+                  <BurgerConstructor />
+                </main>
+              </ProtectedRoute>
               <Route path="/register" exact={true}>
-                {user ? (
-                  <Redirect to={{ pathname: "/" }} />
-                ) : (
-                  <main className={styles.login}>
-                    <Register />
-                  </main>
-                )}
+                <main className={styles.login}>
+                  <Register />
+                </main>
               </Route>
               <Route path="/login" exact={true}>
-                {user ? (
-                  <Redirect to={{ pathname: "/" }} />
-                ) : (
-                  <main className={styles.login}>
-                    <Login />
-                  </main>
-                )}
+                <main className={styles.login}>
+                  <Login />
+                </main>
               </Route>
-              <Route path="/forgot-password" exact={true}>
-                {user ? (
-                  <Redirect to={{ pathname: "/" }} />
-                ) : (
-                  <main className={styles.login}>
-                    <ForgotPassword />
-                  </main>
-                )}
-              </Route>
+              <ProtectedRoute path="/forgot-password" to="/login" exact={true}>
+                <main className={styles.login}>
+                  <ForgotPassword />
+                </main>
+              </ProtectedRoute>
               <Route path="/reset-password" exact={true}>
-                {user ? (
-                  <Redirect to={{ pathname: "/" }} />
-                ) : (
-                  <main className={styles.login}>
-                    <ResetPassword />
-                  </main>
-                )}
+                <main className={styles.login}>
+                  <ResetPassword />
+                </main>
               </Route>
               <Route path="/profile" exact={true}>
-                {user ? (
-                  <main className={styles.profile}>
-                    <Profile />
-                  </main>
-                ) : (
-                  <Redirect to={{ pathname: "/" }} />
-                )}
+                <main className={styles.profile}>
+                  <Profile />
+                </main>
               </Route>
               <Route path="/ingredients/:id" exact={true}>
                 ingredients/:id

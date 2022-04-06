@@ -1,12 +1,19 @@
 import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function ProtectedRoute({ children, path, to }) {
+function ProtectedRoute({ children, to, ...rest }) {
   const { user } = useSelector((store) => store.profile);
   return (
-    <Route path={path} exact={true}>
-      {user ? children : <Redirect to={{ pathname: to }} />}
-    </Route>
+    <Route
+      {...rest}
+      render={({ location }) =>
+        user ? (
+          children
+        ) : (
+          <Redirect to={{ pathname: to, state: { from: location } }} />
+        )
+      }
+    />
   );
 }
 export default ProtectedRoute;
