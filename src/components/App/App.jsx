@@ -23,14 +23,14 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 import { getCookie } from "../../utils/cookie";
 import { userIn } from "../../services/actions/profileActions";
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+
+import { RouteUserIn, RouteUserOut } from "../ProtectedRoute/ProtectedRoute";
 
 export default function App() {
   const dispatch = useDispatch();
   const { ingredientsRequest, ingredientsFailed } = useSelector(
     (store) => store.ingredients
   );
-  const { user } = useSelector((store) => store.profile);
 
   useEffect(() => {
     dispatch(getData());
@@ -48,37 +48,37 @@ export default function App() {
           <>
             <AppHeader />
             <Switch>
-              <ProtectedRoute path="/" to="/login" exact={true}>
+              <RouteUserOut path="/" to="/login" exact={true}>
                 <main className={styles.main}>
                   <BurgerIngredients />
                   <BurgerConstructor />
                 </main>
-              </ProtectedRoute>
-              <Route path="/register" exact={true}>
-                <main className={styles.login}>
-                  <Register />
-                </main>
-              </Route>
-              <Route path="/login" exact={true}>
-                <main className={styles.login}>
-                  <Login />
-                </main>
-              </Route>
-              <ProtectedRoute path="/forgot-password" to="/login" exact={true}>
-                <main className={styles.login}>
-                  <ForgotPassword />
-                </main>
-              </ProtectedRoute>
-              <Route path="/reset-password" exact={true}>
-                <main className={styles.login}>
-                  <ResetPassword />
-                </main>
-              </Route>
-              <Route path="/profile" exact={true}>
+              </RouteUserOut>
+              <RouteUserOut path="/profile" to="/login" exact={true}>
                 <main className={styles.profile}>
                   <Profile />
                 </main>
-              </Route>
+              </RouteUserOut>
+              <RouteUserIn path="/register" to="/" exact={true}>
+                <main className={styles.login}>
+                  <Register />
+                </main>
+              </RouteUserIn>
+              <RouteUserIn path="/login" to="/" exact={true}>
+                <main className={styles.login}>
+                  <Login />
+                </main>
+              </RouteUserIn>
+              <RouteUserIn path="/forgot-password" to="/" exact={true}>
+                <main className={styles.login}>
+                  <ForgotPassword />
+                </main>
+              </RouteUserIn>
+              <RouteUserIn path="/reset-password" to="/" exact={true}>
+                <main className={styles.login}>
+                  <ResetPassword />
+                </main>
+              </RouteUserIn>
               <Route path="/ingredients/:id" exact={true}>
                 ingredients/:id
               </Route>

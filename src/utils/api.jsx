@@ -155,7 +155,6 @@ export const postLoginRequest = (email, password, history) => {
         });
         setCookie("refreshToken", res.data.refreshToken);
         setCookie("accessToken", res.data.accessToken);
-        await dispatch(getProfileInfo());
         await dispatch(loginFormSubmitSuccess());
         await dispatch(userIn());
         history.replace({ pathname: "/" });
