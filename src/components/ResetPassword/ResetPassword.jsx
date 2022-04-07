@@ -32,50 +32,52 @@ function ResetPassword() {
   );
 
   return (
-    <div className={styles.container}>
-      {resetPasswordRequest ? (
-        <Loader />
-      ) : resetPasswordFailed ? (
-        <h1>Произошла ошибка при отправке данных</h1>
-      ) : (
-        <>
-          <h2 className={styles.heading}>Восстановление пароля</h2>
-          <form className={styles.form} onSubmit={onFormSubmit}>
-            <div className={styles.input}>
-              <PasswordInput
-                onChange={onFormChange}
-                value={password}
-                placeholder={"Введите новый пароль"}
-                name={"password"}
-              />
+    <main className={styles.section}>
+      <div className={styles.container}>
+        {resetPasswordRequest ? (
+          <Loader />
+        ) : resetPasswordFailed ? (
+          <h1>Произошла ошибка при отправке данных</h1>
+        ) : (
+          <>
+            <h2 className={styles.heading}>Восстановление пароля</h2>
+            <form className={styles.form} onSubmit={onFormSubmit}>
+              <div className={styles.input}>
+                <PasswordInput
+                  onChange={onFormChange}
+                  value={password}
+                  placeholder={"Введите новый пароль"}
+                  name={"password"}
+                />
+              </div>
+              <div className={styles.input}>
+                <Input
+                  type={"text"}
+                  placeholder={"Введите код из письма"}
+                  onChange={onFormChange}
+                  value={token}
+                  error={false}
+                  errorText={"Ошибка"}
+                  size={"default"}
+                  name={"token"}
+                />
+              </div>
+              <div className={styles.button}>
+                <Button type="primary" size="medium">
+                  Сохранить
+                </Button>
+              </div>
+            </form>
+            <div className={styles.footer}>
+              <p className={styles.text}>Вспомнили пароль?</p>
+              <Link className={styles.text} to="/login">
+                Войти
+              </Link>
             </div>
-            <div className={styles.input}>
-              <Input
-                type={"text"}
-                placeholder={"Введите код из письма"}
-                onChange={onFormChange}
-                value={token}
-                error={false}
-                errorText={"Ошибка"}
-                size={"default"}
-                name={"token"}
-              />
-            </div>
-            <div className={styles.button}>
-              <Button type="primary" size="medium">
-                Сохранить
-              </Button>
-            </div>
-          </form>
-          <div className={styles.footer}>
-            <p className={styles.text}>Вспомнили пароль?</p>
-            <Link className={styles.text} to="/login">
-              Войти
-            </Link>
-          </div>
-        </>
-      )}
-    </div>
+          </>
+        )}
+      </div>
+    </main>
   );
 }
 

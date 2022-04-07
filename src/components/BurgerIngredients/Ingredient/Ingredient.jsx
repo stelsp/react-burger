@@ -12,8 +12,8 @@ import { useDrag } from "react-dnd";
 
 function Ingredient({ el }) {
   const dispatch = useDispatch();
-  const { currentIngredient } = useSelector((store) => store);
   const { outer, inner } = useSelector((store) => store.burgerConstructor);
+  const currentIngredient = useSelector((store) => store.currentIngredient);
 
   const count = useMemo(() => {
     return el.type === "bun" && el._id === outer._id

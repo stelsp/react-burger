@@ -10,7 +10,7 @@ export function RouteUserOut({ children, to, ...rest }) {
         user ? (
           children
         ) : (
-          <Redirect to={{ pathname: to, state: { from: location } }} />
+          <Redirect to={{ pathname: "/login", state: { from: location } }} />
         )
       }
     />
@@ -24,7 +24,7 @@ export function RouteUserIn({ children, to, ...rest }) {
       {...rest}
       render={({ location }) =>
         user ? (
-          <Redirect to={{ pathname: to, state: { from: location } }} />
+          <Redirect to={{ pathname: "/", state: { from: location } }} />
         ) : (
           children
         )

@@ -9,9 +9,7 @@ export const getIngredients = () => ({
 
 export const getIngredientsSuccess = (ingredients) => ({
   type: ACTIONS.GET_INGREDIENTS_SUCCESS,
-  bun: ingredients.filter((el) => el.type === "bun"),
-  sauce: ingredients.filter((el) => el.type === "sauce"),
-  main: ingredients.filter((el) => el.type === "main"),
+  ingredients: ingredients,
 });
 
 export const getIngredientsFailed = () => ({

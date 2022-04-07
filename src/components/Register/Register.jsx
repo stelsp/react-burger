@@ -33,61 +33,63 @@ function Register() {
   );
 
   return (
-    <div className={styles.container}>
-      {registerRequest ? (
-        <Loader />
-      ) : registerFailed ? (
-        <h1>Произошла ошибка при отправке данных</h1>
-      ) : (
-        <>
-          <h2 className={styles.heading}>Регистрация</h2>
-          <form className={styles.form} onSubmit={onFormSubmit}>
-            <div className={styles.input}>
-              <Input
-                type={"text"}
-                placeholder={"Имя"}
-                onChange={onFormChange}
-                value={name}
-                error={false}
-                errorText={"Ошибка"}
-                size={"default"}
-                name={"name"}
-              />
+    <main className={styles.section}>
+      <div className={styles.container}>
+        {registerRequest ? (
+          <Loader />
+        ) : registerFailed ? (
+          <h1>Произошла ошибка при отправке данных</h1>
+        ) : (
+          <>
+            <h2 className={styles.heading}>Регистрация</h2>
+            <form className={styles.form} onSubmit={onFormSubmit}>
+              <div className={styles.input}>
+                <Input
+                  type={"text"}
+                  placeholder={"Имя"}
+                  onChange={onFormChange}
+                  value={name}
+                  error={false}
+                  errorText={"Ошибка"}
+                  size={"default"}
+                  name={"name"}
+                />
+              </div>
+              <div className={styles.input}>
+                <Input
+                  type={"email"}
+                  placeholder={"E-mail"}
+                  onChange={onFormChange}
+                  value={email}
+                  error={false}
+                  errorText={"Ошибка"}
+                  size={"default"}
+                  name={"email"}
+                />
+              </div>
+              <div className={styles.input}>
+                <PasswordInput
+                  onChange={onFormChange}
+                  value={password}
+                  name={"password"}
+                />
+              </div>
+              <div className={styles.button}>
+                <Button type="primary" size="medium" htmlType="submit">
+                  Зарегистрироваться
+                </Button>
+              </div>
+            </form>
+            <div className={styles.footer}>
+              <p className={styles.text}>Уже зарегистрированы?</p>
+              <Link className={styles.text} to="/login">
+                Войти
+              </Link>
             </div>
-            <div className={styles.input}>
-              <Input
-                type={"email"}
-                placeholder={"E-mail"}
-                onChange={onFormChange}
-                value={email}
-                error={false}
-                errorText={"Ошибка"}
-                size={"default"}
-                name={"email"}
-              />
-            </div>
-            <div className={styles.input}>
-              <PasswordInput
-                onChange={onFormChange}
-                value={password}
-                name={"password"}
-              />
-            </div>
-            <div className={styles.button}>
-              <Button type="primary" size="medium" htmlType="submit">
-                Зарегистрироваться
-              </Button>
-            </div>
-          </form>
-          <div className={styles.footer}>
-            <p className={styles.text}>Уже зарегистрированы?</p>
-            <Link className={styles.text} to="/login">
-              Войти
-            </Link>
-          </div>
-        </>
-      )}
-    </div>
+          </>
+        )}
+      </div>
+    </main>
   );
 }
 

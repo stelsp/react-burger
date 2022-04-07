@@ -58,86 +58,88 @@ function Profile() {
   }, [history]);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.links}>
-        <Link to={"/profile"} className={styles.link}>
-          Профиль
-        </Link>
-        <Link to={"/"} className={styles.link}>
-          История заказов
-        </Link>
-        <Link to={"/profile"} className={styles.link} onClick={onLogOut}>
-          Выход
-        </Link>
-        <p className={styles.text}>
-          В этом разделе вы можете изменить свои персональные данные
-        </p>
+    <main className={styles.section}>
+      <div className={styles.container}>
+        <div className={styles.links}>
+          <Link to={"/profile"} className={styles.link}>
+            Профиль
+          </Link>
+          <Link to={"/"} className={styles.link}>
+            История заказов
+          </Link>
+          <Link to={"/profile"} className={styles.link} onClick={onLogOut}>
+            Выход
+          </Link>
+          <p className={styles.text}>
+            В этом разделе вы можете изменить свои персональные данные
+          </p>
+        </div>
+        <form className={styles.form} onSubmit={onFormSubmit}>
+          <div className={styles.input}>
+            <Input
+              type={"text"}
+              placeholder={"Имя"}
+              onChange={onFormChange}
+              icon={"EditIcon"}
+              value={name}
+              name={"name"}
+              error={false}
+              onIconClick={onNameIconClick}
+              errorText={"Ошибка"}
+              size={"default"}
+              ref={nameRef}
+            />
+          </div>
+          <div className={styles.input}>
+            <Input
+              type={"email"}
+              placeholder={"Логин"}
+              onChange={onFormChange}
+              icon={"EditIcon"}
+              value={login}
+              name={"login"}
+              error={false}
+              onIconClick={onLoginIconClick}
+              errorText={"Ошибка"}
+              size={"default"}
+              ref={loginRef}
+            />
+          </div>
+          <div className={styles.input}>
+            <Input
+              type={"password"}
+              placeholder={"Пароль"}
+              onChange={onFormChange}
+              icon={"EditIcon"}
+              value={password}
+              name={"password"}
+              error={false}
+              onIconClick={onPasswordIconClick}
+              errorText={"Ошибка"}
+              size={"default"}
+              ref={passwordRef}
+            />
+          </div>
+          <div className={styles.buttons}>
+            <div className={styles.button}>
+              <Button type="primary" size="medium">
+                Сохранить
+              </Button>
+            </div>
+            <div className={styles.button}>
+              <Button
+                type="primary"
+                size="medium"
+                onClick={onFormReset}
+                htmlType="reset"
+              >
+                Отмена
+              </Button>
+            </div>
+          </div>
+        </form>
       </div>
-      <form className={styles.form} onSubmit={onFormSubmit}>
-        <div className={styles.input}>
-          <Input
-            type={"text"}
-            placeholder={"Имя"}
-            onChange={onFormChange}
-            icon={"EditIcon"}
-            value={name}
-            name={"name"}
-            error={false}
-            onIconClick={onNameIconClick}
-            errorText={"Ошибка"}
-            size={"default"}
-            ref={nameRef}
-          />
-        </div>
-        <div className={styles.input}>
-          <Input
-            type={"email"}
-            placeholder={"Логин"}
-            onChange={onFormChange}
-            icon={"EditIcon"}
-            value={login}
-            name={"login"}
-            error={false}
-            onIconClick={onLoginIconClick}
-            errorText={"Ошибка"}
-            size={"default"}
-            ref={loginRef}
-          />
-        </div>
-        <div className={styles.input}>
-          <Input
-            type={"password"}
-            placeholder={"Пароль"}
-            onChange={onFormChange}
-            icon={"EditIcon"}
-            value={password}
-            name={"password"}
-            error={false}
-            onIconClick={onPasswordIconClick}
-            errorText={"Ошибка"}
-            size={"default"}
-            ref={passwordRef}
-          />
-        </div>
-        <div className={styles.buttons}>
-          <div className={styles.button}>
-            <Button type="primary" size="medium">
-              Сохранить
-            </Button>
-          </div>
-          <div className={styles.button}>
-            <Button
-              type="primary"
-              size="medium"
-              onClick={onFormReset}
-              htmlType="reset"
-            >
-              Отмена
-            </Button>
-          </div>
-        </div>
-      </form>
-    </div>
+    </main>
   );
 }
 

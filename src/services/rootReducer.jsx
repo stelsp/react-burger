@@ -11,16 +11,12 @@ import profileReducer from "./reducers/profileReducer";
 
 export const initialState = {
   ingredients: {
-    category: {
-      bun: [],
-      sauce: [],
-      main: [],
-    },
+    ingredients: [],
     ingredientsRequest: false,
     ingredientsFailed: false,
-
     currentTab: "one",
   },
+  currentIngredient: null,
   constructor: {
     outer: "", // bun
     inner: [], // main + sauce
@@ -30,7 +26,6 @@ export const initialState = {
     orderRequest: false,
     orderFailed: false,
   },
-  currentIngredient: null,
   login: {
     form: {
       email: "",

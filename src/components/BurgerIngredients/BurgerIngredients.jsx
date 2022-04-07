@@ -5,12 +5,22 @@ import {
   INGREDIENT_CATEGORY,
   BURGER_INGREDIENTS_TITLE,
 } from "../../constants/content";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import { useSelector } from "react-redux";
 
 function BurgerIngredients() {
-  const { bun, sauce, main } = useSelector(
-    (store) => store.ingredients.category
+  const { ingredients } = useSelector((store) => store.ingredients);
+  const bun = useMemo(
+    () => ingredients.filter((el) => el.type === "bun"),
+    [ingredients]
+  );
+  const sauce = useMemo(
+    () => ingredients.filter((el) => el.type === "sauce"),
+    [ingredients]
+  );
+  const main = useMemo(
+    () => ingredients.filter((el) => el.type === "main"),
+    [ingredients]
   );
 
   const bunRef = useRef(null);

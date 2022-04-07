@@ -1,8 +1,6 @@
-import styles from "./App.module.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AppHeader from "../AppHeader/AppHeader";
-import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
-import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
+import MainPage from "../MainPage/MainPage";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Loader from "../Loader/Loader";
@@ -15,11 +13,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { getData } from "../../utils/api";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-
 import { RouteUserIn, RouteUserOut } from "../ProtectedRoute/ProtectedRoute";
+import ImageView from "../ImageView/ImageView";
 
 export default function App() {
   const dispatch = useDispatch();
+
   const { ingredientsRequest, ingredientsFailed } = useSelector(
     (store) => store.ingredients
   );
@@ -39,45 +38,22 @@ export default function App() {
           <>
             <AppHeader />
             <Switch>
-              <Route path="/" exact={true}>
-                <main className={styles.main}>
-                  <BurgerIngredients />
-                  <BurgerConstructor />
-                </main>
-              </Route>
-              <RouteUserOut path="/profile" to="/login" exact={true}>
-                <main className={styles.profile}>
-                  <Profile />
-                </main>
-              </RouteUserOut>
-              <RouteUserIn path="/register" to="/" exact={true}>
-                <main className={styles.login}>
-                  <Register />
-                </main>
-              </RouteUserIn>
-              <RouteUserIn path="/login" to="/" exact={true}>
-                <main className={styles.login}>
-                  <Login />
-                </main>
-              </RouteUserIn>
-              <RouteUserIn path="/forgot-password" to="/" exact={true}>
-                <main className={styles.login}>
-                  <ForgotPassword />
-                </main>
-              </RouteUserIn>
-              <RouteUserIn path="/reset-password" to="/" exact={true}>
-                <main className={styles.login}>
-                  <ResetPassword />
-                </main>
-              </RouteUserIn>
-              <Route path="/ingredients/:id" exact={true}>
-                ingredients/:id
-              </Route>
-              <Route>
-                <main className={styles.login}>
-                  <NotFound404 />
-                </main>
-              </Route>
+              <Route exact path="/" children={<MainPage />} />
+              <RouteUserOut exact path="/profile" children={<Profile />} />
+              <RouteUserIn exact path="/register" children={<Register />} />
+              <RouteUserIn exact path="/login" children={<Login />} />
+              <RouteUserIn
+                exact
+                path="/forgot-password"
+                children={<ForgotPassword />}
+              />
+              <RouteUserIn
+                exact
+                path="/reset-password"
+                children={<ResetPassword />}
+              />
+              <Route exact path="/ingredients/:id" children={<ImageView />} />
+              <Route children={<NotFound404 />} />
             </Switch>
           </>
         )}

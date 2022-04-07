@@ -32,42 +32,44 @@ function ForgotPassword() {
   );
 
   return (
-    <div className={styles.container}>
-      {forgotPasswordRequest ? (
-        <Loader />
-      ) : forgotPasswordFailed ? (
-        <h1>Произошла ошибка при отправке данных</h1>
-      ) : (
-        <>
-          <h2 className={styles.heading}>Восстановление пароля</h2>
-          <form className={styles.form} onSubmit={onFormSubmit}>
-            <div className={styles.input}>
-              <Input
-                type={"email"}
-                placeholder={"Укажите e-mail"}
-                onChange={onFormChange}
-                value={email}
-                error={false}
-                errorText={"Ошибка"}
-                size={"default"}
-                name={"email"}
-              />
+    <main className={styles.section}>
+      <div className={styles.container}>
+        {forgotPasswordRequest ? (
+          <Loader />
+        ) : forgotPasswordFailed ? (
+          <h1>Произошла ошибка при отправке данных</h1>
+        ) : (
+          <>
+            <h2 className={styles.heading}>Восстановление пароля</h2>
+            <form className={styles.form} onSubmit={onFormSubmit}>
+              <div className={styles.input}>
+                <Input
+                  type={"email"}
+                  placeholder={"Укажите e-mail"}
+                  onChange={onFormChange}
+                  value={email}
+                  error={false}
+                  errorText={"Ошибка"}
+                  size={"default"}
+                  name={"email"}
+                />
+              </div>
+              <div className={styles.button}>
+                <Button type="primary" size="medium">
+                  Восстановить
+                </Button>
+              </div>
+            </form>
+            <div className={styles.footer}>
+              <p className={styles.text}>Вспомнили пароль?</p>
+              <Link className={styles.text} to="/login">
+                Войти
+              </Link>
             </div>
-            <div className={styles.button}>
-              <Button type="primary" size="medium">
-                Восстановить
-              </Button>
-            </div>
-          </form>
-          <div className={styles.footer}>
-            <p className={styles.text}>Вспомнили пароль?</p>
-            <Link className={styles.text} to="/login">
-              Войти
-            </Link>
-          </div>
-        </>
-      )}
-    </div>
+          </>
+        )}
+      </div>
+    </main>
   );
 }
 

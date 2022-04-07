@@ -13,24 +13,14 @@ const ingredientsReducer = (state = initialState.ingredients, action) => {
     case ACTIONS.GET_INGREDIENTS_SUCCESS:
       return {
         ...state,
-        category: {
-          ...state.category,
-          bun: action.bun,
-          sauce: action.sauce,
-          main: action.main,
-        },
+        ingredients: action.ingredients,
         ingredientsRequest: false,
       };
 
     case ACTIONS.GET_INGREDIENTS_FAILED:
       return {
         ...state,
-        category: {
-          ...state.category,
-          bun: [],
-          sauce: [],
-          main: [],
-        },
+        ingredients: [],
         ingredientsFailed: true,
         ingredientsRequest: false,
       };
