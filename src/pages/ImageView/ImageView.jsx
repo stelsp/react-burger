@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import IngredientDetails from "../BurgerIngredients/IngredientDetails/IngredientDetails";
+import IngredientDetails from "../../components/BurgerIngredients/IngredientDetails/IngredientDetails";
 import { useHistory } from "react-router-dom";
 import styles from "./ImageView.module.css";
 

@@ -1,20 +1,23 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AppHeader from "../AppHeader/AppHeader";
-import MainPage from "../MainPage/MainPage";
-import Register from "../Register/Register";
-import Login from "../Login/Login";
+import MainPage from "../../pages/MainPage/MainPage";
+import Register from "../../pages/Register/Register";
+import Login from "../../pages/Login/Login";
 import Loader from "../Loader/Loader";
-import ForgotPassword from "../ForgotPassword/ForgotPassword";
-import ResetPassword from "../ResetPassword/ResetPassword";
-import Profile from "../Profile/Profile";
-import NotFound404 from "../NotFound404/NotFound404";
+import ForgotPassword from "../../pages/ForgotPassword/ForgotPassword";
+import ResetPassword from "../../pages/ResetPassword/ResetPassword";
+import Profile from "../../pages/Profile/Profile";
+import NotFound404 from "../../pages/NotFound404/NotFound404";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getData } from "../../utils/api";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { RouteUserIn, RouteUserOut } from "../ProtectedRoute/ProtectedRoute";
-import ImageView from "../ImageView/ImageView";
+import {
+  RouteUserIn,
+  RouteUserOut,
+} from "../../pages/ProtectedRoute/ProtectedRoute";
+import ImageView from "../../pages/ImageView/ImageView";
 
 export default function App() {
   const dispatch = useDispatch();

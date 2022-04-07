@@ -1,62 +1,70 @@
-import styles from "./ForgotPassword.module.css";
+import styles from "./ResetPassword.module.css";
 import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Loader from "../Loader/Loader";
+import Loader from "../../components/Loader/Loader";
 import {
   Input,
+  PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link, useHistory } from "react-router-dom";
-import { setForgotPasswordFormValue } from "../../services/actions/forgotPasswordActions";
-import { postForgotPasswordRequest } from "../../utils/api";
+import { Link } from "react-router-dom";
+import { setResetPasswordFormValue } from "../../services/actions/resetPasswordActions";
+import { postResetPasswordRequest } from "../../utils/api";
 
-function ForgotPassword() {
+function ResetPassword() {
   const dispatch = useDispatch();
-  const history = useHistory();
 
-  const { email } = useSelector((store) => store.forgotPassword.form);
-  const { forgotPasswordRequest, forgotPasswordFailed } = useSelector(
-    (store) => store.forgotPassword
+  const { token, password } = useSelector((store) => store.resetPassword.form);
+  const { resetPasswordRequest, resetPasswordFailed } = useSelector(
+    (store) => store.resetPassword
   );
 
   const onFormChange = (e) => {
-    dispatch(setForgotPasswordFormValue(e.target.name, e.target.value));
+    dispatch(setResetPasswordFormValue(e.target.name, e.target.value));
   };
 
   const onFormSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      dispatch(postForgotPasswordRequest(email, history));
+      dispatch(postResetPasswordRequest(password, token));
     },
-    [email, dispatch, history]
+    [password, token, dispatch]
   );
 
   return (
     <main className={styles.section}>
       <div className={styles.container}>
-        {forgotPasswordRequest ? (
+        {resetPasswordRequest ? (
           <Loader />
-        ) : forgotPasswordFailed ? (
+        ) : resetPasswordFailed ? (
           <h1>Произошла ошибка при отправке данных</h1>
         ) : (
           <>
             <h2 className={styles.heading}>Восстановление пароля</h2>
             <form className={styles.form} onSubmit={onFormSubmit}>
               <div className={styles.input}>
-                <Input
-                  type={"email"}
-                  placeholder={"Укажите e-mail"}
+                <PasswordInput
                   onChange={onFormChange}
-                  value={email}
+                  value={password}
+                  placeholder={"Введите новый пароль"}
+                  name={"password"}
+                />
+              </div>
+              <div className={styles.input}>
+                <Input
+                  type={"text"}
+                  placeholder={"Введите код из письма"}
+                  onChange={onFormChange}
+                  value={token}
                   error={false}
                   errorText={"Ошибка"}
                   size={"default"}
-                  name={"email"}
+                  name={"token"}
                 />
               </div>
               <div className={styles.button}>
                 <Button type="primary" size="medium">
-                  Восстановить
+                  Сохранить
                 </Button>
               </div>
             </form>
@@ -73,4 +81,4 @@ function ForgotPassword() {
   );
 }
 
-export default ForgotPassword;
+export default ResetPassword;
