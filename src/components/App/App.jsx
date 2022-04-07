@@ -1,10 +1,5 @@
 import styles from "./App.module.css";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AppHeader from "../AppHeader/AppHeader";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
@@ -21,9 +16,6 @@ import { getData } from "../../utils/api";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-import { getCookie } from "../../utils/cookie";
-import { userIn } from "../../services/actions/profileActions";
-
 import { RouteUserIn, RouteUserOut } from "../ProtectedRoute/ProtectedRoute";
 
 export default function App() {
@@ -34,7 +26,6 @@ export default function App() {
 
   useEffect(() => {
     dispatch(getData());
-    if (getCookie("accessToken")) return dispatch(userIn());
   }, [dispatch]);
 
   return (
@@ -48,12 +39,12 @@ export default function App() {
           <>
             <AppHeader />
             <Switch>
-              <RouteUserOut path="/" to="/login" exact={true}>
+              <Route path="/" exact={true}>
                 <main className={styles.main}>
                   <BurgerIngredients />
                   <BurgerConstructor />
                 </main>
-              </RouteUserOut>
+              </Route>
               <RouteUserOut path="/profile" to="/login" exact={true}>
                 <main className={styles.profile}>
                   <Profile />

@@ -1,8 +1,8 @@
 import { Route, Redirect } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { getCookie } from "../../utils/cookie";
 
 export function RouteUserOut({ children, to, ...rest }) {
-  const { user } = useSelector((store) => store.profile);
+  const user = getCookie("accessToken");
   return (
     <Route
       {...rest}
@@ -18,7 +18,7 @@ export function RouteUserOut({ children, to, ...rest }) {
 }
 
 export function RouteUserIn({ children, to, ...rest }) {
-  const { user } = useSelector((store) => store.profile);
+  const user = getCookie("accessToken");
   return (
     <Route
       {...rest}

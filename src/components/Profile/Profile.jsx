@@ -1,5 +1,5 @@
 import styles from "./Profile.module.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useCallback, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -29,6 +29,7 @@ function Profile() {
   };
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const { name, login, password } = useSelector((store) => store.profile);
 
@@ -53,19 +54,19 @@ function Profile() {
   }, [dispatch]);
 
   const onLogOut = useCallback(() => {
-    dispatch(logOutRequest());
-  }, [dispatch]);
+    logOutRequest(history);
+  }, [history]);
 
   return (
     <div className={styles.container}>
       <div className={styles.links}>
-        <Link to={"profile"} className={styles.link}>
+        <Link to={"/profile"} className={styles.link}>
           Профиль
         </Link>
         <Link to={"/"} className={styles.link}>
           История заказов
         </Link>
-        <Link to={"login"} className={styles.link} onClick={onLogOut}>
+        <Link to={"/profile"} className={styles.link} onClick={onLogOut}>
           Выход
         </Link>
         <p className={styles.text}>

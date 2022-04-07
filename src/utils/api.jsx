@@ -45,8 +45,6 @@ import {
 import {
   getProfileValue,
   patchProfileValue,
-  userIn,
-  userOut,
 } from "../services/actions/profileActions";
 
 import { getCookie, setCookie, deleteCookie } from "./cookie";
@@ -75,7 +73,7 @@ export const postOrder = (ingredientsIDs) => {
         const res = await axios.post(`${API_URL}${URL_KEY_ORDERS}`, {
           ingredients: ingredientsIDs,
         });
-        dispatch(getOrderSuccess(res.data.data));
+        dispatch(getOrderSuccess(res.data));
       } catch (err) {
         let error = await err;
         console.log(error.response);
@@ -156,7 +154,6 @@ export const postLoginRequest = (email, password, history) => {
         setCookie("refreshToken", res.data.refreshToken);
         setCookie("accessToken", res.data.accessToken);
         await dispatch(loginFormSubmitSuccess());
-        await dispatch(userIn());
         history.replace({ pathname: "/" });
       } catch (err) {
         let error = await err;
@@ -224,20 +221,18 @@ export const refreshTokenRequest = () => {
   })();
 };
 
-export const logOutRequest = () => {
-  return (dispatch) => {
-    (async () => {
-      try {
-        await axios.post(`${API_URL}${URL_KEY_LOGOUT}`, {
-          token: getCookie("refreshToken"),
-        });
-        deleteCookie("accessToken");
-        deleteCookie("refreshToken");
-        dispatch(userOut());
-      } catch (err) {
-        const error = await err;
-        console.log(error.response);
-      }
-    })();
-  };
+export const logOutRequest = (history) => {
+  (async () => {
+    try {
+      await axios.post(`${API_URL}${URL_KEY_LOGOUT}`, {
+        token: getCookie("refreshToken"),
+      });
+      deleteCookie("accessToken");
+      deleteCookie("refreshToken");
+      history.replace({ pathname: "/login" });
+    } catch (err) {
+      const error = await err;
+      console.log(error.response);
+    }
+  })();
 };
