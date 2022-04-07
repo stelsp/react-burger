@@ -57,8 +57,7 @@ export const getData = () => {
         const res = await axios.get(`${API_URL}${URL_KEY_INGREDIENTS}`);
         dispatch(getIngredientsSuccess(res.data.data));
       } catch (err) {
-        let error = await err;
-        console.log(error.response);
+        console.log(err.response);
         dispatch(getIngredientsFailed());
       }
     })();
@@ -75,8 +74,8 @@ export const postOrder = (ingredientsIDs) => {
         });
         dispatch(getOrderSuccess(res.data));
       } catch (err) {
-        let error = await err;
-        console.log(error.response);
+        console.log(err.response);
+
         dispatch(getOrderFailed());
       }
     })();
@@ -92,10 +91,10 @@ export const postForgotPasswordRequest = (email, history) => {
           email: email,
         });
         await dispatch(forgotPasswordFormSubmitSuccess());
-        history.replace({ pathname: "/reset-password" });
+        history.push({ pathname: "/reset-password" });
       } catch (err) {
-        let error = await err;
-        console.log(error.response);
+        console.log(err.response);
+
         dispatch(forgotPasswordFormSubmitFailed());
       }
     })();
@@ -113,8 +112,7 @@ export const postResetPasswordRequest = (password, token) => {
         });
         dispatch(resetPasswordFormSubmitSuccess());
       } catch (err) {
-        let error = await err;
-        console.log(error.response);
+        console.log(err.response);
         dispatch(resetPasswordFormSubmitFailed());
       }
     })();
@@ -134,8 +132,8 @@ export const postRegisterRequest = (email, password, name, history) => {
         await dispatch(registerFormSubmitSuccess());
         dispatch(postLoginRequest(email, password, history));
       } catch (err) {
-        let error = await err;
-        console.log(error.response);
+        console.log(err.response);
+
         dispatch(registerFormSubmitFailed());
       }
     })();
@@ -156,8 +154,8 @@ export const postLoginRequest = (email, password, history) => {
         await dispatch(loginFormSubmitSuccess());
         history.replace({ pathname: "/" });
       } catch (err) {
-        let error = await err;
-        console.log(error.response);
+        console.log(err.response);
+
         dispatch(loginFormSubmitFailed());
       }
     })();
@@ -175,8 +173,7 @@ export const getProfileInfo = () => {
         });
         dispatch(getProfileValue(res.data.user.name, res.data.user.email));
       } catch (err) {
-        let error = await err;
-        console.log(error.response);
+        console.log(err.response);
       }
     })();
   };
@@ -199,8 +196,7 @@ export const patchProfileInfo = (name, email, password) => {
         dispatch(patchProfileValue(email, res.data.user.email));
         dispatch(patchProfileValue(password, res.data.user.password));
       } catch (err) {
-        let error = await err;
-        console.log(error.response);
+        console.log(err.response);
       }
     })();
   };
@@ -215,8 +211,7 @@ export const refreshTokenRequest = () => {
       setCookie("refreshToken", res.data.refreshToken);
       setCookie("accessToken", res.data.accessToken);
     } catch (err) {
-      const error = await err;
-      console.log(error.response);
+      console.log(err.response);
     }
   })();
 };
@@ -231,8 +226,7 @@ export const logOutRequest = (history) => {
       deleteCookie("refreshToken");
       history.replace({ pathname: "/login" });
     } catch (err) {
-      const error = await err;
-      console.log(error.response);
+      console.log(err.response);
     }
   })();
 };

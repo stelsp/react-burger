@@ -1,5 +1,11 @@
 import styles from "./BurgerIngredients.module.css";
 import IngredientType from "./IngredientType/IngredientType";
+// import IngredientDetails from "../BurgerIngredients/IngredientDetails/IngredientDetails";
+// import Modal from "../Modal/Modal";
+// import { MODAL_TITLE_INGREDIENT } from "../../constants/content";
+// import { Route, useLocation } from "react-router-dom";
+// import { setCurrentIngredient } from "../../services/actions/ingredientsActions";
+
 import Tabs from "./Tabs/Tabs";
 import {
   INGREDIENT_CATEGORY,
@@ -22,7 +28,6 @@ function BurgerIngredients() {
     () => ingredients.filter((el) => el.type === "main"),
     [ingredients]
   );
-
   const bunRef = useRef(null);
   const souceRef = useRef(null);
   const mainRef = useRef(null);

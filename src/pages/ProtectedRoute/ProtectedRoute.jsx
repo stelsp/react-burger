@@ -1,7 +1,7 @@
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, useLocation } from "react-router-dom";
 import { getCookie } from "../../utils/cookie";
 
-export function RouteUserOut({ children, to, ...rest }) {
+export function RouteUserOut({ children, ...rest }) {
   const user = getCookie("accessToken");
   return (
     <Route
@@ -17,14 +17,32 @@ export function RouteUserOut({ children, to, ...rest }) {
   );
 }
 
-export function RouteUserIn({ children, to, ...rest }) {
+export function RouteUserIn({ children, ...rest }) {
   const user = getCookie("accessToken");
+
   return (
     <Route
       {...rest}
       render={({ location }) =>
         user ? (
           <Redirect to={{ pathname: "/", state: { from: location } }} />
+        ) : (
+          children
+        )
+      }
+    />
+  );
+}
+
+export function RouteTest({ children, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        location.pathname === "forgot-password" ? (
+          <Redirect
+            to={{ pathname: "/reset-password", state: { from: location } }}
+          />
         ) : (
           children
         )

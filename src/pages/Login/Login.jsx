@@ -74,7 +74,10 @@ function Login() {
             </div>
             <div className={styles.footer}>
               <p className={styles.text}>Забыли пароль?</p>
-              <Link className={styles.text} to="/forgot-password">
+              <Link
+                className={styles.text}
+                to={{ pathname: "/forgot-password" }}
+              >
                 Восстановить пароль
               </Link>
             </div>

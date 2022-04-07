@@ -2,18 +2,17 @@ import styles from "./Ingredient.module.css";
 import { ingredientPropTypes } from "../../../constants/custom-prop-types";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-import Modal from "../../Modal/Modal";
-import IngredientDetails from "../IngredientDetails/IngredientDetails";
-import { MODAL_TITLE_INGREDIENT } from "../../../constants/content";
-import { useCallback, useMemo } from "react";
+import { useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentIngredient } from "../../../services/actions/ingredientsActions";
 import { useDrag } from "react-dnd";
+import { setCurrentIngredient } from "../../../services/actions/ingredientsActions";
+import { Link, useLocation } from "react-router-dom";
 
 function Ingredient({ el }) {
   const dispatch = useDispatch();
+  const location = useLocation();
+
   const { outer, inner } = useSelector((store) => store.burgerConstructor);
-  const currentIngredient = useSelector((store) => store.currentIngredient);
 
   const count = useMemo(() => {
     return el.type === "bun" && el._id === outer._id
@@ -21,21 +20,26 @@ function Ingredient({ el }) {
       : inner.filter((item) => item._id === el._id).length;
   }, [inner, outer, el]);
 
-  const openModal = useCallback(() => {
-    dispatch(setCurrentIngredient(el));
-  }, [dispatch, el]);
-
-  const closeModal = useCallback(() => {
-    dispatch(setCurrentIngredient(null));
-  }, [dispatch]);
-
   const [, drag] = useDrag(() => ({
     type: "ingredient",
     item: el,
   }));
 
+  const openModal = useCallback(() => {
+    dispatch(setCurrentIngredient(el));
+  }, [dispatch, el]);
+
   return (
-    <>
+    <Link
+      className={styles.link}
+      key={el._id}
+      to={{
+        pathname: `/ingredients/${el._id}`,
+        // This is the trick! This link sets
+        // the `background` in location state.
+        state: { background: location },
+      }}
+    >
       <div onClick={openModal} className={styles.card} ref={drag}>
         {count > 0 && <Counter count={count} size={"default"} />}
         <img src={el.image} alt={el.name} className={styles.img} />
@@ -45,12 +49,7 @@ function Ingredient({ el }) {
         </p>
         <h3 className={styles.card__title}>{el.name}</h3>
       </div>
-      {currentIngredient && (
-        <Modal onClose={closeModal} title={MODAL_TITLE_INGREDIENT}>
-          <IngredientDetails el={currentIngredient} />
-        </Modal>
-      )}
-    </>
+    </Link>
   );
 }
 
