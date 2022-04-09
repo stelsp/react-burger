@@ -25,7 +25,6 @@ import { MODAL_TITLE_INGREDIENT } from "../../constants/content";
 export default function App() {
   const dispatch = useDispatch();
   const history = useHistory();
-
   const location = useLocation();
   const background = location.state && location.state.background;
 
@@ -61,8 +60,7 @@ export default function App() {
             <RouteUserIn path="/login" children={<Login />} />
             <RouteTest path="/forgot-password" children={<ForgotPassword />} />
             <Route path="/reset-password" children={<ResetPassword />} />
-
-            <Route path="/ingredients/:id" children={<ImageView />} />
+            <Route exact path="/ingredients/:id" children={<ImageView />} />
             <Route children={<NotFound404 />} />
           </Switch>
           {background && (

@@ -11,7 +11,6 @@ import { Link, useLocation } from "react-router-dom";
 function Ingredient({ el }) {
   const dispatch = useDispatch();
   const location = useLocation();
-
   const { outer, inner } = useSelector((store) => store.burgerConstructor);
 
   const count = useMemo(() => {
@@ -20,14 +19,14 @@ function Ingredient({ el }) {
       : inner.filter((item) => item._id === el._id).length;
   }, [inner, outer, el]);
 
+  const openModal = useCallback(() => {
+    dispatch(setCurrentIngredient(el));
+  }, [dispatch, el]);
+
   const [, drag] = useDrag(() => ({
     type: "ingredient",
     item: el,
   }));
-
-  const openModal = useCallback(() => {
-    dispatch(setCurrentIngredient(el));
-  }, [dispatch, el]);
 
   return (
     <Link
@@ -35,8 +34,6 @@ function Ingredient({ el }) {
       key={el._id}
       to={{
         pathname: `/ingredients/${el._id}`,
-        // This is the trick! This link sets
-        // the `background` in location state.
         state: { background: location },
       }}
     >

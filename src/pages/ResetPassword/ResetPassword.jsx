@@ -7,12 +7,13 @@ import {
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
+import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
 import { setResetPasswordFormValue } from "../../services/actions/resetPasswordActions";
 import { postResetPasswordRequest } from "../../utils/api";
 
 function ResetPassword() {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const { token, password } = useSelector((store) => store.resetPassword.form);
   const { resetPasswordRequest, resetPasswordFailed } = useSelector(
@@ -30,6 +31,8 @@ function ResetPassword() {
     },
     [password, token, dispatch]
   );
+
+  if (history.action === "POP") return <Redirect to={{ pathname: "/" }} />;
 
   return (
     <main className={styles.section}>

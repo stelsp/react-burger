@@ -8,10 +8,6 @@ function Tabs({ bunRef, sauceRef, mainRef }) {
   const dispatch = useDispatch();
   const { currentTab } = useSelector((store) => store.ingredients);
 
-  // const setTab = (tab) => {
-  //   const element = document.getElementById(tab)
-  //   if (element) element.scrollIntoView({ behavior: 'smooth' })
-  // }
   return (
     <div className={styles.tab}>
       <Tab
