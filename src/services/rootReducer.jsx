@@ -14,7 +14,7 @@ export const initialState = {
     ingredients: [],
     ingredientsRequest: false,
     ingredientsFailed: false,
-    currentTab: "one",
+    currentTab: "bun",
   },
   currentIngredient: null,
   constructor: {

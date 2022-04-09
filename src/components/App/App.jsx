@@ -33,8 +33,6 @@ export default function App() {
     (store) => store.ingredients
   );
 
-  console.log(location);
-
   const closeModal = useCallback(
     (e) => {
       e.stopPropagation();
