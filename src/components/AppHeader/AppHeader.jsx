@@ -42,7 +42,7 @@ function AppHeader() {
             linkStyle={styles.link + " pl-5"}
             textStyle={"ml-2"}
             icon={<ProfileIcon type="secondary" />}
-            to={"profile"}
+            to={"/profile"}
             text={APP_HEADER_LINKS.ACCOUNT}
           />
         </nav>

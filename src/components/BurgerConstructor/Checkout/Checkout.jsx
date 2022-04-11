@@ -13,7 +13,6 @@ import {
 } from "../../../services/actions/constructorActions";
 import { postOrder } from "../../../utils/api";
 import { useHistory } from "react-router-dom";
-import { getCookie } from "../../../utils/cookie";
 
 function Checkout() {
   const dispatch = useDispatch();
@@ -22,8 +21,7 @@ function Checkout() {
     (store) => store.order
   );
   const { outer, inner } = useSelector((store) => store.burgerConstructor);
-
-  const user = getCookie("accessToken");
+  const { isLoggedIn } = useSelector((store) => store.profile);
 
   const ingredientsIDs = useMemo(() => {
     return inner ? [...inner.map((el) => el._id), outer._id] : [];
@@ -36,10 +34,10 @@ function Checkout() {
   }, [inner, outer]);
 
   const openModal = useCallback(() => {
-    return user
+    return isLoggedIn
       ? dispatch(postOrder(ingredientsIDs))
       : history.replace({ pathname: "/login" });
-  }, [ingredientsIDs, dispatch, history, user]);
+  }, [ingredientsIDs, dispatch, history, isLoggedIn]);
 
   const closeModal = useCallback(() => {
     dispatch(getOrderSuccess(null));

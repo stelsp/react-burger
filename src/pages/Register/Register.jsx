@@ -6,19 +6,20 @@ import {
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link, useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setRegisterFormValue } from "../../services/actions/registerActions";
 import { postRegisterRequest } from "../../utils/api";
 
 function Register() {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const location = useLocation();
 
   const { name, email, password } = useSelector((store) => store.register.form);
   const { registerRequest, registerFailed } = useSelector(
     (store) => store.register
   );
+  const { isLoggedIn } = useSelector((store) => store.profile);
 
   const onFormChange = (e) => {
     dispatch(setRegisterFormValue(e.target.name, e.target.value));
@@ -27,10 +28,19 @@ function Register() {
   const onFormSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      dispatch(postRegisterRequest(email, password, name, history));
+      dispatch(postRegisterRequest(email, password, name));
     },
-    [email, password, name, dispatch, history]
+    [email, password, name, dispatch]
   );
+
+  if (isLoggedIn) {
+    return (
+      <Redirect
+        // Если объект state не является undefined, вернём пользователя назад.
+        to={location?.state?.from || "/"}
+      />
+    );
+  }
 
   return (
     <main className={styles.section}>

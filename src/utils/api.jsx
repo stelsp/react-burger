@@ -45,6 +45,8 @@ import {
 import {
   getProfileValue,
   patchProfileValue,
+  userIn,
+  userOut,
 } from "../services/actions/profileActions";
 
 import { getCookie, setCookie, deleteCookie } from "./cookie";
@@ -119,7 +121,7 @@ export const postResetPasswordRequest = (password, token) => {
   };
 };
 
-export const postRegisterRequest = (email, password, name, history) => {
+export const postRegisterRequest = (email, password, name) => {
   return (dispatch) => {
     dispatch(registerFormSubmit());
     (async () => {
@@ -130,7 +132,7 @@ export const postRegisterRequest = (email, password, name, history) => {
           name: name,
         });
         await dispatch(registerFormSubmitSuccess());
-        dispatch(postLoginRequest(email, password, history));
+        dispatch(postLoginRequest(email, password));
       } catch (err) {
         console.log(err.response);
 
@@ -140,7 +142,7 @@ export const postRegisterRequest = (email, password, name, history) => {
   };
 };
 
-export const postLoginRequest = (email, password, history) => {
+export const postLoginRequest = (email, password) => {
   return (dispatch) => {
     dispatch(loginFormSubmit());
     (async () => {
@@ -152,7 +154,7 @@ export const postLoginRequest = (email, password, history) => {
         setCookie("refreshToken", res.data.refreshToken);
         setCookie("accessToken", res.data.accessToken);
         await dispatch(loginFormSubmitSuccess());
-        history.replace({ pathname: "/" });
+        await dispatch(userIn());
       } catch (err) {
         console.log(err.response);
 
@@ -164,6 +166,7 @@ export const postLoginRequest = (email, password, history) => {
 
 export const getProfileInfo = () => {
   return (dispatch) => {
+    refreshTokenRequest();
     (async () => {
       try {
         const res = await axios.get(`${API_URL}${URL_KEY_USER}`, {
@@ -181,6 +184,7 @@ export const getProfileInfo = () => {
 
 export const patchProfileInfo = (name, email, password) => {
   return (dispatch) => {
+    refreshTokenRequest();
     (async () => {
       try {
         const res = await axios.patch(
@@ -216,17 +220,19 @@ export const refreshTokenRequest = () => {
   })();
 };
 
-export const logOutRequest = (history) => {
-  (async () => {
-    try {
-      await axios.post(`${API_URL}${URL_KEY_LOGOUT}`, {
-        token: getCookie("refreshToken"),
-      });
-      deleteCookie("accessToken");
-      deleteCookie("refreshToken");
-      history.replace({ pathname: "/login" });
-    } catch (err) {
-      console.log(err.response);
-    }
-  })();
+export const logOutRequest = () => {
+  return (dispatch) => {
+    (async () => {
+      try {
+        await axios.post(`${API_URL}${URL_KEY_LOGOUT}`, {
+          token: getCookie("refreshToken"),
+        });
+        deleteCookie("accessToken");
+        deleteCookie("refreshToken");
+        await dispatch(userOut());
+      } catch (err) {
+        console.log(err.response);
+      }
+    })();
+  };
 };

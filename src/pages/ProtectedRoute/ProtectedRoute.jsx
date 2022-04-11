@@ -1,50 +1,16 @@
-import { Route, Redirect, useLocation } from "react-router-dom";
-import { getCookie } from "../../utils/cookie";
+import { useSelector } from "react-redux";
+import { Route, Redirect } from "react-router-dom";
 
-export function RouteUserOut({ children, ...rest }) {
-  const user = getCookie("accessToken");
+export function ProtectedRoute({ children, ...rest }) {
+  const { isLoggedIn } = useSelector((store) => store.profile);
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        user ? (
+        isLoggedIn ? (
           children
         ) : (
           <Redirect to={{ pathname: "/login", state: { from: location } }} />
-        )
-      }
-    />
-  );
-}
-
-export function RouteUserIn({ children, ...rest }) {
-  const user = getCookie("accessToken");
-
-  return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        user ? (
-          <Redirect to={{ pathname: "/", state: { from: location } }} />
-        ) : (
-          children
-        )
-      }
-    />
-  );
-}
-
-export function RouteTest({ children, ...rest }) {
-  return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        location.pathname === "forgot-password" ? (
-          <Redirect
-            to={{ pathname: "/reset-password", state: { from: location } }}
-          />
-        ) : (
-          children
         )
       }
     />

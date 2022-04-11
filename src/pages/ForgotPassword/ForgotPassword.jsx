@@ -6,18 +6,20 @@ import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link, useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
 import { setForgotPasswordFormValue } from "../../services/actions/forgotPasswordActions";
 import { postForgotPasswordRequest } from "../../utils/api";
 
 function ForgotPassword() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
 
   const { email } = useSelector((store) => store.forgotPassword.form);
   const { forgotPasswordRequest, forgotPasswordFailed } = useSelector(
     (store) => store.forgotPassword
   );
+  const { isLoggedIn } = useSelector((store) => store.profile);
 
   const onFormChange = (e) => {
     dispatch(setForgotPasswordFormValue(e.target.name, e.target.value));
@@ -30,6 +32,15 @@ function ForgotPassword() {
     },
     [email, dispatch, history]
   );
+
+  if (isLoggedIn) {
+    return (
+      <Redirect
+        // Если объект state не является undefined, вернём пользователя назад.
+        to={location?.state?.from || "/"}
+      />
+    );
+  }
 
   return (
     <main className={styles.section}>

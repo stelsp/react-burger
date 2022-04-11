@@ -11,16 +11,14 @@ import NotFound404 from "../../pages/NotFound404/NotFound404";
 import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getData } from "../../utils/api";
-import {
-  RouteTest,
-  RouteUserIn,
-  RouteUserOut,
-} from "../../pages/ProtectedRoute/ProtectedRoute";
+import { ProtectedRoute } from "../../pages/ProtectedRoute/ProtectedRoute";
 import ImageView from "../../pages/ImageView/ImageView";
 
 import IngredientDetails from "../BurgerIngredients/IngredientDetails/IngredientDetails";
 import Modal from "../Modal/Modal";
 import { MODAL_TITLE_INGREDIENT } from "../../constants/content";
+import { getCookie } from "../../utils/cookie";
+import { userIn } from "../../services/actions/profileActions";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -42,6 +40,7 @@ export default function App() {
 
   useEffect(() => {
     dispatch(getData());
+    if (getCookie("accessToken")) return dispatch(userIn());
   }, [dispatch]);
 
   return (
@@ -55,10 +54,10 @@ export default function App() {
           <AppHeader />
           <Switch location={background || location}>
             <Route exact path="/" children={<MainPage />} />
-            <RouteUserOut path="/profile" children={<Profile />} />
-            <RouteUserIn path="/register" children={<Register />} />
-            <RouteUserIn path="/login" children={<Login />} />
-            <RouteTest path="/forgot-password" children={<ForgotPassword />} />
+            <ProtectedRoute path="/profile" children={<Profile />} />
+            <Route path="/register" children={<Register />} />
+            <Route path="/login" children={<Login />} />
+            <Route path="/forgot-password" children={<ForgotPassword />} />
             <Route path="/reset-password" children={<ResetPassword />} />
             <Route exact path="/ingredients/:id" children={<ImageView />} />
             <Route children={<NotFound404 />} />

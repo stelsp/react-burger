@@ -25,13 +25,13 @@ const profileReducer = (state = initialState.profile, action) => {
     case ACTIONS.PROFILE_USER_IN: {
       return {
         ...state,
-        user: true,
+        isLoggedIn: true,
       };
     }
     case ACTIONS.PROFILE_USER_OUT: {
       return {
         ...state,
-        user: false,
+        isLoggedIn: false,
       };
     }
 

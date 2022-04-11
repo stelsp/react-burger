@@ -12,7 +12,6 @@ import {
   logOutRequest,
   patchProfileInfo,
 } from "../../utils/api";
-import { getCookie } from "../../utils/cookie";
 
 function Profile() {
   const nameRef = useRef(null);
@@ -34,7 +33,7 @@ function Profile() {
   const { name, login, password } = useSelector((store) => store.profile);
 
   useEffect(() => {
-    if (getCookie("accessToken")) return dispatch(getProfileInfo());
+    dispatch(getProfileInfo());
   }, [dispatch]);
 
   const onFormChange = (e) => {
@@ -50,11 +49,11 @@ function Profile() {
   );
 
   const onFormReset = useCallback(() => {
-    if (getCookie("accessToken")) return dispatch(getProfileInfo());
+    dispatch(getProfileInfo());
   }, [dispatch]);
 
   const onLogOut = useCallback(() => {
-    logOutRequest(history);
+    dispatch(logOutRequest(history));
   }, [history]);
 
   return (
@@ -67,7 +66,7 @@ function Profile() {
           <Link to={"/"} className={styles.link}>
             История заказов
           </Link>
-          <Link to={"/profile"} className={styles.link} onClick={onLogOut}>
+          <Link to={"/login"} className={styles.link} onClick={onLogOut}>
             Выход
           </Link>
           <p className={styles.text}>

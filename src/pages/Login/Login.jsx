@@ -6,17 +6,18 @@ import {
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link, useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setLoginFormValue } from "../../services/actions/loginActions";
 import { postLoginRequest } from "../../utils/api";
 
 function Login() {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const location = useLocation();
 
   const { email, password } = useSelector((store) => store.login.form);
   const { loginRequest, loginFailed } = useSelector((store) => store.login);
+  const { isLoggedIn } = useSelector((store) => store.profile);
 
   const onFormChange = (e) => {
     dispatch(setLoginFormValue(e.target.name, e.target.value));
@@ -25,10 +26,19 @@ function Login() {
   const onFormSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      dispatch(postLoginRequest(email, password, history));
+      dispatch(postLoginRequest(email, password));
     },
-    [email, password, dispatch, history]
+    [email, password, dispatch]
   );
+
+  if (isLoggedIn) {
+    return (
+      <Redirect
+        // Если объект state не является undefined, вернём пользователя назад.
+        to={location?.state?.from || "/"}
+      />
+    );
+  }
 
   return (
     <main className={styles.section}>

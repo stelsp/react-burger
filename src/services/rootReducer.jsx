@@ -62,7 +62,7 @@ export const initialState = {
     name: "",
     login: "",
     password: "",
-    user: false,
+    isLoggedIn: false,
   },
 };
 
