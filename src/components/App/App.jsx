@@ -30,13 +30,9 @@ export default function App() {
     (store) => store.ingredients
   );
 
-  const closeModal = useCallback(
-    (e) => {
-      e.stopPropagation();
-      history.goBack();
-    },
-    [history]
-  );
+  const closeModal = useCallback(() => {
+    history.goBack();
+  }, [history]);
 
   useEffect(() => {
     dispatch(getData());
