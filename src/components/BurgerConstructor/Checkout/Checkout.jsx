@@ -7,20 +7,21 @@ import Loader from "../../Loader/Loader";
 import { ORDER_BUTTON_TEXT } from "../../../constants/content";
 import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrderSuccess } from "../../../services/actions/actions";
-import { fetchOrder } from "../../../utils/api";
+import {
+  getOrderSuccess,
+  resetConstructor,
+} from "../../../services/actions/constructorActions";
+import { postOrder } from "../../../utils/api";
+import { useHistory } from "react-router-dom";
 
 function Checkout() {
   const dispatch = useDispatch();
-  const { order, orderRequest, orderFailed, outer, inner } = useSelector(
-    (store) => ({
-      orderRequest: store.order.orderRequest,
-      orderFailed: store.order.orderFailed,
-      order: store.order.order,
-      outer: store.burgerConstructor.outer,
-      inner: store.burgerConstructor.inner,
-    })
+  const history = useHistory();
+  const { order, orderRequest, orderFailed } = useSelector(
+    (store) => store.order
   );
+  const { outer, inner } = useSelector((store) => store.burgerConstructor);
+  const { isLoggedIn } = useSelector((store) => store.profile);
 
   const ingredientsIDs = useMemo(() => {
     return inner ? [...inner.map((el) => el._id), outer._id] : [];
@@ -33,13 +34,15 @@ function Checkout() {
   }, [inner, outer]);
 
   const openModal = useCallback(() => {
-    dispatch(fetchOrder(ingredientsIDs));
-  }, [ingredientsIDs, dispatch]);
+    return isLoggedIn
+      ? dispatch(postOrder(ingredientsIDs))
+      : history.replace({ pathname: "/login" });
+  }, [ingredientsIDs, dispatch, history, isLoggedIn]);
 
-  const closeModal = useCallback(
-    () => dispatch(getOrderSuccess(null)),
-    [dispatch]
-  );
+  const closeModal = useCallback(() => {
+    dispatch(getOrderSuccess(null));
+    dispatch(resetConstructor());
+  }, [dispatch]);
 
   return (
     <>

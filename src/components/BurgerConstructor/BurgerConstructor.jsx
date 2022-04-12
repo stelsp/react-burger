@@ -3,11 +3,11 @@ import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-comp
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import Checkout from "./Checkout/Checkout";
 import { useSelector, useDispatch } from "react-redux";
+import { deleteConstructorIngredient } from "../../services/actions/constructorActions";
 import {
-  deleteConstructorIngredient,
   dragIngredient,
   sortIngredient,
-} from "../../services/actions/actions";
+} from "../../services/actions/ingredientsActions";
 import { useDrop, useDrag } from "react-dnd";
 import { useCallback } from "react";
 
@@ -68,10 +68,7 @@ function Inner({ id, name, image, price, moveCard, findCard }) {
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
-  const { outer, inner } = useSelector((store) => ({
-    outer: store.burgerConstructor.outer,
-    inner: store.burgerConstructor.inner,
-  }));
+  const { outer, inner } = useSelector((store) => store.burgerConstructor);
 
   const [, drop] = useDrop(
     () => ({

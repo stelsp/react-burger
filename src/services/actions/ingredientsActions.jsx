@@ -9,9 +9,7 @@ export const getIngredients = () => ({
 
 export const getIngredientsSuccess = (ingredients) => ({
   type: ACTIONS.GET_INGREDIENTS_SUCCESS,
-  bun: ingredients.filter((el) => el.type === "bun"),
-  sauce: ingredients.filter((el) => el.type === "sauce"),
-  main: ingredients.filter((el) => el.type === "main"),
+  ingredients: ingredients,
 });
 
 export const getIngredientsFailed = () => ({
@@ -26,25 +24,6 @@ export const setCurrentIngredient = (currentIngredient) => ({
 export const setCurrentTab = (currentTab) => ({
   type: ACTIONS.SET_CURRENT_TAB,
   currentTab,
-});
-
-// constructor
-export const getOrder = () => ({
-  type: ACTIONS.GET_ORDER,
-});
-
-export const getOrderSuccess = (order) => ({
-  type: ACTIONS.GET_ORDER_SUCCESS,
-  order,
-});
-
-export const getOrderFailed = () => ({
-  type: ACTIONS.GET_ORDER_FAILED,
-});
-
-export const deleteConstructorIngredient = (inner, id) => ({
-  type: ACTIONS.DELETE_CONSTRUCTOR_INGREDIENT,
-  inner: inner.filter((el) => el.id !== id),
 });
 
 // dnd

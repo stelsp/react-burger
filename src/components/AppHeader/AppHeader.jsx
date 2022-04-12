@@ -8,6 +8,8 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import { APP_HEADER_LINKS } from "../../constants/content";
 
+import { Link } from "react-router-dom";
+
 function AppHeader() {
   return (
     <header className={styles.header}>
@@ -18,7 +20,7 @@ function AppHeader() {
               linkStyle={styles.link + " pr-5 mr-2"}
               textStyle={"ml-2"}
               icon={<BurgerIcon type="secondary" />}
-              href={"#"}
+              to={"/"}
               text={APP_HEADER_LINKS.CONSTRUCTOR}
             />
 
@@ -26,20 +28,21 @@ function AppHeader() {
               linkStyle={styles.link + " pr-5 pl-5"}
               textStyle={"ml-2"}
               icon={<ListIcon type="secondary" />}
-              href={"#"}
+              to={"/ingredients/60d3b41abdacab0026a733c7"}
               text={APP_HEADER_LINKS.ORDER_FEED}
             />
           </div>
 
           <div className={styles.logo}>
-            <Logo />
+            <Link to="/">
+              <Logo />
+            </Link>
           </div>
-
           <MenuItem
             linkStyle={styles.link + " pl-5"}
             textStyle={"ml-2"}
             icon={<ProfileIcon type="secondary" />}
-            href={"#"}
+            to={"/profile"}
             text={APP_HEADER_LINKS.ACCOUNT}
           />
         </nav>

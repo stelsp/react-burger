@@ -1,8 +1,17 @@
 import styles from "./IngredientDetails.module.css";
-import { ingredientPropTypes } from "../../../constants/custom-prop-types";
 import { INGREDIENT_COMPOUND } from "../../../constants/content";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-function IngredientDetails({ el }) {
+function IngredientDetails() {
+  let { id } = useParams();
+
+  const { ingredients } = useSelector((store) => store.ingredients);
+
+  const el = ingredients.find((el) => el._id === id);
+
+  if (!el) return null;
+
   return (
     <div className={styles.card} key={el._id}>
       <img src={el.image} alt={el.name} className={styles.img} />
@@ -28,9 +37,5 @@ function IngredientDetails({ el }) {
     </div>
   );
 }
-
-IngredientDetails.propTypes = {
-  el: ingredientPropTypes.isRequired,
-};
 
 export default IngredientDetails;

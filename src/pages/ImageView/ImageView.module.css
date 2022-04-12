@@ -1,0 +1,12 @@
+.section {
+  width: 1250px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.title {
+  margin: 0 auto;
+  text-align: center;
+  composes: text text_type_main-large text_color_primary pt-30 from global;
+}
