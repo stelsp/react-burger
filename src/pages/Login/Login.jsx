@@ -6,10 +6,12 @@ import {
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
+import { Link, Redirect, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setLoginFormValue } from "../../services/actions/loginActions";
-import { postLoginRequest } from "../../utils/api";
+import {
+  postLoginRequest,
+  setLoginFormValue,
+} from "../../services/actions/loginActions";
 
 function Login() {
   const dispatch = useDispatch();

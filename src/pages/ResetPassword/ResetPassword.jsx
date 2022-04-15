@@ -7,9 +7,11 @@ import {
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
-import { setResetPasswordFormValue } from "../../services/actions/resetPasswordActions";
-import { postResetPasswordRequest } from "../../utils/api";
+import { Link, Redirect, useHistory } from "react-router-dom";
+import {
+  postResetPasswordRequest,
+  setResetPasswordFormValue,
+} from "../../services/actions/resetPasswordActions";
 
 function ResetPassword() {
   const dispatch = useDispatch();

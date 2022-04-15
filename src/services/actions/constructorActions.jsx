@@ -1,4 +1,6 @@
+import axios from "axios";
 import { ACTIONS } from "./actionTypes";
+import { API_URL, URL_KEY_ORDERS } from "../../constants/api-url";
 
 // constructor
 export const getOrder = () => ({
@@ -13,6 +15,24 @@ export const getOrderSuccess = (order) => ({
 export const getOrderFailed = () => ({
   type: ACTIONS.GET_ORDER_FAILED,
 });
+
+export const postOrder = (ingredientsIDs) => {
+  return (dispatch) => {
+    dispatch(getOrder());
+    (async () => {
+      try {
+        const res = await axios.post(`${API_URL}${URL_KEY_ORDERS}`, {
+          ingredients: ingredientsIDs,
+        });
+        dispatch(getOrderSuccess(res.data));
+      } catch (err) {
+        console.log(err.response);
+
+        dispatch(getOrderFailed());
+      }
+    })();
+  };
+};
 
 export const resetConstructor = () => ({
   type: ACTIONS.RESET_CONSTRUCTOR,

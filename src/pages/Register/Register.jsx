@@ -1,15 +1,17 @@
 import styles from "./Register.module.css";
-import { useCallback } from "react";
 import Loader from "../../components/Loader/Loader";
 import {
   Input,
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
+import { useCallback } from "react";
+import { Link, Redirect, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setRegisterFormValue } from "../../services/actions/registerActions";
-import { postRegisterRequest } from "../../utils/api";
+import {
+  postRegisterRequest,
+  setRegisterFormValue,
+} from "../../services/actions/registerActions";
 
 function Register() {
   const dispatch = useDispatch();

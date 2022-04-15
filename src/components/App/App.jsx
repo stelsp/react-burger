@@ -1,21 +1,21 @@
 import { Switch, Route, useLocation, useHistory } from "react-router-dom";
 import AppHeader from "../AppHeader/AppHeader";
+import Loader from "../Loader/Loader";
+import Modal from "../Modal/Modal";
+import IngredientDetails from "../BurgerIngredients/IngredientDetails/IngredientDetails";
 import MainPage from "../../pages/MainPage/MainPage";
 import Register from "../../pages/Register/Register";
 import Login from "../../pages/Login/Login";
-import Loader from "../Loader/Loader";
 import ForgotPassword from "../../pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "../../pages/ResetPassword/ResetPassword";
 import Profile from "../../pages/Profile/Profile";
 import NotFound404 from "../../pages/NotFound404/NotFound404";
+import ImageView from "../../pages/ImageView/ImageView";
+import { ProtectedRoute } from "../../pages/ProtectedRoute/ProtectedRoute";
 import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getData } from "../../utils/api";
-import { ProtectedRoute } from "../../pages/ProtectedRoute/ProtectedRoute";
-import ImageView from "../../pages/ImageView/ImageView";
+import { getData } from "../../services/actions/ingredientsActions";
 
-import IngredientDetails from "../BurgerIngredients/IngredientDetails/IngredientDetails";
-import Modal from "../Modal/Modal";
 import { MODAL_TITLE_INGREDIENT } from "../../constants/content";
 import { getCookie } from "../../utils/cookie";
 import { userIn } from "../../services/actions/profileActions";

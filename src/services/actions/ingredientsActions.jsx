@@ -1,6 +1,8 @@
+import axios from "axios";
 import { ACTIONS } from "./actionTypes";
 import { nanoid } from "@reduxjs/toolkit";
 import update from "immutability-helper";
+import { API_URL, URL_KEY_INGREDIENTS } from "../../constants/api-url";
 
 // ingredients
 export const getIngredients = () => ({
@@ -25,6 +27,21 @@ export const setCurrentTab = (currentTab) => ({
   type: ACTIONS.SET_CURRENT_TAB,
   currentTab,
 });
+
+export const getData = () => {
+  return (dispatch) => {
+    dispatch(getIngredients());
+    (async () => {
+      try {
+        const res = await axios.get(`${API_URL}${URL_KEY_INGREDIENTS}`);
+        dispatch(getIngredientsSuccess(res.data.data));
+      } catch (err) {
+        console.log(err.response);
+        dispatch(getIngredientsFailed());
+      }
+    })();
+  };
+};
 
 // dnd
 export const dragIngredient = (inner, ingr) => {

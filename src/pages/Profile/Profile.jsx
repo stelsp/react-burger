@@ -6,12 +6,12 @@ import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { setProfileValue } from "../../services/actions/profileActions";
 import {
   getProfileInfo,
   logOutRequest,
   patchProfileInfo,
-} from "../../utils/api";
+  setProfileValue,
+} from "../../services/actions/profileActions";
 
 function Profile() {
   const nameRef = useRef(null);
@@ -54,24 +54,24 @@ function Profile() {
 
   const onLogOut = useCallback(() => {
     dispatch(logOutRequest(history));
-  }, [history]);
+  }, [dispatch, history]);
 
   return (
     <main className={styles.section}>
       <div className={styles.container}>
         <div className={styles.links}>
-          <Link to={"/profile"} className={styles.link}>
-            Профиль
-          </Link>
-          <Link to={"/"} className={styles.link}>
-            История заказов
-          </Link>
-          <Link to={"/login"} className={styles.link} onClick={onLogOut}>
-            Выход
-          </Link>
-          <p className={styles.text}>
-            В этом разделе вы можете изменить свои персональные данные
-          </p>
+          <Link to="/profile" className={styles.link} children="Профиль" />
+          <Link to="/" className={styles.link} children="История заказов" />
+          <Link
+            to="/login"
+            className={styles.link}
+            onClick={onLogOut}
+            children="Выход"
+          />
+          <p
+            className={styles.text}
+            children="В этом разделе вы можете изменить свои персональные данные"
+          />
         </div>
         <form className={styles.form} onSubmit={onFormSubmit}>
           <div className={styles.input}>

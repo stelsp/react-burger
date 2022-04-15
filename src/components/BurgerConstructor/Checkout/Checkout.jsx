@@ -9,9 +9,9 @@ import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getOrderSuccess,
+  postOrder,
   resetConstructor,
 } from "../../../services/actions/constructorActions";
-import { postOrder } from "../../../utils/api";
 import { useHistory } from "react-router-dom";
 
 function Checkout() {

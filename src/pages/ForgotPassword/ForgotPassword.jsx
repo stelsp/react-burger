@@ -7,8 +7,10 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
-import { setForgotPasswordFormValue } from "../../services/actions/forgotPasswordActions";
-import { postForgotPasswordRequest } from "../../utils/api";
+import {
+  postForgotPasswordRequest,
+  setForgotPasswordFormValue,
+} from "../../services/actions/forgotPasswordActions";
 
 function ForgotPassword() {
   const dispatch = useDispatch();
