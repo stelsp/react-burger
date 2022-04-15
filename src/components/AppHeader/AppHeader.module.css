@@ -21,7 +21,7 @@
 }
 
 .link {
-  composes: flex;
+  display: flex;
   composes: text text_type_main-default text_color_inactive mt-4 mb-4 pt-4 pb-4 from global;
   text-decoration: none;
 }
