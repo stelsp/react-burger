@@ -24,8 +24,8 @@ export const patchProfileValue = (field, value) => ({
 });
 
 export const getProfileInfo = () => {
+  refreshTokenRequest();
   return (dispatch) => {
-    refreshTokenRequest();
     (async () => {
       try {
         const res = await axios.get(`${API_URL}${URL_KEY_USER}`, {
@@ -42,8 +42,8 @@ export const getProfileInfo = () => {
 };
 
 export const patchProfileInfo = (name, email, password) => {
+  refreshTokenRequest();
   return (dispatch) => {
-    refreshTokenRequest();
     (async () => {
       try {
         const res = await axios.patch(

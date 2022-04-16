@@ -1,43 +1,32 @@
-import { Switch, Route, useLocation, useHistory } from "react-router-dom";
 import AppHeader from "../AppHeader/AppHeader";
 import Loader from "../Loader/Loader";
-import Modal from "../Modal/Modal";
-import IngredientDetails from "../BurgerIngredients/IngredientDetails/IngredientDetails";
-import MainPage from "../../pages/MainPage/MainPage";
-import Register from "../../pages/Register/Register";
-import Login from "../../pages/Login/Login";
-import ForgotPassword from "../../pages/ForgotPassword/ForgotPassword";
-import ResetPassword from "../../pages/ResetPassword/ResetPassword";
-import Profile from "../../pages/Profile/Profile";
-import NotFound404 from "../../pages/NotFound404/NotFound404";
-import ImageView from "../../pages/ImageView/ImageView";
-import { ProtectedRoute } from "../../pages/ProtectedRoute/ProtectedRoute";
-import { useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getData } from "../../services/actions/ingredientsActions";
-
-import { MODAL_TITLE_INGREDIENT } from "../../constants/content";
 import { getCookie } from "../../utils/cookie";
 import { userIn } from "../../services/actions/profileActions";
+import Routes from "../Routes/Routes";
 
 export default function App() {
   const dispatch = useDispatch();
-  const history = useHistory();
-  const location = useLocation();
-  const background = location.state && location.state.background;
 
   const { ingredientsRequest, ingredientsFailed } = useSelector(
     (store) => store.ingredients
   );
-
-  const closeModal = useCallback(() => {
-    history.goBack();
-  }, [history]);
+  console.log(getCookie("accessToken"));
 
   useEffect(() => {
     dispatch(getData());
     if (getCookie("accessToken")) return dispatch(userIn());
   }, [dispatch]);
+
+  const ws = new WebSocket(
+    `wss://norma.nomoreparties.space/orders/all?token=${getCookie(
+      "accessToken"
+    )}`
+  );
+
+  console.log(ws);
 
   return (
     <>
@@ -48,26 +37,7 @@ export default function App() {
       ) : (
         <>
           <AppHeader />
-          <Switch location={background || location}>
-            <Route exact path="/" children={<MainPage />} />
-            <ProtectedRoute path="/profile" children={<Profile />} />
-            <Route path="/register" children={<Register />} />
-            <Route path="/login" children={<Login />} />
-            <Route path="/forgot-password" children={<ForgotPassword />} />
-            <Route path="/reset-password" children={<ResetPassword />} />
-            <Route exact path="/ingredients/:id" children={<ImageView />} />
-            <Route children={<NotFound404 />} />
-          </Switch>
-          {background && (
-            <Route
-              path="/ingredients/:id"
-              children={
-                <Modal onClose={closeModal} title={MODAL_TITLE_INGREDIENT}>
-                  <IngredientDetails />
-                </Modal>
-              }
-            />
-          )}
+          <Routes />
         </>
       )}
     </>
