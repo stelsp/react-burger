@@ -13,20 +13,19 @@ export default function App() {
   const { ingredientsRequest, ingredientsFailed } = useSelector(
     (store) => store.ingredients
   );
-  console.log(getCookie("accessToken"));
 
   useEffect(() => {
+    const token = getCookie("accessToken")?.split("Bearer")[1];
     dispatch(getData());
-    if (getCookie("accessToken")) return dispatch(userIn());
+    const ws = new WebSocket(
+      `wss://norma.nomoreparties.space/orders/all?token=${token}`
+    );
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      console.log(data);
+    };
+    if (token) return dispatch(userIn());
   }, [dispatch]);
-
-  const ws = new WebSocket(
-    `wss://norma.nomoreparties.space/orders/all?token=${getCookie(
-      "accessToken"
-    )}`
-  );
-
-  console.log(ws);
 
   return (
     <>

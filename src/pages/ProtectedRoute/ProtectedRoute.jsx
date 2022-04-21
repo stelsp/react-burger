@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
-import { Route, Redirect, useHistory, useLocation } from "react-router-dom";
+import { Route, Redirect, useHistory } from "react-router-dom";
 import Modal from "../../components/Modal/Modal";
 import { MODAL_TITLE_INGREDIENT } from "../../constants/content";
 
