@@ -7,7 +7,7 @@ import {
   logOutRequest,
 } from "../../services/actions/profileActions";
 import ProfileForm from "../../components/ProfileForm/ProfileForm";
-import ProfileOrders from "../ProfileOrders/ProfileOrders";
+import ProfileOrders from "../../components/ProfileOrders/ProfileOrders";
 import { ModalRoute } from "../../pages/ProtectedRoute/ProtectedRoute";
 import Order from "../Order/Order";
 

@@ -1,0 +1,10 @@
+.sum {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.price {
+  margin: 0;
+  font: var(--ingredient);
+}

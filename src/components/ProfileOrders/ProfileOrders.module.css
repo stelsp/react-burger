@@ -1,0 +1,81 @@
+.feed {
+  padding-inline: var(--m-2);
+  height: 696px;
+  width: 100%;
+  max-width: 844px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  overflow-y: scroll;
+  box-sizing: border-box;
+}
+.card {
+  width: 100%;
+  padding: var(--m-6);
+  background-color: #1c1c21;
+  border-radius: 40px;
+  box-sizing: border-box;
+}
+.ingContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.imageContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.numberContainer {
+  margin-bottom: var(--m-6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.number {
+  margin: 0;
+  font: var(--order-number);
+}
+.time {
+  margin: 0;
+  font: var(--ingredient);
+  color: var(--color-inactive);
+}
+.heading {
+  margin: 0;
+  margin-bottom: var(--m-2);
+  font: var(--heading);
+}
+.status {
+  margin: 0;
+  margin-bottom: var(--m-6);
+  font: var(--ingredient);
+}
+
+.div1 {
+  grid-area: 1 / 1 / 2 / 2;
+}
+.div2 {
+  grid-area: 1 / 1 / 2 / 2;
+  margin-left: 40px;
+}
+.div3 {
+  grid-area: 1 / 1 / 2 / 2;
+  margin-left: 80px;
+}
+.div4 {
+  grid-area: 1 / 1 / 2 / 2;
+  margin-left: 120px;
+}
+.div5 {
+  grid-area: 1 / 1 / 2 / 2;
+  margin-left: 160px;
+}
+.div6 {
+  grid-area: 1 / 1 / 2 / 2;
+  margin-left: 200px;
+}

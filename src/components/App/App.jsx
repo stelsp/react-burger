@@ -20,10 +20,6 @@ export default function App() {
     const ws = new WebSocket(
       `wss://norma.nomoreparties.space/orders/all?token=${token}`
     );
-    ws.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      console.log(data);
-    };
     if (token) return dispatch(userIn());
   }, [dispatch]);
 
