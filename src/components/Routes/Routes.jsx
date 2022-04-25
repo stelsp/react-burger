@@ -14,6 +14,7 @@ import {
   ModalRoute,
 } from "../../pages/ProtectedRoute/ProtectedRoute";
 import Order from "../../pages/Order/Order";
+import { MODAL_TITLE_INGREDIENT } from "../../constants/content";
 
 function Routes() {
   return (
@@ -31,6 +32,13 @@ function Routes() {
           path="/ingredients/:id"
           modal={<IngredientDetails />}
           page={<ImageView />}
+          title={MODAL_TITLE_INGREDIENT}
+        />
+        <ModalRoute
+          exact
+          path="/orders/:id"
+          modal={<Order />}
+          page={<Order />}
         />
 
         <Route children={<NotFound404 />} />

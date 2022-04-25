@@ -1,0 +1,90 @@
+.order {
+  width: 640px;
+  margin: 0 auto;
+  /* margin-top: 122px; */
+  composes: pt-2 pb-10 pr-10 pl-10 from global;
+}
+
+.middle {
+  text-decoration: none;
+  composes: text mb-10 from global;
+
+  max-height: 312px;
+  overflow-y: scroll;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.number {
+  composes: text text_type_digits-default mb-10 from global;
+  text-align: center;
+}
+
+.heading {
+  composes: text text_type_main-medium mb-3 from global;
+}
+
+.status {
+  composes: text text_type_main-default text_color_success mb-15 from global;
+}
+
+.comp {
+  composes: text text_type_main-medium mb-6 from global;
+}
+
+.date {
+  composes: text text_type_main-default text_color_inactive from global;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  composes: mb-4 mr-6 from global;
+  gap: 16px;
+}
+
+.name {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.text {
+  composes: text text_type_main-default from global;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+::-webkit-scrollbar-thumb {
+  background: #8585ad;
+  border: 3px solid #2f2f37;
+  border-radius: 6px;
+}
+
+.div1 {
+  height: 56px;
+  width: 56px;
+  min-width: 56px;
+  background-color: #8585ad;
+  border: 2px solid purple;
+  border-radius: 50%;
+  box-sizing: border-box;
+}

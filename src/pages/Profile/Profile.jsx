@@ -46,12 +46,14 @@ function Profile() {
         </div>
         <Switch>
           <Route exact path="/profile" children={<ProfileForm />} />
-          <Route exact path="/profile/orders" children={<ProfileOrders />} />
-          <ModalRoute
+          <Route
             exact
-            path="/orders/:id"
-            modal={<Order />}
-            page={<Order />}
+            path="/profile/orders"
+            children={
+              <div className={styles.feed}>
+                <ProfileOrders />
+              </div>
+            }
           />
         </Switch>
       </div>

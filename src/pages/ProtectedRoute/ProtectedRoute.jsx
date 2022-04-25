@@ -2,7 +2,6 @@ import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { Route, Redirect, useHistory } from "react-router-dom";
 import Modal from "../../components/Modal/Modal";
-import { MODAL_TITLE_INGREDIENT } from "../../constants/content";
 
 export function ProtectedRoute({ children, ...rest }) {
   const { isLoggedIn } = useSelector((store) => store.profile);
@@ -20,7 +19,7 @@ export function ProtectedRoute({ children, ...rest }) {
   );
 }
 
-export function ModalRoute({ modal, page, ...rest }) {
+export function ModalRoute({ modal, page, title, ...rest }) {
   const history = useHistory();
 
   const closeModal = useCallback(() => {
@@ -33,7 +32,7 @@ export function ModalRoute({ modal, page, ...rest }) {
         {...rest}
         render={() =>
           history.action === "PUSH" ? (
-            <Modal onClose={closeModal} title={MODAL_TITLE_INGREDIENT}>
+            <Modal onClose={closeModal} title={title}>
               {modal}
             </Modal>
           ) : (

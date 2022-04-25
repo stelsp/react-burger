@@ -1,72 +1,62 @@
 import styles from "./ProfileOrders.module.css";
 import Price from "../Price/Price";
-import { useMemo } from "react";
-import { getCookie } from "../../utils/cookie";
-
-const token = getCookie("accessToken")?.split("Bearer")[1];
-const ws = new WebSocket(
-  `wss://norma.nomoreparties.space/orders/all?token=${token}`
-);
-ws.onmessage = (event) => {
-  const data = JSON.parse(event.data);
-  console.log(data);
-  return data;
-};
+import { Link, useLocation } from "react-router-dom";
 
 const Top = () => {
   return (
-    <>
-      {ws.onmessage.orders.map((el) => {
-        return (
-          <div>
-            <div className={styles.numberContainer}>
-              <p className={styles.number}>{el.number}</p>
-              <p className={styles.time}>{el.createdAt}</p>
-            </div>
-            <h2 className={styles.heading}>{el.name}</h2>
-            <p className={styles.status}>{el.status}</p>
-          </div>
-        );
-      })}
-    </>
+    <div>
+      <div className={styles.numberContainer}>
+        <p className={styles.number}>#034533</p>
+        <p className={styles.date}>Вчера, 13:50 i-GMT+3</p>
+      </div>
+      <h2 className={styles.heading}>Black Hole Singularity острый бургер</h2>
+      <p className={styles.status}>Выполнен</p>
+    </div>
   );
 };
 
 const Bottom = () => {
-  // const sumPrice = useMemo(() => {
-  //   return data.ing ? data.ing.reduce((sum, el) => sum + el.price, 0) : 0;
-  // }, []);
   return (
     <div className={styles.ingContainer}>
       <div className={styles.imageContainer}>
-        {ws.onmessage.orders.map((el) => (
-          <div
-            key={el.ingredients}
-            styles={{ width: "56px", height: "56px", backgroundColor: "white" }}
-          />
-        ))}
+        <div className={styles.div1} />
+        <div className={styles.div2} />
+        <div className={styles.div3} />
+        <div className={styles.div4} />
+        <div className={styles.div5} />
+        <div className={styles.div6} />
       </div>
-      <Price price={100} />
+      <Price price={640} />
     </div>
   );
 };
 
 function Card() {
+  const location = useLocation();
   return (
-    <div className={styles.card}>
-      <Top />
-      <Bottom />
-    </div>
+    <Link
+      className={styles.link}
+      to={{
+        pathname: "/orders/:id",
+        // `/orders/:id/${el._id}`,
+        state: { background: location },
+      }}
+    >
+      <div className={styles.card}>
+        <Top />
+        <Bottom />
+      </div>
+    </Link>
   );
 }
 
 export default function ProfileOrders() {
   return (
-    <div className={styles.feed}>
+    <>
       <Card />
       <Card />
       <Card />
       <Card />
-    </div>
+    </>
   );
 }

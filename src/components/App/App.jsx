@@ -15,12 +15,8 @@ export default function App() {
   );
 
   useEffect(() => {
-    const token = getCookie("accessToken")?.split("Bearer")[1];
     dispatch(getData());
-    const ws = new WebSocket(
-      `wss://norma.nomoreparties.space/orders/all?token=${token}`
-    );
-    if (token) return dispatch(userIn());
+    if (getCookie("accessToken")) return dispatch(userIn());
   }, [dispatch]);
 
   return (
