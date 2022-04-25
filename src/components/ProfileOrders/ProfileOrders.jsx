@@ -1,9 +1,8 @@
 import styles from "./ProfileOrders.module.css";
 import Price from "../Price/Price";
 import { Link, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
-import { useEffect } from "react";
 
 const Top = ({ createdAt, number, status, name }) => {
   const date = new Date(createdAt).toLocaleString();
@@ -19,12 +18,28 @@ const Top = ({ createdAt, number, status, name }) => {
   );
 };
 
-const Bottom = ({ ingredients }) => {
+const Img = ({ el }) => {
+  const { ingredients } = useSelector((store) => store.ingredients);
+  const id = el;
+
+  const ingredient = ingredients?.find((el) => el._id === id);
+  console.log(ingredient);
+
+  return (
+    <img
+      alt="#"
+      src="https://code.s3.yandex.net/react/code/sauce-02.png"
+      className={styles.img}
+    />
+  );
+};
+
+const Bottom = ({ ing }) => {
   return (
     <div className={styles.ingContainer}>
       <div className={styles.imageContainer}>
-        {ingredients?.slice(0, 6).map((el, index) => (
-          <div className={styles.div} key={nanoid()} />
+        {ing?.slice(0, 6).map((el, index) => (
+          <Img el={el} key={nanoid()} />
         ))}
       </div>
       <Price price={640} />
@@ -32,7 +47,7 @@ const Bottom = ({ ingredients }) => {
   );
 };
 
-function Card({ createdAt, number, status, name, _id, ingredients }) {
+function Card({ createdAt, number, status, name, _id, ing }) {
   const location = useLocation();
   return (
     <Link
@@ -49,7 +64,7 @@ function Card({ createdAt, number, status, name, _id, ingredients }) {
           status={status}
           name={name}
         />
-        <Bottom ingredients={ingredients} />
+        <Bottom ing={ing} />
       </div>
     </Link>
   );
@@ -69,7 +84,7 @@ export default function ProfileOrders() {
             name={el.name}
             _id={el._id}
             key={el._id}
-            ingredients={el.ingredients}
+            ing={el.ingredients}
           />
         );
       })}

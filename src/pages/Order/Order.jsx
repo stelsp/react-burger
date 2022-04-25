@@ -1,12 +1,20 @@
 import styles from "./Order.module.css";
 import Price from "../../components/Price/Price";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { nanoid } from "@reduxjs/toolkit";
 
-const Ingredient = () => {
+const Ingredient = ({ el }) => {
+  const { ingredients } = useSelector((store) => store.ingredients);
+  const id = el;
+  const ingredient = ingredients?.find((el) => el._id == id);
+
   return (
     <li className={styles.container}>
       <div className={styles.name}>
-        <div className={styles.div1} />
-        <p className={styles.text}>Флюоресцентная булка R2-D3</p>
+        <img alt="#" src="" className={styles.img} />
+
+        <p className={styles.text}>{ingredient.name}</p>
       </div>
       <div className={styles.price}>
         <p className={styles.text}>2</p>
@@ -17,46 +25,50 @@ const Ingredient = () => {
   );
 };
 
-const Top = () => {
+const Top = ({ number, name, status }) => {
   return (
     <div className={styles.top}>
-      <p className={styles.number}>#034533</p>
-      <h2 className={styles.heading}>Black Hole Singularity острый бургер</h2>
-      <p className={styles.status}>Выполнен</p>
+      <p className={styles.number}>#{number}</p>
+      <h2 className={styles.heading}>{name}</h2>
+      <p className={styles.status}>{status}</p>
       <h3 className={styles.comp}>Состав:</h3>
     </div>
   );
 };
 
-const Middle = () => {
+const Middle = ({ el }) => {
   return (
     <ul className={styles.middle}>
-      <Ingredient />
-      <Ingredient />
-      <Ingredient />
-      <Ingredient />
-      <Ingredient />
-      <Ingredient />
-      <Ingredient />
+      {el?.map((el) => (
+        <Ingredient el={el} key={nanoid()} />
+      ))}
     </ul>
   );
 };
 
-const Bottom = () => {
+const Bottom = ({ createdAt }) => {
+  const date = new Date(createdAt).toLocaleString();
+
   return (
     <div className={styles.bottom}>
-      <p className={styles.date}>Вчера, 13:50 i-GMT+3</p>
+      <p className={styles.date}>{date}</p>
       <Price price={1250} />
     </div>
   );
 };
 
 export default function Order() {
+  let { id } = useParams();
+  const { data } = useSelector((store) => store.socket);
+  const el = data.orders.find((el) => el._id === id);
+
+  if (!el) return null;
+
   return (
     <div className={styles.order}>
-      <Top />
-      <Middle />
-      <Bottom />
+      <Top number={el.number} name={el.name} status={el.status} />
+      <Middle el={el.ingredients} />
+      <Bottom createdAt={el.createdAt} />
     </div>
   );
 }
