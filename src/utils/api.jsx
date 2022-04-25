@@ -8,7 +8,6 @@ export const refreshTokenRequest = () => {
       const res = await axios.post(`${API_URL}${URL_KEY_TOKEN}`, {
         token: getCookie("refreshToken"),
       });
-      console.log(res);
       setCookie("refreshToken", res.data.refreshToken);
       setCookie("accessToken", res.data.accessToken);
     } catch (err) {

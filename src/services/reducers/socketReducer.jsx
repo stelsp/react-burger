@@ -37,7 +37,7 @@ const wsReducer = (state = initialState.socket, action) => {
       return {
         ...state,
         error: undefined,
-        data: [...state.data, action.payload],
+        data: action.payload,
       };
     default:
       return state;

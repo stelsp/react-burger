@@ -34,7 +34,7 @@ function Ingredient({ el }) {
       key={el._id}
       to={{
         pathname: `/ingredients/${el._id}`,
-        state: { background: "/" },
+        state: { background: location },
       }}
     >
       <div onClick={openModal} className={styles.card} ref={drag}>

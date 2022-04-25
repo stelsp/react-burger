@@ -8,8 +8,20 @@ import {
 } from "../../services/actions/profileActions";
 import ProfileForm from "../../components/ProfileForm/ProfileForm";
 import ProfileOrders from "../../components/ProfileOrders/ProfileOrders";
-import { ModalRoute } from "../../pages/ProtectedRoute/ProtectedRoute";
-import Order from "../Order/Order";
+
+const ProfileFeed = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: "WS_CONNECTION_USER_START" });
+  }, [dispatch]);
+
+  return (
+    <div className={styles.feed}>
+      <ProfileOrders />
+    </div>
+  );
+};
 
 function Profile() {
   const dispatch = useDispatch();
@@ -46,15 +58,7 @@ function Profile() {
         </div>
         <Switch>
           <Route exact path="/profile" children={<ProfileForm />} />
-          <Route
-            exact
-            path="/profile/orders"
-            children={
-              <div className={styles.feed}>
-                <ProfileOrders />
-              </div>
-            }
-          />
+          <Route exact path="/profile/orders" children={<ProfileFeed />} />
         </Switch>
       </div>
     </main>

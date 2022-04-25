@@ -26,7 +26,6 @@ export function setCookie(name, value, props) {
     }
   }
   document.cookie = updatedCookie;
-  console.log("ы");
 }
 
 export function deleteCookie(name) {

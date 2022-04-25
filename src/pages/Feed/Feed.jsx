@@ -1,7 +1,15 @@
 import styles from "./Feed.module.css";
 import ProfileOrders from "../../components/ProfileOrders/ProfileOrders";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 function Feed() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: "WS_CONNECTION_START" });
+  }, [dispatch]);
+
   return (
     <div className={styles.main}>
       <div className={styles.container}>

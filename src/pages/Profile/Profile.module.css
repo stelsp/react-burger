@@ -4,7 +4,7 @@
   width: 844px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+
   gap: 24px;
   overflow-y: scroll;
   box-sizing: border-box;
