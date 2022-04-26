@@ -15,13 +15,6 @@ const FeedInfo = () => {
   const done = data?.orders?.filter((el) => el.status === "done");
   const pending = data?.orders?.filter((el) => el.status === "pending");
 
-  // const sumPrice = useMemo(() => {
-  //   return ingredients
-  //     .filter((i) => ing.includes(i._id))
-  //     .map((el) => el.price)
-  //     .reduce((a, b) => a + b, 0);
-  // }, [ingredients, ing]);
-
   return (
     <div className={feed.container}>
       <div className={feed.orders}>
