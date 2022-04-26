@@ -34,6 +34,7 @@ export const postLoginRequest = (email, password) => {
         });
         setCookie("refreshToken", res.data.refreshToken);
         setCookie("accessToken", res.data.accessToken);
+        await dispatch({ type: "WS_CONNECTION_USER_START" });
         await dispatch(loginFormSubmitSuccess());
         await dispatch(userIn());
       } catch (err) {

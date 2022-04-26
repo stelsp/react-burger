@@ -3,6 +3,7 @@ import Price from "../Price/Price";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
+import { useMemo } from "react";
 
 const Top = ({ createdAt, number, status, name }) => {
   const date = new Date(createdAt).toLocaleString();
@@ -21,28 +22,40 @@ const Top = ({ createdAt, number, status, name }) => {
 const Img = ({ el }) => {
   const { ingredients } = useSelector((store) => store.ingredients);
   const id = el;
-
   const ingredient = ingredients?.find((el) => el._id === id);
-  console.log(ingredient);
+
+  if (!ingredient?.image) {
+    return null;
+  }
 
   return (
-    <img
-      alt="#"
-      src="https://code.s3.yandex.net/react/code/sauce-02.png"
+    <div
+      style={{
+        backgroundImage: `url(${ingredient.image})`,
+      }}
       className={styles.img}
     />
   );
 };
 
 const Bottom = ({ ing }) => {
+  const { ingredients } = useSelector((store) => store.ingredients);
+
+  const sumPrice = useMemo(() => {
+    return ingredients
+      .filter((i) => ing.includes(i._id))
+      .map((el) => el.price)
+      .reduce((a, b) => a + b, 0);
+  }, [ingredients, ing]);
+
   return (
     <div className={styles.ingContainer}>
       <div className={styles.imageContainer}>
-        {ing?.slice(0, 6).map((el, index) => (
+        {ing?.slice(0, 6).map((el) => (
           <Img el={el} key={nanoid()} />
         ))}
       </div>
-      <Price price={640} />
+      <Price price={sumPrice} />
     </div>
   );
 };

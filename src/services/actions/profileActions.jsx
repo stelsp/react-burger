@@ -2,7 +2,7 @@ import axios from "axios";
 import { ACTIONS } from "./actionTypes";
 import { API_URL, URL_KEY_LOGOUT, URL_KEY_USER } from "../../constants/api-url";
 import { deleteCookie, getCookie } from "../../utils/cookie";
-import { refreshTokenRequest } from "../../utils/api";
+// import { refreshTokenRequest } from "../../utils/api";
 
 // profile
 export const setProfileValue = (field, value) => ({
@@ -24,7 +24,7 @@ export const patchProfileValue = (field, value) => ({
 });
 
 export const getProfileInfo = () => {
-  refreshTokenRequest();
+  // refreshTokenRequest();
   return (dispatch) => {
     (async () => {
       try {
@@ -42,7 +42,6 @@ export const getProfileInfo = () => {
 };
 
 export const patchProfileInfo = (name, email, password) => {
-  refreshTokenRequest();
   return (dispatch) => {
     (async () => {
       try {

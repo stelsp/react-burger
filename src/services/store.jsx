@@ -4,8 +4,6 @@ import thunk from "redux-thunk";
 import { ACTIONS } from "./actions/actionTypes";
 import { getCookie } from "../utils/cookie";
 
-const token = getCookie("accessToken");
-
 const wsActions = {
   wsInit: ACTIONS.WS_CONNECTION_START,
   wsInitUser: ACTIONS.WS_CONNECTION_USER_START,
@@ -17,12 +15,12 @@ const wsActions = {
   onMessage: ACTIONS.WS_GET_MESSAGE,
 };
 
-export const socketMiddleware = (wsUrl, wsActions, token) => {
+export const socketMiddleware = (wsUrl, wsActions) => {
   return (store) => {
     let socket = null;
 
     return (next) => (action) => {
-      const { dispatch } = store;
+      const { dispatch, getState } = store;
       const { type, payload } = action;
       const {
         wsInit,
@@ -34,13 +32,15 @@ export const socketMiddleware = (wsUrl, wsActions, token) => {
         onError,
         onMessage,
       } = wsActions;
+      const { isLoggedIn } = getState().profile;
 
       if (type === wsInit) {
         socket = new WebSocket(`${wsUrl}/all`);
       }
-      if (type === wsInitUser && token) {
-        socket = new WebSocket(`${wsUrl}?token=${token.split(" ")[1]}`);
-        console.log(socket);
+      if (type === wsInitUser && isLoggedIn) {
+        socket = new WebSocket(
+          `${wsUrl}?token=${getCookie("accessToken").split(" ")[1]}`
+        );
       }
 
       if (socket) {
@@ -55,9 +55,8 @@ export const socketMiddleware = (wsUrl, wsActions, token) => {
         socket.onmessage = (event) => {
           const { data } = event;
           const parsedData = JSON.parse(data);
-          const { success, ...restParsedData } = parsedData;
 
-          dispatch({ type: onMessage, payload: restParsedData });
+          dispatch({ type: onMessage, payload: parsedData });
         };
 
         socket.onclose = (event) => {
@@ -69,7 +68,7 @@ export const socketMiddleware = (wsUrl, wsActions, token) => {
         }
 
         if (type === wsSendMessage) {
-          const message = { ...payload, token: token };
+          const message = { ...payload, token: getCookie("accessToken") };
           socket.send(JSON.stringify(message));
         }
       }
@@ -87,7 +86,7 @@ const composeEnhancers =
 const enhancer = composeEnhancers(
   applyMiddleware(
     thunk,
-    socketMiddleware("wss://norma.nomoreparties.space/orders", wsActions, token)
+    socketMiddleware("wss://norma.nomoreparties.space/orders", wsActions)
   )
 );
 

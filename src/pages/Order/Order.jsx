@@ -1,25 +1,36 @@
 import styles from "./Order.module.css";
 import Price from "../../components/Price/Price";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
+import { useEffect, useMemo } from "react";
 
 const Ingredient = ({ el }) => {
   const { ingredients } = useSelector((store) => store.ingredients);
   const id = el;
-  const ingredient = ingredients?.find((el) => el._id == id);
+  const ingredient = ingredients?.find((el) => el._id === id);
+  console.log(ingredient);
+
+  if (!ingredient?.image) {
+    return null;
+  }
 
   return (
     <li className={styles.container}>
       <div className={styles.name}>
-        <img alt="#" src="" className={styles.img} />
+        <div
+          style={{
+            backgroundImage: `url(${ingredient.image})`,
+          }}
+          className={styles.img}
+        />
 
         <p className={styles.text}>{ingredient.name}</p>
       </div>
       <div className={styles.price}>
-        <p className={styles.text}>2</p>
+        <p className={styles.text}>1</p>
         <p className={styles.text}>x</p>
-        <Price price={120} />
+        <Price price={ingredient.price} key={nanoid()} />
       </div>
     </li>
   );
@@ -46,21 +57,34 @@ const Middle = ({ el }) => {
   );
 };
 
-const Bottom = ({ createdAt }) => {
+const Bottom = ({ createdAt, el }) => {
   const date = new Date(createdAt).toLocaleString();
+  const { ingredients } = useSelector((store) => store.ingredients);
+  const sumPrice = useMemo(() => {
+    return ingredients
+      .filter((i) => el.includes(i._id))
+      .map((el) => el.price)
+      .reduce((a, b) => a + b, 0);
+  }, [ingredients, el]);
 
   return (
     <div className={styles.bottom}>
       <p className={styles.date}>{date}</p>
-      <Price price={1250} />
+      <Price price={sumPrice} />
     </div>
   );
 };
 
 export default function Order() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: "WS_CONNECTION_START" });
+  }, [dispatch]);
+
   let { id } = useParams();
   const { data } = useSelector((store) => store.socket);
-  const el = data.orders.find((el) => el._id === id);
+  const el = data?.orders?.find((el) => el._id === id);
 
   if (!el) return null;
 
@@ -68,7 +92,7 @@ export default function Order() {
     <div className={styles.order}>
       <Top number={el.number} name={el.name} status={el.status} />
       <Middle el={el.ingredients} />
-      <Bottom createdAt={el.createdAt} />
+      <Bottom createdAt={el.createdAt} el={el.ingredients} />
     </div>
   );
 }
