@@ -8,6 +8,7 @@ import registerReducer from "./reducers/registerReducer";
 import forgotPasswordReducer from "./reducers/forgotPasswordReducer";
 import resetPasswordReducer from "./reducers/resetPasswordReducer";
 import profileReducer from "./reducers/profileReducer";
+import wsReducer from "./reducers/socketReducer";
 
 export const initialState = {
   ingredients: {
@@ -64,6 +65,11 @@ export const initialState = {
     password: "",
     isLoggedIn: false,
   },
+  socket: {
+    wsConnected: false,
+    data: [],
+    error: undefined,
+  },
 };
 
 const rootReducer = combineReducers({
@@ -76,6 +82,7 @@ const rootReducer = combineReducers({
   forgotPassword: forgotPasswordReducer,
   resetPassword: resetPasswordReducer,
   profile: profileReducer,
+  socket: wsReducer,
 });
 
 export default rootReducer;

@@ -1,0 +1,9 @@
+.sum {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.price {
+  composes: text text_type_main-default from global;
+}
