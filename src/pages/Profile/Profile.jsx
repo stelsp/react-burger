@@ -8,12 +8,22 @@ import {
 } from "../../services/actions/profileActions";
 import ProfileForm from "../../components/ProfileForm/ProfileForm";
 import ProfileOrders from "../../components/ProfileOrders/ProfileOrders";
+import {
+  wsConnectionClose,
+  wsConnectionUserOpen,
+} from "../../services/actions/socketActions";
 
 const ProfileFeed = () => {
   const dispatch = useDispatch();
 
+  useEffect(() => {}, [dispatch]);
+
   useEffect(() => {
-    dispatch({ type: "WS_CONNECTION_USER_START" });
+    dispatch(wsConnectionUserOpen());
+
+    return () => {
+      dispatch(wsConnectionClose());
+    };
   }, [dispatch]);
 
   return (

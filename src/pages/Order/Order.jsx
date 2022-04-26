@@ -9,7 +9,6 @@ const Ingredient = ({ el }) => {
   const { ingredients } = useSelector((store) => store.ingredients);
   const id = el;
   const ingredient = ingredients?.find((el) => el._id === id);
-  console.log(ingredient);
 
   if (!ingredient?.image) {
     return null;

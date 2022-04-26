@@ -1,6 +1,7 @@
 import axios from "axios";
 import { ACTIONS } from "./actionTypes";
 import { API_URL, URL_KEY_ORDERS } from "../../constants/api-url";
+import { getCookie } from "../../utils/cookie";
 
 // constructor
 export const getOrder = () => ({
@@ -21,10 +22,19 @@ export const postOrder = (ingredientsIDs) => {
     dispatch(getOrder());
     (async () => {
       try {
-        const res = await axios.post(`${API_URL}${URL_KEY_ORDERS}`, {
-          ingredients: ingredientsIDs,
-        });
+        const res = await axios.post(
+          `${API_URL}${URL_KEY_ORDERS}`,
+          {
+            ingredients: ingredientsIDs,
+          },
+          {
+            headers: {
+              Authorization: getCookie("accessToken"),
+            },
+          }
+        );
         dispatch(getOrderSuccess(res.data));
+        console.log(res);
       } catch (err) {
         console.log(err.response);
 
