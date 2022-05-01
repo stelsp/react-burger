@@ -37,7 +37,7 @@ function Login() {
     return (
       <Redirect
         // Если объект state не является undefined, вернём пользователя назад.
-        to={location?.state?.from || "/"}
+        to={location?.state?.from || "/react-burger"}
       />
     );
   }

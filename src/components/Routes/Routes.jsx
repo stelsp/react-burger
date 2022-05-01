@@ -20,7 +20,7 @@ function Routes() {
   return (
     <>
       <Switch>
-        <Route exact path="/" children={<MainPage />} />
+        <Route exact path="/react-burger" children={<MainPage />} />
         <ProtectedRoute path="/profile" children={<Profile />} />
         <Route path="/feed" children={<Feed />} />
         <Route path="/register" children={<Register />} />

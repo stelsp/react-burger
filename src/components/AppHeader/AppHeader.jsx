@@ -20,7 +20,7 @@ function AppHeader() {
               linkStyle={styles.link + " pr-5 mr-2"}
               textStyle={"ml-2"}
               icon={<BurgerIcon type="secondary" />}
-              to={"/"}
+              to={"/react-burger"}
               text={APP_HEADER_LINKS.CONSTRUCTOR}
             />
 
@@ -34,7 +34,7 @@ function AppHeader() {
           </div>
 
           <div className={styles.logo}>
-            <Link to="/">
+            <Link to="/react-burger">
               <Logo />
             </Link>
           </div>
