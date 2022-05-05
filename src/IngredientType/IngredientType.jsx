@@ -1,7 +1,7 @@
 import styles from "./IngredientType.module.css";
 import PropTypes from "prop-types";
-import Ingredient from "../Ingredient/Ingredient";
-import { ingredientPropTypes } from "../../../constants/custom-prop-types";
+import Ingredient from "../components/Ingredient/Ingredient";
+import { ingredientPropTypes } from "../constants/custom-prop-types";
 import { forwardRef } from "react";
 
 const IngredientType = forwardRef(({ category, title }, ref) => (

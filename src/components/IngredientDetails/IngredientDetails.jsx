@@ -1,5 +1,5 @@
 import styles from "./IngredientDetails.module.css";
-import { INGREDIENT_COMPOUND } from "../../../constants/content";
+import { INGREDIENT_COMPOUND } from "../../constants/content";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 

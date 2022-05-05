@@ -2,16 +2,16 @@ import style from "./Checkout.module.css";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/button";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import OrderDetails from "../OrderDetails/OrderDetails";
-import Modal from "../../Modal/Modal";
-import Loader from "../../Loader/Loader";
-import { ORDER_BUTTON_TEXT } from "../../../constants/content";
+import Modal from "../Modal/Modal";
+import Loader from "../Loader/Loader";
+import { ORDER_BUTTON_TEXT } from "../../constants/content";
 import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getOrderSuccess,
   postOrder,
   resetConstructor,
-} from "../../../services/actions/constructorActions";
+} from "../../services/actions/constructorActions";
 import { useHistory } from "react-router-dom";
 
 function Checkout() {

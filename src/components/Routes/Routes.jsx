@@ -1,5 +1,5 @@
 import { Switch, Route } from "react-router-dom";
-import IngredientDetails from "../BurgerIngredients/IngredientDetails/IngredientDetails";
+import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import MainPage from "../../pages/MainPage/MainPage";
 import Register from "../../pages/Register/Register";
 import Login from "../../pages/Login/Login";

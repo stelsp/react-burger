@@ -1,4 +1,4 @@
-import IngredientDetails from "../../components/BurgerIngredients/IngredientDetails/IngredientDetails";
+import IngredientDetails from "../../components/IngredientDetails/IngredientDetails";
 import styles from "./ImageView.module.css";
 
 function ImageView() {

@@ -6,15 +6,16 @@ import { getData } from "../../services/actions/ingredientsActions";
 import { getCookie } from "../../utils/cookie";
 import { userIn } from "../../services/actions/profileActions";
 import Routes from "../Routes/Routes";
+import { RootState } from "../../services/rootReducer";
 
 export default function App() {
   const dispatch = useDispatch();
 
   const { ingredientsRequest, ingredientsFailed } = useSelector(
-    (store) => store.ingredients
+    (store: RootState) => store.ingredients
   );
 
-  useEffect(() => {
+  useEffect((): any => {
     dispatch(getData());
     if (getCookie("accessToken")) return dispatch(userIn());
   }, [dispatch]);

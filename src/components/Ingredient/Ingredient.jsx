@@ -1,11 +1,11 @@
 import styles from "./Ingredient.module.css";
-import { ingredientPropTypes } from "../../../constants/custom-prop-types";
+import { ingredientPropTypes } from "../../constants/custom-prop-types";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import { useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrag } from "react-dnd";
-import { setCurrentIngredient } from "../../../services/actions/ingredientsActions";
+import { setCurrentIngredient } from "../../services/actions/ingredientsActions";
 import { Link, useLocation } from "react-router-dom";
 
 function Ingredient({ el }) {

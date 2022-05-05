@@ -85,4 +85,6 @@ const rootReducer = combineReducers({
   socket: wsReducer,
 });
 
+export type RootState = ReturnType<typeof rootReducer>;
+
 export default rootReducer;

@@ -1,7 +1,7 @@
 import style from "./BurgerConstructor.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-import Checkout from "./Checkout/Checkout";
+import Checkout from "../Checkout/Checkout";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteConstructorIngredient } from "../../services/actions/constructorActions";
 import {
@@ -9,11 +9,21 @@ import {
   sortIngredient,
 } from "../../services/actions/ingredientsActions";
 import { useDrop, useDrag } from "react-dnd";
-import { useCallback } from "react";
+import { FC, useCallback } from "react";
+import { RootState } from "../../services/rootReducer";
 
-function Inner({ id, name, image, price, moveCard, findCard }) {
+interface IInner {
+  id: string;
+  name: string;
+  image: string;
+  price: number;
+  moveCard: () => any;
+  findCard: () => any;
+}
+
+const Inner: FC<IInner> = ({ id, name, image, price, moveCard, findCard }) => {
   const dispatch = useDispatch();
-  const { inner } = useSelector((store) => ({
+  const { inner } = useSelector((store: RootState) => ({
     inner: store.burgerConstructor.inner,
   }));
 
@@ -64,11 +74,13 @@ function Inner({ id, name, image, price, moveCard, findCard }) {
       />
     </li>
   );
-}
+};
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
-  const { outer, inner } = useSelector((store) => store.burgerConstructor);
+  const { outer, inner } = useSelector(
+    (store: RootState) => store.burgerConstructor
+  );
 
   const [, drop] = useDrop(
     () => ({

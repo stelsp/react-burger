@@ -1,4 +1,4 @@
-import ModalOverlay from "../Modal/ModalOverlay/ModalOverlay";
+import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import styles from "./Loader.module.css";
 
 function Loader() {
