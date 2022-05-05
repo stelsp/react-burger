@@ -17,9 +17,26 @@ interface IInner {
   name: string;
   image: string;
   price: number;
-  moveCard: () => any;
-  findCard: () => any;
+  moveCard: () => void;
+  findCard: () => void;
 }
+
+interface IIngredient {
+  calories: number;
+  carbohydrates: number;
+  fat: number;
+  image: string;
+  image_large: string;
+  image_mobile: string;
+  name: string;
+  price: number;
+  proteins: number;
+  type: string;
+  __v: number;
+  id: string;
+}
+
+type TfindCard = (id: number) => IIngredient;
 
 const Inner: FC<IInner> = ({ id, name, image, price, moveCard, findCard }) => {
   const dispatch = useDispatch();
@@ -92,9 +109,9 @@ function BurgerConstructor() {
     [inner, dispatch]
   );
 
-  const findCard = useCallback(
+  const findCard = useCallback<TfindCard>(
     (id) => {
-      const card = inner.filter((el) => el.id === id)[0];
+      const card = inner.filter((el: IIngredient) => el.id === id)[0];
       return {
         card,
         index: inner.indexOf(card),
@@ -103,7 +120,7 @@ function BurgerConstructor() {
     [inner]
   );
   const moveCard = useCallback(
-    (id, atIndex) => {
+    (id: string, atIndex: string) => {
       const { card, index } = findCard(id);
       dispatch(sortIngredient(card, index, atIndex, inner));
     },
@@ -127,7 +144,7 @@ function BurgerConstructor() {
             </div>
             {inner.length > 0 ? (
               <ul className={style.list} ref={drop2}>
-                {inner.map((el) => {
+                {inner.map((el: IIngredient) => {
                   return (
                     <Inner
                       key={el.id}

@@ -5,12 +5,12 @@ import {
   INGREDIENT_CATEGORY,
   BURGER_INGREDIENTS_TITLE,
 } from "../../constants/content";
-import { MutableRefObject, useCallback, useMemo, useRef } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentTab } from "../../services/actions/ingredientsActions";
 import { RootState } from "../../services/rootReducer";
 
-interface IIngr {
+interface IIngredient {
   calories: number;
   carbohydrates: number;
   fat: number;
@@ -28,18 +28,17 @@ interface IIngr {
 const BurgerIngredients = () => {
   const dispatch = useDispatch();
   const { ingredients } = useSelector((store: RootState) => store.ingredients);
-  console.log(ingredients);
 
-  const bun: [IIngr] = useMemo(
-    () => ingredients.filter((el: IIngr) => el.type === "bun"),
+  const bun: [IIngredient] = useMemo(
+    () => ingredients.filter((el: IIngredient) => el.type === "bun"),
     [ingredients]
   );
-  const sauce: [IIngr] = useMemo(
-    () => ingredients.filter((el: IIngr) => el.type === "sauce"),
+  const sauce: [IIngredient] = useMemo(
+    () => ingredients.filter((el: IIngredient) => el.type === "sauce"),
     [ingredients]
   );
-  const main: [IIngr] = useMemo(
-    () => ingredients.filter((el: IIngr) => el.type === "main"),
+  const main: [IIngredient] = useMemo(
+    () => ingredients.filter((el: IIngredient) => el.type === "main"),
     [ingredients]
   );
 
@@ -62,21 +61,15 @@ const BurgerIngredients = () => {
       <h2 className={styles.title}>{BURGER_INGREDIENTS_TITLE}</h2>
       <Tabs bunRef={bunRef} sauceRef={sauceRef} mainRef={mainRef} />
       <ul className={styles.list} ref={refContainer} onScroll={onScroll}>
-        <IngredientType
-          ref={bunRef}
-          category={bun}
-          title={INGREDIENT_CATEGORY.BUN}
-        />
-        <IngredientType
-          ref={sauceRef}
-          category={sauce}
-          title={INGREDIENT_CATEGORY.SAUCE}
-        />
-        <IngredientType
-          ref={mainRef}
-          category={main}
-          title={INGREDIENT_CATEGORY.MAIN}
-        />
+        <li ref={bunRef}>
+          <IngredientType category={bun} title={INGREDIENT_CATEGORY.BUN} />
+        </li>
+        <li ref={sauceRef}>
+          <IngredientType category={sauce} title={INGREDIENT_CATEGORY.SAUCE} />
+        </li>
+        <li ref={mainRef}>
+          <IngredientType category={main} title={INGREDIENT_CATEGORY.MAIN} />
+        </li>
       </ul>
     </div>
   );
