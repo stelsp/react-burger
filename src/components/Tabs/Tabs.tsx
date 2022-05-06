@@ -3,10 +3,18 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/
 import { INGREDIENT_CATEGORY } from "../../constants/content";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentTab } from "../../services/actions/ingredientsActions";
+import { RootState } from "../../services/rootReducer";
+import { FC } from "react";
 
-function Tabs({ bunRef, sauceRef, mainRef }) {
+interface ITabs {
+  bunRef: any;
+  sauceRef: any;
+  mainRef: any;
+}
+
+const Tabs: FC<ITabs> = ({ bunRef, sauceRef, mainRef }) => {
   const dispatch = useDispatch();
-  const { currentTab } = useSelector((store) => store.ingredients);
+  const { currentTab } = useSelector((store: RootState) => store.ingredients);
 
   return (
     <div className={styles.tab}>
@@ -42,6 +50,6 @@ function Tabs({ bunRef, sauceRef, mainRef }) {
       </Tab>
     </div>
   );
-}
+};
 
 export default Tabs;

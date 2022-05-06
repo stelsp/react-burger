@@ -3,9 +3,24 @@ import Price from "../Price/Price";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
-import { useMemo } from "react";
+import { useMemo, FC } from "react";
+import IIngredient from "../BurgerIngredients/types";
+import { RootState } from "../../services/rootReducer";
 
-const Top = ({ createdAt, number, status, name }) => {
+interface ICard {
+  createdAt?: any;
+  number?: number;
+  status?: string;
+  name?: string;
+  _id?: string;
+  ing?: [string];
+  ingredients?: [string];
+  el?: IIngredient;
+}
+
+interface ITop {}
+
+const Top: FC<ICard> = ({ createdAt, number, status, name }) => {
   const date = new Date(createdAt).toLocaleString();
   return (
     <div>
@@ -19,10 +34,10 @@ const Top = ({ createdAt, number, status, name }) => {
   );
 };
 
-const Img = ({ el }) => {
-  const { ingredients } = useSelector((store) => store.ingredients);
+const Img: FC<ICard> = ({ el }) => {
+  const { ingredients } = useSelector((store: RootState) => store.ingredients);
   const id = el;
-  const ingredient = ingredients?.find((el) => el._id === id);
+  const ingredient = ingredients?.find((el: any) => el._id === id);
 
   if (!ingredient?.image) {
     return null;
@@ -38,20 +53,20 @@ const Img = ({ el }) => {
   );
 };
 
-const Bottom = ({ ing }) => {
-  const { ingredients } = useSelector((store) => store.ingredients);
+const Bottom: FC<ICard> = ({ ing }) => {
+  const { ingredients } = useSelector((store: RootState) => store.ingredients);
 
   const sumPrice = useMemo(() => {
     return ingredients
-      .filter((i) => ing.includes(i._id))
-      .map((el) => el.price)
-      .reduce((a, b) => a + b, 0);
+      .filter((i: IIngredient) => ing?.includes(i._id))
+      .map((el: IIngredient) => el.price)
+      .reduce((a: number, b: number) => a + b, 0);
   }, [ingredients, ing]);
 
   return (
     <div className={styles.ingContainer}>
       <div className={styles.imageContainer}>
-        {ing?.slice(0, 6).map((el) => (
+        {ing?.slice(0, 6).map((el: any) => (
           <Img el={el} key={nanoid()} />
         ))}
       </div>
@@ -60,7 +75,7 @@ const Bottom = ({ ing }) => {
   );
 };
 
-function Card({ createdAt, number, status, name, _id, ing }) {
+const Card: FC<ICard> = ({ createdAt, number, status, name, _id, ing }) => {
   const location = useLocation();
   return (
     <Link
@@ -81,14 +96,14 @@ function Card({ createdAt, number, status, name, _id, ing }) {
       </div>
     </Link>
   );
-}
+};
 
 export default function ProfileOrders() {
-  const { data } = useSelector((store) => store.socket);
+  const { data } = useSelector((store: RootState) => store.socket);
 
   return (
     <>
-      {data?.orders?.map((el) => {
+      {data?.orders?.map((el: ICard) => {
         return (
           <Card
             createdAt={el.createdAt}
