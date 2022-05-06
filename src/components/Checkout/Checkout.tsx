@@ -13,23 +13,30 @@ import {
   resetConstructor,
 } from "../../services/actions/constructorActions";
 import { useHistory } from "react-router-dom";
+import { RootState } from "../../services/rootReducer";
+import IIngredient from "../BurgerIngredients/types";
 
 function Checkout() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { order, orderRequest, orderFailed } = useSelector(
-    (store) => store.order
+    (store: RootState) => store.order
   );
-  const { outer, inner } = useSelector((store) => store.burgerConstructor);
-  const { isLoggedIn } = useSelector((store) => store.profile);
+  const { outer, inner } = useSelector(
+    (store: RootState) => store.burgerConstructor
+  );
+  const { isLoggedIn } = useSelector((store: RootState) => store.profile);
 
   const ingredientsIDs = useMemo(() => {
-    return inner ? [...inner.map((el) => el._id), outer._id] : [];
+    return inner ? [...inner.map((el: IIngredient) => el._id), outer._id] : [];
   }, [inner, outer]);
 
   const ingredientsPrice = useMemo(() => {
     return inner
-      ? inner.reduce((sum, el) => sum + el.price, outer.price * 2)
+      ? inner.reduce(
+          (sum: number, el: IIngredient) => sum + el.price,
+          outer.price * 2
+        )
       : 0;
   }, [inner, outer]);
 
@@ -62,7 +69,7 @@ function Checkout() {
       ) : (
         order && (
           <Modal onClose={closeModal}>
-            <OrderDetails order={order} />
+            <OrderDetails />
           </Modal>
         )
       )}

@@ -9,34 +9,18 @@ import {
   sortIngredient,
 } from "../../services/actions/ingredientsActions";
 import { useDrop, useDrag } from "react-dnd";
-import { FC, useCallback } from "react";
+import { useCallback, FC } from "react";
 import { RootState } from "../../services/rootReducer";
+import IIngredient from "../BurgerIngredients/types";
 
 interface IInner {
-  id: string;
+  id: string | undefined;
   name: string;
   image: string;
   price: number;
-  moveCard: () => void;
-  findCard: () => void;
+  moveCard: (droppedId?: string, originalIndex?: string) => void;
+  findCard: (id?: string) => any;
 }
-
-interface IIngredient {
-  calories: number;
-  carbohydrates: number;
-  fat: number;
-  image: string;
-  image_large: string;
-  image_mobile: string;
-  name: string;
-  price: number;
-  proteins: number;
-  type: string;
-  __v: number;
-  id: string;
-}
-
-type TfindCard = (id: number) => IIngredient;
 
 const Inner: FC<IInner> = ({ id, name, image, price, moveCard, findCard }) => {
   const dispatch = useDispatch();
@@ -63,9 +47,9 @@ const Inner: FC<IInner> = ({ id, name, image, price, moveCard, findCard }) => {
     [id, originalIndex, moveCard]
   );
   const [, drop3] = useDrop(
-    () => ({
+    (): any => ({
       accept: "card",
-      hover({ id: draggedId }) {
+      hover({ id: draggedId }: any) {
         if (draggedId !== id) {
           const { index: overIndex } = findCard(id);
           moveCard(draggedId, overIndex);
@@ -109,7 +93,7 @@ function BurgerConstructor() {
     [inner, dispatch]
   );
 
-  const findCard = useCallback<TfindCard>(
+  const findCard = useCallback(
     (id) => {
       const card = inner.filter((el: IIngredient) => el.id === id)[0];
       return {
@@ -120,7 +104,7 @@ function BurgerConstructor() {
     [inner]
   );
   const moveCard = useCallback(
-    (id: string, atIndex: string) => {
+    (id, atIndex) => {
       const { card, index } = findCard(id);
       dispatch(sortIngredient(card, index, atIndex, inner));
     },

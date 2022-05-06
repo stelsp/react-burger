@@ -9,21 +9,7 @@ import { useCallback, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentTab } from "../../services/actions/ingredientsActions";
 import { RootState } from "../../services/rootReducer";
-
-interface IIngredient {
-  calories: number;
-  carbohydrates: number;
-  fat: number;
-  image: string;
-  image_large: string;
-  image_mobile: string;
-  name: string;
-  price: number;
-  proteins: number;
-  type: string;
-  __v: number;
-  _id: string;
-}
+import IIngredient from "./types";
 
 const BurgerIngredients = () => {
   const dispatch = useDispatch();

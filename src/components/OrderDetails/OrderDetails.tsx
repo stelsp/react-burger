@@ -2,9 +2,10 @@ import styles from "./OrderDetails.module.css";
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import { MODAL_TEXT_ORDER } from "../../constants/content";
 import { useSelector } from "react-redux";
+import { RootState } from "../../services/rootReducer";
 
 function OrderDetails() {
-  const { order } = useSelector((store) => store.order);
+  const { order } = useSelector((store: RootState) => store.order);
 
   return (
     <div className={styles.card}>

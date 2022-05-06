@@ -1,22 +1,29 @@
 import styles from "./Ingredient.module.css";
-import { ingredientPropTypes } from "../../constants/custom-prop-types";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-import { useMemo, useCallback } from "react";
+import { useMemo, useCallback, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrag } from "react-dnd";
 import { setCurrentIngredient } from "../../services/actions/ingredientsActions";
 import { Link, useLocation } from "react-router-dom";
+import IIngredient from "../BurgerIngredients/types";
+import { RootState } from "../../services/rootReducer";
 
-function Ingredient({ el }) {
+interface Iel {
+  el: IIngredient;
+}
+
+const Ingredient: FC<Iel> = ({ el }) => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { outer, inner } = useSelector((store) => store.burgerConstructor);
+  const { outer, inner } = useSelector(
+    (store: RootState) => store.burgerConstructor
+  );
 
   const count = useMemo(() => {
     return el.type === "bun" && el._id === outer._id
       ? 2
-      : inner.filter((item) => item._id === el._id).length;
+      : inner.filter((item: IIngredient) => item._id === el._id).length;
   }, [inner, outer, el]);
 
   const openModal = useCallback(() => {
@@ -48,10 +55,6 @@ function Ingredient({ el }) {
       </div>
     </Link>
   );
-}
-
-Ingredient.propTypes = {
-  el: ingredientPropTypes.isRequired,
 };
 
 export default Ingredient;

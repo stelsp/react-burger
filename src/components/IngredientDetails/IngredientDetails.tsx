@@ -2,13 +2,15 @@ import styles from "./IngredientDetails.module.css";
 import { INGREDIENT_COMPOUND } from "../../constants/content";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { RootState } from "../../services/rootReducer";
+import IIngredient from "../BurgerIngredients/types";
 
 function IngredientDetails() {
-  let { id } = useParams();
+  let { id } = useParams() as any;
 
-  const { ingredients } = useSelector((store) => store.ingredients);
+  const { ingredients } = useSelector((store: RootState) => store.ingredients);
 
-  const el = ingredients.find((el) => el._id === id);
+  const el = ingredients.find((el: IIngredient) => el._id === id);
 
   if (!el) return null;
 

@@ -10,11 +10,12 @@ import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { RootState } from "../../services/rootReducer";
 
 function ProfileForm() {
-  const nameRef = useRef(null);
-  const loginRef = useRef(null);
-  const passwordRef = useRef(null);
+  const nameRef = useRef(null) as any;
+  const loginRef = useRef(null) as any;
+  const passwordRef = useRef(null) as any;
   const onNameIconClick = () => {
     setTimeout(() => nameRef.current.focus(), 0);
   };
@@ -27,9 +28,11 @@ function ProfileForm() {
 
   const dispatch = useDispatch();
 
-  const { name, login, password } = useSelector((store) => store.profile);
+  const { name, login, password } = useSelector(
+    (store: RootState) => store.profile
+  );
 
-  const onFormChange = (e) => {
+  const onFormChange = (e: any) => {
     dispatch(setProfileValue(e.target.name, e.target.value));
   };
 
