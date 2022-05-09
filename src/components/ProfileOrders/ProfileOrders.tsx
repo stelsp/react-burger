@@ -7,7 +7,7 @@ import { useMemo, FC } from "react";
 import IIngredient from "../BurgerIngredients/types";
 import { RootState } from "../../services/rootReducer";
 
-interface ICard {
+export interface ICard {
   createdAt?: any;
   number?: number;
   status?: string;
@@ -17,8 +17,6 @@ interface ICard {
   ingredients?: [string];
   el?: IIngredient;
 }
-
-interface ITop {}
 
 const Top: FC<ICard> = ({ createdAt, number, status, name }) => {
   const date = new Date(createdAt).toLocaleString();

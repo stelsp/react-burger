@@ -12,21 +12,26 @@ import {
   postLoginRequest,
   setLoginFormValue,
 } from "../../services/actions/loginActions";
+import { RootState } from "../../services/rootReducer";
 
 function Login() {
   const dispatch = useDispatch();
-  const location = useLocation();
+  const location = useLocation<any>();
 
-  const { email, password } = useSelector((store) => store.login.form);
-  const { loginRequest, loginFailed } = useSelector((store) => store.login);
-  const { isLoggedIn } = useSelector((store) => store.profile);
+  const { email, password } = useSelector(
+    (store: RootState) => store.login.form
+  );
+  const { loginRequest, loginFailed } = useSelector(
+    (store: RootState) => store.login
+  );
+  const { isLoggedIn } = useSelector((store: RootState) => store.profile);
 
-  const onFormChange = (e) => {
+  const onFormChange = (e: any) => {
     dispatch(setLoginFormValue(e.target.name, e.target.value));
   };
 
   const onFormSubmit = useCallback(
-    (e) => {
+    (e: any) => {
       e.preventDefault();
       dispatch(postLoginRequest(email, password));
     },

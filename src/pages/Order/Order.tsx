@@ -3,12 +3,14 @@ import Price from "../../components/Price/Price";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, FC } from "react";
+import { RootState } from "../../services/rootReducer";
+import { ICard } from "../../components/ProfileOrders/ProfileOrders";
 
-const Ingredient = ({ el }) => {
-  const { ingredients } = useSelector((store) => store.ingredients);
+const Ingredient: FC<ICard> = ({ el }) => {
+  const { ingredients } = useSelector((store: RootState) => store.ingredients);
   const id = el;
-  const ingredient = ingredients?.find((el) => el._id === id);
+  const ingredient = ingredients?.find((el: ICard) => el._id === id);
 
   if (!ingredient?.image) {
     return null;
@@ -35,7 +37,7 @@ const Ingredient = ({ el }) => {
   );
 };
 
-const Top = ({ number, name, status }) => {
+const Top: FC<ICard> = ({ number, name, status }) => {
   return (
     <div className={styles.top}>
       <p className={styles.number}>#{number}</p>
@@ -46,24 +48,24 @@ const Top = ({ number, name, status }) => {
   );
 };
 
-const Middle = ({ el }) => {
+const Middle: FC<ICard> = ({ el }) => {
   return (
     <ul className={styles.middle}>
-      {el?.map((el) => (
-        <Ingredient el={el} key={nanoid()} />
+      {el?.map((ing: ICard) => (
+        <Ingredient el={ing} key={nanoid()} />
       ))}
     </ul>
   );
 };
 
-const Bottom = ({ createdAt, el }) => {
+const Bottom: FC<ICard> = ({ createdAt, el }) => {
   const date = new Date(createdAt).toLocaleString();
-  const { ingredients } = useSelector((store) => store.ingredients);
+  const { ingredients } = useSelector((store: RootState) => store.ingredients);
   const sumPrice = useMemo(() => {
     return ingredients
-      .filter((i) => el.includes(i._id))
-      .map((el) => el.price)
-      .reduce((a, b) => a + b, 0);
+      ?.filter((i: any) => el?.includes(i._id))
+      .map((el: any) => el.price)
+      .reduce((a: any, b: any) => a + b, 0);
   }, [ingredients, el]);
 
   return (

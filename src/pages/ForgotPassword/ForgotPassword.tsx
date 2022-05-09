@@ -11,19 +11,22 @@ import {
   postForgotPasswordRequest,
   setForgotPasswordFormValue,
 } from "../../services/actions/forgotPasswordActions";
+import { RootState } from "../../services/rootReducer";
 
 function ForgotPassword() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const location = useLocation();
+  const location = useLocation<any>();
 
-  const { email } = useSelector((store) => store.forgotPassword.form);
-  const { forgotPasswordRequest, forgotPasswordFailed } = useSelector(
-    (store) => store.forgotPassword
+  const { email } = useSelector(
+    (store: RootState) => store.forgotPassword.form
   );
-  const { isLoggedIn } = useSelector((store) => store.profile);
+  const { forgotPasswordRequest, forgotPasswordFailed } = useSelector(
+    (store: RootState) => store.forgotPassword
+  );
+  const { isLoggedIn } = useSelector((store: RootState) => store.profile);
 
-  const onFormChange = (e) => {
+  const onFormChange = (e: any) => {
     dispatch(setForgotPasswordFormValue(e.target.name, e.target.value));
   };
 
