@@ -50,7 +50,7 @@ export const userOut = (): IUserOutAction => ({
 });
 
 export const getProfileInfo: AppThunk = () => {
-  refreshTokenRequest();
+  // refreshTokenRequest();
   return (dispatch: AppDispatch) => {
     (async () => {
       try {

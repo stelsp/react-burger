@@ -16,8 +16,6 @@ import {
 const ProfileFeed: React.FC = () => {
   const dispatch = useAppDispatch();
 
-  useEffect(() => {}, [dispatch]);
-
   useEffect(() => {
     dispatch(wsConnectionUserOpen());
 

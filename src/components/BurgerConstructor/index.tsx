@@ -23,8 +23,6 @@ const Inner: React.FC<IInnerProps> = ({
   const dispatch = useAppDispatch();
   const inner = useAppSelector((store) => store.burgerConstructor.inner);
 
-  console.log(inner);
-
   const originalIndex = findCard(id).index;
   const [{ isDragging }, drag] = useDrag(
     () => ({
