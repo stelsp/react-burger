@@ -1,7 +1,7 @@
 import style from "./styles.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-import Checkout from "../Checkout/Checkout";
+import Checkout from "../Checkout";
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { deleteConstructorIngredient } from "../../services/actions/constructorActions";
 import {
@@ -46,7 +46,7 @@ const Inner: React.FC<IInnerProps> = ({
   const [, drop3] = useDrop(
     (): any => ({
       accept: "card",
-      hover({ id: draggedId }) {
+      hover({ id: draggedId }: any) {
         if (draggedId !== id) {
           const { index: overIndex } = findCard(id);
           moveCard(draggedId, overIndex);
@@ -90,7 +90,7 @@ const BurgerConstructor: React.FC = () => {
 
   const findCard = useCallback(
     (id) => {
-      const card = inner?.filter((el) => el.id === id)[0];
+      const card = inner?.filter((el: any) => el.id === id)[0];
       return {
         card,
         index: inner?.indexOf(card),
@@ -123,7 +123,7 @@ const BurgerConstructor: React.FC = () => {
             </div>
             {inner.length > 0 ? (
               <ul className={style.list} ref={drop2}>
-                {inner?.map((el) => {
+                {inner?.map((el: any) => {
                   return (
                     <Inner
                       key={el.id}

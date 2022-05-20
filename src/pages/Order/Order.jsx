@@ -1,5 +1,5 @@
 import styles from "./Order.module.css";
-import Price from "../../components/Price/Price";
+import Price from "../../components/Price";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";

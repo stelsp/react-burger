@@ -1,6 +1,6 @@
 import styles from "../../pages/Profile/Profile.module.css";
 import { useCallback, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import {
   getProfileInfo,
   patchProfileInfo,
@@ -12,9 +12,9 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function ProfileForm() {
-  const nameRef = useRef(null);
-  const loginRef = useRef(null);
-  const passwordRef = useRef(null);
+  const nameRef: any = useRef(null);
+  const loginRef: any = useRef(null);
+  const passwordRef: any = useRef(null);
   const onNameIconClick = () => {
     setTimeout(() => nameRef.current.focus(), 0);
   };
@@ -25,11 +25,11 @@ function ProfileForm() {
     setTimeout(() => passwordRef.current.focus(), 0);
   };
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const { name, login, password } = useSelector((store) => store.profile);
+  const { name, login, password } = useAppSelector((store) => store.profile);
 
-  const onFormChange = (e) => {
+  const onFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setProfileValue(e.target.name, e.target.value));
   };
 

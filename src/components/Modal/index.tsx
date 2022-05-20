@@ -1,15 +1,15 @@
+import styles from "./styles.module.css";
 import { useEffect } from "react";
 import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
-import styles from "./Modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-import ModalOverlay from "./ModalOverlay/ModalOverlay";
+import ModalOverlay from "../ModalOverlay";
+import IModalProps from "./types";
 
-const MODAL_ROOT = document.getElementById("modal-root");
+const MODAL_ROOT = document.getElementById("modal-root") as Element;
 
-function Modal({ onClose, children, title }) {
+const Modal: React.FC<IModalProps> = ({ onClose, children, title }) => {
   useEffect(() => {
-    function closeOnEsc(e) {
+    function closeOnEsc(e: any) {
       if (e.key === "Escape" || e.key === "Esc") {
         onClose();
       }
@@ -34,15 +34,6 @@ function Modal({ onClose, children, title }) {
     </div>,
     MODAL_ROOT
   );
-}
-
-Modal.propTypes = {
-  onClose: PropTypes.func,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
-  title: PropTypes.string,
 };
 
 export default Modal;

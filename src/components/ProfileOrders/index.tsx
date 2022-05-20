@@ -1,11 +1,13 @@
-import styles from "./ProfileOrders.module.css";
-import Price from "../Price/Price";
+import styles from "./styles.module.css";
+import Price from "../Price";
 import { Link, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../services/hooks";
 import { nanoid } from "@reduxjs/toolkit";
 import { useMemo } from "react";
+import { IBottomProps, ICardProps, IImgProps, ITopProps } from "./types";
+import { TOrder } from "../../services/types/data";
 
-const Top = ({ createdAt, number, status, name }) => {
+const Top: React.FC<ITopProps> = ({ createdAt, number, status, name }) => {
   const date = new Date(createdAt).toLocaleString();
   return (
     <div>
@@ -19,9 +21,8 @@ const Top = ({ createdAt, number, status, name }) => {
   );
 };
 
-const Img = ({ el }) => {
-  const { ingredients } = useSelector((store) => store.ingredients);
-  const id = el;
+const Img: React.FC<IImgProps> = ({ id }) => {
+  const { ingredients } = useAppSelector((store) => store.ingredients);
   const ingredient = ingredients?.find((el) => el._id === id);
 
   if (!ingredient?.image) {
@@ -38,12 +39,12 @@ const Img = ({ el }) => {
   );
 };
 
-const Bottom = ({ ing }) => {
-  const { ingredients } = useSelector((store) => store.ingredients);
+const Bottom: React.FC<IBottomProps> = ({ ing }) => {
+  const { ingredients } = useAppSelector((store) => store.ingredients);
 
   const sumPrice = useMemo(() => {
     return ingredients
-      .filter((i) => ing.includes(i._id))
+      ?.filter((i) => ing.includes(i._id))
       .map((el) => el.price)
       .reduce((a, b) => a + b, 0);
   }, [ingredients, ing]);
@@ -51,8 +52,8 @@ const Bottom = ({ ing }) => {
   return (
     <div className={styles.ingContainer}>
       <div className={styles.imageContainer}>
-        {ing?.slice(0, 6).map((el) => (
-          <Img el={el} key={nanoid()} />
+        {ing?.slice(0, 6).map((id) => (
+          <Img id={id} key={nanoid()} />
         ))}
       </div>
       <Price price={sumPrice} />
@@ -60,7 +61,14 @@ const Bottom = ({ ing }) => {
   );
 };
 
-function Card({ createdAt, number, status, name, _id, ing }) {
+const Card: React.FC<ICardProps> = ({
+  createdAt,
+  number,
+  status,
+  name,
+  _id,
+  ing,
+}) => {
   const location = useLocation();
   return (
     <Link
@@ -81,14 +89,14 @@ function Card({ createdAt, number, status, name, _id, ing }) {
       </div>
     </Link>
   );
-}
+};
 
 export default function ProfileOrders() {
-  const { data } = useSelector((store) => store.ws);
+  const { data } = useAppSelector((store) => store.ws);
 
   return (
     <>
-      {data?.orders?.map((el) => {
+      {data?.orders?.map((el: TOrder) => {
         return (
           <Card
             createdAt={el.createdAt}

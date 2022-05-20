@@ -1,5 +1,5 @@
 import { Switch, Route } from "react-router-dom";
-import IngredientDetails from "../BurgerIngredients/IngredientDetails/IngredientDetails";
+import IngredientDetails from "../IngredientDetails";
 import MainPage from "../../pages/MainPage/MainPage";
 import Register from "../../pages/Register/Register";
 import Login from "../../pages/Login/Login";
@@ -16,7 +16,7 @@ import {
 import Order from "../../pages/Order/Order";
 import { MODAL_TITLE_INGREDIENT } from "../../constants/content";
 
-function Routes() {
+const Routes: React.FC = () => {
   return (
     <>
       <Switch>
@@ -27,14 +27,20 @@ function Routes() {
         <Route path="/login" children={<Login />} />
         <Route path="/forgot-password" children={<ForgotPassword />} />
         <Route path="/reset-password" children={<ResetPassword />} />
-        <ModalRoute path="/feed/:id" modal={<Order />} page={<Order />} />
         <ModalRoute
+          title=""
+          path="/feed/:id"
+          modal={<Order />}
+          page={<Order />}
+        />
+        <ModalRoute
+          title={MODAL_TITLE_INGREDIENT}
           path="/ingredients/:id"
           modal={<IngredientDetails />}
           page={<ImageView />}
-          title={MODAL_TITLE_INGREDIENT}
         />
         <ModalRoute
+          title=""
           exact
           path="/orders/:id"
           modal={<Order />}
@@ -45,6 +51,6 @@ function Routes() {
       </Switch>
     </>
   );
-}
+};
 
 export default Routes;

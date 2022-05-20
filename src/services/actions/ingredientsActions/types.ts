@@ -28,8 +28,8 @@ export interface IDragIngredientAction {
   readonly type:
     | typeof ACTIONS.DRAG_INNER_INGREDIENT
     | typeof ACTIONS.DRAG_OUTER_INGREDIENT;
-  readonly inner?: TIngredient[];
-  readonly outer?: TIngredient;
+  readonly inner?: any;
+  readonly outer?: any;
 }
 
 export interface ISortIngredientAction {

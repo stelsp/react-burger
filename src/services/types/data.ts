@@ -15,7 +15,7 @@ export type TIngredient = {
   id: string; // мб не надо будет
 };
 
-type TOrder = {
+export type TOrder = {
   _id: string;
   ingredients: string[];
   status: string;
@@ -30,4 +30,24 @@ export type TwsData = {
   total: number;
   totalToday: number;
   orders: TOrder[];
+};
+
+export type TOrderSuccess = {
+  success: true;
+  name: string;
+  order: {
+    ingredients: TIngredient[];
+    owner: {
+      name: string;
+      email: string;
+      createdAt: string;
+      updatedAt: string;
+    };
+    _id: string;
+    status: string;
+    createdAt: string;
+    updatedAt: string;
+    number: number;
+    price: number;
+  };
 };

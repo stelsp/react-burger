@@ -1,6 +1,6 @@
 import styles from "./Login.module.css";
 import { useCallback } from "react";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../components/Loader";
 import {
   Input,
   PasswordInput,

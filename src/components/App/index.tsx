@@ -1,11 +1,11 @@
 import AppHeader from "../AppHeader";
-import Loader from "../Loader/Loader";
+import Loader from "../Loader";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { getData } from "../../services/actions/ingredientsActions";
 import { getCookie } from "../../utils/cookie";
 import { userIn } from "../../services/actions/profileActions";
-import Routes from "../Routes/Routes";
+import Routes from "../Routes";
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -14,11 +14,9 @@ const App: React.FC = () => {
     (store) => store.ingredients
   );
 
-  useEffect(() => {
+  useEffect((): any => {
     dispatch(getData());
-    if (getCookie("accessToken")) {
-      dispatch(userIn());
-    }
+    if (getCookie("accessToken")) return dispatch(userIn());
   }, [dispatch]);
 
   return (

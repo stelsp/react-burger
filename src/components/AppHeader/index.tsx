@@ -32,7 +32,6 @@ const AppHeader: React.FC = () => {
               text={APP_HEADER_LINKS.ORDER_FEED}
             />
           </div>
-
           <div className={styles.logo}>
             <Link to="/react-burger">
               <Logo />

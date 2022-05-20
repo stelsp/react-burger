@@ -1,7 +1,7 @@
 import styles from "./ResetPassword.module.css";
 import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../components/Loader";
 import {
   Input,
   PasswordInput,

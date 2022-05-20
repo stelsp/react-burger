@@ -1,15 +1,15 @@
-import styles from "./OrderDetails.module.css";
+import styles from "./styles.module.css";
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-import { MODAL_TEXT_ORDER } from "../../../constants/content";
-import { useSelector } from "react-redux";
+import { MODAL_TEXT_ORDER } from "../../constants/content";
+import { useAppSelector } from "../../services/hooks";
 
-function OrderDetails() {
-  const { order } = useSelector((store) => store.order);
+const OrderDetails: React.FC = () => {
+  const { order } = useAppSelector((store) => store.order);
 
   return (
     <div className={styles.card}>
-      <h3 className={styles.order}>{order.order.number}</h3>
-      <p className={styles.text__identifier}>{order.name}</p>
+      <h3 className={styles.order}>{order?.order.number}</h3>
+      <p className={styles.text__identifier}>{order?.name}</p>
       <span className={styles.icon}>
         <CheckMarkIcon type="primary" />
       </span>
@@ -17,6 +17,6 @@ function OrderDetails() {
       <p className={styles.text__wait}>{MODAL_TEXT_ORDER.WAIT}</p>
     </div>
   );
-}
+};
 
 export default OrderDetails;

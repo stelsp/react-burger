@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { Route, Redirect, useHistory } from "react-router-dom";
-import Modal from "../../components/Modal/Modal";
+import Modal from "../../components/Modal";
 
 export function ProtectedRoute({ children, ...rest }) {
   const { isLoggedIn } = useSelector((store) => store.profile);

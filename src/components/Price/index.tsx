@@ -1,11 +1,12 @@
-import styles from "./Price.module.css";
+import styles from "./styles.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
+import IPriceProps from "./types";
 
-const Price = ({ price }) => {
+const Price: React.FC<IPriceProps> = ({ price }) => {
   return (
     <div className={styles.sum}>
       <p className={styles.price}>{price}</p>
-      <CurrencyIcon />
+      <CurrencyIcon type="primary" />
     </div>
   );
 };

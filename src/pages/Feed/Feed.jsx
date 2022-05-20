@@ -1,6 +1,6 @@
 import styles from "./Feed.module.css";
 import feed from "./FeedInfo.module.css";
-import ProfileOrders from "../../components/ProfileOrders/ProfileOrders";
+import ProfileOrders from "../../components/ProfileOrders";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { nanoid } from "@reduxjs/toolkit";

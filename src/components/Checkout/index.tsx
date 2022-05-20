@@ -1,35 +1,39 @@
-import style from "./Checkout.module.css";
+import style from "./styles.module.css";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/button";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-import OrderDetails from "../OrderDetails/OrderDetails";
-import Modal from "../../Modal/Modal";
-import Loader from "../../Loader/Loader";
-import { ORDER_BUTTON_TEXT } from "../../../constants/content";
+import OrderDetails from "../OrderDetails";
+import Modal from "../Modal";
+import Loader from "../Loader";
+import { ORDER_BUTTON_TEXT } from "../../constants/content";
 import { useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import {
   getOrderSuccess,
   postOrder,
   resetConstructor,
-} from "../../../services/actions/constructorActions";
+} from "../../services/actions/constructorActions";
 import { useHistory } from "react-router-dom";
+import { TIngredient } from "../../services/types/data";
 
-function Checkout() {
-  const dispatch = useDispatch();
+const Checkout: React.FC = () => {
+  const dispatch = useAppDispatch();
   const history = useHistory();
-  const { order, orderRequest, orderFailed } = useSelector(
+  const { order, orderRequest, orderFailed } = useAppSelector(
     (store) => store.order
   );
-  const { outer, inner } = useSelector((store) => store.burgerConstructor);
-  const { isLoggedIn } = useSelector((store) => store.profile);
+  const { outer, inner } = useAppSelector((store) => store.burgerConstructor);
+  const { isLoggedIn } = useAppSelector((store) => store.profile);
 
   const ingredientsIDs = useMemo(() => {
-    return inner ? [...inner.map((el) => el._id), outer._id] : [];
+    return inner ? [...inner.map((el: TIngredient) => el._id), outer._id] : [];
   }, [inner, outer]);
 
   const ingredientsPrice = useMemo(() => {
     return inner
-      ? inner.reduce((sum, el) => sum + el.price, outer.price * 2)
+      ? inner.reduce(
+          (sum: number, el: TIngredient) => sum + el.price,
+          outer.price * 2
+        )
       : 0;
   }, [inner, outer]);
 
@@ -62,12 +66,12 @@ function Checkout() {
       ) : (
         order && (
           <Modal onClose={closeModal}>
-            <OrderDetails order={order} />
+            <OrderDetails />
           </Modal>
         )
       )}
     </>
   );
-}
+};
 
 export default Checkout;

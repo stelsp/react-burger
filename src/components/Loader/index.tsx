@@ -1,7 +1,7 @@
-import ModalOverlay from "../Modal/ModalOverlay/ModalOverlay";
-import styles from "./Loader.module.css";
+import ModalOverlay from "../ModalOverlay";
+import styles from "./styles.module.css";
 
-function Loader() {
+const Loader: React.FC = () => {
   return (
     <>
       <ModalOverlay />
@@ -10,6 +10,6 @@ function Loader() {
       </div>
     </>
   );
-}
+};
 
 export default Loader;

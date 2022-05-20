@@ -6,8 +6,8 @@ import {
   getProfileInfo,
   logOutRequest,
 } from "../../services/actions/profileActions";
-import ProfileForm from "../../components/ProfileForm/ProfileForm";
-import ProfileOrders from "../../components/ProfileOrders/ProfileOrders";
+import ProfileForm from "../../components/ProfileForm";
+import ProfileOrders from "../../components/ProfileOrders";
 import {
   wsConnectionClose,
   wsConnectionUserOpen,

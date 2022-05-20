@@ -1,8 +1,8 @@
 import styles from "./Tabs.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
-import { INGREDIENT_CATEGORY } from "../../../constants/content";
+import { INGREDIENT_CATEGORY } from "../../constants/content";
 import { useSelector, useDispatch } from "react-redux";
-import { setCurrentTab } from "../../../services/actions/ingredientsActions";
+import { setCurrentTab } from "../../services/actions/ingredientsActions";
 
 function Tabs({ bunRef, sauceRef, mainRef }) {
   const dispatch = useDispatch();

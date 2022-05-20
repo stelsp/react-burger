@@ -1,22 +1,23 @@
-import styles from "./Ingredient.module.css";
-import { ingredientPropTypes } from "../../../constants/custom-prop-types";
+import styles from "./styles.module.css";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import { useMemo, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { useDrag } from "react-dnd";
-import { setCurrentIngredient } from "../../../services/actions/ingredientsActions";
+import { setCurrentIngredient } from "../../services/actions/ingredientsActions";
 import { Link, useLocation } from "react-router-dom";
+import IIngredientProps from "./types";
+import { TIngredient } from "../../services/types/data";
 
-function Ingredient({ el }) {
-  const dispatch = useDispatch();
+const Ingredient: React.FC<IIngredientProps> = ({ el }) => {
+  const dispatch = useAppDispatch();
   const location = useLocation();
-  const { outer, inner } = useSelector((store) => store.burgerConstructor);
+  const { outer, inner } = useAppSelector((store) => store.burgerConstructor);
 
   const count = useMemo(() => {
     return el.type === "bun" && el._id === outer._id
       ? 2
-      : inner.filter((item) => item._id === el._id).length;
+      : inner.filter((item: TIngredient) => item._id === el._id).length;
   }, [inner, outer, el]);
 
   const openModal = useCallback(() => {
@@ -48,10 +49,6 @@ function Ingredient({ el }) {
       </div>
     </Link>
   );
-}
-
-Ingredient.propTypes = {
-  el: ingredientPropTypes.isRequired,
 };
 
 export default Ingredient;

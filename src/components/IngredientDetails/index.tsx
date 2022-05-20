@@ -1,14 +1,15 @@
-import styles from "./IngredientDetails.module.css";
-import { INGREDIENT_COMPOUND } from "../../../constants/content";
+import styles from "./styles.module.css";
+import { INGREDIENT_COMPOUND } from "../../constants/content";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+
+import { useAppSelector } from "../../services/hooks";
 
 function IngredientDetails() {
-  let { id } = useParams();
+  let { id }: any = useParams();
 
-  const { ingredients } = useSelector((store) => store.ingredients);
+  const { ingredients } = useAppSelector((store) => store.ingredients);
 
-  const el = ingredients.find((el) => el._id === id);
+  const el = ingredients?.find((el) => el._id === id);
 
   if (!el) return null;
 

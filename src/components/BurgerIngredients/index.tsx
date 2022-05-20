@@ -1,35 +1,35 @@
-import styles from "./BurgerIngredients.module.css";
-import IngredientType from "./IngredientType/IngredientType";
-import Tabs from "./Tabs/Tabs";
+import styles from "./styles.module.css";
+import IngredientType from "../IngredientType";
+import Tabs from "../Tabs/Tabs";
 import {
   INGREDIENT_CATEGORY,
   BURGER_INGREDIENTS_TITLE,
 } from "../../constants/content";
 import { useCallback, useMemo, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { setCurrentTab } from "../../services/actions/ingredientsActions";
 
-function BurgerIngredients() {
-  const dispatch = useDispatch();
-  const { ingredients } = useSelector((store) => store.ingredients);
+const BurgerIngredients: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const { ingredients } = useAppSelector((store) => store.ingredients);
 
   const bun = useMemo(
-    () => ingredients.filter((el) => el.type === "bun"),
+    () => ingredients?.filter((el) => el.type === "bun"),
     [ingredients]
   );
   const sauce = useMemo(
-    () => ingredients.filter((el) => el.type === "sauce"),
+    () => ingredients?.filter((el) => el.type === "sauce"),
     [ingredients]
   );
   const main = useMemo(
-    () => ingredients.filter((el) => el.type === "main"),
+    () => ingredients?.filter((el) => el.type === "main"),
     [ingredients]
   );
 
-  const refContainer = useRef();
-  const bunRef = useRef();
-  const sauceRef = useRef();
-  const mainRef = useRef();
+  const refContainer = useRef() as any;
+  const bunRef = useRef() as any;
+  const sauceRef = useRef() as any;
+  const mainRef = useRef() as any;
 
   const onScroll = useCallback(() => {
     const scrollTop = refContainer.current.scrollTop;
@@ -63,6 +63,6 @@ function BurgerIngredients() {
       </ul>
     </div>
   );
-}
+};
 
 export default BurgerIngredients;

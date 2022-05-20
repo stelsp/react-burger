@@ -1,8 +1,9 @@
 import { ACTIONS } from "../actions/actionTypes";
 import { TContructorActions } from "../actions/constructorActions/types";
+import { TOrderSuccess } from "../types/data";
 
 type TInitialState = {
-  order: null | string[];
+  order: TOrderSuccess | null;
   orderRequest: boolean;
   orderFailed: boolean;
 };

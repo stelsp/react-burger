@@ -1,5 +1,5 @@
 import styles from "./Register.module.css";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../components/Loader";
 import {
   Input,
   PasswordInput,

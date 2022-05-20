@@ -4,6 +4,8 @@ import { API_URL, URL_KEY_ORDERS } from "../../../constants/api-url";
 import { getCookie } from "../../../utils/cookie";
 
 import { TIngredient } from "../../types/data";
+import { TOrderSuccess } from "../../types/data";
+
 import {
   IGetOrderAction,
   IGetOrderSuccessAction,
@@ -18,7 +20,9 @@ export const getOrder = (): IGetOrderAction => ({
   type: ACTIONS.GET_ORDER,
 });
 
-export const getOrderSuccess = (order: string[]): IGetOrderSuccessAction => ({
+export const getOrderSuccess = (
+  order: TOrderSuccess | null
+): IGetOrderSuccessAction => ({
   type: ACTIONS.GET_ORDER_SUCCESS,
   order,
 });
@@ -32,7 +36,7 @@ export const resetConstructor = (): IResetConstructorAction => ({
 });
 
 export const deleteConstructorIngredient = (
-  inner: TIngredient[] | undefined,
+  inner: TIngredient[],
   id: string
 ): IDeleteConstructorIngredientAction => ({
   type: ACTIONS.DELETE_CONSTRUCTOR_INGREDIENT,
