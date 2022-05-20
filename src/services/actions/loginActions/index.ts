@@ -9,6 +9,7 @@ import {
   ILoginFormSubmitSuccessAction,
   ILoginFormSubmitFailedAction,
 } from "./types";
+import { AppDispatch, AppThunk } from "../../types";
 // login
 export const setLoginFormValue = (
   field: string,
@@ -31,8 +32,8 @@ export const loginFormSubmitFailed = (): ILoginFormSubmitFailedAction => ({
   type: ACTIONS.LOGIN_FORM_SUBMIT_FAILED,
 });
 
-export const postLoginRequest = (email: string, password: string) => {
-  return (dispatch: any) => {
+export const postLoginRequest: AppThunk = (email: string, password: string) => {
+  return (dispatch: AppDispatch) => {
     dispatch(loginFormSubmit());
     (async () => {
       try {
@@ -42,8 +43,8 @@ export const postLoginRequest = (email: string, password: string) => {
         });
         setCookie("refreshToken", res.data.refreshToken);
         setCookie("accessToken", res.data.accessToken);
-        await dispatch(loginFormSubmitSuccess());
-        await dispatch(userIn());
+        dispatch(loginFormSubmitSuccess());
+        dispatch(userIn());
       } catch (err: any) {
         console.log(err.response);
         dispatch(loginFormSubmitFailed());

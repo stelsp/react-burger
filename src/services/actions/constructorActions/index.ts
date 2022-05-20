@@ -11,6 +11,7 @@ import {
   IResetConstructorAction,
   IDeleteConstructorIngredientAction,
 } from "./types";
+import { AppDispatch, AppThunk } from "../../types";
 
 // constructor
 export const getOrder = (): IGetOrderAction => ({
@@ -38,8 +39,8 @@ export const deleteConstructorIngredient = (
   inner: inner.filter((el) => el.id !== id),
 });
 
-export const postOrder = (ingredientsIDs: string[]) => {
-  return (dispatch: any) => {
+export const postOrder: AppThunk = (ingredientsIDs: string[]) => {
+  return (dispatch: AppDispatch) => {
     dispatch(getOrder());
     (async () => {
       try {

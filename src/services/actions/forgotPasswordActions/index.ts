@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_URL, URL_KEY_PASSWORD_FORGOT } from "../../../constants/api-url";
+import { AppDispatch, AppThunk } from "../../types";
 import { ACTIONS } from "../actionTypes";
 import {
   ISetForgotPasswordFormValueAction,
@@ -32,15 +33,18 @@ export const forgotPasswordFormSubmitFailed =
     type: ACTIONS.FORGOT_PASSWORD_FORM_SUBMIT_FAILED,
   });
 
-export const postForgotPasswordRequest = (email: string, history: any) => {
-  return (dispatch: any) => {
+export const postForgotPasswordRequest: AppThunk = (
+  email: string,
+  history: any
+) => {
+  return (dispatch: AppDispatch) => {
     dispatch(forgotPasswordFormSubmit());
     (async () => {
       try {
         await axios.post(`${API_URL}${URL_KEY_PASSWORD_FORGOT}`, {
           email: email,
         });
-        await dispatch(forgotPasswordFormSubmitSuccess());
+        dispatch(forgotPasswordFormSubmitSuccess());
         history.push({ pathname: "/reset-password" });
       } catch (err: any) {
         console.log(err.response);

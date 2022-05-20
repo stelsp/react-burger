@@ -8,6 +8,7 @@ import {
   IRegisterFormSubmitSuccessAction,
   IRegisterFormSubmitFailedAction,
 } from "./types";
+import { AppDispatch, AppThunk } from "../../types";
 
 // register
 export const setRegisterFormValue = (
@@ -33,12 +34,12 @@ export const registerFormSubmitFailed =
     type: ACTIONS.REGISTER_FORM_SUBMIT_FAILED,
   });
 
-export const postRegisterRequest = (
+export const postRegisterRequest: AppThunk = (
   email: string,
   password: string,
   name: string
 ) => {
-  return (dispatch: any) => {
+  return (dispatch: AppDispatch) => {
     dispatch(registerFormSubmit());
     (async () => {
       try {
@@ -47,8 +48,8 @@ export const postRegisterRequest = (
           password: password,
           name: name,
         });
-        await dispatch(registerFormSubmitSuccess());
-        dispatch(postLoginRequest(email, password));
+        dispatch(registerFormSubmitSuccess());
+        dispatch<any>(postLoginRequest(email, password));
       } catch (err: any) {
         console.log(err.response);
         dispatch(registerFormSubmitFailed());

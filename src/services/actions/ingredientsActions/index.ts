@@ -13,6 +13,7 @@ import {
   IDragIngredientAction,
   ISortIngredientAction,
 } from "./types";
+import { AppDispatch, AppThunk } from "../../types";
 
 // ingredients
 export const getIngredients = (): IGetIngredientsAction => ({
@@ -73,8 +74,8 @@ export const sortIngredient = (
   }),
 });
 
-export const getData = () => {
-  return (dispatch: any) => {
+export const getData: AppThunk = () => {
+  return (dispatch: AppDispatch) => {
     dispatch(getIngredients());
     (async () => {
       try {

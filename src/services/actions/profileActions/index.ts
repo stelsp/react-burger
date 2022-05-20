@@ -14,6 +14,7 @@ import {
   IUserInAction,
   IUserOutAction,
 } from "./types";
+import { AppDispatch, AppThunk } from "../../types";
 
 // profile
 export const setProfileValue = (
@@ -48,9 +49,9 @@ export const userOut = (): IUserOutAction => ({
   type: ACTIONS.PROFILE_USER_OUT,
 });
 
-export const getProfileInfo = () => {
+export const getProfileInfo: AppThunk = () => {
   refreshTokenRequest();
-  return (dispatch: any) => {
+  return (dispatch: AppDispatch) => {
     (async () => {
       try {
         const res = await axios.get(`${API_URL}${URL_KEY_USER}`, {
@@ -66,12 +67,12 @@ export const getProfileInfo = () => {
   };
 };
 
-export const patchProfileInfo = (
+export const patchProfileInfo: AppThunk = (
   name: string,
   email: string,
   password: string
 ) => {
-  return (dispatch: any) => {
+  return (dispatch: AppDispatch) => {
     (async () => {
       try {
         const res = await axios.patch(
@@ -93,8 +94,8 @@ export const patchProfileInfo = (
   };
 };
 
-export const logOutRequest = () => {
-  return (dispatch: any) => {
+export const logOutRequest: AppThunk = () => {
+  return (dispatch: AppDispatch) => {
     (async () => {
       try {
         await axios.post(`${API_URL}${URL_KEY_LOGOUT}`, {
@@ -102,7 +103,7 @@ export const logOutRequest = () => {
         });
         deleteCookie("accessToken");
         deleteCookie("refreshToken");
-        await dispatch(userOut());
+        dispatch(userOut());
       } catch (err: any) {
         console.log(err.response);
       }

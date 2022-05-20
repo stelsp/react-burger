@@ -1,6 +1,7 @@
 import axios from "axios";
 import { ACTIONS } from "../actionTypes";
 import { API_URL, URL_KEY_PASSWORD_RESET } from "../../../constants/api-url";
+import { AppDispatch, AppThunk } from "../../types";
 
 // resetPassword
 export const setResetPasswordFormValue = (field: string, value: string) => ({
@@ -21,8 +22,11 @@ export const resetPasswordFormSubmitFailed = () => ({
   type: ACTIONS.RESET_PASSWORD_FORM_SUBMIT_FAILED,
 });
 
-export const postResetPasswordRequest = (password: string, token: string) => {
-  return (dispatch: any) => {
+export const postResetPasswordRequest: AppThunk = (
+  password: string,
+  token: string
+) => {
+  return (dispatch: AppDispatch) => {
     dispatch(resetPasswordFormSubmit());
     (async () => {
       try {
