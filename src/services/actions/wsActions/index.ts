@@ -22,8 +22,9 @@ export const wsConnectionSuccess = (): IwsConnectionSuccessAction => ({
   type: ACTIONS.WS_CONNECTION_SUCCESS,
 });
 
-export const wsConnectionError = (): IwsConnectionErrorAction => ({
+export const wsConnectionError = (error: any): IwsConnectionErrorAction => ({
   type: ACTIONS.WS_CONNECTION_ERROR,
+  payload: error,
 });
 
 export const wsConnectionClose = (): IwsConnectionCloseAction => ({

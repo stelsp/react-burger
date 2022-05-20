@@ -1,13 +1,24 @@
 import { ACTIONS } from "../actions/actionTypes";
+import { TProfileActions } from "../actions/profileActions/types";
 
-const initialState = {
+type TInitialState = {
+  name: string;
+  login: string;
+  password: string;
+  isLoggedIn: boolean;
+};
+
+const initialState: TInitialState = {
   name: "",
   login: "",
   password: "",
   isLoggedIn: false,
 };
 
-const profileReducer = (state = initialState, action) => {
+const profileReducer = (
+  state = initialState,
+  action: TProfileActions
+): TInitialState => {
   switch (action.type) {
     case ACTIONS.PROFILE_GET_VALUE: {
       return {

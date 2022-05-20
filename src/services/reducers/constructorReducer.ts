@@ -1,11 +1,22 @@
 import { ACTIONS } from "../actions/actionTypes";
+import { TIngredient } from "../types/data";
+import { TContructorActions } from "../actions/constructorActions/types";
+import { TIngredientsActions } from "../actions/ingredientsActions/types";
 
-const initialState = {
+type TInitialState = {
+  outer: TIngredient | undefined | string;
+  inner: TIngredient[] | undefined;
+};
+
+const initialState: TInitialState = {
   outer: "", // bun
   inner: [], // main + sauce
 };
 
-const constructorReducer = (state = initialState, action) => {
+const constructorReducer = (
+  state = initialState,
+  action: TContructorActions | TIngredientsActions
+): TInitialState => {
   switch (action.type) {
     case ACTIONS.DRAG_OUTER_INGREDIENT:
       return {

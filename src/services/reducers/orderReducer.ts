@@ -1,12 +1,22 @@
 import { ACTIONS } from "../actions/actionTypes";
+import { TContructorActions } from "../actions/constructorActions/types";
 
-const initialState = {
+type TInitialState = {
+  order: null | string[];
+  orderRequest: boolean;
+  orderFailed: boolean;
+};
+
+const initialState: TInitialState = {
   order: null,
   orderRequest: false,
   orderFailed: false,
 };
 
-const orderReducer = (state = initialState, action) => {
+const orderReducer = (
+  state = initialState,
+  action: TContructorActions
+): TInitialState => {
   switch (action.type) {
     case ACTIONS.GET_ORDER:
       return {

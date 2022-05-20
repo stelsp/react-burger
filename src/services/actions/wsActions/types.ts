@@ -15,10 +15,15 @@ export interface IwsConnectionSuccessAction {
 
 export interface IwsConnectionErrorAction {
   readonly type: typeof ACTIONS.WS_CONNECTION_ERROR;
+  readonly payload: any;
 }
 
 export interface IwsConnectionCloseAction {
   readonly type: typeof ACTIONS.WS_CONNECTION_CLOSE;
+}
+
+export interface IwsConnectionClosedAction {
+  readonly type: typeof ACTIONS.WS_CONNECTION_CLOSED;
 }
 
 export interface IwsGetMessageAction {
@@ -37,5 +42,6 @@ export type TwsActions =
   | IwsConnectionSuccessAction
   | IwsConnectionErrorAction
   | IwsConnectionCloseAction
+  | IwsConnectionClosedAction
   | IwsGetMessageAction
   | IwsSendMessageAction;

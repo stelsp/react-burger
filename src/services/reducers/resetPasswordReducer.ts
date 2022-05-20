@@ -1,6 +1,16 @@
 import { ACTIONS } from "../actions/actionTypes";
+import { TResetPasswordFormActions } from "../actions/resetPasswordActions/types";
 
-const initialState = {
+type TInitialState = {
+  form: {
+    token: string;
+    password: string;
+  };
+  resetPasswordRequest: boolean;
+  resetPasswordFailed: boolean;
+};
+
+const initialState: TInitialState = {
   form: {
     token: "",
     password: "",
@@ -9,7 +19,10 @@ const initialState = {
   resetPasswordFailed: false,
 };
 
-const resetPasswordReducer = (state = initialState, action) => {
+const resetPasswordReducer = (
+  state = initialState,
+  action: TResetPasswordFormActions
+): TInitialState => {
   switch (action.type) {
     case ACTIONS.RESET_PASSWORD_FORM_SET_VALUE: {
       return {

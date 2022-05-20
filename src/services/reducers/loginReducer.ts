@@ -1,6 +1,16 @@
 import { ACTIONS } from "../actions/actionTypes";
+import { TLoginActions } from "../actions/loginActions/types";
 
-const initialState = {
+type TInitialState = {
+  form: {
+    email: string;
+    password: string;
+  };
+  loginRequest: boolean;
+  loginFailed: boolean;
+};
+
+const initialState: TInitialState = {
   form: {
     email: "",
     password: "",
@@ -9,7 +19,10 @@ const initialState = {
   loginFailed: false,
 };
 
-const loginReducer = (state = initialState, action) => {
+const loginReducer = (
+  state = initialState,
+  action: TLoginActions
+): TInitialState => {
   switch (action.type) {
     case ACTIONS.LOGIN_FORM_SET_VALUE: {
       return {

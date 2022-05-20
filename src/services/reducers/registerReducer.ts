@@ -1,6 +1,17 @@
 import { ACTIONS } from "../actions/actionTypes";
+import { TRegisterActions } from "../actions/registerActions/types";
 
-const initialState = {
+type TInitialState = {
+  form: {
+    name: string;
+    email: string;
+    password: string;
+  };
+  registrationRequest: boolean;
+  registrationFailed: boolean;
+};
+
+const initialState: TInitialState = {
   form: {
     name: "",
     email: "",
@@ -10,7 +21,10 @@ const initialState = {
   registrationFailed: false,
 };
 
-const registerReducer = (state = initialState, action) => {
+const registerReducer = (
+  state = initialState,
+  action: TRegisterActions
+): TInitialState => {
   switch (action.type) {
     case ACTIONS.REGISTER_FORM_SET_VALUE: {
       return {
@@ -24,8 +38,8 @@ const registerReducer = (state = initialState, action) => {
     case ACTIONS.REGISTER_FORM_SUBMIT: {
       return {
         ...state,
-        registerRequest: true,
-        registerFailed: false,
+        registrationRequest: true,
+        registrationFailed: false,
       };
     }
     case ACTIONS.REGISTER_FORM_SUBMIT_SUCCESS: {
@@ -37,14 +51,14 @@ const registerReducer = (state = initialState, action) => {
           email: "",
           password: "",
         },
-        registerRequest: false,
+        registrationRequest: false,
       };
     }
     case ACTIONS.REGISTER_FORM_SUBMIT_FAILED: {
       return {
         ...state,
-        registerRequest: false,
-        registerFailed: true,
+        registrationRequest: false,
+        registrationFailed: true,
       };
     }
 

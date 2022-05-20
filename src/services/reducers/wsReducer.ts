@@ -1,12 +1,20 @@
 import { ACTIONS } from "../actions/actionTypes";
+import { TwsActions } from "../actions/wsActions/types";
+import { TwsData } from "../types/data";
 
-const initialState = {
+type TInitialState = {
+  wsConnected: boolean;
+  data: any | TwsData;
+  error: any;
+};
+
+const initialState: TInitialState = {
   wsConnected: false,
   data: [],
   error: undefined,
 };
 
-const wsReducer = (state = initialState, action) => {
+const wsReducer = (state = initialState, action: TwsActions): TInitialState => {
   switch (action.type) {
     // Опишем обработку экшена с типом WS_CONNECTION_SUCCESS
     // Установим флаг wsConnected в состояние true

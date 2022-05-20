@@ -1,6 +1,15 @@
 import { ACTIONS } from "../actions/actionTypes";
+import { TForgotPasswordFormActions } from "../actions/forgotPasswordActions/types";
 
-const initialState = {
+type TInitialState = {
+  form: {
+    email: string;
+  };
+  forgotPasswordRequest: boolean;
+  forgotPasswordFailed: boolean;
+};
+
+const initialState: TInitialState = {
   form: {
     email: "",
   },
@@ -8,7 +17,10 @@ const initialState = {
   forgotPasswordFailed: false,
 };
 
-const forgotPasswordReducer = (state = initialState, action) => {
+const forgotPasswordReducer = (
+  state = initialState,
+  action: TForgotPasswordFormActions
+): TInitialState => {
   switch (action.type) {
     case ACTIONS.FORGOT_PASSWORD_FORM_SET_VALUE: {
       return {
