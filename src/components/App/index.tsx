@@ -1,22 +1,24 @@
-import AppHeader from "../AppHeader/AppHeader";
+import AppHeader from "../AppHeader";
 import Loader from "../Loader/Loader";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { getData } from "../../services/actions/ingredientsActions";
 import { getCookie } from "../../utils/cookie";
 import { userIn } from "../../services/actions/profileActions";
 import Routes from "../Routes/Routes";
 
-export default function App() {
-  const dispatch = useDispatch();
+const App: React.FC = () => {
+  const dispatch = useAppDispatch();
 
-  const { ingredientsRequest, ingredientsFailed } = useSelector(
+  const { ingredientsRequest, ingredientsFailed } = useAppSelector(
     (store) => store.ingredients
   );
 
   useEffect(() => {
     dispatch(getData());
-    if (getCookie("accessToken")) return dispatch(userIn());
+    if (getCookie("accessToken")) {
+      dispatch(userIn());
+    }
   }, [dispatch]);
 
   return (
@@ -33,4 +35,6 @@ export default function App() {
       )}
     </>
   );
-}
+};
+
+export default App;

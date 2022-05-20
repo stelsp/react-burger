@@ -32,11 +32,11 @@ export const resetConstructor = (): IResetConstructorAction => ({
 });
 
 export const deleteConstructorIngredient = (
-  inner: TIngredient[],
+  inner: TIngredient[] | undefined,
   id: string
 ): IDeleteConstructorIngredientAction => ({
   type: ACTIONS.DELETE_CONSTRUCTOR_INGREDIENT,
-  inner: inner.filter((el) => el.id !== id),
+  inner: inner?.filter((el) => el.id !== id),
 });
 
 export const postOrder: AppThunk = (ingredientsIDs: string[]) => {

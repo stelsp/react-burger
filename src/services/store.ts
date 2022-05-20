@@ -2,9 +2,10 @@ import { compose, createStore, applyMiddleware } from "redux";
 import rootReducer from "./rootReducer";
 import thunk from "redux-thunk";
 import { ACTIONS } from "./actions/actionTypes";
-import { socketMiddleware } from "./middleware/socketMiddleware";
+import { wsMiddleware } from "./middleware/socketMiddleware";
+import { IwsActions } from "./types";
 
-const wsActions = {
+const wsActions: IwsActions = {
   wsInit: ACTIONS.WS_CONNECTION_START,
   wsInitUser: ACTIONS.WS_CONNECTION_USER_START,
   wsSendMessage: ACTIONS.WS_SEND_MESSAGE,
@@ -15,15 +16,18 @@ const wsActions = {
   onMessage: ACTIONS.WS_GET_MESSAGE,
 };
 
-const composeEnhancers =
-  typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-    : compose;
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const enhancer = composeEnhancers(
   applyMiddleware(
     thunk,
-    socketMiddleware("wss://norma.nomoreparties.space/orders", wsActions)
+    wsMiddleware("wss://norma.nomoreparties.space/orders", wsActions)
   )
 );
 

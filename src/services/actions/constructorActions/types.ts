@@ -17,7 +17,7 @@ export interface IResetConstructorAction {
 export interface IDeleteConstructorIngredientAction {
   readonly type: typeof ACTIONS.DELETE_CONSTRUCTOR_INGREDIENT;
   readonly inner: TIngredient[];
-  readonly id?: string;
+  readonly id: string;
 }
 
 export type TContructorActions =

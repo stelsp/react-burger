@@ -46,7 +46,7 @@ export const setCurrentTab = (currentTab: string): ISetCurrentTabAction => ({
 // dnd
 export const dragIngredient = (
   inner: TIngredient[],
-  ingr: TIngredient
+  ingr: TIngredient | any
 ): IDragIngredientAction => {
   return ingr.type !== "bun"
     ? {

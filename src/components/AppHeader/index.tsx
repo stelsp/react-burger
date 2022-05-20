@@ -1,5 +1,5 @@
-import styles from "./AppHeader.module.css";
-import MenuItem from "./MenuItem/MenuItem";
+import styles from "./styles.module.css";
+import MenuItem from "../MenuItem";
 import { Logo } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/logo";
 import {
   BurgerIcon,
@@ -10,7 +10,7 @@ import { APP_HEADER_LINKS } from "../../constants/content";
 
 import { Link } from "react-router-dom";
 
-function AppHeader() {
+const AppHeader: React.FC = () => {
   return (
     <header className={styles.header}>
       <div className={styles.wrapper}>
@@ -49,6 +49,6 @@ function AppHeader() {
       </div>
     </header>
   );
-}
+};
 
 export default AppHeader;

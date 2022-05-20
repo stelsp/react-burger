@@ -1,8 +1,8 @@
-import style from "./BurgerConstructor.module.css";
+import style from "./styles.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-import Checkout from "./Checkout/Checkout";
-import { useSelector, useDispatch } from "react-redux";
+import Checkout from "../Checkout/Checkout";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { deleteConstructorIngredient } from "../../services/actions/constructorActions";
 import {
   dragIngredient,
@@ -10,12 +10,18 @@ import {
 } from "../../services/actions/ingredientsActions";
 import { useDrop, useDrag } from "react-dnd";
 import { useCallback } from "react";
+import { IInnerProps } from "./types";
 
-function Inner({ id, name, image, price, moveCard, findCard }) {
-  const dispatch = useDispatch();
-  const { inner } = useSelector((store) => ({
-    inner: store.burgerConstructor.inner,
-  }));
+const Inner: React.FC<IInnerProps> = ({
+  id,
+  name,
+  image,
+  price,
+  moveCard,
+  findCard,
+}) => {
+  const dispatch = useAppDispatch();
+  const inner = useAppSelector((store) => store.burgerConstructor.inner);
 
   console.log(inner);
 
@@ -38,7 +44,7 @@ function Inner({ id, name, image, price, moveCard, findCard }) {
     [id, originalIndex, moveCard]
   );
   const [, drop3] = useDrop(
-    () => ({
+    (): any => ({
       accept: "card",
       hover({ id: draggedId }) {
         if (draggedId !== id) {
@@ -66,11 +72,11 @@ function Inner({ id, name, image, price, moveCard, findCard }) {
       />
     </li>
   );
-}
+};
 
-function BurgerConstructor() {
-  const dispatch = useDispatch();
-  const { outer, inner } = useSelector((store) => store.burgerConstructor);
+const BurgerConstructor: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const { outer, inner } = useAppSelector((store) => store.burgerConstructor);
 
   const [, drop] = useDrop(
     () => ({
@@ -84,10 +90,10 @@ function BurgerConstructor() {
 
   const findCard = useCallback(
     (id) => {
-      const card = inner.filter((el) => el.id === id)[0];
+      const card = inner?.filter((el) => el.id === id)[0];
       return {
         card,
-        index: inner.indexOf(card),
+        index: inner?.indexOf(card),
       };
     },
     [inner]
@@ -117,7 +123,7 @@ function BurgerConstructor() {
             </div>
             {inner.length > 0 ? (
               <ul className={style.list} ref={drop2}>
-                {inner.map((el) => {
+                {inner?.map((el) => {
                   return (
                     <Inner
                       key={el.id}
@@ -161,6 +167,6 @@ function BurgerConstructor() {
       )}
     </section>
   );
-}
+};
 
 export default BurgerConstructor;

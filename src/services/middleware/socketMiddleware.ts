@@ -1,10 +1,11 @@
 import { getCookie } from "../../utils/cookie";
+import { IwsActions } from "../types/index";
 
-export const socketMiddleware = (wsUrl, wsActions) => {
-  return (store) => {
-    let socket = null;
+export const wsMiddleware = (wsUrl: string, wsActions: IwsActions): any => {
+  return (store: any) => {
+    let socket: any = null;
 
-    return (next) => (action) => {
+    return (next: any) => (action: any) => {
       const { dispatch, getState } = store;
       const { type, payload } = action;
       const {
@@ -29,22 +30,22 @@ export const socketMiddleware = (wsUrl, wsActions) => {
       }
 
       if (socket) {
-        socket.onopen = (event) => {
+        socket.onopen = (event: any) => {
           dispatch({ type: onOpen, payload: event });
         };
 
-        socket.onerror = (event) => {
+        socket.onerror = (event: any) => {
           dispatch({ type: onError, payload: event });
         };
 
-        socket.onmessage = (event) => {
+        socket.onmessage = (event: any) => {
           const { data } = event;
           const parsedData = JSON.parse(data);
 
           dispatch({ type: onMessage, payload: parsedData });
         };
 
-        socket.onclose = (event) => {
+        socket.onclose = (event: any) => {
           dispatch({ type: onClose, payload: event });
         };
 
