@@ -1,4 +1,4 @@
-import styles from "./Login.module.css";
+import styles from "./styles.module.css";
 import { useCallback } from "react";
 import Loader from "../../components/Loader";
 import {
@@ -7,21 +7,21 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, Redirect, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import {
   postLoginRequest,
   setLoginFormValue,
 } from "../../services/actions/loginActions";
 
 function Login() {
-  const dispatch = useDispatch();
-  const location = useLocation();
+  const dispatch = useAppDispatch();
+  const location: any = useLocation();
 
-  const { email, password } = useSelector((store) => store.login.form);
-  const { loginRequest, loginFailed } = useSelector((store) => store.login);
-  const { isLoggedIn } = useSelector((store) => store.profile);
+  const { email, password } = useAppSelector((store) => store.login.form);
+  const { loginRequest, loginFailed } = useAppSelector((store) => store.login);
+  const { isLoggedIn } = useAppSelector((store) => store.profile);
 
-  const onFormChange = (e) => {
+  const onFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setLoginFormValue(e.target.name, e.target.value));
   };
 

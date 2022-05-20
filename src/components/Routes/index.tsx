@@ -1,19 +1,16 @@
 import { Switch, Route } from "react-router-dom";
 import IngredientDetails from "../IngredientDetails";
-import MainPage from "../../pages/MainPage/MainPage";
-import Register from "../../pages/Register/Register";
-import Login from "../../pages/Login/Login";
-import ForgotPassword from "../../pages/ForgotPassword/ForgotPassword";
-import ResetPassword from "../../pages/ResetPassword/ResetPassword";
-import Profile from "../../pages/Profile/Profile";
+import MainPage from "../../pages/MainPage";
+import Register from "../../pages/Register";
+import Login from "../../pages/Login";
+import ForgotPassword from "../../pages/ForgotPassword";
+import ResetPassword from "../../pages/ResetPassword";
+import Profile from "../../pages/Profile";
 import NotFound404 from "../../pages/NotFound404/NotFound404";
-import ImageView from "../../pages/ImageView/ImageView";
-import Feed from "../../pages/Feed/Feed";
-import {
-  ProtectedRoute,
-  ModalRoute,
-} from "../../pages/ProtectedRoute/ProtectedRoute";
-import Order from "../../pages/Order/Order";
+import ImageView from "../../pages/ImageView";
+import Feed from "../../pages/Feed";
+import { ProtectedRoute, ModalRoute } from "../../pages/ProtectedRoute";
+import Order from "../../pages/Order";
 import { MODAL_TITLE_INGREDIENT } from "../../constants/content";
 
 const Routes: React.FC = () => {
@@ -27,12 +24,7 @@ const Routes: React.FC = () => {
         <Route path="/login" children={<Login />} />
         <Route path="/forgot-password" children={<ForgotPassword />} />
         <Route path="/reset-password" children={<ResetPassword />} />
-        <ModalRoute
-          title=""
-          path="/feed/:id"
-          modal={<Order />}
-          page={<Order />}
-        />
+        <ModalRoute path="/feed/:id" modal={<Order />} page={<Order />} />
         <ModalRoute
           title={MODAL_TITLE_INGREDIENT}
           path="/ingredients/:id"
@@ -40,7 +32,6 @@ const Routes: React.FC = () => {
           page={<ImageView />}
         />
         <ModalRoute
-          title=""
           exact
           path="/orders/:id"
           modal={<Order />}

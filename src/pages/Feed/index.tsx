@@ -1,19 +1,20 @@
-import styles from "./Feed.module.css";
-import feed from "./FeedInfo.module.css";
+import styles from "./styles.module.css";
+import feed from "./feed.module.css";
 import ProfileOrders from "../../components/ProfileOrders";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { useEffect } from "react";
 import { nanoid } from "@reduxjs/toolkit";
 import {
   wsConnectionClose,
   wsConnectionOpen,
 } from "../../services/actions/wsActions";
+import { TOrder } from "../../services/types/data";
 
-const FeedInfo = () => {
-  const { data } = useSelector((store) => store.ws);
+const FeedInfo: React.FC = () => {
+  const { data } = useAppSelector((store) => store.ws);
 
-  const done = data?.orders?.filter((el) => el.status === "done");
-  const pending = data?.orders?.filter((el) => el.status === "pending");
+  const done = data?.orders?.filter((el: TOrder) => el.status === "done");
+  const pending = data?.orders?.filter((el: TOrder) => el.status === "pending");
 
   return (
     <div className={feed.container}>
@@ -21,7 +22,7 @@ const FeedInfo = () => {
         <div className={feed.done}>
           <h3 className={feed.title}>Готовы:</h3>
           <ul className={feed.list}>
-            {done?.map((el) => (
+            {done?.map((el: TOrder) => (
               <li className={feed.doneItem} key={nanoid()}>
                 {el.number}
               </li>
@@ -31,7 +32,7 @@ const FeedInfo = () => {
         <div className={feed.pending}>
           <h3 className={feed.title}>В работе:</h3>
           <ul className={feed.list}>
-            {pending?.map((el) => (
+            {pending?.map((el: TOrder) => (
               <li className={feed.pendingItem} key={nanoid()}>
                 {el.number}
               </li>
@@ -52,7 +53,7 @@ const FeedInfo = () => {
 };
 
 function Feed() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(wsConnectionOpen());

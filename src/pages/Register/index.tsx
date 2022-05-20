@@ -1,4 +1,4 @@
-import styles from "./Register.module.css";
+import styles from "./styles.module.css";
 import Loader from "../../components/Loader";
 import {
   Input,
@@ -7,23 +7,25 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useCallback } from "react";
 import { Link, Redirect, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import {
   postRegisterRequest,
   setRegisterFormValue,
 } from "../../services/actions/registerActions";
 
 function Register() {
-  const dispatch = useDispatch();
-  const location = useLocation();
+  const dispatch = useAppDispatch();
+  const location: any = useLocation();
 
-  const { name, email, password } = useSelector((store) => store.register.form);
-  const { registerRequest, registerFailed } = useSelector(
+  const { name, email, password } = useAppSelector(
+    (store) => store.register.form
+  );
+  const { registrationRequest, registrationFailed } = useAppSelector(
     (store) => store.register
   );
-  const { isLoggedIn } = useSelector((store) => store.profile);
+  const { isLoggedIn } = useAppSelector((store) => store.profile);
 
-  const onFormChange = (e) => {
+  const onFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setRegisterFormValue(e.target.name, e.target.value));
   };
 
@@ -47,9 +49,9 @@ function Register() {
   return (
     <main className={styles.section}>
       <div className={styles.container}>
-        {registerRequest ? (
+        {registrationRequest ? (
           <Loader />
-        ) : registerFailed ? (
+        ) : registrationFailed ? (
           <h1>Произошла ошибка при отправке данных</h1>
         ) : (
           <>

@@ -1,6 +1,6 @@
-import styles from "./ForgotPassword.module.css";
+import styles from "./styles.module.css";
 import { useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import Loader from "../../components/Loader";
 import {
   Input,
@@ -13,17 +13,17 @@ import {
 } from "../../services/actions/forgotPasswordActions";
 
 function ForgotPassword() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const history = useHistory();
-  const location = useLocation();
+  const location: any = useLocation();
 
-  const { email } = useSelector((store) => store.forgotPassword.form);
-  const { forgotPasswordRequest, forgotPasswordFailed } = useSelector(
+  const { email } = useAppSelector((store) => store.forgotPassword.form);
+  const { forgotPasswordRequest, forgotPasswordFailed } = useAppSelector(
     (store) => store.forgotPassword
   );
-  const { isLoggedIn } = useSelector((store) => store.profile);
+  const { isLoggedIn } = useAppSelector((store) => store.profile);
 
-  const onFormChange = (e) => {
+  const onFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setForgotPasswordFormValue(e.target.name, e.target.value));
   };
 

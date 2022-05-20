@@ -1,7 +1,7 @@
-import styles from "./Profile.module.css";
+import styles from "./styles.module.css";
 import { Link, Switch, Route, useHistory } from "react-router-dom";
 import { useCallback, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../services/hooks";
 import {
   getProfileInfo,
   logOutRequest,
@@ -13,8 +13,8 @@ import {
   wsConnectionUserOpen,
 } from "../../services/actions/wsActions";
 
-const ProfileFeed = () => {
-  const dispatch = useDispatch();
+const ProfileFeed: React.FC = () => {
+  const dispatch = useAppDispatch();
 
   useEffect(() => {}, [dispatch]);
 
@@ -34,7 +34,7 @@ const ProfileFeed = () => {
 };
 
 function Profile() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const history = useHistory();
 
   useEffect(() => {

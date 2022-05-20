@@ -1,7 +1,7 @@
 import IngredientDetails from "../../components/IngredientDetails";
-import styles from "./ImageView.module.css";
+import styles from "./styles.module.css";
 
-function ImageView() {
+const ImageView: React.FC = () => {
   return (
     <>
       <h1 className={styles.title}>Детали ингредиента</h1>
@@ -10,6 +10,6 @@ function ImageView() {
       </main>
     </>
   );
-}
+};
 
 export default ImageView;

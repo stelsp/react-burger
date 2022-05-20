@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const NotFound404 = () => {
+const NotFound404: React.FC = () => {
   return (
     <main>
       <div>

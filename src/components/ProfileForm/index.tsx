@@ -1,4 +1,4 @@
-import styles from "../../pages/Profile/Profile.module.css";
+import styles from "../../pages/Profile/styles.module.css";
 import { useCallback, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import {

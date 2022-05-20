@@ -1,13 +1,19 @@
-import styles from "./Order.module.css";
+import styles from "./styles.module.css";
 import Price from "../../components/Price";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { nanoid } from "@reduxjs/toolkit";
 import { useEffect, useMemo } from "react";
+import {
+  IBottomProps,
+  IIngredientProps,
+  IMiddleProps,
+  ITopProps,
+} from "./types";
+import { TOrder } from "../../services/types/data";
 
-const Ingredient = ({ el }) => {
-  const { ingredients } = useSelector((store) => store.ingredients);
-  const id = el;
+const Ingredient: React.FC<IIngredientProps> = ({ id }) => {
+  const { ingredients } = useAppSelector((store) => store.ingredients);
   const ingredient = ingredients?.find((el) => el._id === id);
 
   if (!ingredient?.image) {
@@ -35,7 +41,7 @@ const Ingredient = ({ el }) => {
   );
 };
 
-const Top = ({ number, name, status }) => {
+const Top: React.FC<ITopProps> = ({ number, name, status }) => {
   return (
     <div className={styles.top}>
       <p className={styles.number}>#{number}</p>
@@ -46,25 +52,25 @@ const Top = ({ number, name, status }) => {
   );
 };
 
-const Middle = ({ el }) => {
+const Middle: React.FC<IMiddleProps> = ({ ing }) => {
   return (
     <ul className={styles.middle}>
-      {el?.map((el) => (
-        <Ingredient el={el} key={nanoid()} />
+      {ing?.map((id) => (
+        <Ingredient id={id} key={nanoid()} />
       ))}
     </ul>
   );
 };
 
-const Bottom = ({ createdAt, el }) => {
+const Bottom: React.FC<IBottomProps> = ({ createdAt, ing }) => {
   const date = new Date(createdAt).toLocaleString();
-  const { ingredients } = useSelector((store) => store.ingredients);
+  const { ingredients } = useAppSelector((store) => store.ingredients);
   const sumPrice = useMemo(() => {
     return ingredients
-      .filter((i) => el.includes(i._id))
+      ?.filter((i) => ing.includes(i._id))
       .map((el) => el.price)
       .reduce((a, b) => a + b, 0);
-  }, [ingredients, el]);
+  }, [ingredients, ing]);
 
   return (
     <div className={styles.bottom}>
@@ -74,24 +80,26 @@ const Bottom = ({ createdAt, el }) => {
   );
 };
 
-export default function Order() {
-  const dispatch = useDispatch();
+const Order: React.FC = () => {
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch({ type: "WS_CONNECTION_START" });
   }, [dispatch]);
 
-  let { id } = useParams();
-  const { data } = useSelector((store) => store.socket);
-  const el = data?.orders?.find((el) => el._id === id);
+  let { id }: any = useParams();
+  const { data } = useAppSelector((store) => store.ws);
+  const el = data?.orders?.find((el: TOrder) => el._id === id);
 
   if (!el) return null;
 
   return (
     <div className={styles.order}>
       <Top number={el.number} name={el.name} status={el.status} />
-      <Middle el={el.ingredients} />
-      <Bottom createdAt={el.createdAt} el={el.ingredients} />
+      <Middle ing={el.ingredients} />
+      <Bottom createdAt={el.createdAt} ing={el.ingredients} />
     </div>
   );
-}
+};
+
+export default Order;

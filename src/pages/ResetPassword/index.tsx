@@ -1,6 +1,6 @@
-import styles from "./ResetPassword.module.css";
+import styles from "./styles.module.css";
 import { useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import Loader from "../../components/Loader";
 import {
   Input,
@@ -14,15 +14,17 @@ import {
 } from "../../services/actions/resetPasswordActions";
 
 function ResetPassword() {
-  const dispatch = useDispatch();
-  const history = useHistory();
+  const dispatch = useAppDispatch();
+  const history: any = useHistory();
 
-  const { token, password } = useSelector((store) => store.resetPassword.form);
-  const { resetPasswordRequest, resetPasswordFailed } = useSelector(
+  const { token, password } = useAppSelector(
+    (store) => store.resetPassword.form
+  );
+  const { resetPasswordRequest, resetPasswordFailed } = useAppSelector(
     (store) => store.resetPassword
   );
 
-  const onFormChange = (e) => {
+  const onFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setResetPasswordFormValue(e.target.name, e.target.value));
   };
 
@@ -51,7 +53,6 @@ function ResetPassword() {
                 <PasswordInput
                   onChange={onFormChange}
                   value={password}
-                  placeholder={"Введите новый пароль"}
                   name={"password"}
                 />
               </div>

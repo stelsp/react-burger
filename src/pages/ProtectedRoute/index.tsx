@@ -1,10 +1,14 @@
 import { useCallback } from "react";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../services/hooks";
 import { Route, Redirect, useHistory } from "react-router-dom";
 import Modal from "../../components/Modal";
+import { IModalRouteProps, IProtectedRouteProps } from "./types";
 
-export function ProtectedRoute({ children, ...rest }) {
-  const { isLoggedIn } = useSelector((store) => store.profile);
+export const ProtectedRoute: React.FC<IProtectedRouteProps> = ({
+  children,
+  ...rest
+}) => {
+  const { isLoggedIn } = useAppSelector((store) => store.profile);
   return (
     <Route
       {...rest}
@@ -17,9 +21,14 @@ export function ProtectedRoute({ children, ...rest }) {
       }
     />
   );
-}
+};
 
-export function ModalRoute({ modal, page, title, ...rest }) {
+export const ModalRoute: React.FC<IModalRouteProps> = ({
+  modal,
+  page,
+  title,
+  ...rest
+}) => {
   const history = useHistory();
 
   const closeModal = useCallback(() => {
@@ -42,4 +51,4 @@ export function ModalRoute({ modal, page, title, ...rest }) {
       />
     </>
   );
-}
+};
