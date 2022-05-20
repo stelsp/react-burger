@@ -1,7 +1,12 @@
-import { initialState } from "../rootReducer";
 import { ACTIONS } from "../actions/actionTypes";
 
-const wsReducer = (state = initialState.socket, action) => {
+const initialState = {
+  wsConnected: false,
+  data: [],
+  error: undefined,
+};
+
+const wsReducer = (state = initialState, action) => {
   switch (action.type) {
     // Опишем обработку экшена с типом WS_CONNECTION_SUCCESS
     // Установим флаг wsConnected в состояние true

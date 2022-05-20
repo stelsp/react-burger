@@ -1,7 +1,13 @@
-import { initialState } from "../rootReducer";
 import { ACTIONS } from "../actions/actionTypes";
 
-const profileReducer = (state = initialState.profile, action) => {
+const initialState = {
+  name: "",
+  login: "",
+  password: "",
+  isLoggedIn: false,
+};
+
+const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.PROFILE_GET_VALUE: {
       return {

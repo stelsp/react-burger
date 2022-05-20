@@ -17,6 +17,8 @@ function Inner({ id, name, image, price, moveCard, findCard }) {
     inner: store.burgerConstructor.inner,
   }));
 
+  console.log(inner);
+
   const originalIndex = findCard(id).index;
   const [{ isDragging }, drag] = useDrag(
     () => ({

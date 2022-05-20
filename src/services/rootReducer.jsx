@@ -8,69 +8,7 @@ import registerReducer from "./reducers/registerReducer";
 import forgotPasswordReducer from "./reducers/forgotPasswordReducer";
 import resetPasswordReducer from "./reducers/resetPasswordReducer";
 import profileReducer from "./reducers/profileReducer";
-import wsReducer from "./reducers/socketReducer";
-
-export const initialState = {
-  ingredients: {
-    ingredients: [],
-    ingredientsRequest: false,
-    ingredientsFailed: false,
-    currentTab: "bun",
-  },
-  currentIngredient: null,
-  constructor: {
-    outer: "", // bun
-    inner: [], // main + sauce
-  },
-  order: {
-    order: null,
-    orderRequest: false,
-    orderFailed: false,
-  },
-  login: {
-    form: {
-      email: "",
-      password: "",
-    },
-    loginRequest: false,
-    loginFailed: false,
-  },
-  register: {
-    form: {
-      name: "",
-      email: "",
-      password: "",
-    },
-    registrationRequest: false,
-    registrationFailed: false,
-  },
-  forgotPassword: {
-    form: {
-      email: "",
-    },
-    forgotPasswordRequest: false,
-    forgotPasswordFailed: false,
-  },
-  resetPassword: {
-    form: {
-      token: "",
-      password: "",
-    },
-    resetPasswordRequest: false,
-    resetPasswordFailed: false,
-  },
-  profile: {
-    name: "",
-    login: "",
-    password: "",
-    isLoggedIn: false,
-  },
-  socket: {
-    wsConnected: false,
-    data: [],
-    error: undefined,
-  },
-};
+import wsReducer from "./reducers/wsReducer";
 
 const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
@@ -82,7 +20,7 @@ const rootReducer = combineReducers({
   forgotPassword: forgotPasswordReducer,
   resetPassword: resetPasswordReducer,
   profile: profileReducer,
-  socket: wsReducer,
+  ws: wsReducer,
 });
 
 export default rootReducer;

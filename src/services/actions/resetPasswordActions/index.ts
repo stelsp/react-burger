@@ -1,9 +1,9 @@
 import axios from "axios";
-import { ACTIONS } from "./actionTypes";
-import { API_URL, URL_KEY_PASSWORD_RESET } from "../../constants/api-url";
+import { ACTIONS } from "../actionTypes";
+import { API_URL, URL_KEY_PASSWORD_RESET } from "../../../constants/api-url";
 
 // resetPassword
-export const setResetPasswordFormValue = (field, value) => ({
+export const setResetPasswordFormValue = (field: string, value: string) => ({
   type: ACTIONS.RESET_PASSWORD_FORM_SET_VALUE,
   field,
   value,
@@ -21,8 +21,8 @@ export const resetPasswordFormSubmitFailed = () => ({
   type: ACTIONS.RESET_PASSWORD_FORM_SUBMIT_FAILED,
 });
 
-export const postResetPasswordRequest = (password, token) => {
-  return (dispatch) => {
+export const postResetPasswordRequest = (password: string, token: string) => {
+  return (dispatch: any) => {
     dispatch(resetPasswordFormSubmit());
     (async () => {
       try {
@@ -31,7 +31,7 @@ export const postResetPasswordRequest = (password, token) => {
           token: token,
         });
         dispatch(resetPasswordFormSubmitSuccess());
-      } catch (err) {
+      } catch (err: any) {
         console.log(err.response);
         dispatch(resetPasswordFormSubmitFailed());
       }

@@ -1,7 +1,13 @@
-import { initialState } from "../rootReducer";
 import { ACTIONS } from "../actions/actionTypes";
 
-const ingredientsReducer = (state = initialState.ingredients, action) => {
+const initialState = {
+  ingredients: [],
+  ingredientsRequest: false,
+  ingredientsFailed: false,
+  currentTab: "bun",
+};
+
+const ingredientsReducer = (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.GET_INGREDIENTS:
       return {

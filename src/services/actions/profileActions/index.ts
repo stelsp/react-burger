@@ -1,31 +1,56 @@
 import axios from "axios";
-import { ACTIONS } from "./actionTypes";
-import { API_URL, URL_KEY_LOGOUT, URL_KEY_USER } from "../../constants/api-url";
-import { deleteCookie, getCookie } from "../../utils/cookie";
-// import { refreshTokenRequest } from "../../utils/api";
+import { ACTIONS } from "../actionTypes";
+import {
+  API_URL,
+  URL_KEY_LOGOUT,
+  URL_KEY_USER,
+} from "../../../constants/api-url";
+import { deleteCookie, getCookie } from "../../../utils/cookie";
+import { refreshTokenRequest } from "../../../utils/api";
+import {
+  ISetProfileValueAction,
+  IGetProfileValueAction,
+  IPatchProfileValueAction,
+  IUserInAction,
+  IUserOutAction,
+} from "./types";
 
 // profile
-export const setProfileValue = (field, value) => ({
+export const setProfileValue = (
+  field: string,
+  value: string
+): ISetProfileValueAction => ({
   type: ACTIONS.PROFILE_SET_VALUE,
   field,
   value,
 });
 
-export const getProfileValue = (name, login) => ({
+export const getProfileValue = (
+  name: string,
+  login: string
+): IGetProfileValueAction => ({
   type: ACTIONS.PROFILE_GET_VALUE,
   name,
   login,
 });
 
-export const patchProfileValue = (field, value) => ({
+export const patchProfileValue = (
+  field: string,
+  value: string
+): IPatchProfileValueAction => ({
   type: ACTIONS.PROFILE_PATCH_VALUE,
   field,
   value,
 });
 
+export const userIn = (): IUserInAction => ({ type: ACTIONS.PROFILE_USER_IN });
+export const userOut = (): IUserOutAction => ({
+  type: ACTIONS.PROFILE_USER_OUT,
+});
+
 export const getProfileInfo = () => {
-  // refreshTokenRequest();
-  return (dispatch) => {
+  refreshTokenRequest();
+  return (dispatch: any) => {
     (async () => {
       try {
         const res = await axios.get(`${API_URL}${URL_KEY_USER}`, {
@@ -34,15 +59,19 @@ export const getProfileInfo = () => {
           },
         });
         dispatch(getProfileValue(res.data.user.name, res.data.user.email));
-      } catch (err) {
+      } catch (err: any) {
         console.log(err.response);
       }
     })();
   };
 };
 
-export const patchProfileInfo = (name, email, password) => {
-  return (dispatch) => {
+export const patchProfileInfo = (
+  name: string,
+  email: string,
+  password: string
+) => {
+  return (dispatch: any) => {
     (async () => {
       try {
         const res = await axios.patch(
@@ -57,7 +86,7 @@ export const patchProfileInfo = (name, email, password) => {
         dispatch(patchProfileValue(name, res.data.user.name));
         dispatch(patchProfileValue(email, res.data.user.email));
         dispatch(patchProfileValue(password, res.data.user.password));
-      } catch (err) {
+      } catch (err: any) {
         console.log(err.response);
       }
     })();
@@ -65,7 +94,7 @@ export const patchProfileInfo = (name, email, password) => {
 };
 
 export const logOutRequest = () => {
-  return (dispatch) => {
+  return (dispatch: any) => {
     (async () => {
       try {
         await axios.post(`${API_URL}${URL_KEY_LOGOUT}`, {
@@ -74,12 +103,9 @@ export const logOutRequest = () => {
         deleteCookie("accessToken");
         deleteCookie("refreshToken");
         await dispatch(userOut());
-      } catch (err) {
+      } catch (err: any) {
         console.log(err.response);
       }
     })();
   };
 };
-
-export const userIn = () => ({ type: ACTIONS.PROFILE_USER_IN });
-export const userOut = () => ({ type: ACTIONS.PROFILE_USER_OUT });

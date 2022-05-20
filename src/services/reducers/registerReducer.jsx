@@ -1,7 +1,16 @@
-import { initialState } from "../rootReducer";
 import { ACTIONS } from "../actions/actionTypes";
 
-const registerReducer = (state = initialState.register, action) => {
+const initialState = {
+  form: {
+    name: "",
+    email: "",
+    password: "",
+  },
+  registrationRequest: false,
+  registrationFailed: false,
+};
+
+const registerReducer = (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.REGISTER_FORM_SET_VALUE: {
       return {

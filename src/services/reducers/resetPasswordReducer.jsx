@@ -1,7 +1,15 @@
-import { initialState } from "../rootReducer";
 import { ACTIONS } from "../actions/actionTypes";
 
-const resetPasswordReducer = (state = initialState.resetPassword, action) => {
+const initialState = {
+  form: {
+    token: "",
+    password: "",
+  },
+  resetPasswordRequest: false,
+  resetPasswordFailed: false,
+};
+
+const resetPasswordReducer = (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.RESET_PASSWORD_FORM_SET_VALUE: {
       return {

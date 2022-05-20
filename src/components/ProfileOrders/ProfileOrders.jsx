@@ -84,7 +84,7 @@ function Card({ createdAt, number, status, name, _id, ing }) {
 }
 
 export default function ProfileOrders() {
-  const { data } = useSelector((store) => store.socket);
+  const { data } = useSelector((store) => store.ws);
 
   return (
     <>

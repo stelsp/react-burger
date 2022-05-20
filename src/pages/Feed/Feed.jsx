@@ -7,10 +7,10 @@ import { nanoid } from "@reduxjs/toolkit";
 import {
   wsConnectionClose,
   wsConnectionOpen,
-} from "../../services/actions/socketActions";
+} from "../../services/actions/wsActions";
 
 const FeedInfo = () => {
-  const { data } = useSelector((store) => store.socket);
+  const { data } = useSelector((store) => store.ws);
 
   const done = data?.orders?.filter((el) => el.status === "done");
   const pending = data?.orders?.filter((el) => el.status === "pending");

@@ -1,7 +1,12 @@
-import { initialState } from "../rootReducer";
 import { ACTIONS } from "../actions/actionTypes";
 
-const orderReducer = (state = initialState.order, action) => {
+const initialState = {
+  order: null,
+  orderRequest: false,
+  orderFailed: false,
+};
+
+const orderReducer = (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.GET_ORDER:
       return {

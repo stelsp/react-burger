@@ -1,7 +1,11 @@
-import { initialState } from "../rootReducer";
 import { ACTIONS } from "../actions/actionTypes";
 
-const constructorReducer = (state = initialState.constructor, action) => {
+const initialState = {
+  outer: "", // bun
+  inner: [], // main + sauce
+};
+
+const constructorReducer = (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.DRAG_OUTER_INGREDIENT:
       return {

@@ -1,10 +1,10 @@
-import { initialState } from "../rootReducer";
 import { ACTIONS } from "../actions/actionTypes";
 
-const currentIngredientReducer = (
-  state = initialState.currentIngredient,
-  action
-) => {
+const initialState = {
+  currentIngredient: null,
+};
+
+const currentIngredientReducer = (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.SET_CURRENT_INGREDIENT:
       return action.currentIngredient;

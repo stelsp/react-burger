@@ -1,7 +1,14 @@
-import { initialState } from "../rootReducer";
 import { ACTIONS } from "../actions/actionTypes";
 
-const forgotPasswordReducer = (state = initialState.forgotPassword, action) => {
+const initialState = {
+  form: {
+    email: "",
+  },
+  forgotPasswordRequest: false,
+  forgotPasswordFailed: false,
+};
+
+const forgotPasswordReducer = (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.FORGOT_PASSWORD_FORM_SET_VALUE: {
       return {

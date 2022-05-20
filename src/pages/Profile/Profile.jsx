@@ -11,7 +11,7 @@ import ProfileOrders from "../../components/ProfileOrders/ProfileOrders";
 import {
   wsConnectionClose,
   wsConnectionUserOpen,
-} from "../../services/actions/socketActions";
+} from "../../services/actions/wsActions";
 
 const ProfileFeed = () => {
   const dispatch = useDispatch();

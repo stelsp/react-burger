@@ -1,11 +1,12 @@
-export function getCookie(name) {
+export const getCookie = (name: string): any => {
+  if (!name) return;
   const matches = document.cookie.match(
     new RegExp("(?:^|; )" + name.replace(/([$?*|{}\\^])/g, "\\$1") + "=([^;]*)")
   );
   return matches ? decodeURIComponent(matches[1]) : undefined;
-}
+};
 
-export function setCookie(name, value, props) {
+export function setCookie(name: string, value: any, props?: any) {
   props = props || {};
   let exp = props.expires;
   if (typeof exp == "number" && exp) {
@@ -28,7 +29,7 @@ export function setCookie(name, value, props) {
   document.cookie = updatedCookie;
 }
 
-export function deleteCookie(name) {
+export function deleteCookie(name: string) {
   // устанавливаем отрицательное время жизни, чтобы удалить сам ключ token
   setCookie(name, null, { expires: -1 });
 }
