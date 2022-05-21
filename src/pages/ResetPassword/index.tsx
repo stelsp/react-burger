@@ -13,9 +13,13 @@ import {
   setResetPasswordFormValue,
 } from "../../services/actions/resetPasswordActions";
 
+interface HistoryState {
+  action: string;
+}
+
 function ResetPassword() {
   const dispatch = useAppDispatch();
-  const history: any = useHistory();
+  const history = useHistory<HistoryState>();
 
   const { token, password } = useAppSelector(
     (store) => store.resetPassword.form

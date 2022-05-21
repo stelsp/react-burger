@@ -2,7 +2,7 @@ import { compose, createStore, applyMiddleware } from "redux";
 import rootReducer from "./rootReducer";
 import thunk from "redux-thunk";
 import { ACTIONS } from "./actions/actionTypes";
-import { wsMiddleware } from "./middleware/socketMiddleware";
+import { wsMiddleware } from "./middleware/wsMiddleware";
 import { IwsActions } from "./types";
 
 const wsActions: IwsActions = {

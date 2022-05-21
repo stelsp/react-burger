@@ -25,10 +25,12 @@ const Checkout: React.FC = () => {
   const { isLoggedIn } = useAppSelector((store) => store.profile);
 
   const ingredientsIDs = useMemo(() => {
+    if (outer === null) return 0;
     return inner ? [...inner.map((el: TIngredient) => el._id), outer._id] : [];
   }, [inner, outer]);
 
   const ingredientsPrice = useMemo(() => {
+    if (outer === null) return 0;
     return inner
       ? inner.reduce(
           (sum: number, el: TIngredient) => sum + el.price,

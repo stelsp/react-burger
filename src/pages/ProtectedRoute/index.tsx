@@ -1,13 +1,10 @@
 import { useCallback } from "react";
 import { useAppSelector } from "../../services/hooks";
-import { Route, Redirect, useHistory } from "react-router-dom";
+import { Route, Redirect, useHistory, RouteProps } from "react-router-dom";
 import Modal from "../../components/Modal";
-import { IModalRouteProps, IProtectedRouteProps } from "./types";
+import { IModalRouteProps } from "./types";
 
-export const ProtectedRoute: React.FC<IProtectedRouteProps> = ({
-  children,
-  ...rest
-}) => {
+export const ProtectedRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
   const { isLoggedIn } = useAppSelector((store) => store.profile);
   return (
     <Route

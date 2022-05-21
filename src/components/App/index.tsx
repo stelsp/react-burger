@@ -14,9 +14,9 @@ const App: React.FC = () => {
     (store) => store.ingredients
   );
 
-  useEffect((): any => {
+  useEffect(() => {
     dispatch(getData());
-    if (getCookie("accessToken")) return dispatch(userIn());
+    if (getCookie("accessToken")) dispatch(userIn());
   }, [dispatch]);
 
   return (

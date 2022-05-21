@@ -1,14 +1,15 @@
 import { ACTIONS } from "../actions/actionTypes";
 import { TContructorActions } from "../actions/constructorActions/types";
 import { TIngredientsActions } from "../actions/ingredientsActions/types";
+import { TIngredient } from "../types/data";
 
 type TInitialState = {
-  outer: any;
-  inner: any;
+  outer: TIngredient | null;
+  inner: TIngredient[];
 };
 
 const initialState: TInitialState = {
-  outer: "", // bun
+  outer: null, // мб не надо будет}, // bun
   inner: [], // main + sauce
 };
 
@@ -44,7 +45,7 @@ const constructorReducer = (
     case ACTIONS.RESET_CONSTRUCTOR:
       return {
         ...state,
-        outer: "",
+        outer: null,
         inner: [],
       };
 

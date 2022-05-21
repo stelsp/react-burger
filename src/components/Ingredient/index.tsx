@@ -15,6 +15,7 @@ const Ingredient: React.FC<IIngredientProps> = ({ el }) => {
   const { outer, inner } = useAppSelector((store) => store.burgerConstructor);
 
   const count = useMemo(() => {
+    if (outer === null) return 0;
     return el.type === "bun" && el._id === outer._id
       ? 2
       : inner.filter((item: TIngredient) => item._id === el._id).length;

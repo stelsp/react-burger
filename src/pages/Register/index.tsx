@@ -13,9 +13,15 @@ import {
   setRegisterFormValue,
 } from "../../services/actions/registerActions";
 
+interface LocationState {
+  from: {
+    pathname: string;
+  };
+}
+
 function Register() {
   const dispatch = useAppDispatch();
-  const location: any = useLocation();
+  const location = useLocation<LocationState>();
 
   const { name, email, password } = useAppSelector(
     (store) => store.register.form

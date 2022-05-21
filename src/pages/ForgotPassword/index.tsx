@@ -12,10 +12,16 @@ import {
   setForgotPasswordFormValue,
 } from "../../services/actions/forgotPasswordActions";
 
+interface LocationState {
+  from: {
+    pathname: string;
+  };
+}
+
 function ForgotPassword() {
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const location: any = useLocation();
+  const location = useLocation<LocationState>();
 
   const { email } = useAppSelector((store) => store.forgotPassword.form);
   const { forgotPasswordRequest, forgotPasswordFailed } = useAppSelector(

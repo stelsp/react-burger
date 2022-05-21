@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../services/hooks";
 
 function IngredientDetails() {
-  let { id }: any = useParams();
+  const { id }: { id: string } = useParams();
 
   const { ingredients } = useAppSelector((store) => store.ingredients);
 

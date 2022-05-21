@@ -13,9 +13,15 @@ import {
   setLoginFormValue,
 } from "../../services/actions/loginActions";
 
+interface LocationState {
+  from: {
+    pathname: string;
+  };
+}
+
 function Login() {
   const dispatch = useAppDispatch();
-  const location: any = useLocation();
+  const location = useLocation<LocationState>();
 
   const { email, password } = useAppSelector((store) => store.login.form);
   const { loginRequest, loginFailed } = useAppSelector((store) => store.login);
