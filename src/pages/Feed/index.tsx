@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import feed from "./feed.module.css";
+import feed from "./feedInfo.module.css";
 import ProfileOrders from "../../components/ProfileOrders";
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { useEffect } from "react";

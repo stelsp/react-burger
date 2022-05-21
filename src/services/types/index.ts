@@ -8,6 +8,7 @@ import { TProfileActions } from "../actions/profileActions/types";
 import { TRegisterActions } from "../actions/registerActions/types";
 import { TForgotPasswordFormActions } from "../actions/forgotPasswordActions/types";
 import { TResetPasswordFormActions } from "../actions/resetPasswordActions/types";
+import { TwsActions } from "../actions/wsActions/types";
 import { ACTIONS } from "../actions/actionTypes";
 
 export type RootState = ReturnType<typeof store.getState>;
@@ -20,13 +21,13 @@ type TApplicationActions =
   | TProfileActions
   | TRegisterActions
   | TForgotPasswordFormActions
-  | TResetPasswordFormActions;
+  | TResetPasswordFormActions
+  | TwsActions;
 
 // Типизация thunk в нашем приложении
 export type AppThunk<TReturn = void> = ActionCreator<
-  ThunkAction<TReturn, Action, RootState, TApplicationActions>
+  ThunkAction<TReturn, RootState, Action, TApplicationActions>
 >;
-
 // Типизация метода dispatch для проверки на валидность отправляемого экшена
 export type AppDispatch = typeof store.dispatch;
 

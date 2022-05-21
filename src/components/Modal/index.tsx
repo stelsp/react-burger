@@ -9,7 +9,7 @@ const MODAL_ROOT = document.getElementById("modal-root") as Element;
 
 const Modal: React.FC<IModalProps> = ({ onClose, children, title }) => {
   useEffect(() => {
-    function closeOnEsc(e: any) {
+    function closeOnEsc(e: KeyboardEvent) {
       if (e.key === "Escape" || e.key === "Esc") {
         onClose();
       }

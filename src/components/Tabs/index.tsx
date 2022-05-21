@@ -1,12 +1,12 @@
-import styles from "./Tabs.module.css";
+import styles from "./styles.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
 import { INGREDIENT_CATEGORY } from "../../constants/content";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { setCurrentTab } from "../../services/actions/ingredientsActions";
 
-function Tabs({ bunRef, sauceRef, mainRef }) {
-  const dispatch = useDispatch();
-  const { currentTab } = useSelector((store) => store.ingredients);
+const Tabs: React.FC<any> = ({ bunRef, sauceRef, mainRef }) => {
+  const dispatch = useAppDispatch();
+  const { currentTab } = useAppSelector((store) => store.ingredients);
 
   return (
     <div className={styles.tab}>
@@ -42,6 +42,6 @@ function Tabs({ bunRef, sauceRef, mainRef }) {
       </Tab>
     </div>
   );
-}
+};
 
 export default Tabs;

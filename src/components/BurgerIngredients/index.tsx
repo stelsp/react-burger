@@ -1,6 +1,6 @@
 import styles from "./styles.module.css";
 import IngredientType from "../IngredientType";
-import Tabs from "../Tabs/Tabs";
+import Tabs from "../Tabs";
 import {
   INGREDIENT_CATEGORY,
   BURGER_INGREDIENTS_TITLE,
