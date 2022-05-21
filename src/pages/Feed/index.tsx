@@ -8,13 +8,12 @@ import {
   wsConnectionClose,
   wsConnectionOpen,
 } from "../../services/actions/wsActions";
-import { TOrder } from "../../services/types/data";
 
 const FeedInfo: React.FC = () => {
   const { data } = useAppSelector((store) => store.ws);
 
-  const done = data?.orders?.filter((el: TOrder) => el.status === "done");
-  const pending = data?.orders?.filter((el: TOrder) => el.status === "pending");
+  const done = data?.orders?.filter((el) => el.status === "done");
+  const pending = data?.orders?.filter((el) => el.status === "pending");
 
   return (
     <div className={feed.container}>
@@ -22,7 +21,7 @@ const FeedInfo: React.FC = () => {
         <div className={feed.done}>
           <h3 className={feed.title}>Готовы:</h3>
           <ul className={feed.list}>
-            {done?.map((el: TOrder) => (
+            {done?.map((el) => (
               <li className={feed.doneItem} key={nanoid()}>
                 {el.number}
               </li>
@@ -32,7 +31,7 @@ const FeedInfo: React.FC = () => {
         <div className={feed.pending}>
           <h3 className={feed.title}>В работе:</h3>
           <ul className={feed.list}>
-            {pending?.map((el: TOrder) => (
+            {pending?.map((el) => (
               <li className={feed.pendingItem} key={nanoid()}>
                 {el.number}
               </li>

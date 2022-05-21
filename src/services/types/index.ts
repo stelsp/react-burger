@@ -26,7 +26,7 @@ type TApplicationActions =
 
 // Типизация thunk в нашем приложении
 export type AppThunk<TReturn = void> = ActionCreator<
-  ThunkAction<TReturn, RootState, Action, TApplicationActions>
+  ThunkAction<TReturn, Action, RootState, TApplicationActions>
 >;
 // Типизация метода dispatch для проверки на валидность отправляемого экшена
 export type AppDispatch = typeof store.dispatch;

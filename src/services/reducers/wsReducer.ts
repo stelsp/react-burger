@@ -4,13 +4,13 @@ import { TwsData } from "../types/data";
 
 type TInitialState = {
   wsConnected: boolean;
-  data: any | TwsData;
+  data: TwsData | null;
   error: any;
 };
 
 const initialState: TInitialState = {
   wsConnected: false,
-  data: [],
+  data: null,
   error: undefined,
 };
 

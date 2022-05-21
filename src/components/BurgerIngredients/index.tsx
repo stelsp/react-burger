@@ -32,8 +32,8 @@ const BurgerIngredients: React.FC = () => {
   const mainRef = useRef() as any;
 
   const onScroll = useCallback(() => {
-    const scrollTop = refContainer.current.scrollTop;
-    if (scrollTop <= bunRef.current.offsetTop) dispatch(setCurrentTab("bun"));
+    const scrollTop = refContainer?.current.scrollTop;
+    if (scrollTop <= bunRef?.current.offsetTop) dispatch(setCurrentTab("bun"));
     if (scrollTop >= sauceRef.current.offsetTop - bunRef.current.offsetTop - 50)
       dispatch(setCurrentTab("sauce"));
     if (scrollTop >= mainRef.current.offsetTop - bunRef.current.offsetTop - 50)
