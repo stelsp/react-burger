@@ -11,7 +11,7 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-function ProfileForm() {
+const ProfileForm: React.FC = () => {
   const nameRef: any = useRef(null);
   const loginRef: any = useRef(null);
   const passwordRef: any = useRef(null);
@@ -111,6 +111,6 @@ function ProfileForm() {
       </div>
     </form>
   );
-}
+};
 
 export default ProfileForm;

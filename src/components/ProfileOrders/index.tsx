@@ -5,7 +5,6 @@ import { useAppSelector } from "../../services/hooks";
 import { nanoid } from "@reduxjs/toolkit";
 import { useMemo } from "react";
 import { IBottomProps, ICardProps, IImgProps, ITopProps } from "./types";
-import { TOrder } from "../../services/types/data";
 
 const Top: React.FC<ITopProps> = ({ createdAt, number, status, name }) => {
   const date = new Date(createdAt).toLocaleString();
@@ -96,7 +95,7 @@ export default function ProfileOrders() {
 
   return (
     <>
-      {data?.orders?.map((el: TOrder) => {
+      {data?.orders?.map((el) => {
         return (
           <Card
             createdAt={el.createdAt}

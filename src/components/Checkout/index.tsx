@@ -13,7 +13,6 @@ import {
   resetConstructor,
 } from "../../services/actions/constructorActions";
 import { useHistory } from "react-router-dom";
-import { TIngredient } from "../../services/types/data";
 
 const Checkout: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -26,16 +25,13 @@ const Checkout: React.FC = () => {
 
   const ingredientsIDs = useMemo(() => {
     if (outer === null) return 0;
-    return inner ? [...inner.map((el: TIngredient) => el._id), outer._id] : [];
+    return inner ? [...inner.map((el) => el._id), outer._id] : [];
   }, [inner, outer]);
 
   const ingredientsPrice = useMemo(() => {
     if (outer === null) return 0;
     return inner
-      ? inner.reduce(
-          (sum: number, el: TIngredient) => sum + el.price,
-          outer.price * 2
-        )
+      ? inner.reduce((sum: number, el) => sum + el.price, outer.price * 2)
       : 0;
   }, [inner, outer]);
 

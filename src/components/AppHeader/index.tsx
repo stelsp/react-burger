@@ -7,7 +7,6 @@ import {
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import { APP_HEADER_LINKS } from "../../constants/content";
-
 import { Link } from "react-router-dom";
 
 const AppHeader: React.FC = () => {

@@ -10,7 +10,10 @@ import {
   IMiddleProps,
   ITopProps,
 } from "./types";
-import { TOrder } from "../../services/types/data";
+import {
+  wsConnectionClose,
+  wsConnectionOpen,
+} from "../../services/actions/wsActions";
 
 const Ingredient: React.FC<IIngredientProps> = ({ id }) => {
   const { ingredients } = useAppSelector((store) => store.ingredients);
@@ -84,12 +87,16 @@ const Order: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch({ type: "WS_CONNECTION_START" });
+    dispatch(wsConnectionOpen());
+
+    return () => {
+      dispatch(wsConnectionClose());
+    };
   }, [dispatch]);
 
-  let { id }: any = useParams();
+  let { id }: { id: string } = useParams();
   const { data } = useAppSelector((store) => store.ws);
-  const el = data?.orders?.find((el: TOrder) => el._id === id);
+  const el = data?.orders?.find((el) => el._id === id);
 
   if (!el) return null;
 
