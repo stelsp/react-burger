@@ -6,6 +6,7 @@
 ## Стек
 + React.js
 + Redux
++ TypeScript
 + CSS Modules
 + React-dnd
 + React-router
